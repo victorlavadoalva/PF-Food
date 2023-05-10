@@ -1,15 +1,18 @@
 import { Routes } from "react-router-dom";
 import './App.css';
+import Home from './pages/Home/index'
+import Landing from "./pages/Landing";
+import NavBar from "./components/NavBar";
 // importar componentes
 function App() {
   return (
     <div className="App">
       <Routes>
       <header></header>
-      {/* nav  component*/}
+      <NavBar/>
       <main>
-        {/* Descomentar: <Route exact path='/' element ={}/>
-        <Route exact path='/Home' element ={}/> */}
+        <Route exact path='/' element ={Landing}/>
+        <Route exact path='/Home' element ={Home}/> 
 {/* git merge developer */}
       </main>
       <footer></footer>
@@ -18,4 +21,5 @@ function App() {
   );
 }
 
-export default App;
+export default App
+
