@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import SelectSmall from './Components/Select';
-import { LOCATION, ORDER, RATING } from './dataHardcodeo/constants';
+import SelectSmall from '../../Components/Select';
+import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 
 import styles from "./index.module.css";
 

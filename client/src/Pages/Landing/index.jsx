@@ -1,6 +1,6 @@
-import './index.styles.css';
 import { Link } from 'react-router-dom';
-import SearchBar from '../../components/SearchBar/index';
+import SearchBar from '../../Components/SearchBar';
+import './index.styles.css';
 
 
 
