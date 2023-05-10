@@ -1,7 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import './searchBar.styles.css'
-
+import React, { useState } from "react";
+// import styles from "./index.styles.css"
 function SearchBar(props) {
   const [searchResto, setSearchResto] = useState("");
 
