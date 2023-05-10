@@ -10,7 +10,7 @@ function App() {
       <main>
         {/* Descomentar: <Route exact path='/' element ={}/>
         <Route exact path='/Home' element ={}/> */}
-
+{/* git merge developer */}
       </main>
       <footer></footer>
       </Routes>
