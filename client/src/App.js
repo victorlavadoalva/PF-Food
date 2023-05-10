@@ -1,25 +1,24 @@
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home/index'
-import Landing from "./pages/Landing";
-import NavBar from "./components/NavBar";
+import Landing from "./pages/Landing/index";
+import NavBar from "./components/NavBar/index";
 // importar componentes
 function App() {
   return (
     <div className="App">
-      <Routes>
       <header></header>
       <NavBar/>
       <main>
+      <Routes>
         <Route exact path='/' element ={Landing}/>
-        <Route exact path='/Home' element ={Home}/> 
-{/* git merge developer */}
+        <Route exact path='/home' element ={Home}/> 
+      </Routes>
       </main>
       <footer></footer>
-      </Routes>
     </div>
   );
 }
 
-export default App
+export default App;
 

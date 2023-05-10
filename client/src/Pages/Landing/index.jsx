@@ -1,8 +1,7 @@
 import './index.styles.css';
 import { Link } from 'react-router-dom';
-import logo from './logo.png'
-import SearchBar from '../../components/searchBar/searchBar.component';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar/index';
+
 
 
 function Landing() {
@@ -10,7 +9,6 @@ function Landing() {
         <div>
             <div>
             <h1>Welcome to FoodBook</h1>
-            <img src={logo} alt='logo'></img>
             <SearchBar/>
             <Link to={'/home'}>
               <button>Entrar</button>
@@ -20,4 +18,4 @@ function Landing() {
     )
 }
 
-export default Landing
+export default Landing;
