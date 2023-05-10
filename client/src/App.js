@@ -1,9 +1,19 @@
+import { Routes } from "react-router-dom";
 import './App.css';
-
+// importar componentes
 function App() {
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+      <Routes>
+      <header></header>
+      {/* nav  component*/}
+      <main>
+        {/* Descomentar: <Route exact path='/' element ={}/>
+        <Route exact path='/Home' element ={}/> */}
+
+      </main>
+      <footer></footer>
+      </Routes>
     </div>
   );
 }
