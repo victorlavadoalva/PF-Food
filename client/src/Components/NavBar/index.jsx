@@ -1,8 +1,7 @@
 import styles from "./navBar.module.css";
 
 export default function NavBar() {
-    return (
-        
+    return (   
         <div>
             <div className={styles.searchBar}>
                 <span>SearchBar</span>
