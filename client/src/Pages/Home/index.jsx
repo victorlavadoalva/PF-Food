@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SelectSmall from '../../Components/Select';
 import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 // import PaginationRounded from "../../Components/Paginado/index";
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../Redux/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../Redux/actions';
 
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
 
 export default function Home() {

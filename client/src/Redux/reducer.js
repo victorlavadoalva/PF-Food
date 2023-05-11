@@ -1,6 +1,8 @@
-import { GET_ALL_RESTORANTS } from "./actionsTypes";
-import { GET_FILTERED } from "./actionsTypes";
-import { CREATED_RESTORANTS } from "./actionsTypes";
+import {
+    CREATED_RESTORANTS,
+    GET_ALL_RESTORANTS,
+    GET_FILTERED
+} from "./actionsTypes";
 
 const initialState = {
     restorants: [],
