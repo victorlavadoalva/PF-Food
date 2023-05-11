@@ -1,7 +1,0 @@
-.searchButton {
-    margin: 10px;
-    background: rgb(91, 192, 190);
-    background: linear-gradient(90deg, rgba(91, 192, 190, 1) 0%, rgba(111, 255, 233, 1) 92%, rgba(111, 255, 233, 1) 100%);
-    border: 2px solid white;
-    border-radius: 8px;
-}
