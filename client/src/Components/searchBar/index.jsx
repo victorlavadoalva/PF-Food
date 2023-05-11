@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-// import styles from "./index.styles.css"
+import React from "react";
+import { useState } from "react";
+import './index.styles.css'
+
 function SearchBar(props) {
   const [searchResto, setSearchResto] = useState("");
 
@@ -13,9 +15,8 @@ function SearchBar(props) {
     // dispatch(getByName(searchResto));
     // este getByName supone una funcion que me va a buscar por nombre
   }
-
   return (
-    <form className='searchbar' onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <label>
         Buscar:
         <input
@@ -28,5 +29,4 @@ function SearchBar(props) {
     </form>
   );
 }
-
 export default SearchBar;

@@ -27,8 +27,7 @@ export default function Home() {
             <div className={styles.paginate}>
                 <span>ACA VA EL PAGINADO</span>
             </div>
-
-            //La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back
+            {/* //La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back */}
             <div className={styles.selectors}>
                 <SelectSmall onChange={handleChangeLocation} value={location} items={LOCATION} title="Ubicacion"/>
                 <SelectSmall onChange={handleChangeOrder} value={order} items={ORDER} title="Ordenar"/>
