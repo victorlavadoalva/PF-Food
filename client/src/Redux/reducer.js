@@ -1,5 +1,4 @@
 import {
-    CREATED_RESTORANTS,
     GET_ALL_RESTORANTS,
     GET_FILTERED
 } from "./actionsTypes";
@@ -7,29 +6,23 @@ import {
 const initialState = {
     restorants: [],
     allRestorants: [],
-    createdRestorants: [],
 }
 
-const rootReducer = (state = initialState, {type, payload}) =>{
+const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_ALL_RESTORANTS:
             return {
                 ...state,
                 allRestorants: payload,
                 restorants: payload
-            }  
-        case GET_FILTERED: 
+            }
+        case GET_FILTERED:
             return {
                 ...state,
                 restorants: payload
             }
-        case CREATED_RESTORANTS:
-            return {
-                ...state,
-                createdRestorants: payload
-            }
         default:
-            return {...state};
+            return { ...state };
     };
 };
 
