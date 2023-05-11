@@ -73,7 +73,6 @@ function SearchBar() {
       setSearchError(true); // Mostrar mensaje de error si no se encuentra ningún resultado
     }
   }
-
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
       <label>
