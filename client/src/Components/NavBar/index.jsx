@@ -1,15 +1,16 @@
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
+import SerchBar from '../SearchBar/index'
 
 export default function NavBar() {
     return (   
-        <div>
+        <div className={styles.container}>
             <div className={styles.searchBar}>
-                <span>SearchBar</span>
+                <SerchBar />
             </div>
             <div className={styles.buttons}>
-                <button>Contacto</button>
-                <button>Conocenos</button>
-                <button>Cerrar sesion</button>
+                <button className={styles.navButton}>Contacto</button>
+                <button className={styles.navButton}>Conocenos</button>
+                <button className={styles.navButton}>Cerrar sesion</button>
             </div>
         </div>
     );
