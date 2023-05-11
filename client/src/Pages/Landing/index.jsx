@@ -5,6 +5,7 @@ import SearchBar from '../../Components/SearchBar/index';
 
 
 function Landing() {
+    console.log("hola")
     return(
         <div>
             <div>
@@ -13,6 +14,7 @@ function Landing() {
             <Link to={'/home'}>
               <button>Entrar</button>
             </Link>
+            
             </div>
         </div>
     )
