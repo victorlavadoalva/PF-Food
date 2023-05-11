@@ -1,22 +1,24 @@
 import { Link } from 'react-router-dom';
 import SearchBar from '../../Components/SearchBar/index';
-
+import styles from "./index.styles.css";
 
 
 
 function Landing() {
-    console.log("hola")
+
     return(
-        <div>
-            <div>
+ 
+        <div className={styles.container}>
+                <div></div>
             <h1>Welcome to FoodBook</h1>
+            <h3>My Location |</h3>
             <SearchBar/>
             <Link to={'/home'}>
-              <button>Entrar</button>
+              <button className={styles.button}>Search</button>
             </Link>
             
-            </div>
         </div>
+
     )
 }
 
