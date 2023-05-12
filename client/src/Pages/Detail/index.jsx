@@ -14,7 +14,7 @@ function Detail() {
 
   return (
     <div>
-      <Link to='/'>
+      <Link to='/home'>
         <button>Vover</button>
       </Link>
       <h2>{resto.name}</h2>
