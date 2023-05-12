@@ -8,10 +8,8 @@
 
 .selectors {
     display: flex;
-    margin:10rem 0 3vh 0 ;
-    height:8rem;
-    width: 50%;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 50px
     
     
 }
