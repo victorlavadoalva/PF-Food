@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import SearchBar from "../../Components/SearchBar/index";
 import img from "../../Img/Food-landing.png";
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 function Landing() {
   return (
     <div className={styles.container}>
