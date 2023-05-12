@@ -8,11 +8,12 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import MenuIcon from '@mui/icons-material/Menu';
 import { NavBarMenu } from './NavBarMenu';
+import { TemporaryDrawer } from './Drawer';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,22 +66,39 @@ export default function PrimarySearchAppBar() {
     // setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleDrawerOpen = () => {
+    setOpen(prevState => !prevState);
+  };
+
   const menuId = 'primary-search-account-menu';
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: '#3A506B' }}>
+      <AppBar position="static" sx={{ background: '#3A506B' }} open={open}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            sx={{ mr: 2 }}
           >
-            FOODBOOK
-          </Typography>
+            <MenuIcon />
+            <TemporaryDrawer isOpen={open}/>
+          </IconButton>
+          <Link to="/home" className={styles.link}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: 'none', sm: 'block' } }}
+            >
+              FOODBOOK
+            </Typography>
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -89,12 +108,6 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Link to="/form">
-            <button className={styles.postButton}>Agregar Restaurant!</button>
-          </Link>
-          <Link to="/home">
-            <button className={styles.postButton}>Home</button>
-          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
