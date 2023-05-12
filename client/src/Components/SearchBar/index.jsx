@@ -30,10 +30,7 @@ function SearchBar() {
   }
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
-      <label>
-        Buscar:
         <input type="text" value={searchResto} onChange={handleChange} />
-      </label>
       <button type="submit">Buscar</button>
       {searchError && <p>No se encontró ningún restaurante con ese nombre.</p>}
     </form>
