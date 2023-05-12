@@ -1,7 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { RESTOS } from "../../dataHardcodeo/constants";
-import { Link } from "react-router-dom";
 
 function Detail() {
   const { restoId } = useParams();
@@ -15,7 +14,7 @@ function Detail() {
 
   return (
     <div>
-      <Link to='/'>
+      <Link to='/home'>
         <button>Vover</button>
       </Link>
       <h2>{resto.name}</h2>

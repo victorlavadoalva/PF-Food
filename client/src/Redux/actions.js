@@ -7,7 +7,7 @@ export const getRestorants = (page = 1) => {
         const data = response.data;
         return dispatch({
             type: GET_ALL_RESTORANTS,
-            payload: data,
+            payload: data[page-1].documents,
         })
     }
 };
