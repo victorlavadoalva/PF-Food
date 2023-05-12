@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
+import styles from './styles.module.css'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -68,7 +70,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: '#3A506B'}}>
+      <AppBar position="static" sx={{ background: '#3A506B' }}>
         <Toolbar>
           <Typography
             variant="h6"
@@ -87,6 +89,12 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          <Link to="/form">
+            <button className={styles.postButton}>Agregar Restaurant!</button>
+          </Link>
+          <Link to="/home">
+            <button className={styles.postButton}>Home</button>
+          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
@@ -115,7 +123,7 @@ export default function PrimarySearchAppBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <NavBarMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
+      <NavBarMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
     </Box>
   );
 }
