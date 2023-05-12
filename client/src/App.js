@@ -14,9 +14,9 @@ function App() {
   return (
     <div className="app">
       {
-        location.pathname !== "/" && <header className="header">
-          <Header />
-        </header>
+       location.pathname !== "/" && <header>
+        <Header/>
+      </header>
       }
       <main className="main">
         <Routes>

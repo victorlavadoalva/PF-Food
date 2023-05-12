@@ -1,0 +1,17 @@
+.home {
+    padding: 20px 30px
+}
+
+.selectors {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px
+}
