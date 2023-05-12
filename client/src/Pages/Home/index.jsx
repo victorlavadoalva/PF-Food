@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import SelectSmall from '../../Components/Select';
-import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
+import { IMAGE_NOT_FOUND, LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 // import PaginationRounded from "../../Components/Paginado/index";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../Redux/actions';
@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className={styles.home}>
       {/* <div className={styles.paginate}>
         <PaginationRounded 
 
@@ -49,13 +49,14 @@ export default function Home() {
       <div className={styles.cards}>
         {
           restorants.length ?
-            restorants.map(resto => {
+          restorants.map(resto => {
+            console.log(resto)
               return (
                 <SimpleCard
-                  key={resto.id}
-                  image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png" }
+                  key={resto._id}
+                  image={resto.image[0] || IMAGE_NOT_FOUND}
                   title={resto.name}
-                  description="{resto.description}"
+                  description={"resto.description"}
                   id={resto._id}
                 />
               )

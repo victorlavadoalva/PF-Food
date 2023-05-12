@@ -10,13 +10,10 @@ const location = useLocation()
   return (
     <div className="app">
       {
-       location.pathname !== "/" && <header className="header">
+       location.pathname !== "/" && <header>
         <Header/>
       </header>
       }
-      
-      
-      
       <main className="main">
       <Routes>
         <Route exact path='/' element ={<Landing/>}/>
