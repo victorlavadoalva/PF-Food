@@ -1,12 +1,22 @@
 .home {
-    padding: 20px 30px
+    display: flex;
+    padding: 20px 30px;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .selectors {
-    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     gap: 50px
+    
+    
+}
+
+.paginate {
+margin: 5rem 0 10rem 0;
+
 }
 
 .cards {
