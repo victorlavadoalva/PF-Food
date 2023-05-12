@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../Redux/actions';
 import { SimpleCard } from '../../Components/Card/index'
 import styles from "./styles.module.css";
+import { RESTOS } from "../../dataHardcodeo/constants";
+
 
 
 export default function Home() {
@@ -48,19 +50,30 @@ export default function Home() {
       </div>
       <div className={styles.cards}>
         {
-          restorants.length ?
-            restorants.map(resto => {
-              return (
-                <SimpleCard
-                  key={resto.id}
-                  image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png" }
-                  title={resto.name}
-                  description="{resto.description}"
-                  id={resto._id}
-                />
-              )
-            })
-            : <p>LOADING...</p>
+          RESTOS.map(resto => {
+            return(
+              <SimpleCard 
+                key={resto.id}
+                image={resto.image[0]}
+                title={resto.name}
+                description={resto.summary}
+                id={resto.id}
+              />
+            )
+          })
+          // restorants.length ?
+          //   restorants.map(resto => {
+          //     return (
+          //       <SimpleCard
+          //         key={resto.id}
+          //         image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+          //         title={resto.name}
+          //         description={resto.description}
+          //         id={resto._id}
+          //       />
+          //     )
+          //   })
+          //   : <p>LOADING...</p>
         }
       </div>
     </div>
