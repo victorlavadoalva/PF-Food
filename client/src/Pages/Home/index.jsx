@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import SelectSmall from '../../Components/Select';
-import { IMAGE_NOT_FOUND, LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
+import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 // import PaginationRounded from "../../Components/Paginado/index";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../Redux/actions';
