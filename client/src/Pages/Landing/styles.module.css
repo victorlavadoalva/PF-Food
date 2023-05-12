@@ -61,7 +61,7 @@ overflow: hidden;
   height: 7%;
 }
 .popularCards {
-  /* border:3px solid black; */
+  border:3px solid black;
   order:4;
   margin:5px 0 0 0;
   width: 50rem;

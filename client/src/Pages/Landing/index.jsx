@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SearchBar from "../../Components/SearchBar/index";
-import img from "../../Img/Food-landing.png";
+import img from "../../Img/ImgLanding/Food-landing.png";
 import styles from "./styles.module.css";
 function Landing() {
   return (
@@ -20,7 +20,7 @@ function Landing() {
         </Link>
         </div>
         <div className={styles.popularCards}>
-
+            
         </div>
       </div>
       <div className={styles.containerImg}>
