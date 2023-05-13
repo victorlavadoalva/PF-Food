@@ -56,8 +56,8 @@ export default function Home() {
                   key={resto._id}
                   image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                   title={resto.name}
-                  // city={}
-                  // adress={}
+                  city={"Cordoba"}
+                  address={"Direccion"}
                   id={resto._id}
                 />
               )
