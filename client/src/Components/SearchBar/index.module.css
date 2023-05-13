@@ -14,7 +14,8 @@
 .searchBarInput {
     display: flex;
     align-items: center;
-    
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     width: 350px;
     height: 60px;
     padding: 0 0 0 60px;
