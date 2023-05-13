@@ -129,32 +129,6 @@ export const RESTOS = [
             require('./img/ejemplo3.jpg').default
         ], 
     },
-    {
-        id: 19,
-        name:'El Chato',
-        ubic:'Bogotá, Colombia',
-        dire:'Calle 65 # 4-76',
-        summary:'Nacido y criado en Colombia, el chef Álvaro Clavijo se sintió atraído por la cocina desde una edad temprana. Dejó Sudamérica para explorar Estados Unidos y Europa, trabajando en Per Se, L Atelier de Joël Robuchon y Noma. Clavijo fusiona esta experiencia de trotamundos con la rica biodiversidad de Colombia en El Chato, que lanzó en 2017.',
-        especial:'Aquí solo se ofrece un menú degustación, listo para cambiar en cualquier momento para resaltar los mejores productos disponibles en cada día. Platos clásicos como corazones de pollo con papa y suero costeño, una salsa tradicional colombiana y quesosa, son imprescindibles, aunque los locales conocedores siempre solicitarán el renombrado soufflé de aguacate que no está en el menú.',
-        image: [
-            require('./img/ejemplo1.jpg').default,
-            require('./img/ejemplo2.jpg').default,
-            require('./img/ejemplo3.jpg').default
-        ],
-    },
-    {
-        id: 20,
-        name:'Maito',
-        ubic:'Ciudad de Panamá, Panamá.',
-        dire:'Final de la Calle 50, cuarto local a la izquierda',
-        summary:'En Maito, los comensales pueden disfrutar de los contrastes de la cocina panameña, con toques de origen afro, criollo y cantonés mezclados con nuevas cocinas como Chombasia, una fusión de las tradiciones culinarias cantonesa y afro.',
-        especial:'Maito ofrece un menú degustación que puede constar de nueve a once platos, junto con opciones a la carta que presentan ingredientes raramente utilizados en otros lugares de la ciudad. Esto se debe a las relaciones que Castrellón ha establecido con productores locales, a quienes destaca en el restaurante. Su amor por el mar y los productos tropicales, justificado por la doble costa de Panamá, se refleja en todos los platos.',
-        image: [
-            require('./img/ejemplo1.jpg').default,
-            require('./img/ejemplo2.jpg').default,
-            require('./img/ejemplo3.jpg').default
-        ],
-    }
 ]
 export const LOCATION = [
     {
