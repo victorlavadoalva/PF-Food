@@ -1,11 +1,14 @@
 import {
     GET_ALL_RESTORANTS,
+    GET_AMOUNTPAGES,
     GET_FILTERED
 } from "./actionsTypes";
 
 const initialState = {
     restorants: [],
     allRestorants: [],
+    AmountPage:"",
+    Error:[]
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -20,6 +23,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 restorants: payload
+            }
+        case GET_AMOUNTPAGES:
+            return {
+                ...state,
+                AmountPage:payload
             }
         default:
             return { ...state };
