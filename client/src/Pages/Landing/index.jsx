@@ -2,47 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
-import chicken from "../../Img/ImgCardLanding/Chicken.png";
-import dessert from "../../Img/ImgCardLanding/Dessert.png";
-import pasta from "../../Img/ImgCardLanding/Pasta.png";
-import sandwich from "../../Img/ImgCardLanding/Sandwich.png";
-import burger from "../../Img/ImgCardLanding/hamburger.png";
-import pizza from "../../Img/ImgCardLanding/pizza.png";
 import img from "../../Img/ImgLanding/Food-landing.png";
 import styles from "./styles.module.css";
+import { localState } from './localState'
+
+
 function Landing() {
-  const [props, SetProps] = useState([
-    {
-      id: 1,
-      image: pizza,
-      name: "Pizza",
-    },
-    {
-      id: 2,
-      image: burger,
-      name: "Burger",
-    },
-    {
-      id: 3,
-      image: sandwich,
-      name: "Sandwich",
-    },
-    {
-      id: 4,
-      image: chicken,
-      name: "Chicken",
-    },
-    {
-      id: 5,
-      image: pasta,
-      name: "Pasta",
-    },
-    {
-      id: 6,
-      image: dessert,
-      name: "Dessert",
-    },
-  ]);
+  const [props, SetProps] = useState(localState);
 
   return (
     <div className={styles.container}>
@@ -54,7 +20,6 @@ function Landing() {
         <div className={styles.searchBar}>
           <SearchBar />
         </div>
-
         <div className={styles.divLink}>
           <Link to={"/home"} style={{ textDecoration: "none" }}>
             <button className={styles.button}>Explorar</button>
@@ -63,23 +28,20 @@ function Landing() {
         <div className={styles.popularCards}>
           <h3 className={styles.category}>Popular Category</h3>
         </div>
-        
-          <div className={styles.containerCards}>
-            {props.map((el, index) => (
-              <Link 
-                to ="/home" 
-                style = {{ textDecoration: "none" , color:"black"}}
-                key={index}
-              >
-               <CardLanding
-                className={styles.CardPopular} 
-                image={el.image} 
+        <div className={styles.containerCards}>
+          {props.map((el, index) => (
+            <Link
+              to="/home"
+              style={{ textDecoration: "none", color: "black" }}
+              key={index}
+            >
+              <CardLanding
+                className={styles.CardPopular}
+                image={el.image}
                 name={el.name} />
-              </Link>
-              
-            ))}
-          </div>
-        
+            </Link>
+          ))}
+        </div>
       </div>
       <div className={styles.containerImg}>
         <div className={styles.elementDesing}>
