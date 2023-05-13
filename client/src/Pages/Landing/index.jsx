@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
+import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
+import pizza from "../../Img/ImgCardLanding/pizza.png";
 import img from "../../Img/ImgLanding/Food-landing.png";
 import styles from "./styles.module.css";
 function Landing() {
+  const props = [
+    {
+      image:pizza,
+      name:"Pizza"
+    }
+  ]
   return (
     <div className={styles.container}>
       <div className={styles.containerContent}>
@@ -20,6 +28,15 @@ function Landing() {
         </Link>
         </div>
         <div className={styles.popularCards}>
+          <h3 className={styles.category}>Popular Category</h3>
+          {
+              props.map((el) => (
+                <CardLanding
+                 image ={el.image}
+                 name ={el.name}
+                />
+              ))
+          }
             
         </div>
       </div>
