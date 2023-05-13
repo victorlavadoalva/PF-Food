@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import SelectSmall from '../../Components/Select';
-import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
+import SelectSmall from '../../Components/Select';
 import * as actions from '../../Redux/actions';
-import { RESTOS } from "../../dataHardcodeo/constants";
+import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 import styles from "./styles.module.css";
 
 export default function Home() {
@@ -49,18 +48,20 @@ export default function Home() {
       
       <div className={styles.cards}>
         {
-          RESTOS.map(resto => {
-            return(
-              <SimpleCard 
-                key={resto.id}
-                image={resto.image[0]}
-                title={resto.name}
-                city={resto.ubic}
-                address={resto.dire}
-                id={resto.id}
-              />
-            )
-          })
+         restorants.length ?
+            restorants.map(resto => {
+              
+              return (
+                <SimpleCard
+                  key={resto._id}
+                  image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                  title={resto.name}
+                  
+                  id={resto._id}
+                />
+              )
+            })
+            : <p>LOADING...</p>
         }
       </div>
     </div>
