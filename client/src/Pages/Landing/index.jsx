@@ -65,9 +65,16 @@ function Landing() {
         </div>
         
           <div className={styles.containerCards}>
-            {props.map((el) => (
-              <Link to ="/home" style = {{ textDecoration: "none" , color:"black"}}>
-               <CardLanding className={styles.CardPopular} image={el.image} name={el.name} />
+            {props.map((el, index) => (
+              <Link 
+                to ="/home" 
+                style = {{ textDecoration: "none" , color:"black"}}
+                key={index}
+              >
+               <CardLanding
+                className={styles.CardPopular} 
+                image={el.image} 
+                name={el.name} />
               </Link>
               
             ))}
@@ -79,7 +86,7 @@ function Landing() {
           <Link to={"/home"} style={{ textDecoration: "none" }}>
             <button className={styles.buttonAccount}>Cuenta</button>
           </Link>
-          <img className={styles.imgFood} src={img} />
+          <img className={styles.imgFood} src={img} alt={"img"} />
         </div>
       </div>
     </div>
