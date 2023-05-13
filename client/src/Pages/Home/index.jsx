@@ -55,24 +55,12 @@ export default function Home() {
                 key={resto.id}
                 image={resto.image[0]}
                 title={resto.name}
-                description={resto.summary}
+                city={resto.ubic}
+                address={resto.dire}
                 id={resto.id}
               />
             )
           })
-          // restorants.length ?
-          //   restorants.map(resto => {
-          //     return (
-          //       <SimpleCard
-          //         key={resto.id}
-          //         image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
-          //         title={resto.name}
-          //         description={resto.description}
-          //         id={resto._id}
-          //       />
-          //     )
-          //   })
-          //   : <p>LOADING...</p>
         }
       </div>
     </div>
