@@ -62,11 +62,24 @@ overflow: hidden;
 }
 .popularCards {
   /* border:3px solid black; */
+
   order:4;
+  margin:15px 0 0 0;
+  width: 50rem;
+  height:3rem;
+  margin-left:30px;
+}
+
+.containerCards {
+  /* border:3px solid black; */
+  display: flex;
+  order:5;
+  flex-direction: row;
   margin:15px 0 0 0;
   width: 50rem;
   height:25rem;
   margin-left:30px;
+  gap:15px
 }
 
 .category {
@@ -133,6 +146,12 @@ overflow: hidden;
 
 }
 
-/* .button  ,.buttonAccount:hover{
+.CardPopular :hover {
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-4px);
+ }
 
-} */
+.button :hover {
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-4px);
+ }

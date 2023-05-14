@@ -1,5 +1,4 @@
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getRestorants } from "../../Redux/actions";
@@ -12,8 +11,8 @@ const handleChange = (e,p) => {
 }
 
   return (
-    <Stack spacing={2}>
-      <Pagination count={amountPages} variant="outlined" onChange={handleChange} shape="rounded" />
-    </Stack>
+
+      <Pagination count={Number(amountPages)} variant="outlined" onChange={handleChange} shape="rounded" />
+ 
   );
 }
