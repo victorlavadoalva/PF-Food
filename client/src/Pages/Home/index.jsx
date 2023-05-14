@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
-import * as actions from '../../Redux/actions';
+// import { getRestorants } from "../../Redux/actions";
 import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 import styles from "./styles.module.css";
 
@@ -13,7 +13,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!restorants.length) dispatch(actions.getRestorants());
+    // if (!restorants.length) dispatch(getRestorants());
     console.log(restorants);
   }, [dispatch, restorants, restorants.length]);
 
@@ -61,7 +61,7 @@ export default function Home() {
                 />
               )
             })
-            : <p>LOADING...</p>
+            : <p>No hay Restaurantes...</p>
         }
       </div>
     </div>
