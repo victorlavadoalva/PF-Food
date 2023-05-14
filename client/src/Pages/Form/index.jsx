@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
+import {Link } from 'react-router-dom';
+import { TextField, Box, Button, Container } from "@mui/material";
+import { useRef } from "react";
 
 export default function Form() {
     const [restorants, setRestorants] = useState({
@@ -10,7 +13,7 @@ export default function Form() {
         ubi: "",
         type_customer: "Restaurant",
         tags: [],
-        capacidad: ""
+        capacity: ""
     });
 
     const [errors, setErrors] = useState({
@@ -23,7 +26,7 @@ export default function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (restorants.name && restorants.ubi && restorants.description && restorants.capacity && restorants.image){
+        if (restorants.name && restorants.ubi && restorants.description && restorants.capacity){
             axios.post("https://pf-backend-production-5a61.up.railway.app/restaurants", restorants)
             setErrors({});
             setRestorants({
@@ -35,22 +38,25 @@ export default function Form() {
                 tags: [],
                 capacity: ""
             });
+            alert('Restaurante creado')
         }else{
             alert('Información incompleta');
         }
     };
-
+    const tagsInputRef = useRef(null);
     function handleTags(event) {
-        event.preventDefault();
+      event.preventDefault();
+      const tagValue = tagsInputRef.current.value;
+      if (tagValue.trim() !== "") {
         setRestorants({
-            ...restorants,
-            tags: [...restorants.tags, event.target.value]
-        })
-        event.target.value = ""
+          ...restorants,
+          tags: [...restorants.tags, tagValue]
+        });
+        tagsInputRef.current.value = "";
+      }
     }
 
     function handleChange(e) {
-        e.preventDefault();
         const { name, value } = e.target;
         if (name !== "tags") {
             setRestorants({
@@ -58,6 +64,7 @@ export default function Form() {
                 [name]: value
             })
         };
+        
 
         switch (name) {
             case 'name':
@@ -130,43 +137,112 @@ export default function Form() {
           errors.image === ''
         );
       }
-      
 
-    return (
-        <div className={styles.container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                
-                <label>Name:</label>
-                <input autoComplete="off" name="name" value={restorants.name} onChange={handleChange} placeholder="name..." type="text" />
-                {errors.name !== "" && <p className={styles.danger}>{errors.name}</p>}
-                <br/>
-
-                <label>Image</label>
-                <input autoComplete="off" name="image" value={restorants.image} onChange={handleChange} placeholder="image..." type="URL image..." />
-                {errors.image !== "" && <p className={styles.danger}>{errors.image}</p>}
-                <br/>
-
-                <label>Description</label>
-                <textarea autoComplete="off" name="description" value={restorants.description} onChange={handleChange} placeholder="description..." type="" />
-                {errors.description !== "" && <p className={styles.danger}>{errors.description}</p>}
-                <br/>
-
-                <label>Tags</label>
-                <input autoComplete="off" name="tags" placeholder="tags..." type="text" />
-                {errors.tags !== "" && <p className={styles.danger}>{errors.tags}</p>}
-                <button onClick={handleTags} className={styles.add}>Agregar</button>
-                <br/>
-
-                <label>Ubicacion</label>
-                <input autoComplete="off" name="ubi" value={restorants.ubi} onChange={handleChange} placeholder="Ubicacion..." type="text" />
-                {errors.ubi !== "" && <p className={styles.danger}>{errors.ubi}</p>}
-                <br/>
-
-                <label>Capacidad</label>
-                <input autoComplete="off" name="capacity" value={restorants.capacity} onChange={handleChange} placeholder="Capacidad..." type="" />
-                {errors.capacity !== "" && <p className={styles.danger}>{errors.capacity}</p>}
-                <button className={styles.createButton} type="submit" disabled={!isFormValid()}>Create</button>
-            </form>
-        </div>
-    )
+return (
+  <>
+    <Box display="flex" justifyContent="flex-start" mb={2}>
+      <Box mr={2} mt={2} mb={2}>
+        <Link to="/home" style={{ textDecoration: 'none' }}>
+          <Button variant="contained">Volver</Button>
+        </Link>
+      </Box>
+    </Box>
+    <Container className='boxForm' maxWidth="sm">
+      <Box display="flex" flexDirection="column" >
+        <form onSubmit={handleSubmit}>
+          <Box display="flex" flexDirection="column" gap={2}>
+            <TextField
+              label="Name"
+              variant="outlined"
+              name="name"
+              value={restorants.name}
+              onChange={handleChange}
+              autoComplete="off"
+              placeholder="Name..."
+              error={errors.name !== ""}
+              helperText={errors.name !== "" ? errors.name : ""}
+            />
+            <TextField
+              label="Ubicacion"
+              variant="outlined"
+              name="ubi"
+              value={restorants.ubi}
+              onChange={handleChange}
+              autoComplete="off"
+              placeholder="Ubicacion..."
+              error={errors.ubi !== ""}
+              helperText={errors.ubi !== "" ? errors.ubi : ""}
+            />
+            <TextField
+              label="Description"
+              variant="outlined"
+              name="description"
+              value={restorants.description}
+              onChange={handleChange}
+              autoComplete="off"
+              placeholder="Description..."
+              multiline
+              rows={4}
+              error={errors.description !== ""}
+              helperText={errors.description !== "" ? errors.description : ""}
+            />
+            <TextField
+              label="Capacidad"
+              variant="outlined"
+              name="capacity"
+              value={restorants.capacity}
+              onChange={handleChange}
+              autoComplete="off"
+              placeholder="Capacidad..."
+              error={errors.capacity !== ""}
+              helperText={errors.capacity !== "" ? errors.capacity : ""}
+            />
+            <TextField
+              label="Tags"
+              variant="outlined"
+              name="tags"
+              placeholder="Tags..."
+              autoComplete="off"
+              inputRef={tagsInputRef}
+              onChange={handleChange}
+              type="text"
+              error={errors.tags !== ""}
+              helperText={errors.tags !== "" ? errors.tags : ""}
+            />
+            <Button
+              
+              variant="contained"
+              onClick={handleTags}
+              className={styles.add}
+            >
+              Agregar
+            </Button>
+            <TextField
+              label="Image"
+              variant="outlined"
+              name="image"
+              value={restorants.image}
+              onChange={handleChange}
+              autoComplete="off"
+              placeholder="Image..."
+              type="url"
+              error={errors.image !== ""}
+              helperText={errors.image !== "" ? errors.image : ""}
+            />
+            <Box mr={2} mt={2} mb={2}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={!isFormValid()}
+              >
+                Create
+              </Button>
+            </Box>
+          </Box>
+        </form>
+      </Box>
+    </Container>
+  </>
+);
 }
