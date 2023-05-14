@@ -1,12 +1,14 @@
 import {
     GET_ALL_RESTORANTS,
     GET_AMOUNTPAGES,
-    GET_FILTERED
+    GET_FILTERED,
+    GET_RESTOURANTID
 } from "./actionsTypes";
 
 const initialState = {
     restorants: [],
     allRestorants: [],
+    RestaurantID:[],
     AmountPage:"",
     Error:[]
 }
@@ -23,6 +25,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 restorants: payload
+            }
+        case GET_RESTOURANTID:
+            return{
+                ...state,
+                RestaurantID: payload
             }
         case GET_AMOUNTPAGES:
             return {

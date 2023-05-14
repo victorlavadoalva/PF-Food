@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
@@ -9,8 +10,23 @@ import sandwich from "../../Img/ImgCardLanding/Sandwich.png";
 import burger from "../../Img/ImgCardLanding/hamburger.png";
 import pizza from "../../Img/ImgCardLanding/pizza.png";
 import img from "../../Img/ImgLanding/Food-landing.png";
+import { getRestorants } from "../../Redux/actions";
 import styles from "./styles.module.css";
+
 function Landing() {
+  const restorants = useSelector(state => state.restorants);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!restorants.length) dispatch(getRestorants());
+
+  }, [dispatch, restorants, restorants.length]);
+
+
+
+
+
+  
   const [props, SetProps] = useState([
     {
       id: 1,
@@ -66,8 +82,8 @@ function Landing() {
         
           <div className={styles.containerCards}>
             {props.map((el) => (
-              <Link to ="/home" style = {{ textDecoration: "none" , color:"black"}}>
-               <CardLanding className={styles.CardPopular} image={el.image} name={el.name} />
+              <Link key={el.id} to ="/home" style = {{ textDecoration: "none" , color:"black"}}>
+               <CardLanding className={styles.CardPopular}  image={el.image} name={el.name} />
               </Link>
               
             ))}
