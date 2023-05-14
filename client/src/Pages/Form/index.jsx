@@ -142,7 +142,7 @@ export default function Form() {
                 <br/>
 
                 <label>Image</label>
-                <input autoComplete="off" name="image" value={restorants.image} onChange={handleChange} placeholder="image..." type="URL image..." />
+                <input autoComplete="off" name="image" value={restorants.image} onChange={handleChange} placeholder="Subir imagen..." type="file" />
                 {errors.image !== "" && <p className={styles.danger}>{errors.image}</p>}
                 <br/>
 
