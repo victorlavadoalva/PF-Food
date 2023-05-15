@@ -212,6 +212,19 @@ export const props = [
     },
 ]
     
-  
+export const dataImg = [
+    {
+      id:1,
+      alt: "Burger",
+    },
+    {
+    id:2,
+      alt: "Pizza",
+    },
+    {
+        id:3,
+          alt: "Sandwich",
+        },
+  ];
 
 export const IMAGE_NOT_FOUND = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"
