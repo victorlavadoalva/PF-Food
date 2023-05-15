@@ -50,7 +50,6 @@ export default function Home() {
         {
          restorants.length ?
             restorants.map(resto => {
-              
               return (
                 <SimpleCard
                   key={resto._id}
