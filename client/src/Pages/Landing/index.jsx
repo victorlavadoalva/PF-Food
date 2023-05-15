@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
 import img from "../../Img/ImgLanding/Food-landing.png";
+import { getRestorants } from "../../Redux/actions";
+import { props } from "../../dataHardcodeo/constants";
 import styles from "./styles.module.css";
-import { localState } from './localState'
 
 
 function Landing() {
-  const [props, SetProps] = useState(localState);
+  const restorants = useSelector(state => state.restorants);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!restorants.length) dispatch(getRestorants());
+
+  }, [dispatch, restorants, restorants.length]);
+  
   return (
     <div className={styles.container}>
       <div className={styles.containerContent}>
@@ -21,27 +29,23 @@ function Landing() {
           <SearchBar />
         </div>
         <div className={styles.divLink}>
-          <Link to={"/home"} style={{ textDecoration: "none" }}>
+          <Link to={"/home"}  style={{ textDecoration: "none" }}>
             <button className={styles.button}>Explorar</button>
           </Link>
         </div>
         <div className={styles.popularCards}>
           <h3 className={styles.category}>Popular Category</h3>
         </div>
-        <div className={styles.containerCards}>
-          {props.map((el, index) => (
-            <Link
-              to="/home"
-              style={{ textDecoration: "none", color: "black" }}
-              key={index}
-            >
-              <CardLanding
-                className={styles.CardPopular}
-                image={el.image}
-                name={el.name} />
-            </Link>
-          ))}
-        </div>
+        
+          <div className={styles.containerCards}>
+            {props.map((el) => (
+              <Link key={el.id} to ="/home" style = {{ textDecoration: "none" , color:"black"}}>
+               <CardLanding className={styles.CardPopular}  image={el.image} name={el.name} />
+              </Link>
+              
+            ))}
+          </div>
+        
       </div>
       <div className={styles.containerImg}>
         <div className={styles.elementDesing}>

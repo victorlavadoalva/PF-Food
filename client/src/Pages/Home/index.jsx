@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
-// import { getRestorants } from "../../Redux/actions";
+import { getRestorants } from "../../Redux/actions";
 import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants';
 import styles from "./styles.module.css";
 
@@ -12,22 +12,34 @@ export default function Home() {
   const restorants = useSelector(state => state.restorants);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // if (!restorants.length) dispatch(getRestorants());
-    console.log(restorants);
-  }, [dispatch, restorants, restorants.length]);
+const [location, setLocation] = useState('');
+const [order, setOrder] = useState('');
+const [rating, setRating] = useState('');
+const [searchName, setSearchName] = useState("")
 
-  const [location, setLocation] = useState('');
+  useEffect(() => {
+    if (order || rating || location){
+      dispatch(getRestorants({ order ,rating ,searchName , location}));
+    }
+    
+
+  }, [dispatch, order, rating,location]);
+  
+  useEffect(() => {
+    if (!restorants.length) dispatch(getRestorants());
+
+  }, [dispatch, restorants, restorants.length]);
+  
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
   };
 
-  const [order, setOrder] = useState('');
+  
   const handleChangeOrder = (event) => {
     setOrder(event.target.value);
   };
 
-  const [rating, setRating] = useState('');
+  
   const handleChangeRating = (event) => {
     setRating(event.target.value);
   };
@@ -61,7 +73,7 @@ export default function Home() {
                 />
               )
             })
-            : <p>No hay Restaurantes...</p>
+            : <p>Loading...</p>
         }
       </div>
     </div>
