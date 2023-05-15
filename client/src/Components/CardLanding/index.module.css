@@ -13,6 +13,10 @@
     margin:20px 0 0 0;
 
 }
+.cardContainer:hover {
+    border: 1px solid black;
+    transform: scale(1.05);
+  }
 
 .imgContainer {
     display: flex;

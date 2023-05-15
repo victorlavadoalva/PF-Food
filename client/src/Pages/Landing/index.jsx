@@ -15,14 +15,7 @@ function Landing() {
     if (!restorants.length) dispatch(getRestorants());
 
   }, [dispatch, restorants, restorants.length]);
-
-
-
-
-
   
-  
-
   return (
     <div className={styles.container}>
       <div className={styles.containerContent}>
@@ -35,7 +28,7 @@ function Landing() {
         </div>
 
         <div className={styles.divLink}>
-          <Link to={"/home"} style={{ textDecoration: "none" }}>
+          <Link to={"/home"}  style={{ textDecoration: "none" }}>
             <button className={styles.button}>Explorar</button>
           </Link>
         </div>
