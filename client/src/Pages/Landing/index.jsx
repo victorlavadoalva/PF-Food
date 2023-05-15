@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
-import chicken from "../../Img/ImgCardLanding/Chicken.png";
-import dessert from "../../Img/ImgCardLanding/Dessert.png";
-import pasta from "../../Img/ImgCardLanding/Pasta.png";
-import sandwich from "../../Img/ImgCardLanding/Sandwich.png";
-import burger from "../../Img/ImgCardLanding/hamburger.png";
-import pizza from "../../Img/ImgCardLanding/pizza.png";
 import img from "../../Img/ImgLanding/Food-landing.png";
 import { getRestorants } from "../../Redux/actions";
+import { props } from "../../dataHardcodeo/constants";
 import styles from "./styles.module.css";
-
 function Landing() {
   const restorants = useSelector(state => state.restorants);
   const dispatch = useDispatch();
@@ -27,38 +21,7 @@ function Landing() {
 
 
   
-  const [props, SetProps] = useState([
-    {
-      id: 1,
-      image: pizza,
-      name: "Pizza",
-    },
-    {
-      id: 2,
-      image: burger,
-      name: "Burger",
-    },
-    {
-      id: 3,
-      image: sandwich,
-      name: "Sandwich",
-    },
-    {
-      id: 4,
-      image: chicken,
-      name: "Chicken",
-    },
-    {
-      id: 5,
-      image: pasta,
-      name: "Pasta",
-    },
-    {
-      id: 6,
-      image: dessert,
-      name: "Dessert",
-    },
-  ]);
+  
 
   return (
     <div className={styles.container}>

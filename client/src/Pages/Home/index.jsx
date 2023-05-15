@@ -19,7 +19,7 @@ const [searchName, setSearchName] = useState("")
 
   useEffect(() => {
     if (order || rating || location){
-      dispatch(getRestorants(null, order ,rating ,searchName , location));
+      dispatch(getRestorants({ order ,rating ,searchName , location}));
     }
     
 

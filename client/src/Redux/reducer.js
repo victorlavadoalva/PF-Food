@@ -2,7 +2,7 @@ import {
     GET_ALL_RESTORANTS,
     GET_AMOUNTPAGES,
     GET_FILTERED,
-    GET_RESTOURANTID
+    GET_RESTOURANT_ID
 } from "./actionsTypes";
 
 const initialState = {
@@ -26,7 +26,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 restorants: payload
             }
-        case GET_RESTOURANTID:
+        case GET_RESTOURANT_ID:
             return{
                 ...state,
                 RestaurantID: payload

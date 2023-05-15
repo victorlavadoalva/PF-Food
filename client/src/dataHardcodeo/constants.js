@@ -1,3 +1,11 @@
+import chicken from "../Img/ImgCardLanding/Chicken.png"
+import dessert from "../Img/ImgCardLanding/Dessert.png"
+import pasta from "../Img/ImgCardLanding/Pasta.png"
+import sandwich from "../Img/ImgCardLanding/Sandwich.png"
+import burger from "../Img/ImgCardLanding/hamburger.png"
+import pizza from "../Img/ImgCardLanding/pizza.png"
+
+
 export const RESTOS = [
     {
         id: 5,
@@ -170,5 +178,40 @@ export const RATING = [
         name: "Mayor a Menor"
     }
 ]
+
+export const props = [
+    {
+      id: 1,
+      image: pizza,
+      name: "Pizza",
+    },
+    {
+      id: 2,
+      image: burger,
+      name: "Burger",
+    },
+    {
+      id: 3,
+      image: sandwich,
+      name: "Sandwich",
+    },
+    {
+      id: 4,
+      image: chicken,
+      name: "Chicken",
+    },
+    {
+      id: 5,
+      image: pasta,
+      name: "Pasta",
+    },
+    {
+      id: 6,
+      image: dessert,
+      name: "Dessert",
+    },
+]
+    
+  
 
 export const IMAGE_NOT_FOUND = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"
