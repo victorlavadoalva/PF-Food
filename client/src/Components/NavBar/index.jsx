@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getRestorants } from '../../Redux/actions';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css'
 import { styled, alpha } from '@mui/material/styles';
@@ -57,6 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState('');  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,6 +77,16 @@ export default function PrimarySearchAppBar() {
   const menuId = 'primary-search-account-menu';
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  useEffect(() => {
+    dispatch(
+      getRestorants(1, undefined, undefined, searchQuery, undefined)
+    );
+  }, [searchQuery, dispatch]);
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -106,6 +120,8 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
