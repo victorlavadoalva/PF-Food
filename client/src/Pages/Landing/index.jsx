@@ -7,6 +7,8 @@ import img from "../../Img/ImgLanding/Food-landing.png";
 import { getRestorants } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import styles from "./styles.module.css";
+
+
 function Landing() {
   const restorants = useSelector(state => state.restorants);
   const dispatch = useDispatch();
@@ -26,7 +28,6 @@ function Landing() {
         <div className={styles.searchBar}>
           <SearchBar />
         </div>
-
         <div className={styles.divLink}>
           <Link to={"/home"}  style={{ textDecoration: "none" }}>
             <button className={styles.button}>Explorar</button>
@@ -51,7 +52,7 @@ function Landing() {
           <Link to={"/home"} style={{ textDecoration: "none" }}>
             <button className={styles.buttonAccount}>Cuenta</button>
           </Link>
-          <img className={styles.imgFood} src={img} />
+          <img className={styles.imgFood} src={img} alt={"img"} />
         </div>
       </div>
     </div>

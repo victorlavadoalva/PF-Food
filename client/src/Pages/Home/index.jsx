@@ -62,7 +62,6 @@ const [searchName, setSearchName] = useState("")
         {
          restorants.length ?
             restorants.map(resto => {
-              
               return (
                 <SimpleCard
                   key={resto._id}

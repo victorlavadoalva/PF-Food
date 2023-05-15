@@ -9,7 +9,8 @@ function SearchBar() {
   const [searchResto, setSearchResto] = useState("");
   const [searchError, setSearchError] = useState(false);
   const navigate = useNavigate();
-const location = useLocation()
+  const location = useLocation();
+
   function handleChange(event) {
     setSearchResto(event.target.value);
     setSearchError(false); // Reiniciar el mensaje de error al cambiar el valor de búsqueda
@@ -17,6 +18,11 @@ const location = useLocation()
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if(!searchResto) {
+      setSearchError(true);
+      return;
+    }
 
     // Realizar la búsqueda por nombre en la lista de restaurantes (RESTOS)
     const results = RESTOS.filter(
