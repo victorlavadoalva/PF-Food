@@ -11,15 +11,17 @@ function Detail() {
   const { restoId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch()
-const restaurant = useSelector((state) => state.RestaurantID)
-
-useEffect(() => {
-      
-  if(restoId) dispatch(getRestorantsID(restoId))
   
-
-}, [dispatch, restoId]);
-
+  
+  useEffect(() => {
+    
+    if(restoId) dispatch(getRestorantsID(restoId))
+    
+    
+  }, [dispatch, restoId]);
+  
+  const restaurant = useSelector((state) => state.RestaurantID)
+  console.log(restaurant);
 
   // Convertir restoId a número
   // const restoIdNumber = parseInt(restoId);
@@ -41,10 +43,10 @@ useEffect(() => {
         </Carousel> */}
       </div>
       <div className={styles.container}>
-        <p>Ubicación: {restaurant.ubic}</p>
-        <p>Dirección: {restaurant.dire}</p>
-        <p>Descripción: {restaurant.summary}</p>
-        <p>Platos especiales: {restaurant.especial}</p>
+        <p>Ubicación: {restaurant.country}</p>
+        <p>Dirección: {restaurant.dire }</p>
+        <p>Descripción: {restaurant.descripion || "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste explicabo quaerat aut. Perspiciatis, praesentium similique enim modi eaque expedita quia dicta, animi veritatis quidem quam iusto dolorem eius quis assumenda?" }</p>
+        <p>Platos especiales: {"Estos son nuestros platos especiales"}</p>
       </div>
       <div>
         <ListItemButton onClick={() => navigate('/home')}>

@@ -67,8 +67,8 @@ const [searchName, setSearchName] = useState("")
                   key={resto._id}
                   image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                   title={resto.name}
-                  city={"Cordoba"}
-                  address={"Direccion"}
+                  city={resto.city || "Ciudad"}
+                  address={resto.adress || "Deireccion"}
                   id={resto._id}
                 />
               )
