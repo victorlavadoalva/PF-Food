@@ -13,7 +13,7 @@ export default function Form() {
     adress:"",
     country:"",
     phoneNumber:"",
-    image: "",
+    image: [],
     type_customer: "Restaurant",
     tags: [],
     capacity: ""

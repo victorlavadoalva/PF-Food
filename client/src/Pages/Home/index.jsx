@@ -26,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     if (!restorants.length) dispatch(getRestorants());
   }, [dispatch, restorants, restorants.length]);
-  
+
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
   };
@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      
+
       {/* La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back */}
       {/* Hay que conectar los filtros con el backend - No están conectados */}
       <div className={styles.selectors}>
@@ -51,18 +51,18 @@ export default function Home() {
       </div>
       {/* Conectar el páginado tbm */}
       <div className={styles.paginate}>
-        <PaginationRounded 
+        <PaginationRounded
         />
       </div>
-      
+
       <div className={styles.cards}>
         {
-         restorants.length ?
+          restorants.length ?
             restorants.map(resto => {
               return (
                 <SimpleCard
                   key={resto._id}
-                  image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                  image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                   title={resto.name}
                   city={resto.city || "Ciudad"}
                   address={resto.adress || "Direccion"}
