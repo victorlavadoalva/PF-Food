@@ -164,23 +164,44 @@ overflow: hidden;
 
 .carousel {
   /* border: 3px solid black; */
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  
-  
+}
+.container_carouselImg {
+  /* border: 3px solid black; */
+  width:90%;
+  height: 90%;
 }
 
-.imgCarousel {
-  width: 50rem;
-  height: 40rem;
-  object-fit:scale-down;
+
+.pagination_circular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+
+  /* border: 3px solid black; */
+  width: 90%;
+  height: 5%;
 }
 
-.imgLoaded {
-  opacity: 1;
-  transition: opacity 0.5s;
+.pagination_circular span {
+  color:transparent;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination_circular span.active {
+  background-color: #fb6304;
+}
+
+.pagination_circular span:hover {
+  background-color: #ff0000;
 }
