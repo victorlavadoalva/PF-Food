@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
 import SearchBar from "../../Components/SearchBar/index";
-import img from "../../Img/ImgLanding/Food-landing.png";
 import { getRestorants } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
+import Carousel from "./Carrusel";
 import styles from "./styles.module.css";
-
 
 function Landing() {
   const restorants = useSelector(state => state.restorants);
@@ -52,7 +51,11 @@ function Landing() {
           <Link to={"/home"} style={{ textDecoration: "none" }}>
             <button className={styles.buttonAccount}>Cuenta</button>
           </Link>
-          <img className={styles.imgFood} src={img} alt={"img"} />
+          <div className={styles.container_carousel}>
+            <Carousel/>
+          </div>
+          
+          
         </div>
       </div>
     </div>

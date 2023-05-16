@@ -6,20 +6,23 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { useNavigate, useParams } from "react-router-dom";
 import { getRestorantsID } from "../../Redux/actions";
 import styles from "./styles.module.css";
+import { Carousel } from 'react-responsive-carousel';
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
 
 function Detail() {
   const { restoId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch()
-const restaurant = useSelector((state) => state.RestaurantID)
-
-useEffect(() => {
-      
-  if(restoId) dispatch(getRestorantsID(restoId))
   
-
-}, [dispatch, restoId]);
-
+  
+  useEffect(() => {
+    console.log('restoId:', restoId);
+    if(restoId) dispatch(getRestorantsID(restoId))
+  }, [dispatch, restoId]);
+  
+  const restaurant = useSelector((state) => state.RestaurantID)
+  console.log('restaurant:', restaurant);
 
   // Convertir restoId a número
   // const restoIdNumber = parseInt(restoId);
@@ -33,18 +36,26 @@ useEffect(() => {
   return (
     <div className={styles.detail}>
       <div>
-        <h1>{restaurant.name}</h1>
-        {/* <Carousel>
-          {restaurant.image.map((image, index) => (
-            <img key={index} src={image} alt="Restaurant" className={styles.image} />
+        <Typography component='h2' variant='h2' style={{ marginBottom: '8px' }}>{restaurant.name}</Typography>
+        {restaurant.image ? (
+          <Carousel>
+            {restaurant.image.map((image, index) => (
+              <img key={index} src={image} alt="Restaurant" className={styles.image} />
             ))}
-        </Carousel> */}
+          </Carousel>
+        ) : (
+        <Typography component="p" style={{ marginBottom: '8px' }}>No hay imágenes disponibles</Typography>
+         )}
       </div>
       <div className={styles.container}>
-        <p>Ubicación: {restaurant.ubic}</p>
-        <p>Dirección: {restaurant.dire}</p>
-        <p>Descripción: {restaurant.summary}</p>
-        <p>Platos especiales: {restaurant.especial}</p>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Ubicación: {restaurant.city + ', ' + restaurant.country}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Dirección: {restaurant.adress}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Teléfono: {restaurant.phoneNumber}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Descripción: {restaurant.description}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Capacidad: {restaurant.capacity}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Calificación</Typography>
+         <Rating name="read-only" defaultValue={restaurant.rating} readOnly />
       </div>
       <div>
         <ListItemButton onClick={() => navigate('/home')}>

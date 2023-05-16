@@ -1,7 +1,10 @@
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RESTOS } from "../../dataHardcodeo/constants";
+// import { RESTOS } from "../../dataHardcodeo/constants"; // sacarlo una vez unido con el backend
+import { getRestorants } from '../../Redux/actions'; 
+
 import styles from "./index.module.css";
 
 
@@ -10,6 +13,8 @@ function SearchBar() {
   const [searchError, setSearchError] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+  const restorants = useSelector(state => state.restorants);
 
   function handleChange(event) {
     setSearchResto(event.target.value);
@@ -24,8 +29,10 @@ function SearchBar() {
       return;
     }
 
+    dispatch(getRestorants());
+
     // Realizar la búsqueda por nombre en la lista de restaurantes (RESTOS)
-    const results = RESTOS.filter(
+    const results = restorants.filter(
       (resto) =>
         resto.name.toLowerCase().includes(searchResto.toLowerCase())
     );

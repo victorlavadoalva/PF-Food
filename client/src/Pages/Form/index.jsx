@@ -9,8 +9,11 @@ export default function Form() {
   const [restorants, setRestorants] = useState({
     name: "",
     description: "",
-    image: "",
-    ubi: "",
+    city: "",
+    adress:"",
+    country:"",
+    phoneNumber:"",
+    image: [],
     type_customer: "Restaurant",
     tags: [],
     capacity: ""
@@ -18,22 +21,29 @@ export default function Form() {
 
   const [errors, setErrors] = useState({
     name: 'Campo Requerido',
-    ubi: '',
     description: '',
+    city: "",
+    country:"",
+    adress:"",
+    phoneNumber:"",
     capacity: '',
     image: '',
+
   });
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (restorants.name && restorants.ubi && restorants.description && restorants.capacity) {
+    if (restorants.name && restorants.city && restorants.country && restorants.adress && restorants.description && restorants.capacity) {
       axios.post("https://pf-backend-production-5a61.up.railway.app/restaurants", restorants)
       setErrors({});
       setRestorants({
         name: "",
         description: "",
+        city: "",
+        country:"",
+        adress:"",
+        phoneNumber:"",
         image: "",
-        ubi: "",
         type_customer: "Restaurant",
         tags: [],
         capacity: ""
@@ -42,23 +52,22 @@ export default function Form() {
     } else {
       alert('Información incompleta');
     }
+    console.log(restorants)
   };
 
   const tagsInputRef = useRef(null);
 
   function handleTags(event) {
+    
     event.preventDefault();
     const tagValue = tagsInputRef.current.value;
     if (tagValue.trim() !== "") {
       setRestorants({
         ...restorants,
-        tags: [...restorants.tags, tagValue + ", "]
+        tags: [...restorants.tags, tagValue]
       });
-      tagsInputRef.current.value = "";
     }
   }
-
-  console.log(restorants.tags);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -77,15 +86,24 @@ export default function Form() {
       case 'description':
         validateDescription(value);
         break;
-      case 'ubi':
-        validateUbi(value);
-        break;
       case 'capacity':
         validateCapacity(value);
         break;
+      case 'city':
+        validateCity(value);
+        break;
+      case 'address':
+        validateAddress(value);
+        break;
+      case 'country':
+        validateCountry(value);
+        break;
+      case 'phoneNumber':
+        validatePhoneNumber(value);
+        break;  
       case 'image':
         validateImage(value);
-        break;
+        break
       default:
         break;
     }
@@ -93,36 +111,62 @@ export default function Form() {
   };
 
   const validateName = (name) => {
-    if (!/^[a-zA-Z\s.,]+$/.test(name) || name.length < 3) {
+    if (!/^[\p{L}\d\s.,;()']+$/u.test(name) || name.length < 3) {
       setErrors({ ...errors, name: 'Nombre inválido' });
     } else {
       setErrors({ ...errors, name: '' });
     }
   };
-
+  
   const validateDescription = (description) => {
-    if (!/^[a-zA-Z0-9\s.,]+$/.test(description) || description.length < 20) {
-      setErrors({ ...errors, description: 'Descripcion inválido' });
+    if (!/^[\p{L}\d\s.,;()']+$/u.test(description) || description.length < 20) {
+      setErrors({ ...errors, description: 'Descripción inválida' });
     } else {
       setErrors({ ...errors, description: '' });
     }
   };
-
-  const validateUbi = (ubi) => {
-    if (!/^[a-zA-Z0-9\s.,]+$/.test(ubi)) {
-      setErrors({ ...errors, ubi: 'Ubicacion inválida' });
-    } else {
-      setErrors({ ...errors, ubi: '' });
-    }
-  };
-
+  
   const validateCapacity = (capacity) => {
-    if (!/^[a-zA-Z0-9\s]+$/.test(capacity)) {
-      setErrors({ ...errors, capacity: 'Se require capacidad' });
+    if (!/^[\p{L}\d\s.,;()']+$/u.test(capacity)) {
+      setErrors({ ...errors, capacity: 'Se requiere capacidad' });
     } else {
       setErrors({ ...errors, capacity: '' });
     }
   };
+
+  const validateCity = (city) => {
+    if (!/^[\p{L}\s.,;()']+$/u.test(city)) {
+      setErrors({ ...errors, city: 'Ciudad inválida' });
+    } else {
+      setErrors({ ...errors, city: '' });
+    }
+  };
+  
+  const validateAddress = (address) => {
+    if (!/^[\p{L}\d\s.,;()']+$/u.test(address)) {
+      setErrors({ ...errors, address: 'Dirección inválida' });
+    } else {
+      setErrors({ ...errors, address: '' });
+    }
+  };
+  
+  const validateCountry = (country) => {
+    if (!/^[\p{L}\s.,;()']+$/u.test(country)) {
+      setErrors({ ...errors, country: 'País inválido' });
+    } else {
+      setErrors({ ...errors, country: '' });
+    }
+  };
+  
+  const validatePhoneNumber = (phoneNumber) => {
+    if (!/^[\d\-()\s]+$/.test(phoneNumber)) {
+      setErrors({ ...errors, phoneNumber: 'Número de teléfono inválido' });
+    } else {
+      setErrors({ ...errors, phoneNumber: '' });
+    }
+  };
+  
+  
 
   const validateImage = (image) => {
     if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.gif|.GIF|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
@@ -136,9 +180,12 @@ export default function Form() {
     return (
       errors.name === '' &&
       errors.description === '' &&
-      errors.ubi === '' &&
+      errors.city === '' &&
+      errors.country === '' &&
+      errors.adress === '' &&
+      errors.phoneNumber === '' &&
       errors.capacity === '' &&
-      errors.image === ''
+      errors.image === '' 
     );
   }
 
@@ -156,7 +203,7 @@ export default function Form() {
           <form onSubmit={handleSubmit}>
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Name"
+                label="Nombre"
                 variant="outlined"
                 name="name"
                 value={restorants.name}
@@ -167,18 +214,51 @@ export default function Form() {
                 helperText={errors.name !== "" ? errors.name : ""}
               />
               <TextField
-                label="Ubicacion"
+                label="Ciudad"
                 variant="outlined"
-                name="ubi"
-                value={restorants.ubi}
+                name="city"
+                value={restorants.city}
                 onChange={handleChange}
                 autoComplete="off"
-                placeholder="Ubicacion..."
-                error={errors.ubi !== ""}
-                helperText={errors.ubi !== "" ? errors.ubi : ""}
+                placeholder="Ciudad..."
+                error={errors.city !== ""}
+                helperText={errors.city !== "" ? errors.city : ""}
               />
               <TextField
-                label="Description"
+                label="Pais"
+                variant="outlined"
+                name="country"
+                value={restorants.country}
+                onChange={handleChange}
+                autoComplete="off"
+                placeholder="Pais..."
+                error={errors.country !== ""}
+                helperText={errors.country !== "" ? errors.country : ""}
+              />
+              <TextField
+                label="Direccion"
+                variant="outlined"
+                name="adress"
+                value={restorants.adress}
+                onChange={handleChange}
+                autoComplete="off"
+                placeholder="Direccion..."
+                error={errors.adress !== ""}
+                helperText={errors.adress !== "" ? errors.adress : ""}
+              />
+              <TextField
+                label="Numero de Telefono"
+                variant="outlined"
+                name="phoneNumber"
+                value={restorants.phoneNumber}
+                onChange={handleChange}
+                autoComplete="off"
+                placeholder="Telefono..."
+                error={errors.phoneNumber !== ""}
+                helperText={errors.phoneNumber !== "" ? errors.phoneNumber : ""}
+              />
+              <TextField
+                label="Descripcion"
                 variant="outlined"
                 name="description"
                 value={restorants.description}
@@ -210,16 +290,13 @@ export default function Form() {
                 inputRef={tagsInputRef}
                 onChange={handleChange}
                 type="text"
-                error={errors.tags !== ""}
-                helperText={errors.tags !== "" ? errors.tags : ""}
               />
               <div>
                 {
-                  restorants.tags.map((tag, index) => (<span key={index}>{tag}</span>))
+                  restorants.tags.map((tag, index) => (<span key={index}>{tag + ', '}</span>))
                 }
               </div>
               <Button
-
                 variant="contained"
                 onClick={handleTags}
                 className={styles.add}
