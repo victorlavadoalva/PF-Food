@@ -12,41 +12,41 @@ export default function Home() {
   const restorants = useSelector(state => state.restorants);
   const dispatch = useDispatch();
 
-const [location, setLocation] = useState('');
-const [order, setOrder] = useState('');
-const [rating, setRating] = useState('');
-const [searchName, setSearchName] = useState("")
+  const [location, setLocation] = useState('');
+  const [order, setOrder] = useState('');
+  const [rating, setRating] = useState('');
+  const [searchName, setSearchName] = useState("")
 
   useEffect(() => {
-    if (order || rating || location){
-      dispatch(getRestorants({ order ,rating ,searchName , location}));
+    if (order || rating || location) {
+      dispatch(getRestorants({ order, rating, searchName, location }));
     }
-    
 
-  }, [dispatch, order, rating,location]);
-  
+
+  }, [dispatch, order, rating, location]);
+
   useEffect(() => {
     if (!restorants.length) dispatch(getRestorants());
 
   }, [dispatch, restorants, restorants.length]);
-  
+
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
   };
 
-  
+
   const handleChangeOrder = (event) => {
     setOrder(event.target.value);
   };
 
-  
+
   const handleChangeRating = (event) => {
     setRating(event.target.value);
   };
 
   return (
     <div className={styles.home}>
-      
+
       {/* La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back */}
       <div className={styles.selectors}>
         <SelectSmall onChange={handleChangeLocation} value={location} items={LOCATION} title="Ubicacion" />
@@ -54,18 +54,18 @@ const [searchName, setSearchName] = useState("")
         <SelectSmall onChange={handleChangeRating} value={rating} items={RATING} title="Rating" />
       </div>
       <div className={styles.paginate}>
-        <PaginationRounded 
+        <PaginationRounded
         />
       </div>
-      
+
       <div className={styles.cards}>
         {
-         restorants.length ?
+          restorants.length ?
             restorants.map(resto => {
               return (
                 <SimpleCard
                   key={resto._id}
-                  image={"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                  image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                   title={resto.name}
                   city={resto.city || "Ciudad"}
                   address={resto.adress || "Direccion"}
