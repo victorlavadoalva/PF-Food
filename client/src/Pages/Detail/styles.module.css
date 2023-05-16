@@ -5,3 +5,7 @@
 .detail {
     padding: 30px 15rem;
 }
+
+.container {
+    marginBottom: '8px';
+}

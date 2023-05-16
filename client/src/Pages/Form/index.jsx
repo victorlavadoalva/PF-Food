@@ -101,6 +101,9 @@ export default function Form() {
       case 'phoneNumber':
         validatePhoneNumber(value);
         break;  
+      case 'image':
+        validateImage(value);
+        break
       default:
         break;
     }
