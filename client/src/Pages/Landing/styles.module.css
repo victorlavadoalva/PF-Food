@@ -178,6 +178,9 @@ overflow: hidden;
   width: 50rem;
   height: 40rem;
   object-fit:scale-down;
-  transition: transform 0.3s ease-in-out;
 }
 
+.imgLoaded {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
