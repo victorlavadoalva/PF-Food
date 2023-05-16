@@ -14,9 +14,7 @@ function App() {
   return (
     <div className="app">
       {
-       location.pathname !== "/" && <header>
-        <Header/>
-      </header>
+       location.pathname !== "/" && <Header/>
       }
       <main className="main">
         <Routes>
@@ -27,9 +25,10 @@ function App() {
           <Route path="*" element={<Error404/>}/>
         </Routes>
       </main>
-      <footer className="footer">
-        <Footer />
-      </footer>
+      {/* {
+       location.pathname !== "/" && 
+      } */}
+        <Footer className="footer"/>
     </div>
   );
 }
