@@ -159,22 +159,22 @@ export const LOCATION = [
 
 export const ORDER = [
     {
-        id: "asc", 
+        id: "alphaasc", 
         name: "A - Z",
     },
     {
-        id: "desc",
+        id: "alphadesc",
         name: "Z - A"
     }
 ]
 
 export const RATING = [
     {
-        id: "asc", 
+        id: "ratingasc", 
         name: "Menor a Mayor",
     },
     {
-        id: "desc",
+        id: "ratingdesc",
         name: "Mayor a Menor"
     }
 ]
