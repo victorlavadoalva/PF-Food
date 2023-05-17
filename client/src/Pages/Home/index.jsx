@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 export default function Home() {
 
-  const restorants = useSelector(state => state.restorants);
+  const {restorants} = useSelector(state => state);
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState('');
@@ -24,8 +24,8 @@ export default function Home() {
   }, [dispatch, order, rating,location]);
   
   useEffect(() => {
-    if (!restorants.length) dispatch(getRestorants());
-  }, [dispatch, restorants, restorants.length]);
+    if (!restorants.documents) dispatch(getRestorants({}));
+  }, [dispatch, restorants.documents, restorants.length]);
 
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
@@ -52,13 +52,14 @@ export default function Home() {
       {/* Conectar el páginado tbm */}
       <div className={styles.paginate}>
         <PaginationRounded
+          filters={{ location, rating, order}}
         />
       </div>
 
       <div className={styles.cards}>
         {
-          restorants.length ?
-            restorants.map(resto => {
+          restorants?.documents?.length ?
+            restorants?.documents?.map(resto => {
               return (
                 <SimpleCard
                   key={resto._id}
