@@ -26,14 +26,27 @@ setSelectedImage(images[index]);
     
   };
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     next();
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, [selectedIndex]);
+
   useEffect(() => {
+    let isMounted = true; // Variable de referencia para verificar si el componente está montado
+  
     const interval = setInterval(() => {
-      next();
+      if (isMounted) {
+        next(); // Llama a la función next solo si el componente está montado
+      }
     }, 4000);
-    return () => clearInterval(interval);
+  
+    return () => {
+      isMounted = false; // Actualiza la variable de referencia cuando el componente se desmonta
+      clearInterval(interval); // Cancela el intervalo
+    };
   }, [selectedIndex]);
-
-
 
   const imgStyles = {
     width: "50rem",
