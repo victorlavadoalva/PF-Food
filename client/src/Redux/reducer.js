@@ -6,7 +6,7 @@ import {
 } from "./actionsTypes";
 
 const initialState = {
-    restorants: [],
+    restorants: {},
     allRestorants: [],
     RestaurantID:[],
     AmountPage:"",

@@ -12,7 +12,7 @@ function Landing() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!restorants.length) dispatch(getRestorants());
+    if (!restorants.length) dispatch(getRestorants({}));
 
   }, [dispatch, restorants, restorants.length]);
   
