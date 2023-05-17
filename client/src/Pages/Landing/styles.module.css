@@ -79,6 +79,7 @@
   }
 }
 
+
 .category {
   opacity: 0.3;
 }
@@ -113,6 +114,15 @@
   }
 }
 
+@media (max-width: 1366px) {
+  .elementDesing {
+    height: 150vh;
+    border-bottom-right-radius: 15rem;
+    bottom: 55vh;
+    right: -25vh;
+  }
+}
+
 .buttonAccount {
   position: relative;
   top: 30vh;
@@ -142,6 +152,15 @@
   }
 }
 
+@media (max-width: 1366px) {
+  .buttonAccount {
+    position: relative;
+    height: 3rem;
+    width: 20vh;
+    top: 25rem;
+    left: 45vh;
+  }
+}
 .container_carousel {
   /* border:3px solid black; */
   position: absolute;
