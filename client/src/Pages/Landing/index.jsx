@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
-import SearchBar from "../../Components/SearchBar/index";
 import { getRestorants } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
@@ -13,7 +12,7 @@ function Landing() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!restorants.length) dispatch(getRestorants());
+    if (!restorants.length) dispatch(getRestorants({}));
 
   }, [dispatch, restorants, restorants.length]);
   
@@ -22,10 +21,6 @@ function Landing() {
       <div className={styles.containerContent}>
         <div className={styles.containerTitle}>
           <h1>Bienvenido a FoodBook </h1>
-          <h3>Mi Ubicacion | "ubicacion"</h3>
-        </div>
-        <div className={styles.searchBar}>
-          <SearchBar />
         </div>
         <div className={styles.divLink}>
           <Link to={"/home"}  style={{ textDecoration: "none" }}>

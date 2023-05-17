@@ -13,6 +13,8 @@
     margin:20px 0 0 0;
 
 }
+
+
 .cardContainer:hover {
     border: 1px solid black;
     transform: scale(1.05);
@@ -24,5 +26,18 @@
     justify-content: center;
     margin:10px 0 0 0;
     height: 50%;
-    width: 100%;
+    
+}
+
+@media (max-width: 1366px) {
+    .imgContainer img{
+        margin:10px 0 0 0;
+    height: 7vh;
+    }
+}
+
+@media (max-width: 1366px) {
+    .cardContainer h3{
+        font-size: 13px;
+    }
 }
