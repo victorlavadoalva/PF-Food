@@ -18,11 +18,15 @@ function App() {
       }
       <main className={styles.main}>
         <Routes>
+
+    
           <Route exact path='/' element={<Landing />} />
           <Route exact path='/home' element={<Home />} />
           <Route exact path='/form' element={<Form />} />
           <Route exact path='/detail/:restoId' element={<Detail />} />
           <Route path="*" element={<Error404/>}/>
+
+
         </Routes>
       </main>
       {

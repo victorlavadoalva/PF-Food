@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -5,7 +6,6 @@ import CardLanding from "../../Components/CardLanding";
 import { getRestorants } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
-import { useAuth0 } from '@auth0/auth0-react';
 
 import styles from "./styles.module.css";
 
@@ -14,11 +14,24 @@ function Landing() {
   const dispatch = useDispatch();
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
 
+
+// const [savedData , setSaveData] = useState(false)
+
+// useEffect(() => {
+//   if(isAuthenticated && !savedData){
+//     window.localStorage.setItem("User", JSON.stringify(user))
+//     setSaveData(true)
+//   }      
+// },[isAuthenticated, user, savedData])
+
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
-
+   
   }, [dispatch, restorants.documents, restorants.length]);
   
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.containerContent}>
@@ -50,10 +63,10 @@ function Landing() {
             <div id='miDiv' className={styles.divUser}>
               <p>{user.name}</p>
               <img src={user.picture} alt={user.name} style={{ borderRadius: '50%', maxWidth: '4rem' }}/>
-              <span onClick={() => logout()}>logout</span>
+              <span onClick={() => logout()}>Log out</span>
             </div>
           ):(
-            <button onClick={loginWithRedirect} className={styles.buttonAccount}>Cuenta</button>
+            <button onClick={loginWithRedirect} className={styles.buttonAccount}>Login</button>
           )}      
         <div className={styles.container_carousel}>
           <Carousel/>

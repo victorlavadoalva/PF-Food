@@ -17,7 +17,6 @@ export const getRestorants = ({page = 1, order , rating, name, country}) => {
     }
 };
 
-
 export const getRestorantsID = (id) => {
     return async function (dispatch) {
         try {
