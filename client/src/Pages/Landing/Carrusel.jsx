@@ -26,13 +26,6 @@ setSelectedImage(images[index]);
     
   };
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     next();
-  //   }, 4000);
-  //   return () => clearInterval(interval);
-  // }, [selectedIndex]);
-
   useEffect(() => {
     let isMounted = true; // Variable de referencia para verificar si el componente está montado
   
