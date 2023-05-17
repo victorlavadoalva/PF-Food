@@ -1,5 +1,4 @@
 import chicken from "../Img/ImgCardLanding/Chicken.png"
-import dessert from "../Img/ImgCardLanding/Dessert.png"
 import pasta from "../Img/ImgCardLanding/Pasta.png"
 import sandwich from "../Img/ImgCardLanding/Sandwich.png"
 import burger from "../Img/ImgCardLanding/hamburger.png"
@@ -204,12 +203,7 @@ export const props = [
       id: 5,
       image: pasta,
       name: "Pasta",
-    },
-    {
-      id: 6,
-      image: dessert,
-      name: "Dessert",
-    },
+    }
 ]
     
 export const dataImg = [

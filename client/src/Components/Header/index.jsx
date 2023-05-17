@@ -4,10 +4,10 @@ import NavBar from "../NavBar"
 export default function Header(){
     const location = useLocation()
     return(
-        <div>
+        <header>
             {
             location.pathname !== "/" &&  <NavBar/>
             }
-        </div>
+        </header>
     )
 }

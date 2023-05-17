@@ -1,9 +1,10 @@
 .container {
   display: flex;
-overflow: hidden;
-  scrollbar-width: none;
+  overflow: hidden;
+
   width: 100%;
-  height: 87vh;
+  height: 100vh;
+  
   background: #ffeeee; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to bottom right,
@@ -18,87 +19,85 @@ overflow: hidden;
 }
 
 .containerContent {
+  /* border: 2px solid black; */
   display: flex;
-  align-items:center;
+  align-items: center;
   flex-direction: column;
   border-top-left-radius: 3%;
+  border-bottom-left-radius: 3%;
   background-color: white;
   width: 49%;
-  height: 97%;
+  height: 88%;
   padding: 0 0 5px 0;
   margin: 1% 0 0px 2%;
 }
 
 .containerTitle {
   /* border:3px solid black; */
-  order:1;
-  
+  order: 1;
   margin: 20px 0 0 0;
-  height:10rem;
+  height: 10rem;
 }
+
 .containerTitle h1 {
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-size: 2,5rem;
-}
-
-.searchBar {
-  margin-left:30px;
-  /* border:3px solid black; */
-  align-items: center;
-  justify-content: center;
-  height: 8rem;
-  width: 50rem;
-  order:2;
-
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 2, 5rem;
 }
 
 .divLink {
   /* border:3px solid black; */
-  order:3;
-  
-  margin:10px 0 0 0;
+  order: 3;
+  margin: 10px 0 0 0;
   width: 20%;
   height: 7%;
 }
 .popularCards {
   /* border:3px solid black; */
-
-  order:4;
-  margin:15px 0 0 0;
+  order: 4;
+  margin: 15px 0 0 0;
   width: 50rem;
-  height:3rem;
-  margin-left:30px;
+  height: 3rem;
+  margin-left: 30px;
 }
 
 .containerCards {
   /* border:3px solid black; */
   display: flex;
-  order:5;
+  order: 5;
   flex-direction: row;
-  margin:15px 0 0 0;
+  margin: 15px 0 0 0;
   width: 50rem;
-  height:25rem;
-  margin-left:30px;
-  gap:15px
+  height: 25rem;
+  margin-left: 30px;
+  gap: 15px;
 }
+
+@media (max-width: 1500px) {
+  .containerCards,
+  .popularCards {
+    width: 38rem;
+  }
+}
+
 
 .category {
   opacity: 0.3;
 }
 
-
 .containerImg {
+  /* border: 2px solid black; */
   display: flex;
   background-color: white;
   border-top-left-radius: 1%;
-  
   width: 49%;
-  height: 100%;
+  height: 90vh;
+  padding-bottom: 4px;
 }
 .elementDesing {
   position: relative;
   background-color: #5bc0be;
   border-radius: 10vh;
+  border-bottom-right-radius: 25rem;
   bottom: 25vh;
   right: -25vh;
   width: 100vh;
@@ -106,40 +105,85 @@ overflow: hidden;
   transform: rotate(10deg);
 }
 
+@media (max-width: 1500px) {
+  .elementDesing {
+    height: 150vh;
+    width: 100vh;
+    bottom: 55vh;
+    right: -15vh;
+  }
+}
+
+@media (max-width: 1366px) {
+  .elementDesing {
+    height: 150vh;
+    border-bottom-right-radius: 15rem;
+    bottom: 55vh;
+    right: -25vh;
+  }
+}
+
 .buttonAccount {
   position: relative;
-  top:30vh;
-  left:45vh;
+  top: 30vh;
+  left: 45vh;
   background-color: #323232;
-  border:none;
-  color:white;
+  border: none;
+  color: white;
   height: 5rem;
   width: 20vh;
   font-size: 17px;
-  border-top-left-radius:30rem;
-  border-bottom-left-radius:60rem;
-  border-top-right-radius:60rem;
-  border-bottom-right-radius:30rem;
+  border-top-left-radius: 30rem;
+  border-bottom-left-radius: 60rem;
+  border-top-right-radius: 60rem;
+  border-bottom-right-radius: 30rem;
   align-items: center;
   justify-content: center;
   transform: rotate(-10deg);
 }
 
+@media (max-width: 1500px) {
+  .buttonAccount {
+    position: relative;
+    height: 3rem;
+    width: 20vh;
+    top: 25rem;
+    left: 55vh;
+  }
+}
+
+@media (max-width: 1366px) {
+  .buttonAccount {
+    position: relative;
+    height: 3rem;
+    width: 20vh;
+    top: 25rem;
+    left: 45vh;
+  }
+}
 .container_carousel {
   /* border:3px solid black; */
   position: absolute;
   width: 55rem;
   height: 60vh;
-  top:50vh;
+  top: 50vh;
   transform: rotate(-10deg);
   right: 300px;
+}
 
+@media (max-width: 1500px) {
+  .container_carousel {
+    width: 30rem;
+    height: 50vh;
+    top: 35rem;
+    right: 18rem;
+  }
 }
 
 .button {
   display: flex;
   background-color: #323232;
-  color:white;
+  color: white;
   height: 3rem;
   width: 15vh;
   border-radius: 15px;
@@ -147,20 +191,21 @@ overflow: hidden;
   justify-content: center;
   font-size: 17px;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .CardPopular :hover {
-  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
   transform: translateY(-4px);
- }
+}
 
 .button :hover {
-  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
   transform: translateY(-4px);
- }
+}
 
- /*Carusel////////////////////////////////////////////////////////////////////////////    */
+/*Carusel////////////////////////////////////////////////////////////////////////////    */
 
 .carousel {
   /* border: 3px solid black; */
@@ -170,24 +215,28 @@ overflow: hidden;
 }
 .container_carouselImg {
   /* border: 3px solid black; */
-  width:90%;
+  width: 90%;
   height: 90%;
 }
-
 
 .pagination_circular {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
 
   /* border: 3px solid black; */
   width: 90%;
   height: 5%;
 }
 
+@media (max-width: 1500px) {
+  .pagination_circular {
+    height: 5%;
+  }
+}
 .pagination_circular span {
-  color:transparent;
+  color: transparent;
   width: 10px;
   height: 10px;
   border-radius: 50%;

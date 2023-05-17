@@ -1,4 +1,4 @@
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
 export default function CardLanding({id ,image, name}) {
   return (

@@ -21,7 +21,6 @@ function Landing() {
       <div className={styles.containerContent}>
         <div className={styles.containerTitle}>
           <h1>Bienvenido a FoodBook </h1>
-          <h3>Mi Ubicacion | "ubicacion"</h3>
         </div>
         <div className={styles.divLink}>
           <Link to={"/home"}  style={{ textDecoration: "none" }}>

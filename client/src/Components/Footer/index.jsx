@@ -1,9 +1,10 @@
-import styles from "./index.module.css"
-
+import { useLocation } from "react-router-dom"
+import styles from "./styles.module.css"
 export default function Footer(){
+    const location = useLocation()
     return (
-        <div className={styles.footer}>
+        <footer className={location.pathname === "/" ? styles.footerLanding : styles.footerHome}>
 
-        </div>
+        </footer>
     )
 }

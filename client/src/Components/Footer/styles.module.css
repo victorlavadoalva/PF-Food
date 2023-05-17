@@ -1,0 +1,15 @@
+.footerLanding{
+    position: absolute;
+  top:87vh;
+    background-color: #3A506B;
+    height: 127px;
+    width: 100%;
+    border-top-left-radius: 5vh;
+}
+
+.footerHome {
+    background-color: #3A506B;
+    height: 127px;
+    width: 100%;
+    border-top-left-radius: 5vh;
+}
