@@ -29,7 +29,7 @@ function SearchBar() {
       return;
     }
 
-    dispatch(getRestorants());
+    dispatch(getRestorants({}));
 
     // Realizar la búsqueda por nombre en la lista de restaurantes (RESTOS)
     const results = restorants.filter(

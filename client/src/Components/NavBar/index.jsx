@@ -60,7 +60,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const [searchQuery, setSearchQuery] = useState('');  
+  const [name, setName] = useState('');  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,12 +80,12 @@ export default function PrimarySearchAppBar() {
 
   useEffect(() => {
     dispatch(
-      getRestorants(1, undefined, undefined, searchQuery, undefined)
+      getRestorants({name})
     );
-  }, [searchQuery, dispatch]);
+  }, [name, dispatch]);
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+    setName(event.target.value);
   };
 
   return (
@@ -120,7 +120,7 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchQuery}
+              value={name}
               onChange={handleSearchChange}
             />
           </Search>
