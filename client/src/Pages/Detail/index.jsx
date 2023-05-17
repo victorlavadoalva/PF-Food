@@ -49,11 +49,10 @@ function Detail() {
       </div>
       <div className={styles.container}>
          <Typography component="p" style={{ marginBottom: '8px' }}>Ubicación: {restaurant.city + ', ' + restaurant.country}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Dirección: {restaurant.adress}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Dirección: {restaurant.address}</Typography>
          <Typography component="p" style={{ marginBottom: '8px' }}>Teléfono: {restaurant.phoneNumber}</Typography>
          <Typography component="p" style={{ marginBottom: '8px' }}>Descripción: {restaurant.description}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Capacidad: {restaurant.capacity}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography>
+         {/* <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography> */}
          <Typography component="p" style={{ marginBottom: '8px' }}>Calificación</Typography>
          <Rating name="read-only" defaultValue={restaurant.rating} readOnly />
       </div>
