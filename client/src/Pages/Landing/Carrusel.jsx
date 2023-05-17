@@ -43,6 +43,14 @@ setSelectedImage(images[index]);
     opacity: loaded ? 1 : 0,
     transition: "opacity 0.5s",
   };
+
+  const mediaQuery = window.matchMedia("(max-width: 1500px)");
+
+if (mediaQuery.matches) {
+  imgStyles.width = "30rem";
+  imgStyles.margin = "0px 0 0 0";
+  imgStyles.height = "20rem";
+}
   
 return (
     <div className={styles.carousel}>
