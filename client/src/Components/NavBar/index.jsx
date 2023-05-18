@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getRestorants } from '../../Redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -33,6 +33,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -60,7 +61,9 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const [name, setName] = useState('');  
+  const [name, setName] = useState('');
+  const location = useLocation();
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,7 +83,7 @@ export default function PrimarySearchAppBar() {
 
   useEffect(() => {
     dispatch(
-      getRestorants({name})
+      getRestorants({ name })
     );
   }, [name, dispatch]);
 
@@ -100,8 +103,11 @@ export default function PrimarySearchAppBar() {
             onClick={handleDrawerOpen}
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
-            <TemporaryDrawer isOpen={open}/>
+            {
+              location.pathname === "/restorant" &&
+              <MenuIcon />
+            }
+            <TemporaryDrawer isOpen={open} />
           </IconButton>
           <Link to="/home" className={styles.link}>
             <Typography
