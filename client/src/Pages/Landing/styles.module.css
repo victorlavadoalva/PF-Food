@@ -18,6 +18,10 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.logoutButton:hover {
+  cursor: pointer;
+}
+
 .containerContent {
   /* border: 2px solid black; */
   display: flex;
@@ -253,4 +257,26 @@
 
 .pagination_circular span:hover {
   background-color: #ff0000;
+}
+
+.divUser{
+  position: relative;
+  top:30vh;
+  left:45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  max-width: 9rem;
+  background-color: #323232;
+  border:none;
+  margin:2rem;
+  color:white;
+  font-size: 13px;
+  margin-top: 10rem;
+  padding-bottom: 1rem;
+  border-radius: 15%;
+  transform: rotate(-10deg);
+  z-index: 1;
 }
