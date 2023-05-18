@@ -49,7 +49,7 @@ function Landing() {
             {(isAuthenticated)?(<div  className={styles.divUser}>
               <p>{user.name}</p>
               <img src={user.picture} alt={user.name} style={{ borderRadius: '50%', maxWidth:'4rem' }}/>
-              <span onClick={logout}>logout</span>
+              <span className={styles.logoutButton} onClick={logout}>logout</span>
               </div>):(<button onClick={loginWithRedirect} className={styles.buttonAccount}>Cuenta</button>)}
           <div className={styles.container_carousel}>
             <Carousel/>
