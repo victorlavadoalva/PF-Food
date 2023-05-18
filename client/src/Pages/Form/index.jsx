@@ -6,6 +6,7 @@ import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from 
 
 
 export default function Form() {
+  const [imageFile,setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
     description: "",
@@ -13,7 +14,7 @@ export default function Form() {
     address:"",
     country:"",
     phoneNumber:"",
-    image: "",
+    image: null,
     type_customer: "Restaurant",
     tags: [],
     capacity: ""
@@ -31,6 +32,12 @@ export default function Form() {
 
   });
 
+  function handleImage(event) {
+    const file = event[0];
+    setImageFile(file)
+    }
+  
+
   function handleSubmit(event) {
     event.preventDefault();
     if (restorants.name && restorants.city && restorants.country && restorants.address && restorants.description && restorants.capacity) {
@@ -41,7 +48,7 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("image", restorants.image);
+      formData.append("image", imageFile);
       formData.append("type_customer", "Restaurant");
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
@@ -58,7 +65,7 @@ export default function Form() {
             country:"",
             address:"",
             phoneNumber:"",
-            image: "",
+            image: null,
             type_customer: "Restaurant",
             tags: [],
             capacity: ""
@@ -321,17 +328,10 @@ export default function Form() {
               >
                 Agregar
               </Button>
-              <TextField
-                label="Image"
-                variant="outlined"
-                name="image"
-                value={restorants.image}
-                onChange={handleChange}
-                autoComplete="off"
-                placeholder="Image..."
-                type="file"
-                error={errors.image !== ""}
-                helperText={errors.image !== "" ? errors.image : ""}
+              <input
+                 type="file"
+                 name="image"
+                 onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>
                 <Button
