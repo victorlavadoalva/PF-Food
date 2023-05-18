@@ -18,6 +18,10 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.logoutButton:hover {
+  cursor: pointer;
+}
+
 .containerContent {
   /* border: 2px solid black; */
   display: flex;
@@ -270,7 +274,9 @@
   margin:2rem;
   color:white;
   font-size: 13px;
+  margin-top: 10rem;
+  padding-bottom: 1rem;
   border-radius: 15%;
-  padding-bottom: 2rem;
   transform: rotate(-10deg);
+  z-index: 1;
 }

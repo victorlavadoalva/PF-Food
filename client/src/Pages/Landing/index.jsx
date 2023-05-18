@@ -5,19 +5,19 @@ import CardLanding from "../../Components/CardLanding";
 import { getRestorants } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
-import { useAuth0 } from '@auth0/auth0-react';
-
 import styles from "./styles.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Landing() {
   const restorants = useSelector(state => state.restorants);
   const dispatch = useDispatch();
-  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+  const {loginWithRedirect, user, isAuthenticated, logout} = useAuth0()
+  
 
   useEffect(() => {
-    if (!restorants.documents) dispatch(getRestorants({}));
+    if (!restorants.length) dispatch(getRestorants({}));
 
-  }, [dispatch, restorants.documents, restorants.length]);
+  }, [dispatch, restorants, restorants.length]);
   
   return (
     <div className={styles.container}>
@@ -46,18 +46,16 @@ function Landing() {
       </div>
       <div className={styles.containerImg}>
         <div className={styles.elementDesing}>
-          {(isAuthenticated)?(
-            <div id='miDiv' className={styles.divUser}>
+            {(isAuthenticated)?(<div  className={styles.divUser}>
               <p>{user.name}</p>
-              <img src={user.picture} alt={user.name} style={{ borderRadius: '50%', maxWidth: '4rem' }}/>
-              <span onClick={() => logout()}>logout</span>
-            </div>
-          ):(
-            <button onClick={loginWithRedirect} className={styles.buttonAccount}>Cuenta</button>
-          )}      
-        <div className={styles.container_carousel}>
-          <Carousel/>
-        </div>           
+              <img src={user.picture} alt={user.name} style={{ borderRadius: '50%', maxWidth:'4rem' }}/>
+              <span className={styles.logoutButton} onClick={logout}>logout</span>
+              </div>):(<button onClick={loginWithRedirect} className={styles.buttonAccount}>Cuenta</button>)}
+          <div className={styles.container_carousel}>
+            <Carousel/>
+          </div>
+          
+          
         </div>
       </div>
     </div>
