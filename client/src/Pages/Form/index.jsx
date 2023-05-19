@@ -2,10 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from "@mui/material";
 
 
 export default function Form() {
+  const navigate = useNavigate();
   const [imageFile,setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
@@ -57,6 +59,7 @@ export default function Form() {
         .then((response) => {
           console.log('Datos enviados:', formData);
           console.log('Respuesta del servidor:', response.data);
+          alert('Restaurante creado');
           setErrors({});
           setRestorants({
             name: "",
@@ -70,7 +73,7 @@ export default function Form() {
             tags: [],
             capacity: ""
           });
-          alert('Restaurante creado');
+          navigate('/formPlatos');
         })
         .catch((error) => {
           console.error(error);
