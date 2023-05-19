@@ -37,23 +37,26 @@ function Detail() {
     <div className={styles.detail}>
       <div>
         <Typography component='h2' variant='h2' style={{ marginBottom: '8px' }}>{restaurant.name}</Typography>
-        {restaurant.image ? (
+        {Array.isArray(restaurant.image) ? (
           <Carousel>
             {restaurant.image.map((image, index) => (
               <img key={index} src={image} alt="Restaurant" className={styles.image} />
             ))}
           </Carousel>
         ) : (
-        <Typography component="p" style={{ marginBottom: '8px' }}>No hay imágenes disponibles</Typography>
-         )}
+          restaurant.image ? (
+            <img src={restaurant.image} alt="Restaurant" className={styles.image} style={{ maxWidth: '100%', height: 'auto' }}/>
+          ) : (
+            <Typography component="p" style={{ marginBottom: '8px' }}>No hay imágenes disponibles</Typography>
+          )
+        )}
       </div>
       <div className={styles.container}>
          <Typography component="p" style={{ marginBottom: '8px' }}>Ubicación: {restaurant.city + ', ' + restaurant.country}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Dirección: {restaurant.adress}</Typography>
+         <Typography component="p" style={{ marginBottom: '8px' }}>Dirección: {restaurant.address}</Typography>
          <Typography component="p" style={{ marginBottom: '8px' }}>Teléfono: {restaurant.phoneNumber}</Typography>
          <Typography component="p" style={{ marginBottom: '8px' }}>Descripción: {restaurant.description}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Capacidad: {restaurant.capacity}</Typography>
-         <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography>
+         {/* <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography> */}
          <Typography component="p" style={{ marginBottom: '8px' }}>Calificación</Typography>
          <Rating name="read-only" defaultValue={restaurant.rating} readOnly />
       </div>

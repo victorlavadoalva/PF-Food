@@ -21,3 +21,17 @@
     flex-wrap: wrap;
     row-gap: 35px;
 }
+
+
+/* Estos dos estilos es para replicar cuando tengamos la vista del menú - No borrar!! */
+/* .cardContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr; Divide en dos columnas de ancho igual
+    grid-gap: 20px;
+}
+.card {
+    width: 80%; Ajusta el ancho de las tarjetas, dejando un espacio entre ellas
+    Otros estilos para las tarjetas
+} */
+  
+  

@@ -95,6 +95,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: '#3A506B' }} open={open}>
         <Toolbar>
+        {location.pathname === "/restorant" && (
           <IconButton
             size="large"
             edge="start"
@@ -102,13 +103,11 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             sx={{ mr: 2 }}
-          >
-            {
-              location.pathname === "/restorant" &&
+          >            
               <MenuIcon />
-            }
-            <TemporaryDrawer isOpen={open} />
           </IconButton>
+        )}      
+            <TemporaryDrawer isOpen={open} />
           <Link to="/home" className={styles.link}>
             <Typography
               variant="h6"
