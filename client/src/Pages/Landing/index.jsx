@@ -1,33 +1,65 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CardLanding from "../../Components/CardLanding";
-import { getRestorants, PostUser } from "../../Redux/actions";
+import { getRestorants, PostUser , GetUserEmail} from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
 import { Outlet } from 'react-router-dom';
 import styles from "./styles.module.css";
 import { useLocation } from 'react-router-dom';
 function Landing() {
-  const {restorants, postuser} = useSelector(state => state);
+  const {restorants, userFoundByEmail} = useSelector(state => state);
   const dispatch = useDispatch();
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
 const location = useLocation()
-
+const redirection = "/user-type"
 const [savedData , setSaveData] = useState(false)
+const [saveEmail , setSaveEmail] = useState("")
+const [redirected, setRedirected] = useState(false);
 console.log(user)
 
-useEffect(() => {
-  if(user) return dispatch(PostUser(user))
-},[user])
+const navigate = useNavigate();
+
 
 useEffect(() => {
-  if(isAuthenticated && !savedData){
-    window.localStorage.setItem("User", JSON.stringify(postuser))
-    setSaveData(true)
-  }      
-},[isAuthenticated, user, savedData])
+     if(isAuthenticated){
+          setSaveEmail(user.email)
+     }
+},[isAuthenticated])
+
+useEffect(() => {
+  if(saveEmail){
+    console.log(saveEmail)
+      dispatch(GetUserEmail({saveEmail}));
+  }
+
+},[dispatch, saveEmail])
+
+
+useEffect(async() => {
+
+    
+    console.log("useEffect foundByemail", userFoundByEmail)
+    const checkIfNewUser = async () => {
+      if (userFoundByEmail && redirected) {
+        const storedPath = localStorage.getItem('redirectPath') || '/';
+        navigate(storedPath)
+        setRedirected(true);
+      } else if (!redirected) {
+        setTimeout(() => {
+        // navigate(redirection)
+        // setRedirected(true);
+        },3000)
+        
+      }
+    };
+  
+    checkIfNewUser()
+  
+}, [userFoundByEmail, redirected]);
+
 
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
@@ -39,6 +71,12 @@ useEffect(() => {
     logout()
     setSaveData(false)
   }
+
+  const handleLogin = () => {
+    window.localStorage.setItem('redirectPath', window.location.pathname);
+    
+    loginWithRedirect();
+  };
 
 
   return (
@@ -78,7 +116,7 @@ useEffect(() => {
               <span onClick={() => handleLogout()}>Log out</span>
             </div>
           ):(
-            <button onClick={loginWithRedirect} className={styles.buttonAccount}>Login</button>
+            <button onClick={() => handleLogin()} className={styles.buttonAccount}>Login</button>
           )}      
         <div className={styles.container_carousel}>
           <Carousel/>

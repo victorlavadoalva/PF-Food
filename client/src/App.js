@@ -35,7 +35,6 @@ function App() {
             <Route element={<RutasCliente/>  }>
                   {/* <Route exact path='/home' element={<Home />} /> */}
             </Route> 
-
           <Route  path='/' element={<Landing />} >
               <Route  path='home' element={<Home />} >
                   <Route path='detail/:restoId' element={<Detail />} />
