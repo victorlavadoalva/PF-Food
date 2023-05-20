@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./styles.module.css";
 
 export default function Login_Register() {
-  const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
