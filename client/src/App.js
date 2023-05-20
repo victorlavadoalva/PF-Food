@@ -8,6 +8,7 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 import styles from "./styles.module.css";
 import FormPlatos from "./Pages/FormPlatos";
+import MenuCliente from "./Pages/MenuClientes";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/form' element={<Form />} />
           <Route exact path='/detail/:restoId' element={<Detail />} />
           <Route exact path='/formPlatos' element={<FormPlatos />} />
+          <Route exact path= '/menuCliente' element={<MenuCliente />}/>
           <Route path="*" element={<Error404/>}/>
         </Routes>
       </main>
