@@ -6,6 +6,8 @@ const GET_RESTOURANT_ID = "GET_RESTOURANT_ID"
 const GET_ADMIN_USER = "GET_ADMIN_USER"
 const POST_USER = "POST_USER"
 const GET_USER_EMAIL = "GET_USER_EMAIL"
+const LOGIN = "LOGIN"
+const LOADING = "LOADING"
 
 module.exports = {
     GET_ALL_RESTORANTS,
@@ -15,6 +17,8 @@ module.exports = {
     GET_RESTOURANT_ID,
     GET_ADMIN_USER,
     POST_USER,
-    GET_USER_EMAIL
+    GET_USER_EMAIL,
+    LOGIN,
+    LOADING
 
 }

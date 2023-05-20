@@ -1,12 +1,14 @@
 import axios from "axios";
 import {
-    ERROR,
-    GET_ADMIN_USER,
-    GET_ALL_RESTORANTS,
-    GET_AMOUNTPAGES,
-    GET_RESTOURANT_ID,
-    GET_USER_EMAIL,
-    POST_USER,
+  ERROR,
+  GET_ADMIN_USER,
+  GET_ALL_RESTORANTS,
+  GET_AMOUNTPAGES,
+  GET_RESTOURANT_ID,
+  GET_USER_EMAIL,
+  LOADING,
+  LOGIN,
+  POST_USER
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN =`https://pf-backend-production-5a61.up.railway.app/${token}`
@@ -46,9 +48,10 @@ export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
         console.log(saveEmail)
-        const {dataUser} = await axios(URL_USERS + `?email=${saveEmail}`)
-        const {dataRestaurant} = await axios.get(URL_RESTAURANT + `?email=${saveEmail}` )
-        console.log(dataUser)
+        const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`)
+        const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}` )
+        const dataUser = response_user.data
+        const dataRestaurant = response_restaurant.data
       if (dataUser) {
         return dispatch({ type: GET_USER_EMAIL, payload: [true, dataUser] });
       }else if(dataRestaurant){
@@ -103,3 +106,15 @@ export const getRestorantsID = (id) => {
     }
   };
 };
+
+export const Login = ({isAuthenticated, user}) => {
+  return async function (dispatch) {
+      return dispatch({ type: LOGIN, payload: [isAuthenticated, user] });
+  };
+};
+
+export const Loading = (boolean) =>{
+return async function(dispatch){
+  return dispatch({type:LOADING,payload:boolean})
+}
+}
