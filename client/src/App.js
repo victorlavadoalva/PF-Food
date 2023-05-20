@@ -53,13 +53,17 @@ function App() {
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Cliente */}
                 <Route element={<RutasCliente />}>
+                  {/* Franco se encarga de terminar esta rutas*/}
                   {/* <Route exact path='/home' element={<Home />} /> */}
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Restaurante */}
                 <Route element={<RutaRestaurant />}>
+                  {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
                   <Route exact path="/form" element={<Form />} />
+                  {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" >
+                    {/*Pasarle los componentes por element*/}
                       <Route path="pedidos" />
                       <Route path="add_food" />
                       <Route path="menu" />
