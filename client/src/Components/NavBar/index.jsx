@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getRestorants } from '../../Redux/actions';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -33,6 +33,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -60,7 +61,9 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const [name, setName] = useState('');  
+  const [name, setName] = useState('');
+  const location = useLocation();
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,7 +83,7 @@ export default function PrimarySearchAppBar() {
 
   useEffect(() => {
     dispatch(
-      getRestorants({name})
+      getRestorants({ name })
     );
   }, [name, dispatch]);
 
@@ -92,6 +95,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ background: '#3A506B' }} open={open}>
         <Toolbar>
+        {location.pathname === "/restorant" && (
           <IconButton
             size="large"
             edge="start"
@@ -99,10 +103,11 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-            <TemporaryDrawer isOpen={open}/>
+          >            
+              <MenuIcon />
           </IconButton>
+        )}      
+            <TemporaryDrawer isOpen={open} />
           <Link to="/home" className={styles.link}>
             <Typography
               variant="h6"

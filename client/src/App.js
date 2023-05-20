@@ -15,6 +15,7 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+
 function App() {
   const location = useLocation();
   const { loading } = useSelector((state) => state);
