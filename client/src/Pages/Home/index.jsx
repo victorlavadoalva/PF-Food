@@ -4,8 +4,9 @@ import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
 import { getRestorants } from "../../Redux/actions";
-import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
+import { FOOD, LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
 import styles from "./styles.module.css";
+import { CardDish } from '../../Components/CardDish';
 
 export default function Home() {
 
@@ -37,7 +38,7 @@ export default function Home() {
   
   const handleChangeRating = (event) => {
     setRating(event.target.value);
-  };
+  };  
 
   return (
     <div className={styles.home}>
@@ -74,6 +75,22 @@ export default function Home() {
             : <p>Loading...</p>
         }
       </div>
+
+      {/* Es una prueba para renderizar las cards de los platos */}
+      {/* <div className={styles.cardContainer}>
+        {FOOD.map((food) => (
+          <CardDish
+            key={food.id}
+            id={food.id}
+            image={food.image[0]}
+            name={food.name}
+            tags={food.tags}
+            cost={food.cost}
+            description={food.description}
+            className={styles.card}          
+          />      
+        ))}        
+      </div> */}
     </div>
   );
 };
