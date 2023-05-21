@@ -20,15 +20,12 @@ const Review = () => {
         rating: rating,
         comment: comment,
       });
-      console.log(response.data); // Manejar la respuesta del backend según tus necesidades
-      // Restablecer los campos después de enviar la revisión
+      console.log(response.data); 
       setRating(0);
       setComment('');
     } catch (error) {
       console.error(error);
-      // Manejar errores de envío de la revisión según tus necesidades
     }
-    console.log('rating: '+ rating,'comentario: '+comment)
   };
 
   return (
@@ -53,6 +50,7 @@ const Review = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 
