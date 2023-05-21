@@ -51,7 +51,7 @@ export const DrawerContent = ({anchor = 'left'}) => {
             </ListItem>
             <ListItem key={'Ver Reservas'} disablePadding>
                 <ListItemButton>
-                    <ListItemIcon>
+                    <ListItemIcon onClick={() => navigate('/reservas') }>
                         <BookmarkAddedIcon/>
                     </ListItemIcon>
                     <ListItemText primary={'Ver Reservas'} />
@@ -59,7 +59,7 @@ export const DrawerContent = ({anchor = 'left'}) => {
             </ListItem>
             <ListItem key={'Pedidos'} disablePadding>
                 <ListItemButton>
-                    <ListItemIcon>
+                    <ListItemIcon onClick={() => navigate('/pedidos') }>
                         <DeliveryDiningIcon/>
                     </ListItemIcon>
                     <ListItemText primary={'Pedidos'} />

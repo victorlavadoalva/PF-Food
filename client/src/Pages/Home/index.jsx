@@ -23,7 +23,7 @@ export default function Home() {
     if (order || rating || location){
       dispatch(getRestorants({ order ,rating ,searchName , location}));
     }   
-  }, [dispatch, order, rating,location]);
+  }, [dispatch, order, rating, location, searchName]);
   
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
@@ -102,4 +102,3 @@ export default function Home() {
   );
 };
 
-//image, title, description, onClick
