@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Outlet ,useLocation} from 'react-router-dom';
 import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
@@ -9,7 +10,7 @@ import styles from "./styles.module.css";
 import { CardDish } from '../../Components/CardDish';
 
 export default function Home() {
-
+  const locationRouter = useLocation()
   const {restorants} = useSelector(state => state);
   const dispatch = useDispatch();
 
@@ -41,8 +42,10 @@ export default function Home() {
   };  
 
   return (
-    <div className={styles.home}>
-
+    <>
+    {
+      locationRouter.pathname === "/home" &&
+      <div className={styles.home}>
       {/* La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back */}
       {/* Hay que conectar los filtros con el backend - No están conectados */}
       <div className={styles.selectors}>
@@ -92,6 +95,10 @@ export default function Home() {
         ))}        
       </div> */}
     </div>
+    }
+    
+    <Outlet/>
+    </>
   );
 };
 
