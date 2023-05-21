@@ -51,7 +51,7 @@ function App() {
                 {/* Usuario registrandose */}
                 <Route path="/user-type" element={<UserType />} />
                 {/* -------------------------------------------------------------------------------------- */}
-                {/* Usuario tipo Cliente */}
+                {/* Usuaio tipo Cliente */}
                 <Route element={<RutasCliente />}>
                   {/* Franco se encarga de terminar esta rutas*/}
                   {/* <Route exact path='/home' element={<Home />} /> */}
