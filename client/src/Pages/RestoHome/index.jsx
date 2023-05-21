@@ -10,6 +10,7 @@ export default function Home() {
   // const { plates } = useSelector(state => state);
   const plates = FOOD;
   const location = useLocation();
+  // console.log(plates);
 
   return (
     <>
@@ -23,13 +24,12 @@ export default function Home() {
               plates.length ?
                 plates.map(plate => {
                   return (
-                    // image, name, tags, cost, id, description
                     <CardDish
                       key={plate.id}
                       image={plate.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                       title={plate.name}
                       tags={plate.tags}
-                      address={plate.cost || "0.00"}
+                      cost={plate.cost || "0.00"}
                       id={plate.id}
                     />
                   )

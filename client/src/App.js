@@ -65,7 +65,7 @@ function App() {
                   {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
                   <Route exact path="/form" element={<Form />} />
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
-                  <Route path="/restorant" >
+                  <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
                       <Route path="pedidos" element={<Pedidos />}/>
                       <Route path="add_food" />
