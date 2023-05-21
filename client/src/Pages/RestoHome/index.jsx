@@ -1,26 +1,30 @@
-import { SimpleCard } from '../../Components/Card/index';
+import { CardDish } from '../../Components/CardDish';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./styles.module.css";
+import { FOOD } from '../../dataHardcodeo/constants'
 
 export default function Home() {
 
-  const {restorants} = useSelector(state => state);
-  const dispatch = useDispatch();
+  // const { plates } = useSelector(state => state);
+  const plates = FOOD;
 
   return (
     <div className={styles.container}>
       <div className={styles.cards}>
         {
-          restorants?.documents?.length ?
-            restorants?.documents?.map(resto => {
+          // plates?.documents?.length ?
+          //   plates?.documents?.map(plate => {
+            plates.length?
+            plates.map(plate => {
               return (
-                <SimpleCard
-                  key={resto._id}
-                  image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
-                  title={resto.name}
-                  city={resto.city || "Ciudad"}
-                  address={resto.adress || "Direccion"}
-                  id={resto._id}
+                // image, name, tags, cost, id, description
+                <CardDish
+                  key={plate.id}
+                  image={plate.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                  title={plate.name}
+                  tags={plate.tags}
+                  address={plate.cost || "0.00"}
+                  id={plate.id}
                 />
               )
             })
