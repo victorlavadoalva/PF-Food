@@ -18,6 +18,7 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import MenuCliente from "./Pages/MenuClientes";
 
 function App() {
   const location = useLocation();
