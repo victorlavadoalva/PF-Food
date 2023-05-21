@@ -1,0 +1,38 @@
+.divUser {
+  position: relative;
+  top: 25vh;
+  left: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  max-width: 9rem;
+  background-color: #323232;
+  border: none;
+  margin: 2rem;
+  color: white;
+  font-size: 13px;
+  border-radius: 15%;
+  padding-bottom: 2rem;
+  transform: rotate(-10deg);
+}
+
+.buttonAccount {
+  position: relative;
+  top: 30vh;
+  left: 45vh;
+  background-color: #323232;
+  border: none;
+  color: white;
+  height: 5rem;
+  width: 20vh;
+  font-size: 17px;
+  border-top-left-radius: 30rem;
+  border-bottom-left-radius: 60rem;
+  border-top-right-radius: 60rem;
+  border-bottom-right-radius: 30rem;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-10deg);
+}
