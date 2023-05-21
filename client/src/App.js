@@ -1,19 +1,25 @@
+import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import RutasAdmin from "./Components/RutasProtegidas/RutasAdmin";
+import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
+import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
+import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import AdminUser from "./View/AdminUsers";
+import Loading_Login from "./View/Loading";
+import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import FormPlatos from "./Pages/FormPlatos";
 import MenuCliente from "./Pages/MenuClientes";
 
 function App() {
-
-  const location = useLocation()
-
+  const location = useLocation();
+  const { loading } = useSelector((state) => state);
   return (
     <div className={styles.app}>
       {
@@ -26,7 +32,6 @@ function App() {
           <Route exact path='/form' element={<Form />} />
           <Route exact path='/detail/:restoId' element={<Detail />} />
           <Route exact path='/formPlatos' element={<FormPlatos />} />
-          <Route exact path= '/menuCliente' element={<MenuCliente />}/>
           <Route path="*" element={<Error404/>}/>
         </Routes>
       </main>
@@ -39,4 +44,3 @@ function App() {
 }
 
 export default App;
-

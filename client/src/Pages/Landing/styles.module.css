@@ -261,8 +261,8 @@
 
 .divUser{
   position: relative;
-  top:30vh;
-  left:45vh;
+  top:25vh;
+  left:40vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
