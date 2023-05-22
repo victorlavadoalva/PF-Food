@@ -55,7 +55,7 @@ export default function Form() {
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
 
-      axios.post("https://pf-backend-production-5a61.up.railway.app/restaurants", formData)
+      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
         .then((response) => {
           console.log('Datos enviados:', formData);
           console.log('Respuesta del servidor:', response.data);

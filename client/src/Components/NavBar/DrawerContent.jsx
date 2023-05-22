@@ -27,6 +27,7 @@ export const DrawerContent = ({ anchor = "left" }) => {
   const handleNavigePedidos = () => {
     navigate("/restorant/pedidos");
   };
+  /////
   const handleNavigeAddFood = () => {
     navigate("/restorant/add_food");
   };
