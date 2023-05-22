@@ -18,7 +18,7 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import FormPlatos from "./Pages/FormPlatos"
+import FormPlatos from "./Pages/FormPlatos";
 import MenuCliente from "./Pages/MenuClientes";
 
 function App() {
@@ -46,10 +46,9 @@ function App() {
               <Route element={<RutasUsers />}>
                 <Route path="/" element={<Landing />}>
                   <Route path="home" element={<Home />}>
-                    <Route path="detail/:restoId" element={<Detail />}>
-                      <Route path='menuCliente' element={<MenuCliente />} /> 
-                    </Route>               
+                    <Route path="detail/:restoId" element={<Detail />}></Route>
                   </Route>
+                  <Route path="menuCliente/:id" element={<MenuCliente />} />
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
@@ -71,13 +70,11 @@ function App() {
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
-                      <Route path="pedidos" element={<Pedidos />}/>
-                      <Route path="add_food" element={<FormPlatos />} />
-                      <Route path="menu" />
-                      <Route path="reservas" element={<Reservas />}/>
+                    <Route path="pedidos" element={<Pedidos />} />
+                    <Route path="add_food" element={<FormPlatos />} />
+                    <Route path="menu" />
+                    <Route path="reservas" element={<Reservas />} />
                   </Route>
-
-                  
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Rutas Admin */}
