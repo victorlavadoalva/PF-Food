@@ -88,8 +88,8 @@ export default function PrimarySearchAppBar() {
   };
 
   let isRestorant = false;
-  
-  if(pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas") {
+
+  if(pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas" || pathname === "/form" ) {
     isRestorant = true;
   }
 
