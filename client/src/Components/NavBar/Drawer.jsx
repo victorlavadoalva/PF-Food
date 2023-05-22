@@ -2,7 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import { DrawerContent } from './DrawerContent';
 import { useState } from 'react';
 
-export function TemporaryDrawer({ isOpen }) {
+export function TemporaryDrawer({ isOpen, toggleDrawer }) {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -10,20 +10,22 @@ export function TemporaryDrawer({ isOpen }) {
     right: false,
   });
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
+  // const toggleDrawer = (anchor, open) => (event) => {
+  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+  //     return;
+  //   }
+  //   console.log('entro')
+  //   setState({ ...state, [anchor]: !open });
+  // };
 
   return (
     <Drawer
         anchor='left'
         open={isOpen}
+        onClose={toggleDrawer}
+
     >
-        <DrawerContent toggleDrawer={() => {}}/>    
+        <DrawerContent toggleDrawer={toggleDrawer}/>    
     </Drawer>
   );
 }
