@@ -5,9 +5,9 @@ import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
 import { getRestorants } from "../../Redux/actions";
-import { FOOD, LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
+import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
 import styles from "./styles.module.css";
-import { CardDish } from '../../Components/CardDish';
+
 
 export default function Home() {
   const locationRouter = useLocation()

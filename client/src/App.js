@@ -18,6 +18,8 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import FormPlatos from "./Pages/FormPlatos"
+import MenuCliente from "./Pages/MenuClientes";
 
 function App() {
   const location = useLocation();
@@ -44,7 +46,9 @@ function App() {
               <Route element={<RutasUsers />}>
                 <Route path="/" element={<Landing />}>
                   <Route path="home" element={<Home />}>
-                    <Route path="detail/:restoId" element={<Detail />} />
+                    <Route path="detail/:restoId" element={<Detail />}>
+                      <Route path='menuCliente' element={<MenuCliente />} /> 
+                    </Route>               
                   </Route>
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
@@ -67,8 +71,13 @@ function App() {
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
+<<<<<<< HEAD
                       <Route path="pedidos" element={<Pedidos />}/>
                       <Route path="add_food" />
+=======
+                      <Route path="pedidos" />
+                      <Route path="add_food" element={<FormPlatos />} />
+>>>>>>> 9fe5dea4e5b124ae60786900d249a8176a2449f5
                       <Route path="menu" />
                       <Route path="reservas" element={<Reservas />}/>
                   </Route>
