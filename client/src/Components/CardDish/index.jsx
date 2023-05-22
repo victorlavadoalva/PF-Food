@@ -11,12 +11,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 import { useState } from "react";
-
 import styles from "./styles.module.css";
+import { useLocation } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -29,9 +29,19 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export const CardDish = ({ image, name, tags, cost, id, description, addToCart}) => {
+export const CardDish = ({
+  image,
+  name,
+  tags,
+  cost,
+  id,
+  description,
+  addToCart,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const { pathname } = useLocation();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -48,9 +58,12 @@ export const CardDish = ({ image, name, tags, cost, id, description, addToCart})
   };
 
   const handleClickFavorite = () => {
-    // TODO hacer un post a la db para que guarde el valor de favorito
+    // TODO hacer un post a la db para que guarde el valor de favorito para la vista de clientes
     setIsFavorite((prevState) => !prevState);
   };
+
+  const isRestorant = pathname === "/restorant";
+
 
   return (
     <Card sx={{ width: 600 }} key={id}>
@@ -85,8 +98,8 @@ export const CardDish = ({ image, name, tags, cost, id, description, addToCart})
             //       open={Boolean(anchorEl)}
             //       onClose={handleClose}
             //     >
-            //       <MenuItem onClick={handleClose}>Editar</MenuItem> 
-            //       <MenuItem onClick={handleClose}>Eliminar</MenuItem> 
+            //       <MenuItem onClick={handleClose}>Editar</MenuItem>
+            //       <MenuItem onClick={handleClose}>Eliminar</MenuItem>
             //     </Menu>
             //   </>
             // }
@@ -109,22 +122,27 @@ export const CardDish = ({ image, name, tags, cost, id, description, addToCart})
           </CardContent>
         </div>
       </div>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={handleClickFavorite}>
-          <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
-        </IconButton>
-        <IconButton aria-label="shopping">
-          <ShoppingCartIcon onClick={() => addToCart({ id, name, cost })}/> 
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
+      {!isRestorant && (
+        <CardActions disableSpacing>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={handleClickFavorite}
+          >
+            <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
+          </IconButton>
+          <IconButton aria-label="shopping">
+            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost })} />
+          </IconButton>
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+      )}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{description}</Typography>
