@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Rating, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
 
-const Review = () => {
-  const [rating, setRating] = useState(0);
+const Review = ( {id} ) => {
+  const [valoracion, setValoracion] = useState(0);
   const [comment, setComment] = useState('');
 
-  const handleRatingChange = (event, value) => {
-    setRating(value);
+  const handleValChange = (event, value) => {
+    setValoracion(value);
   };
 
   const handleCommentChange = (event) => {
@@ -16,12 +16,12 @@ const Review = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("https://pf-backend-production-5a61.up.railway.app/restaurants", {
-        rating: rating,
+      const response = await axios.post(`https://pf-backend-production-5a61.up.railway.app/restaurants${id}`, {
+        valoracion: valoracion,
         comment: comment,
       });
       console.log(response.data); 
-      setRating(0);
+      setValoracion(0);
       setComment('');
     } catch (error) {
       console.error(error);
@@ -32,7 +32,7 @@ const Review = () => {
     <div>
       <div>
         <Typography variant="h6">Deja tu valoración:</Typography>
-        <Rating name="rating" value={rating} onChange={handleRatingChange} />
+        <Rating name="rating" value={valoracion} onChange={handleValChange} />
       </div>
       <div>
         <TextField

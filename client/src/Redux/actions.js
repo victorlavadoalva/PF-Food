@@ -98,7 +98,7 @@ export const GetAdminUser = () => {
 export const getRestorantsID = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios(URL + id);
+      const response = await axios(URL_RESTAURANT + '/' + id);
       const data = response.data;
       return dispatch({ type: GET_RESTOURANT_ID, payload: data });
     } catch (error) {

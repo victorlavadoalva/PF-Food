@@ -20,9 +20,7 @@ const user = login[1]
 console.log("userLOGIN",user)
 console.log("Authen",isAuthenticated)
 
-useEffect(() => {
-    dispatch(Loading(true))
-},[])
+
     useEffect(() => {
         if(isAuthenticated){
              setSaveEmail(user.email)

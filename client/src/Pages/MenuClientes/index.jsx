@@ -5,6 +5,7 @@ import { getRestorants } from "../../Redux/actions";
 import { FOOD } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
 import styles from "./styles.module.css";
 import { CardDish } from '../../Components/CardDish';
+import Cart from '../../Components/Cart';
 
 export default function MenuCliente() {
 
@@ -30,20 +31,7 @@ export default function MenuCliente() {
         <PaginationRounded/>
       </div>
       {/* Es una prueba para renderizar las cards de los platos */}
-      <div className={styles.cardContainer}>
-        {FOOD.map((food) => (
-          <CardDish
-            key={food.id}
-            id={food.id}
-            image={food.image[0]}
-            name={food.name}
-            tags={food.tags}
-            cost={food.cost}
-            description={food.description}
-            className={styles.card}          
-          />      
-        ))}        
-      </div>
+      <Cart></Cart>
     </div>
   );
 };
