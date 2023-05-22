@@ -19,11 +19,12 @@ export default function Home() {
   const [rating, setRating] = useState('');
   const [searchName, setSearchName] = useState("")
 
+
   useEffect(() => {
     if (order || rating || location){
       dispatch(getRestorants({ order ,rating ,searchName , location}));
     }   
-  }, [dispatch, order, rating,location]);
+  }, [dispatch, order, rating, location, searchName]);
   
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
@@ -59,7 +60,6 @@ export default function Home() {
           filters={{ location, rating, order}}
         />
       </div>
-
       <div className={styles.cards}>
         {
           restorants?.documents?.length ?
@@ -102,4 +102,3 @@ export default function Home() {
   );
 };
 
-//image, title, description, onClick

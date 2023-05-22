@@ -21,7 +21,8 @@ const initialState = {
     userFoundByEmail:[],
     login:[],
     loading:false,
-    error:[]
+    error:[],
+    plates: [],
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {

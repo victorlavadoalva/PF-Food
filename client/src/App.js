@@ -9,7 +9,10 @@ import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
+import Pedidos from "./Components/Pedidos";
+import Reservas from "./Components/Reservas";
 import Home from "./Pages/Home";
+import RestoHome from "./Pages/RestoHome";
 import Landing from "./Pages/Landing/index.jsx";
 import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
@@ -66,12 +69,17 @@ function App() {
                   {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
                   <Route exact path="/form" element={<Form />} />
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
-                  <Route path="/restorant" >
+                  <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
+<<<<<<< HEAD
+                      <Route path="pedidos" element={<Pedidos />}/>
+                      <Route path="add_food" />
+=======
                       <Route path="pedidos" />
                       <Route path="add_food" element={<FormPlatos />} />
+>>>>>>> 9fe5dea4e5b124ae60786900d249a8176a2449f5
                       <Route path="menu" />
-                      <Route path="reservas" />
+                      <Route path="reservas" element={<Reservas />}/>
                   </Route>
 
                   

@@ -18,6 +18,15 @@ export const DrawerContent = ({ anchor = "left" }) => {
   const handleNavigeForm = () => {
     navigate("/form");
   };
+  const handleNavigeHome = () => {
+    navigate("/restorant");
+  };
+  const handleNavigeReservas = () => {
+    navigate("/restorant/reservas");
+  };
+  const handleNavigePedidos = () => {
+    navigate("/restorant/pedidos");
+  };
 
   return (
     <Box
@@ -45,7 +54,7 @@ export const DrawerContent = ({ anchor = "left" }) => {
       <Divider />
       <List>
         <ListItem key={"Menú"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleNavigeHome}>
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
@@ -53,7 +62,7 @@ export const DrawerContent = ({ anchor = "left" }) => {
           </ListItemButton>
         </ListItem>
         <ListItem key={"Ver Reservas"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleNavigeReservas}>
             <ListItemIcon>
               <BookmarkAddedIcon />
             </ListItemIcon>
@@ -61,7 +70,7 @@ export const DrawerContent = ({ anchor = "left" }) => {
           </ListItemButton>
         </ListItem>
         <ListItem key={"Pedidos"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleNavigePedidos}>
             <ListItemIcon>
               <DeliveryDiningIcon />
             </ListItemIcon>
