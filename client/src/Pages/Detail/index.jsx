@@ -10,8 +10,10 @@ import { Carousel } from "react-responsive-carousel";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import BasicButtons from "../../Components/Button";
+import { useLocation, Outlet } from "react-router-dom";
 
 function Detail() {
+  const location = useLocation();
   const { restoId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ function Detail() {
   // const resto = RESTOS.find((resto) => resto.id === restoIdNumber);
 
   return (
+    <>
+
     <div className={styles.detail}>
       <div>
         <Typography component="h2" variant="h2" style={{ marginBottom: "8px" }}>
@@ -88,6 +92,9 @@ function Detail() {
         <BasicButtons/>
       </div>
     </div>
+  
+  <Outlet/>
+  </>  
   );
 }
 
