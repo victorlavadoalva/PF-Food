@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export const CardDish = ({ image, name, tags, cost, id, description }) => {
+export const CardDish = ({ image, name, tags, cost, id, description, addToCart}) => {
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -64,31 +64,32 @@ export const CardDish = ({ image, name, tags, cost, id, description }) => {
         />
         <div className={styles.infoContainer}>
           <CardHeader
-            action={
-              <>
-                <IconButton aria-label="settings" onClick={handleClick}>
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Editar</MenuItem> 
-                  <MenuItem onClick={handleClose}>Eliminar</MenuItem> 
-                </Menu>
-              </>
-            }
+            // Despues ver si la action para editar y eliminar se implementa en la cards o no
+            // action={
+            //   <>
+            //     <IconButton aria-label="settings" onClick={handleClick}>
+            //       <MoreVertIcon />
+            //     </IconButton>
+            //     <Menu
+            //       id="menu-appbar"
+            //       anchorEl={anchorEl}
+            //       anchorOrigin={{
+            //         vertical: "top",
+            //         horizontal: "right",
+            //       }}
+            //       keepMounted
+            //       transformOrigin={{
+            //         vertical: "top",
+            //         horizontal: "right",
+            //       }}
+            //       open={Boolean(anchorEl)}
+            //       onClose={handleClose}
+            //     >
+            //       <MenuItem onClick={handleClose}>Editar</MenuItem> 
+            //       <MenuItem onClick={handleClose}>Eliminar</MenuItem> 
+            //     </Menu>
+            //   </>
+            // }
             title={name}
             className={styles.header}
             sx={{ padding: 0 }}
@@ -113,7 +114,7 @@ export const CardDish = ({ image, name, tags, cost, id, description }) => {
           <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
         </IconButton>
         <IconButton aria-label="shopping">
-          <ShoppingCartIcon /> 
+          <ShoppingCartIcon onClick={() => addToCart({ id, name, cost })}/> 
         </IconButton>
         <ExpandMore
           expand={expanded}

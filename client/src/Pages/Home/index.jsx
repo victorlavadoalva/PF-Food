@@ -5,9 +5,9 @@ import { SimpleCard } from '../../Components/Card/index';
 import PaginationRounded from "../../Components/Paginado";
 import SelectSmall from '../../Components/Select';
 import { getRestorants } from "../../Redux/actions";
-import { FOOD, LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
+import { LOCATION, ORDER, RATING } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
 import styles from "./styles.module.css";
-import { CardDish } from '../../Components/CardDish';
+
 
 export default function Home() {
   const locationRouter = useLocation()
@@ -19,11 +19,12 @@ export default function Home() {
   const [rating, setRating] = useState('');
   const [searchName, setSearchName] = useState("")
 
+
   useEffect(() => {
     if (order || rating || location){
       dispatch(getRestorants({ order ,rating ,searchName , location}));
     }   
-  }, [dispatch, order, rating,location]);
+  }, [dispatch, order, rating, location, searchName]);
   
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
@@ -59,7 +60,6 @@ export default function Home() {
           filters={{ location, rating, order}}
         />
       </div>
-
       <div className={styles.cards}>
         {
           restorants?.documents?.length ?
@@ -102,4 +102,3 @@ export default function Home() {
   );
 };
 
-//image, title, description, onClick
