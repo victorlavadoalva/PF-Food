@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import Pedidos from "./Components/Pedidos";
+import Reservas from "./Components/Reservas";
 import RutasAdmin from "./Components/RutasProtegidas/RutasAdmin";
 import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
 import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
@@ -9,8 +11,10 @@ import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
+import FormPlatos from "./Pages/FormPlatos";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import RestoHome from "./Pages/RestoHome";
 import AdminUser from "./View/AdminUsers";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
@@ -58,12 +62,12 @@ function App() {
                   {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
                   <Route exact path="/form" element={<Form />} />
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
-                  <Route path="/restorant" >
+                  <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
-                      <Route path="pedidos" />
-                      <Route path="add_food" />
+                      <Route path="pedidos" element={<Pedidos />}/>
+                      <Route path="add_food" element={<FormPlatos />} />
                       <Route path="menu" />
-                      <Route path="reservas" />
+                      <Route path="reservas" element={<Reservas />}/>
                   </Route>
 
                   

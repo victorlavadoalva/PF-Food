@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export const CardDish = ({ image, name, tags, cost, id, description }) => {
+export const CardDish = ({ image, name, tags, cost, id, description, addToCart}) => {
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -114,7 +114,7 @@ export const CardDish = ({ image, name, tags, cost, id, description }) => {
           <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
         </IconButton>
         <IconButton aria-label="shopping">
-          <ShoppingCartIcon /> 
+          <ShoppingCartIcon onClick={() => addToCart({ id, name, cost })}/> 
         </IconButton>
         <ExpandMore
           expand={expanded}
