@@ -27,6 +27,9 @@ export const DrawerContent = ({ anchor = "left" }) => {
   const handleNavigePedidos = () => {
     navigate("/restorant/pedidos");
   };
+  const handleNavigeAddFood = () => {
+    navigate("/restorant/add_food");
+  };
 
   return (
     <Box
@@ -43,7 +46,7 @@ export const DrawerContent = ({ anchor = "left" }) => {
           </ListItemButton>
         </ListItem>
         <ListItem key={"Agregar Plato"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleNavigeAddFood}> 
             <ListItemIcon>
               <DinnerDiningIcon />
             </ListItemIcon>

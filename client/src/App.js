@@ -71,13 +71,8 @@ function App() {
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
-<<<<<<< HEAD
                       <Route path="pedidos" element={<Pedidos />}/>
-                      <Route path="add_food" />
-=======
-                      <Route path="pedidos" />
                       <Route path="add_food" element={<FormPlatos />} />
->>>>>>> 9fe5dea4e5b124ae60786900d249a8176a2449f5
                       <Route path="menu" />
                       <Route path="reservas" element={<Reservas />}/>
                   </Route>

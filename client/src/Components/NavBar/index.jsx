@@ -87,7 +87,11 @@ export default function PrimarySearchAppBar() {
     setName(event.target.value);
   };
 
-  const isRestorant = pathname === "/restorant" || "/restorant/pedidos" || "restorant/reservas" ? true : false;
+  let isRestorant = false;
+
+  if(pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas" || pathname === "/form" ) {
+    isRestorant = true;
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
