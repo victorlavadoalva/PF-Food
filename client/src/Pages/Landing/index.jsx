@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link,  } from "react-router-dom";
@@ -10,20 +9,15 @@ import { Outlet } from 'react-router-dom';
 import styles from "./styles.module.css";
 import { useLocation } from 'react-router-dom';
 import Login_Register from '../../Components/Login';
+import Loading_Login from "../../View/Loading";
 function Landing() {
   const {restorants, loading} = useSelector(state => state);
   const dispatch = useDispatch();
-  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+
 const location = useLocation()
 
 
-useEffect(async() => {
 
-  if(isAuthenticated, user){
-    dispatch(Login({isAuthenticated,user}))
-  }
-  
-},[isAuthenticated,user])
 
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
@@ -31,27 +25,24 @@ useEffect(async() => {
   }, [dispatch, restorants.documents, restorants.length]);
   
 
-  const handleLogout = () => {
-    logout()
-  }
-
-  const handleLogin = async() => {
-    window.localStorage.setItem('redirectPath', window.location.pathname);
-  };
-
-
   return (
     <>
     {
-      location.pathname === "/" && 
-      
-      <div className={styles.container}>
+        loading ? (
+            <Loading_Login/>
+        ):(
+          <>
+ {
+      (location.pathname === "/" || location.pathname === "/landing" )&&
+
+      (<div className={styles.container}>
       <div className={styles.containerContent}>
         <div className={styles.containerTitle}>
           <h1>Bienvenido a FoodBook </h1>
         </div>
         <div className={styles.divLink}>
-          <Link to={"/home"}  style={{ textDecoration: "none" }}>
+          
+          <Link to={location.pathname === "/" ? "/home" : "h"}  style={{ textDecoration: "none" }}>
             <button className={styles.button}>Explorar</button>
           </Link>
         </div>
@@ -77,9 +68,13 @@ useEffect(async() => {
         </div>           
         </div>
       </div>
-    </div>
-    
+    </div>)
+
     }
+    </>
+        )
+      }
+   
     
     <Outlet/>
     </>

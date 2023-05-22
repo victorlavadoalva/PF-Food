@@ -1,16 +1,51 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GetUserEmail, Loading } from "../../Redux/actions";
+import {  Loading , Login} from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./styles.module.css";
 
 export default function Login_Register() {
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout ,isLoading} = useAuth0();
+const dispatch = useDispatch()
+const navigate = useNavigate()
+  useEffect(() => {
 
+    dispatch(Loading(false))
+  },[isLoading])
+
+  useEffect(() => {
+function data(){
+  const location = localStorage.getItem('redirectPath');
+  if(isAuthenticated, user){
+      dispatch(Login({isAuthenticated,user}))
+      if(location === "/"){
+        navigate("/landing")
+      }else if(location ==="/home"){
+        navigate("/h")
+      }
+    }
+}
+    data();
+  },[isAuthenticated,user])
+  
+
+  const handleLogOut = () => {
+    const location = window.localStorage.setItem("redirectPath", window.location.pathname);
+    dispatch(Loading(true))
+    if(location === "/landing"){
+      navigate("/")
+    }else if(location ==="/h"){
+      navigate("/home")
+    }
+    logout()
+  }
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
-    loginWithRedirect();
+    if(!isLoading){
+      loginWithRedirect();
+    }
+    
   };
 
   return (
@@ -23,7 +58,7 @@ export default function Login_Register() {
             alt={user.name}
             style={{ borderRadius: "50%", maxWidth: "4rem" }}
           />
-          <span onClick={() => logout()}>Log out</span>
+          <span onClick={() => handleLogOut()}>Log out</span>
         </div>
       ) : (
         <div>
@@ -31,7 +66,7 @@ export default function Login_Register() {
             onClick={() => handleLogin()}
             className={styles.buttonAccount}
           >
-            Login
+            {isLoading ? "Cargando" : "Login"}
           </button>
         </div>
       )}

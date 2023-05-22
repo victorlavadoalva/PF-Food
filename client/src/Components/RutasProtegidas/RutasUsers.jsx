@@ -20,9 +20,6 @@ const user = login[1]
 console.log("userLOGIN",user)
 console.log("Authen",isAuthenticated)
 
-useEffect(() => {
-    dispatch(Loading(true))
-},[])
     useEffect(() => {
         if(isAuthenticated){
              setSaveEmail(user.email)
@@ -46,24 +43,18 @@ useEffect(() => {
         const storedPath = localStorage.getItem('redirectPath');
         console.log(storedPath)
         navigate(storedPath)
-         setRedirected(true);
-
-        setTimeout(() => {
-          
-          if (redirected) {
+        dispatch(Loading(false))
           window.localStorage.removeItem('redirectPath');
-        }
-        },5000)
-        
       } else if (userFoundByEmail[0] === false && !redirected) {
         navigate(redirection)
-        setRedirected(true);
+        dispatch(Loading(false))
+        
       }
     };
   
     checkIfNewUser()
 
-}, [userFoundByEmail.length, redirected, navigate]);
+}, [userFoundByEmail.length,dispatch, redirected, navigate]);
 
 return <Outlet/>
 }
