@@ -34,16 +34,7 @@ export const getRestorants = ({ page = 1, order, rating, name, country }) => {
     }
   };
 };
-//   const data = {
-    //     email: "francokris005@gmail.com",
-    //     email_verified: true,
-    //     family_name: "Krismann",
-    //     given_name: "Franco",
-    //     locale: "es",
-    //     name: "Franco Krismann",
-    //     nickname: "francokris005",
-    //     picture: "https://lh3.googleusercontent",
-    //   };
+
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {

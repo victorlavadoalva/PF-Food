@@ -13,59 +13,59 @@ import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import { useNavigate } from 'react-router-dom';
 
 
-export const DrawerContent = ({anchor = 'left'}) => {
+export const DrawerContent = ({ anchor = 'left' }) => {
     const navigate = useNavigate();
 
     return (
         <Box
-        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-        role="presentation"
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
         >
-        <List>
-            <ListItem key={'Crear Restaurant'} disablePadding>
-                <ListItemButton onClick={() => navigate('/form') }>
-                <ListItemIcon>
-                    <FoodBankIcon/>                   
-                </ListItemIcon>
-                <ListItemText primary={'Crear Restaurant'} />
-                </ListItemButton>
-            </ListItem>
-            <ListItem key={'Agregar Plato'} disablePadding>
-                <ListItemButton>
-                <ListItemIcon>
-                    <DinnerDiningIcon /> 
-                </ListItemIcon>
-                <ListItemText primary={'Agregar Plato'} />
-                </ListItemButton>
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem key={'Menú'} disablePadding>
-                <ListItemButton>
-                    <ListItemIcon>
-                        <MenuBookIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Menu'} />
-                </ListItemButton>
-            </ListItem>
-            <ListItem key={'Ver Reservas'} disablePadding>
-                <ListItemButton>
-                    <ListItemIcon onClick={() => navigate('/reservas') }>
-                        <BookmarkAddedIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Ver Reservas'} />
-                </ListItemButton>
-            </ListItem>
-            <ListItem key={'Pedidos'} disablePadding>
-                <ListItemButton>
-                    <ListItemIcon onClick={() => navigate('/pedidos') }>
-                        <DeliveryDiningIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={'Pedidos'} />
-                </ListItemButton>
-            </ListItem>         
-        </List>
+            <List>
+                <ListItem key={'Crear Restaurant'} disablePadding>
+                    <ListItemButton onClick={() => navigate('/form')}>
+                        <ListItemIcon>
+                            <FoodBankIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Crear Restaurant'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Agregar Plato'} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <DinnerDiningIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Agregar Plato'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem key={'Menú'} disablePadding>
+                    <ListItemButton onClick={() => navigate('/restorant')}>
+                        <ListItemIcon>
+                            <MenuBookIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Menu'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Ver Reservas'} disablePadding>
+                    <ListItemButton onClick={() => navigate('/restorant/reservas')}>
+                        <ListItemIcon>
+                            <BookmarkAddedIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Ver Reservas'} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem key={'Pedidos'} disablePadding>
+                    <ListItemButton onClick={() => navigate('/restorant/pedidos')}>
+                        <ListItemIcon>
+                            <DeliveryDiningIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Pedidos'} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
         </Box>
-    )    
+    )
 }
