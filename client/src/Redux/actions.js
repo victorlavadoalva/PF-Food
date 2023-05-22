@@ -5,15 +5,14 @@ import {
   GET_ALL_RESTORANTS,
   GET_AMOUNTPAGES,
   GET_RESTOURANT_ID,
+  GET_TOKEN,
   GET_USER_EMAIL,
-  LOADING,
-  LOGIN,
   POST_USER
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
-const GET_URL_TOKEN =`https://pf-backend-production-5a61.up.railway.app/${token}`
+const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
 const URL_RESTAURANT = "https://pf-backend-production-83a4.up.railway.app/restaurants";
-const URL_USERS = "https://pf-backend-production-5a61.up.railway.app/users";
+const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 
 
 export const getRestorants = ({ page = 1, order, rating, name, country }) => {
@@ -59,6 +58,25 @@ export const GetUserEmail = ({ saveEmail }) => {
   };
 };
 
+export const GetTokenLogin = (typeUser, email) =>{
+  return async function (dispatch){
+    try {
+      if(typeUser === "Cliente"){
+        const {data} = await axios.get(URL_USERS + `/login/${email}`)
+        return dispatch({type:GET_TOKEN,payload:data})
+      }else if(typeUser ==="Restaurante"){
+        const {data} = await axios.get(URL_RESTAURANT + `/login/${email}`)
+        return dispatch({type:GET_TOKEN,payload:data})
+      }
+    } catch (error) {
+      return dispatch({
+        type: ERROR,
+        payload: [{ error }, { errorToken: "ErrorToken" }],
+      });
+    }
+  }
+}
+
 export const PostUser = (User) => {
   return async function (dispatch) {
     try {
@@ -73,6 +91,22 @@ export const PostUser = (User) => {
     }
   };
 };
+
+export const PostRestaurant = (Restaurant) => {
+  return async function (dispatch) {
+    try {
+      console.log(Restaurant);
+      const { data } = await axios.post(URL_RESTAURANT, Restaurant);
+      return dispatch({ type: POST_USER, payload: data });
+    } catch (error) {
+      return dispatch({
+        type: ERROR,
+        payload: [{ error }, { errorPost: "ErrorPostUser" }],
+      });
+    }
+  };
+};
+
 
 export const GetAdminUser = () => {
   return async function (dispatch) {
@@ -98,14 +132,4 @@ export const getRestorantsID = (id) => {
   };
 };
 
-export const Login = ({isAuthenticated, user}) => {
-  return async function (dispatch) {
-      return dispatch({ type: LOGIN, payload: [isAuthenticated, user] });
-  };
-};
 
-export const Loading = (boolean) =>{
-return async function(dispatch){
-  return dispatch({type:LOADING,payload:boolean})
-}
-}

@@ -1,19 +1,19 @@
 import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router";
 import styles from "./styles.module.css"
-import {useAuth0} from "@auth0/auth0-react"
-import { PostUser } from "../../Redux/actions";
+import { PostUser ,PostRestaurant} from "../../Redux/actions";
 
 export default function UserType() {
-  const { loginWithRedirect, user} = useAuth0();
-  
+  const navigate = useNavigate()
   const {postuser} = useSelector(state => state);
   const dispatch = useDispatch();
+  const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"))
   
   const [UserNew, setUserNew] = useState({
     id:null,
-    name:user.name,
-    email:user.email,
+    name:objUser.name,
+    email:objUser.email,
     type_customer:"",
     description:null,
     valoraciones:[],
@@ -41,31 +41,36 @@ const handleTypeRestaurant= (event) => {
 useEffect(() => {
   if(savedData){
     console.log(UserNew)
-    dispatch(PostUser(UserNew))
+    if(UserNew.type_customer === "Cliente"){
+      dispatch(PostUser(UserNew))
+    }else if(UserNew.type_customer === "Restaurante"){
+      dispatch(PostRestaurant(UserNew))
+    }
+    
     
   }      
 },[dispatch,savedData])
 
 useEffect(() => {
+  console.log("useEffect",postuser)
   function Local (){
     const redirectPath = localStorage.getItem('redirectPath');
+    console.log(redirectPath)
     if (postuser) {
-    window.localStorage.setItem("User", JSON.stringify(postuser));
+    window.localStorage.setItem("UserToken", JSON.stringify(postuser));
     };
     const redirect = async () => {
       
-      await loginWithRedirect({ appState: { targetUrl: redirectPath } });
-      localStorage.removeItem('redirectPath');
+      navigate(redirectPath)
+      
     }
     if (redirectPath) {
       redirect();
     }
-    
   }
-  
     Local()
 
-}, [ loginWithRedirect,postuser]);
+}, [ navigate,postuser.length]);
 
 
 
