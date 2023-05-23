@@ -4,6 +4,10 @@
     grid-gap: 20px;
 }
 
+.confirmed {
+    color: green;
+}
+
 .card {
     width: 80%; /* Ajusta el ancho de las tarjetas, dejando un espacio entre ellas
     Otros estilos para las tarjetas */

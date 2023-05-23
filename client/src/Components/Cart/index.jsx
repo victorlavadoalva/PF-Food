@@ -40,7 +40,6 @@ const Cart = () => {
   const addToCart = (product) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
-  //console.log(cartItems);
 
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
@@ -55,7 +54,6 @@ const Cart = () => {
     const response = await axios.post("https://pf-backend-production-83a4.up.railway.app/payment", cartItems);
     setLink(response.data);
   }
-
 
   return (
     <div>
@@ -106,16 +104,21 @@ const Cart = () => {
                 Confirmar
               </Button>
             </Link>
-            <br></br>
-            {
-              confirmed && <p>Pedido confirmado</p>
-            }
-            <br></br>
-              <Link to={link}>
-                <Button variant="contained" color="primary">
-                  Pagar
-                </Button>
-              </Link></>
+              <br></br>
+              {
+                confirmed && <span className={styles.confirmed}>Pedido confirmado</span>
+              }
+              <br></br>
+              {
+                confirmed &&
+                <Link to={link}>
+                  <Button variant="contained" color="primary">
+                    Pagar
+                  </Button>
+                </Link>
+              }
+              <br></br>
+            </>
           )}
         </>
       )}
