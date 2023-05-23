@@ -11,10 +11,9 @@ import {
   POST_USER
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
-const GET_URL_TOKEN =`https://pf-backend-production-5a61.up.railway.app/${token}`
+const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
 const URL_RESTAURANT = "https://pf-backend-production-83a4.up.railway.app/restaurants";
-const URL_USERS = "https://pf-backend-production-5a61.up.railway.app/users";
-
+const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 
 export const getRestorants = ({ page = 1, order, rating, name, country }) => {
   return async function (dispatch) {

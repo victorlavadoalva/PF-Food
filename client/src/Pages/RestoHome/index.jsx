@@ -10,7 +10,6 @@ export default function Home() {
   // const { plates } = useSelector(state => state);
   const plates = FOOD;
   const location = useLocation();
-  // console.log(plates);
 
   return (
     <>
