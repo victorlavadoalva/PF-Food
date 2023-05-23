@@ -16,7 +16,7 @@ const Review = ( {id} ) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`https://pf-backend-production-5a61.up.railway.app/restaurants${id}`, {
+      const response = await axios.post(`https://pf-backend-production-83a4.up.railway.app/restaurants${id}`, {
         valoracion: valoracion,
         comment: comment,
       });
