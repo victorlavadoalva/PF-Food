@@ -56,72 +56,77 @@ const Cart = () => {
   }
 
   return (
-    <div>
-      <Typography variant="h5" gutterBottom>
-        Carta:
-      </Typography>
-      <div className={styles.cardContainer}>
-        {FOOD.map((food) => (
-          <CardDish
-            key={food.id}
-            id={food.id}
-            image={food.image[0]}
-            name={food.name}
-            tags={food.tags}
-            cost={food.cost}
-            description={food.description}
-            className={styles.card}
-            addToCart={addToCart}
-          />
-        ))}
+    <div className={styles.container}>
+      <div className={styles.containerCart}>
+        <Typography variant="h5" gutterBottom>
+          Tu Carrito:
+        </Typography>
+        {cartItems.length === 0 ? (
+          <Typography variant="body1">Tu carrito esta vacio.</Typography>
+        ) : (
+          <>
+            {/* Render the cart items */}
+            <List>
+              {cartItems.map((item) => (
+                <ListItem key={item.id} disableGutters >
+                  <ListItemText primary={item.name} secondary={`$${item.cost}`} />
+                  <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+            <Typography variant="h6" gutterBottom>
+              Total: ${getTotalPrice()}
+            </Typography>
+            {cartItems.length > 0 && (
+              <><Link>
+                <Button variant="contained" color="primary" onClick={payment}>
+                  Confirmar
+                </Button>
+              </Link>
+                <br></br>
+                {
+                  confirmed && <span className={styles.confirmed}>Pedido confirmado</span>
+                }
+                <br></br>
+                {
+                  confirmed &&
+                  <Link to={link}>
+                    <Button variant="contained" color="primary">
+                      Pagar
+                    </Button>
+                  </Link>
+                }
+                <br></br>
+              </>
+            )}
+          </>
+        )}
       </div>
-      <Typography variant="h5" gutterBottom>
-        Tu Carrito:
-      </Typography>
-      {cartItems.length === 0 ? (
-        <Typography variant="body1">Tu carrito esta vacio.</Typography>
-      ) : (
-        <>
-          {/* Render the cart items */}
-          <List>
-            {cartItems.map((item) => (
-              <ListItem key={item.id} disableGutters >
-                <ListItemText primary={item.name} secondary={`$${item.cost}`} />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
-          <Typography variant="h6" gutterBottom>
-            Total: ${getTotalPrice()}
-          </Typography>
-          {cartItems.length > 0 && (
-            <><Link>
-              <Button variant="contained" color="primary" onClick={payment}>
-                Confirmar
-              </Button>
-            </Link>
-              <br></br>
-              {
-                confirmed && <span className={styles.confirmed}>Pedido confirmado</span>
-              }
-              <br></br>
-              {
-                confirmed &&
-                <Link to={link}>
-                  <Button variant="contained" color="primary">
-                    Pagar
-                  </Button>
-                </Link>
-              }
-              <br></br>
-            </>
-          )}
-        </>
-      )}
+
+      <div className={styles.containerMenu}>
+        <Typography variant="h5" gutterBottom>
+          Carta:
+        </Typography>
+        <div className={styles.cardContainer}>
+          {FOOD.map((food) => (
+            <CardDish
+              key={food.id}
+              id={food.id}
+              image={food.image[0]}
+              name={food.name}
+              tags={food.tags}
+              cost={food.cost}
+              description={food.description}
+              className={styles.card}
+              addToCart={addToCart}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

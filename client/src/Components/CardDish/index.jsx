@@ -66,7 +66,7 @@ export const CardDish = ({
 
 
   return (
-    <Card sx={{ width: 600 }} key={id}>
+    <Card sx={{ width: 450 }} key={id}>
       <div className={styles.headerContainer}>
         <CardMedia
           component="img"
@@ -131,7 +131,7 @@ export const CardDish = ({
             <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
           </IconButton>
           <IconButton aria-label="shopping">
-            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost, description:"", image:"" })} />
+            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost, description: "", image: "" })} />
           </IconButton>
           <ExpandMore
             expand={expanded}
