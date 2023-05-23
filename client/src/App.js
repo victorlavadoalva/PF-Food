@@ -1,4 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -15,19 +17,30 @@ import FormPlatos from "./Pages/FormPlatos";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 import RestoHome from "./Pages/RestoHome";
+import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 function App() {
+  const dispatch = useDispatch()
   const location = useLocation();
-  // const { loading } = useSelector((state) => state);
+  const { loadingApp } = useSelector((state) => state);
   const {isLoading} = useAuth0()
+  useEffect(() => {
+    if(isLoading){
+      dispatch(LoadingApp(true))
+    }else{
+      dispatch(LoadingApp(false))
+
+    }
+   
+  },[isLoading])
   return (
     <>
         <div className={styles.app}>
           {
-            isLoading ? (
+            (isLoading || loadingApp)? (
                 <Loading_Login/>
             ) : (
               <>
@@ -46,6 +59,8 @@ function App() {
                   <Route path="detail/:restoId" element={<Detail />} />
                 </Route>
               </Route>
+              <Route element={<RutasCliente />}> 
+              </Route>
               {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
@@ -53,9 +68,9 @@ function App() {
                 
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuaio tipo Cliente */}
-                <Route element={<RutasCliente />}>
+                
                   
-                </Route>
+                
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Restaurante */}
                 <Route element={<RutaRestaurant />}>
@@ -69,8 +84,6 @@ function App() {
                       <Route path="menu" />
                       <Route path="reservas" element={<Reservas />}/>
                   </Route>
-
-                  
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Rutas Admin */}

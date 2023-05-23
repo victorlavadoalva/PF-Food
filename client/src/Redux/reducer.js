@@ -7,6 +7,7 @@ import {
     GET_RESTOURANT_ID,
     GET_TOKEN,
     GET_USER_EMAIL,
+    LOADING,
     LOGIN,
     POST_USER
 } from "./actionsTypes";
@@ -17,6 +18,7 @@ const initialState = {
     RestaurantID:[],
     AmountPage:"",
     Admin:[],
+    loadingApp:false,
     tokenLogin:[],
     postuser:[],
     userFoundByEmail:[],
@@ -46,6 +48,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 return{
                 ...state,
                 userFoundByEmail:payload
+            }
+        case LOADING:
+            return{
+                ...state,
+                loadingApp:payload
             }
         case GET_TOKEN:
             return {

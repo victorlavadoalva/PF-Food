@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router";
 import styles from "./styles.module.css"
-import { PostUser ,PostRestaurant} from "../../Redux/actions";
+import { PostUser ,LoadingApp} from "../../Redux/actions";
 
 export default function UserType() {
   const navigate = useNavigate()
@@ -10,6 +10,7 @@ export default function UserType() {
   const dispatch = useDispatch();
   const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"))
   
+
   const [UserNew, setUserNew] = useState({
     id:null,
     name:objUser.name,
@@ -20,6 +21,8 @@ export default function UserType() {
     rating:null
   })
   const [savedData , setSaveData] = useState(false)
+  const [isRestaurant, setIsRestaurant] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 console.log(postuser)
 
 
@@ -28,49 +31,52 @@ const handleTypeClient = (event) => {
   const updatedUser = { ...UserNew, type_customer: "Cliente" };
   setUserNew(updatedUser);
   setSaveData(true)
-
+  setIsClient(true)
 }
 const handleTypeRestaurant= (event) => {
   event.preventDefault()
   const updatedUser = { ...UserNew, type_customer: "Restaurante" };
   setUserNew(updatedUser);
   setSaveData(true)
+  setIsRestaurant(true)
 }
 
 
 useEffect(() => {
-  if(savedData){
-    console.log(UserNew)
-    if(UserNew.type_customer === "Cliente"){
-      dispatch(PostUser(UserNew))
-    }else if(UserNew.type_customer === "Restaurante"){
-      dispatch(PostRestaurant(UserNew))
+  if (savedData) {
+    
+    console.log(UserNew);
+    if (isClient) {
+      dispatch(PostUser(UserNew));
+    } else if (isRestaurant) {
+      window.localStorage.setItem("UserLogVerificate", JSON.stringify(UserNew));
+      window.localStorage.removeItem("redirectPath")
+      
+      navigate("/form");
+      
     }
-    
-    
   }      
-},[dispatch,savedData])
+}, [navigate,dispatch, savedData]);
+
+
 
 useEffect(() => {
-  console.log("useEffect",postuser)
+  console.log("useEffect",isClient)
   function Local (){
+    if(isClient){
     const redirectPath = localStorage.getItem('redirectPath');
     console.log(redirectPath)
-    if (postuser) {
-    window.localStorage.setItem("UserToken", JSON.stringify(postuser));
-    };
-    const redirect = async () => {
-      
-      navigate(redirectPath)
-      
+
+    window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
+    navigate(redirectPath)
+    
     }
-    if (redirectPath) {
-      redirect();
-    }
+    
   }
     Local()
 
-}, [ navigate,postuser.length]);
+}, [ isClient ]);
+
 
 
 

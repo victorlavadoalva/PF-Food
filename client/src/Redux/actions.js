@@ -7,7 +7,8 @@ import {
   GET_RESTOURANT_ID,
   GET_TOKEN,
   GET_USER_EMAIL,
-  POST_USER
+  LOADING,
+  POST_USER,
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
@@ -58,6 +59,7 @@ export const GetUserEmail = ({ saveEmail }) => {
   };
 };
 
+
 export const GetTokenLogin = (typeUser, email) =>{
   return async function (dispatch){
     try {
@@ -97,6 +99,7 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
+      console.log("RestaurantPost", data)
       return dispatch({ type: POST_USER, payload: data });
     } catch (error) {
       return dispatch({
@@ -132,4 +135,12 @@ export const getRestorantsID = (id) => {
   };
 };
 
+export const LoadingApp = (boolean) => {
+return async function(dispatch){
+return dispatch({
+  type:LOADING,
+  payload:boolean
+})
+}
+}
 

@@ -21,6 +21,7 @@ module.exports = {
     GET_USER_EMAIL,
     LOGIN,
     LOADING,
-    GET_TOKEN
+    GET_TOKEN,
+    
 
 }
