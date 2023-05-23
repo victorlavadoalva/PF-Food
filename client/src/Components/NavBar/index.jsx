@@ -89,7 +89,7 @@ export default function PrimarySearchAppBar() {
 
   let isRestorant = false;
 
-  if(pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas" || pathname === "/form" ) {
+  if(pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas" || pathname === "/restorant/add_food" || pathname === "/form" ) {
     isRestorant = true;
   }
 

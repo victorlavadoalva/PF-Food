@@ -24,7 +24,7 @@ function Detail() {
   }, [dispatch, restoId]);
 
   const restaurant = useSelector((state) => state.RestaurantID);
-  console.log("restaurant:", restaurant);
+  
 
   // Convertir restoId a número
   // const restoIdNumber = parseInt(restoId);
