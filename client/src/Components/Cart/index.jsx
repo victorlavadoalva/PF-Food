@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Typography, Button, Grid } from '@mui/material';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton} from '@mui/material';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FOOD } from '../../dataHardcodeo/constants';
 import { CardDish } from '../CardDish';
 import styles from '../../Pages/MenuClientes/styles.module.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 // const productList = [
 //   { id: 1, name: 'Product 1', price: 10 },
@@ -33,10 +34,13 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [link, setLink] = useState();
+  const [confirmed, setConfirmed] = useState(false)
 
   const addToCart = (product) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
+  //console.log(cartItems);
 
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
@@ -45,6 +49,13 @@ const Cart = () => {
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.cost, 0);
   };
+
+  async function payment() {
+    setConfirmed(true)
+    const response = await axios.post("https://pf-backend-production-83a4.up.railway.app/payment", cartItems);
+    setLink(response.data);
+  }
+
 
   return (
     <div>
@@ -59,12 +70,12 @@ const Cart = () => {
             image={food.image[0]}
             name={food.name}
             tags={food.tags}
-            cost={food.cost}    
+            cost={food.cost}
             description={food.description}
             className={styles.card}
-            addToCart={addToCart}  
-          />      
-        ))}        
+            addToCart={addToCart}
+          />
+        ))}
       </div>
       <Typography variant="h5" gutterBottom>
         Tu Carrito:
@@ -90,11 +101,21 @@ const Cart = () => {
             Total: ${getTotalPrice()}
           </Typography>
           {cartItems.length > 0 && (
-            <Link to="/pago">
-              <Button variant="contained" color="primary">
-                Hacer pedido
+            <><Link>
+              <Button variant="contained" color="primary" onClick={payment}>
+                Confirmar
               </Button>
             </Link>
+            <br></br>
+            {
+              confirmed && <p>Pedido confirmado</p>
+            }
+            <br></br>
+              <Link to={link}>
+                <Button variant="contained" color="primary">
+                  Pagar
+                </Button>
+              </Link></>
           )}
         </>
       )}

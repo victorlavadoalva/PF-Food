@@ -131,7 +131,7 @@ export const CardDish = ({
             <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
           </IconButton>
           <IconButton aria-label="shopping">
-            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost })} />
+            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost, description:"", image:"" })} />
           </IconButton>
           <ExpandMore
             expand={expanded}

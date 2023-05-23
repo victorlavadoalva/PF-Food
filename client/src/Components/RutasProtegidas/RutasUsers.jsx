@@ -17,8 +17,8 @@ const redirection = "/user-type"
   
 const isAuthenticated = login[0]
 const user = login[1]
-console.log("userLOGIN",user)
-console.log("Authen",isAuthenticated)
+// console.log("userLOGIN",user)
+// console.log("Authen",isAuthenticated)
 
     useEffect(() => {
         if(isAuthenticated){
@@ -36,12 +36,12 @@ console.log("Authen",isAuthenticated)
 
 useEffect(() => {
     
-    console.log("useEffect foundByemail", userFoundByEmail)
-    console.log(userFoundByEmail[0])
+    // console.log("useEffect foundByemail", userFoundByEmail)
+    // console.log(userFoundByEmail[0])
     const checkIfNewUser = async () => {
       if (userFoundByEmail[0] === true && !redirected) {
         const storedPath = localStorage.getItem('redirectPath');
-        console.log(storedPath)
+        // console.log(storedPath)
         navigate(storedPath)
          setRedirected(true);
 
