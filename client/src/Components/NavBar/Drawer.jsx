@@ -10,14 +10,6 @@ export function TemporaryDrawer({ isOpen, toggleDrawer }) {
     right: false,
   });
 
-  // const toggleDrawer = (anchor, open) => (event) => {
-  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-  //     return;
-  //   }
-  //   console.log('entro')
-  //   setState({ ...state, [anchor]: !open });
-  // };
-
   return (
     <Drawer
         anchor='left'

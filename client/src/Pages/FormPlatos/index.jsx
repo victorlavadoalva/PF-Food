@@ -75,7 +75,7 @@ export default function FormPlatos() {
           formData.append('type', valores.type);
           formData.append('image', imageFile);
           console.log('Formulario enviado:', valores);
-          axios.post("https://pf-backend-production-83a4.up.railway.app/posts", formData)
+          axios.post("https://pf-backend-production-5a61.up.railway.app/posts", formData)
           .then((response) =>{
               console.log('Datos enviados:', formData);
               console.log('Respuesta del servidor:', response.data);

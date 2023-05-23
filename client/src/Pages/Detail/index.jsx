@@ -19,7 +19,6 @@ function Detail() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("restoId:", restoId);
     if (restoId) dispatch(getRestorantsID(restoId));
   }, [dispatch, restoId]);
 
