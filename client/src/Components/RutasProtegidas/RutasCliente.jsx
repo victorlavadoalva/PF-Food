@@ -1,15 +1,20 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { Outlet } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
 
 export default function RutasCliente(){
+    const redirection = "/restorant"
+    const navigate = useNavigate()
+    const dataUser = window.localStorage.getItem("UserLogVerificate")
+    const [shouldRedirect, setShouldRedirect] = useState(false);
+    
 
-const { isAuthenticated, loginWithRedirect, user } = useAuth0();
-
-
-    if (!isAuthenticated) {
-        return loginWithRedirect();
-    }
+    // if (shouldRedirect) {
+    //     alert("Inicia sesion con una cuenta Cliente");
+    //   navigate(redirection);
+    //   return null; // Evitar que se muestre la ruta antes de redirigir
+    // }
+    
     return <Outlet />;
 }
 
