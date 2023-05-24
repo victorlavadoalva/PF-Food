@@ -7,6 +7,7 @@ import {
     GET_RESTOURANT_ID,
     GET_TOKEN,
     GET_USER_EMAIL,
+    GET_DISH,
     LOADING,
     LOGIN,
     POST_USER
@@ -24,6 +25,7 @@ const initialState = {
     userFoundByEmail:[],
     error:[],
     plates: [],
+    dishes:[]
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -68,6 +70,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return{
                 ...state,
                 RestaurantID: payload
+            }
+        case GET_DISH:
+            return{
+                ...state,
+                dishes: payload
             }
         case GET_AMOUNTPAGES:
             return {

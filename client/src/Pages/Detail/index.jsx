@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import BasicButtons from "../../Components/Button";
 import { useLocation, Outlet } from "react-router-dom";
+import Review from '../../Components/Review';
 
 function Detail() {
   const location = useLocation();
@@ -91,6 +92,7 @@ function Detail() {
       <div>
         <BasicButtons/>
       </div>
+      <Review></Review>
     </div>
 }
     

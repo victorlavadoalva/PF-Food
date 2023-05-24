@@ -13,7 +13,8 @@ const handleChange = (e,page) => {
     page, 
     country: filters.location, 
     order: filters.order, 
-    rating: filters.rating
+    rating: filters.rating,
+    tags: filters.tags
   }))
 }
 

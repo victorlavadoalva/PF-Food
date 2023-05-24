@@ -2,18 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'
-import { useDispatch,useSelector } from "react-redux";
-import { PostUser ,LoadingApp} from "../../Redux/actions";
-import { useAuth0 } from "@auth0/auth0-react";
-
 import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from "@mui/material";
 
 
 export default function Form() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch()
-
   const [imageFile,setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
@@ -82,10 +74,9 @@ export default function Form() {
             tags: [],
             capacity: ""
           });
-          navigate('/formPlatos');
+          localStorage.setItem('RestData', JSON.stringify(response.data));
         })
         .catch((error) => {
-          console.error(error);
           alert('Error al crear el restaurante');
         });
     } else {
