@@ -4,6 +4,7 @@ import {
   GET_ADMIN_USER,
   GET_ALL_RESTORANTS,
   GET_AMOUNTPAGES,
+  GET_DISH,
   GET_RESTOURANT_ID,
   GET_USER_EMAIL,
   LOADING,
@@ -14,12 +15,14 @@ const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
 const URL_RESTAURANT = "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
+const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
 
-export const getRestorants = ({ page = 1, order, rating, name, country }) => {
+
+export const getRestorants = ({ page = 1, order, rating, name, country, tags }) => {
   return async function (dispatch) {
     try {
       const { data } = await axios(URL_RESTAURANT, {
-        params: { page, order, rating, name, country },
+        params: { page, order, rating, name, country, tags },
       });
       return (
         dispatch({ type: GET_ALL_RESTORANTS, payload: data[0] }),
@@ -30,6 +33,18 @@ export const getRestorants = ({ page = 1, order, rating, name, country }) => {
         type: ERROR,
         payload: [{ error }, { errorGetRestorant: "ErrorGetRestorant" }],
       });
+    }
+  };
+};
+
+export const getDish = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios(URL_POST);
+      const data = response.data;
+      return dispatch({ type: GET_DISH, payload: data });
+    } catch(error) {
+      return dispatch({  type: ERROR, payload: error })
     }
   };
 };
