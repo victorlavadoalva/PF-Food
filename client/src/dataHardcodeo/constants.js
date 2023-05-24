@@ -197,6 +197,37 @@ export const RATING = [
   },
 ];
 
+export const TAGS = [
+  {
+    id: "internacional",
+    name: "Internacional",
+  },
+  {
+    id: "veggie",
+    name: "Veggie",
+  },
+  {
+    id: "vegan",
+    name: "Vegan",
+  },
+  {
+    id: "celiaco",
+    name: "Celiaco",
+  },
+  {
+    id: "parrilla",
+    name: "Parrilla",
+  },
+  {
+    id: "tematicas",
+    name: "Temáticas",
+  },
+  {
+    id: "otros",
+    name: "Otros",
+  },
+];
+
 export const props = [
   {
     id: 1,
@@ -602,52 +633,52 @@ export const pedidosClienteRows = [
 ];
 
 export const reservasClienteColumns = [
-    { field: "id", headerName: "Reserva N°", width: 90 },
-    {
-      field: "name",
-      headerName: "Restaurant",
-      width: 200,
-    },
-    {
-      field: "day",
-      headerName: "Dia",
-      type: "string",
-      width: 100,
-    },
-    {
-      field: "hour",
-      headerName: "Hora",
-      type: "string",
-      width: 80,
-          },
-    {
-      field: "quanty",
-      headerName: "Comensales",
-      type: "string",
-      width: 90,
-    },
-  ];
-  
-  export const reservasClienteRows = [
-    {
-      id: 1,
-      name: "SushiClub",
-      day: "26/04/2023",
-      hour: "20:45",
-      quanty: 4,
-    },
-    {
-      id: 2,
-      name: "ItItaly",
-      day: "05/05/2023",
-      hour: "20:45",
-      quanty: 2,
-    },
-    {
-      id: 3,
-      name: "El Club de la Milanesa",
-      day: "24/05/2023",
-      hour: "20:45",
-      quanty: 3,
-    }, 
-  ];
+  { field: "id", headerName: "Reserva N°", width: 90 },
+  {
+    field: "name",
+    headerName: "Restaurant",
+    width: 200,
+  },
+  {
+    field: "day",
+    headerName: "Dia",
+    type: "string",
+    width: 100,
+  },
+  {
+    field: "hour",
+    headerName: "Hora",
+    type: "string",
+    width: 80,
+  },
+  {
+    field: "quanty",
+    headerName: "Comensales",
+    type: "string",
+    width: 90,
+  },
+];
+
+export const reservasClienteRows = [
+  {
+    id: 1,
+    name: "SushiClub",
+    day: "26/04/2023",
+    hour: "20:45",
+    quanty: 4,
+  },
+  {
+    id: 2,
+    name: "ItItaly",
+    day: "05/05/2023",
+    hour: "20:45",
+    quanty: 2,
+  },
+  {
+    id: 3,
+    name: "El Club de la Milanesa",
+    day: "24/05/2023",
+    hour: "20:45",
+    quanty: 3,
+  },
+];

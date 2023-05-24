@@ -8,6 +8,8 @@ const POST_USER = "POST_USER"
 const GET_USER_EMAIL = "GET_USER_EMAIL"
 const LOGIN = "LOGIN"
 const LOADING = "LOADING"
+const GET_TOKEN = "GET_TOKEN"
+const GET_DISH = "GET_DISH"
 
 module.exports = {
     GET_ALL_RESTORANTS,
@@ -19,6 +21,8 @@ module.exports = {
     POST_USER,
     GET_USER_EMAIL,
     LOGIN,
-    LOADING
+    LOADING,
+    GET_TOKEN,
+    GET_DISH
 
 }

@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import BasicButtons from "../../Components/Button";
 import { useLocation, Outlet } from "react-router-dom";
+import Review from '../../Components/Review';
 
 function Detail() {
   const location = useLocation();
@@ -34,8 +35,8 @@ function Detail() {
 
   return (
     <>
-
-    <div className={styles.detail}>
+{location.pathname === `/home/detail/${restoId}` && 
+<div className={styles.detail}>
       <div>
         <Typography component="h2" variant="h2" style={{ marginBottom: "8px" }}>
           {restaurant.name}
@@ -91,7 +92,10 @@ function Detail() {
       <div>
         <BasicButtons/>
       </div>
+      <Review></Review>
     </div>
+}
+    
   
   <Outlet/>
   </>  

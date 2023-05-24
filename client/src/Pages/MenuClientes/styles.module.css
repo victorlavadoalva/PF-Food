@@ -1,7 +1,23 @@
+.container {
+    display: flex;
+    width: 90vw;
+    justify-content: space-between;
+}
+
+.containerCart {
+    padding-top: 8vh;
+    width: 20vw;
+}
+
 .cardContainer {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Divide en dos columnas de ancho igual */
     grid-gap: 20px;
+    max-width: 70vw;
+}
+
+.confirmed {
+    color: green;
 }
 
 .card {

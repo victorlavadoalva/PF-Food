@@ -17,7 +17,7 @@ export default function BasicButtons() {
       <Button
         variant="contained"
         sx={{ background: "#3A506B" }}
-        onClick={() => navigate(`/menuCliente/${restoId}`)}
+        onClick={() => navigate(`menuCliente/${restoId}`)}
       >
         Menú
       </Button>
