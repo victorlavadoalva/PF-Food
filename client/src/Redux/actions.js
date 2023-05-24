@@ -64,6 +64,7 @@ export const GetTokenLogin = (typeUser, email) =>{
   return async function (dispatch){
     try {
       if(typeUser === "Cliente"){
+        console.log("!!!!!!!ActionsToken", email)
         const {data} = await axios.get(URL_USERS + `/login/${email}`)
         return dispatch({type:GET_TOKEN,payload:data})
       }else if(typeUser ==="Restaurante"){

@@ -39,6 +39,7 @@ const handleTypeRestaurant= (event) => {
   setUserNew(updatedUser);
   setSaveData(true)
   setIsRestaurant(true)
+  window.localStorage.setItem("IsLogin", true)
 }
 
 

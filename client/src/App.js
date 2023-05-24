@@ -16,6 +16,7 @@ import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
@@ -53,7 +54,9 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
-                      <Route path="detail/:restoId" element={<Detail />} />
+                      <Route path="detail/:restoId" element={<Detail />} >
+                          <Route path="menuCliente/:id" element={<MenuCliente />} />
+                      </Route>
                     </Route>
                   </Route>
                   <Route element={<RutasCliente />}></Route>

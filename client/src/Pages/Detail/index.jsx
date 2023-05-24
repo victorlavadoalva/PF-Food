@@ -34,8 +34,8 @@ function Detail() {
 
   return (
     <>
-
-    <div className={styles.detail}>
+{location.pathname === `/home/detail/${restoId}` && 
+<div className={styles.detail}>
       <div>
         <Typography component="h2" variant="h2" style={{ marginBottom: "8px" }}>
           {restaurant.name}
@@ -92,6 +92,8 @@ function Detail() {
         <BasicButtons/>
       </div>
     </div>
+}
+    
   
   <Outlet/>
   </>  
