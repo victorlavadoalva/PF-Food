@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 
 export default function RutasCliente(){
-    const redirection = "/home"
     const navigate = useNavigate()
-    const dataUser = window.localStorage.getItem("UserLogVerificate")
-    const [shouldRedirect, setShouldRedirect] = useState(false);
-    
+    const redirection = "/home"
+const dataUser = window.localStorage.getItem("UserLogVerificate")
+const restaurant = JSON.parse(dataUser)
+const [shouldRedirect, setShouldRedirect] = useState(false);
+const {type_customer} = restaurant
+console.log("DataRuta",type_customer)
     useEffect(() => {
         if (type_customer !== "Cliente") {
           
