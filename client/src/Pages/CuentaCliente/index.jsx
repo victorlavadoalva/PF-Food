@@ -3,16 +3,19 @@ import Paper from "@mui/material/Paper";
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import styles from "./styles.module.css";
-import DataGridDemo from "../../Components/Pedidos";
+
 import PedidosCliente from "../../Components/PedidosCliente";
 import ReservasCliente from "../../Components/ReservasCliente";
 
 export default function CuentaCliente() {
-  const [name, setName] = useState("");
+  const { user } = useAuth0();
+
+  const [name, setName] = useState(user.name || "");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(user.email || "");
   const [phone, setPhone] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -52,7 +55,6 @@ export default function CuentaCliente() {
       >
         <Box
           sx={{
-            // marginLeft: "10%",
             "& > :not(style)": {
               m: 1,
               width: 500,
