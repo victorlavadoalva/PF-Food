@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import Pedidos from "./Components/Pedidos";
+import Reservas from "./Components/Reservas";
 import RutasAdmin from "./Components/RutasProtegidas/RutasAdmin";
 import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
 import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
@@ -9,17 +11,17 @@ import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
-import Pedidos from "./Components/Pedidos";
-import Reservas from "./Components/Reservas";
+import FormPlatos from "./Pages/FormPlatos";
 import Home from "./Pages/Home";
-import RestoHome from "./Pages/RestoHome";
 import Landing from "./Pages/Landing/index.jsx";
+import MenuCliente from "./Pages/MenuClientes";
+import RestoHome from "./Pages/RestoHome";
 import AdminUser from "./View/AdminUsers";
+import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import FormPlatos from "./Pages/FormPlatos";
-import MenuCliente from "./Pages/MenuClientes";
+
 
 function App() {
   const location = useLocation();
@@ -74,6 +76,7 @@ function App() {
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
                     <Route path="reservas" element={<Reservas />} />
+                    <Route path="dashboard" element={<Dashboard />} />
                   </Route>
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
