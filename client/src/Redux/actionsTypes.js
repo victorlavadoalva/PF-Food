@@ -8,6 +8,7 @@ const POST_USER = "POST_USER"
 const GET_USER_EMAIL = "GET_USER_EMAIL"
 const LOGIN = "LOGIN"
 const LOADING = "LOADING"
+const GET_TOKEN = "GET_TOKEN"
 const GET_DISH = "GET_DISH"
 
 module.exports = {
@@ -21,6 +22,7 @@ module.exports = {
     GET_USER_EMAIL,
     LOGIN,
     LOADING,
+    GET_TOKEN,
     GET_DISH
 
 }

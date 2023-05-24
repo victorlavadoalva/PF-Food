@@ -6,10 +6,10 @@ import {
   GET_AMOUNTPAGES,
   GET_DISH,
   GET_RESTOURANT_ID,
+  GET_TOKEN,
   GET_USER_EMAIL,
   LOADING,
-  LOGIN,
-  POST_USER
+  POST_USER,
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
@@ -73,6 +73,27 @@ export const GetUserEmail = ({ saveEmail }) => {
   };
 };
 
+
+export const GetTokenLogin = (typeUser, email) =>{
+  return async function (dispatch){
+    try {
+      if(typeUser === "Cliente"){
+        console.log("!!!!!!!ActionsToken", email)
+        const {data} = await axios.get(URL_USERS + `/login/${email}`)
+        return dispatch({type:GET_TOKEN,payload:data})
+      }else if(typeUser ==="Restaurante"){
+        const {data} = await axios.get(URL_RESTAURANT + `/login/${email}`)
+        return dispatch({type:GET_TOKEN,payload:data})
+      }
+    } catch (error) {
+      return dispatch({
+        type: ERROR,
+        payload: [{ error }, { errorToken: "ErrorToken" }],
+      });
+    }
+  }
+}
+
 export const PostUser = (User) => {
   return async function (dispatch) {
     try {
@@ -87,6 +108,23 @@ export const PostUser = (User) => {
     }
   };
 };
+
+export const PostRestaurant = (Restaurant) => {
+  return async function (dispatch) {
+    try {
+      console.log(Restaurant);
+      const { data } = await axios.post(URL_RESTAURANT, Restaurant);
+      console.log("RestaurantPost", data)
+      return dispatch({ type: POST_USER, payload: data });
+    } catch (error) {
+      return dispatch({
+        type: ERROR,
+        payload: [{ error }, { errorPost: "ErrorPostUser" }],
+      });
+    }
+  };
+};
+
 
 export const GetAdminUser = () => {
   return async function (dispatch) {
@@ -103,7 +141,7 @@ export const GetAdminUser = () => {
 export const getRestorantsID = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios(URL_RESTAURANT + '/' + id);
+      const response = await axios(URL_RESTAURANT + "/" + id);
       const data = response.data;
       return dispatch({ type: GET_RESTOURANT_ID, payload: data });
     } catch (error) {
@@ -112,14 +150,12 @@ export const getRestorantsID = (id) => {
   };
 };
 
-export const Login = ({isAuthenticated, user}) => {
-  return async function (dispatch) {
-      return dispatch({ type: LOGIN, payload: [isAuthenticated, user] });
-  };
-};
-
-export const Loading = (boolean) =>{
+export const LoadingApp = (boolean) => {
 return async function(dispatch){
-  return dispatch({type:LOADING,payload:boolean})
+return dispatch({
+  type:LOADING,
+  payload:boolean
+})
 }
 }
+

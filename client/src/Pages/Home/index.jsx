@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <>
     {
-      locationRouter.pathname === "/home" &&
+      (locationRouter.pathname === "/home" || locationRouter.pathname === "/landing/h" ) &&
       <div className={styles.home}>
       {/* La info se obtiene de la carpeta dataHardcodeo hasta que se reciba la info del back */}
       {/* Hay que conectar los filtros con el backend - No están conectados */}
