@@ -20,6 +20,7 @@ import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 import FormPlatos from "./Pages/FormPlatos";
 import MenuCliente from "./Pages/MenuClientes";
+import CuentaCliente from "./Pages/CuentaCliente";
 
 function App() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function App() {
                 <Route element={<RutasCliente />}>
                   {/* Franco se encarga de terminar esta rutas*/}
                   {/* <Route exact path='/home' element={<Home />} /> */}
+                  <Route path="cuentaCliente" element={<CuentaCliente />} />
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Restaurante */}
