@@ -6,6 +6,10 @@ import axios from "axios";
 export default function FormPlatos() {
   const [formSubmit, setformSubmit] = useState(false);
   const [imageFile,setImageFile] = useState(null)
+  const restDataString = localStorage.getItem('RestData');
+  const id = JSON.parse(restDataString)?.id;
+  console.log(id);
+
 
   function handleImage(event) {
     const file = event[0];
@@ -74,14 +78,27 @@ export default function FormPlatos() {
           formData.append('cost', valores.cost);
           formData.append('type', valores.type);
           formData.append('image', imageFile);
+          formData.append('authorRest', id);
           console.log('Formulario enviado:', valores);
           axios.post("https://pf-backend-production-83a4.up.railway.app/posts", formData)
           .then((response) =>{
               console.log('Datos enviados:', formData);
               console.log('Respuesta del servidor:', response.data);
               resetForm();
+              document.getElementById("image").value = null;
               setformSubmit(true);
               setTimeout(() => setformSubmit(false), 5000);
+              const platoId = response.data._id;
+              const menu = { _id: platoId };
+              axios.put(`https://pf-backend-production-5a61.up.railway.app/restaurants/${id}`, {
+                menu: [menu],
+              })
+              .then((response) => {
+                console.log('Actualización del menú exitosa:', response.data);
+              })
+              .catch((error) => {
+                console.error('Error al actualizar el menú:', error);
+              });
           })
           .catch((error)=>{
             console.log(error);
@@ -90,7 +107,6 @@ export default function FormPlatos() {
       >
         {({ values, errors, touched, handleSubmit, handleChange, handleBlur }) => (
           <form className={styles.formulario} onSubmit={handleSubmit}>
-            {console.log(errors)}
             <div>
               <label htmlFor="name">Nombre:</label>
               <input

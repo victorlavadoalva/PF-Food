@@ -178,6 +178,37 @@ export const RATING = [
     }
 ]
 
+export const TAGS = [
+    {
+      id: "internacional",
+      name: "Internacional",
+    },
+    {
+      id: "veggie",
+      name: "Veggie",
+    },
+    {
+      id: "vegan",
+      name: "Vegan",
+    },
+    {
+      id: "celiaco",
+      name: "Celiaco",
+    },
+    {
+      id: "parrilla",
+      name: "Parrilla",
+    },
+    {
+      id: "tematicas",
+      name: "Temáticas",
+    },
+    {
+      id: "otros",
+      name: "Otros",
+    },
+  ];
+
 export const props = [
     {
         id: 1,
