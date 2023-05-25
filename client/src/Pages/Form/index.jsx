@@ -35,14 +35,11 @@ export default function Form() {
 
   });
 
-
-
   function handleImage(event) {
     const file = event[0];
     setImageFile(file)
     }
   
-
   function handleSubmit(event) {
     event.preventDefault();
     if (restorants.name && restorants.city && restorants.country && restorants.address && restorants.description && restorants.capacity) {
@@ -85,7 +82,7 @@ export default function Form() {
           alert('Error al crear el restaurante');
         });
     } else {
-      alert('Información incompleta');
+      alert('Información incompleta!');
     }
     console.log(restorants)
   };
