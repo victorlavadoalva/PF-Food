@@ -20,7 +20,6 @@ import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
-import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
@@ -68,21 +67,11 @@ function App() {
                       </Route>
                     </Route>
                   </Route>
-                  <Route path="menuCliente/:id" element={<MenuCliente />} />
                 </Route>
                 <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
-                {/* -------------------------------------------------------------------------------------- */}
-                {/* Usuario registrandose */}
-                <Route path="/user-type" element={<UserType />} />
-                {/* -------------------------------------------------------------------------------------- */}
-                {/* Usuaio tipo Cliente */}
-                <Route element={<RutasCliente />}>
-                  {/* Franco se encarga de terminar esta rutas*/}
-                  {/* <Route exact path='/home' element={<Home />} /> */}
-                </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Restaurante */}
                 <Route element={<RutaRestaurant />}>
@@ -95,16 +84,15 @@ function App() {
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
                     <Route path="reservas" element={<Reservas />} />
-                    <Route path="dashboard" element={<Dashboard />} />
                   </Route>
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Rutas Admin */}
-                  <Route element={<RutasAdmin />}>
-                    <Route path="/admin/usuarios" element={<AdminUser />} />
-                  </Route>
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Cierra ruta potegida con o sin login */}
                 </Route>
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Rutas Admin */}
+                <Route element={<RutasAdmin />}>
+                  <Route path="/admin/usuarios" element={<AdminUser />} />
+                </Route>
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Cierra ruta potegida con o sin login */}
               </Routes>
             </main>
             {<Footer />}
