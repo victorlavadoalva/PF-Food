@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet, useLocation } from "react-router-dom";
+import { useNavigate, Outlet, Navigate} from "react-router-dom";
 import { GetUserEmail, LoadingApp, GetTokenLogin } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -9,19 +9,15 @@ export default function RutasUsers() {
   const { isAuthenticated, user, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const redirection = "/user-type";
-  const rastaurantRoute = "/restorant";
+  const restaurantRoute = "/restorant";
 
   console.log("Verificado", isAuthenticated);
   console.log("isLoading", isLoading);
   const [saveEmail, setSaveEmail] = useState("");
 
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     
-  //   }
-  // }, []);
   useEffect(() => {
     if (isAuthenticated) {
       setSaveEmail(user.email);
@@ -38,6 +34,11 @@ export default function RutasUsers() {
       dispatch(GetUserEmail({ saveEmail }));
     }
   }, [dispatch, saveEmail]);
+
+
+  const dataUser = window.localStorage.getItem("UserLogVerificate");
+  const restaurant = JSON.parse(dataUser);
+  const { type_customer } = restaurant;
 
   useEffect(() => {
 
@@ -57,7 +58,7 @@ export default function RutasUsers() {
           userFoundByEmail[1].type_customer === "Restaurante"
         ) {
           dispatch(GetTokenLogin("Restaurante", userFoundByEmail[1].email));
-          navigate(rastaurantRoute);
+          navigate(restaurantRoute);
           window.localStorage.removeItem("redirectPath");
           dispatch(LoadingApp(false));
         } else if (userFoundByEmail[0] === false) {
@@ -80,5 +81,13 @@ if (tokenLogin.token) {
   }
   },[tokenLogin])
 
-  return <Outlet />;
+  
+
+
+  if (type_customer === "Restaurante") {
+    return <Navigate to={restaurantRoute} />;
+  } else {
+    return <Outlet />;
+  }
+
 }
