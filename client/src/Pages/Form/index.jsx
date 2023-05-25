@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Link } from 'react-router-dom';
@@ -19,6 +19,7 @@ export default function Form() {
     tags: [],
     capacity: ""
   });
+  
 
   const [errors, setErrors] = useState({
     name: 'Campo Requerido',
@@ -31,6 +32,8 @@ export default function Form() {
     image: '',
 
   });
+
+
 
   function handleImage(event) {
     const file = event[0];

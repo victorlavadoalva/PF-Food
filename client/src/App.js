@@ -1,4 +1,6 @@
-import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -16,39 +18,54 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
+import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
 import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 
-
 function App() {
+  const dispatch = useDispatch();
   const location = useLocation();
-  const { loading } = useSelector((state) => state);
+  const { loadingApp } = useSelector((state) => state);
+  const { isLoading } = useAuth0();
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(LoadingApp(true));
+    } else {
+      dispatch(LoadingApp(false));
+    }
+  }, [isLoading]);
   return (
     <>
-      {loading ? (
-        <Loading_Login />
-      ) : (
-        <div className={styles.app}>
-          {location.pathname !== "/" && location.pathname !== "/user-type" && (
-            <Header />
-          )}
-          <main className={styles.main}>
-            <Routes>
-              {/* Sin iniciar sesion */}
-              <Route path="/" element={<Landing />}>
-                <Route path="home" element={<Home />}>
-                  <Route path="detail/:restoId" element={<Detail />} />
-                </Route>
-              </Route>
-              {/* -------------------------------------------------------------------------------------- */}
-              {/* Rutas para usuarios */}
-              <Route element={<RutasUsers />}>
-                <Route path="/" element={<Landing />}>
-                  <Route path="home" element={<Home />}>
-                    <Route path="detail/:restoId" element={<Detail />}></Route>
+      <div className={styles.app}>
+        {isLoading || loadingApp ? (
+          <Loading_Login />
+        ) : (
+          <>
+            {location.pathname !== "/" &&
+              location.pathname !== "/landing" &&
+              location.pathname !== "/user-type" && <Header />}
+            <main className={styles.main}>
+              <Routes>
+                <Route element={<RutasUsers />}>
+                  {/* Usuario registrandose */}
+                  <Route path="/user-type" element={<UserType />} />
+                  {/* Con o sin iniciar sesion */}
+                  <Route path="/" element={<Landing />}>
+                    <Route path="home" element={<Home />}>
+                      {/* Usuaio tipo Cliente */}
+                      <Route element={<RutasCliente />}>
+                        <Route path="perfil" />
+                      </Route>
+                      <Route path="detail/:restoId" element={<Detail />}>
+                        <Route
+                          path="menuCliente/:id"
+                          element={<MenuCliente />}
+                        />
+                      </Route>
+                    </Route>
                   </Route>
                   <Route path="menuCliente/:id" element={<MenuCliente />} />
                 </Route>
@@ -78,20 +95,20 @@ function App() {
                     <Route path="reservas" element={<Reservas />} />
                     <Route path="dashboard" element={<Dashboard />} />
                   </Route>
+                  {/* -------------------------------------------------------------------------------------- */}
+                  {/* Rutas Admin */}
+                  <Route element={<RutasAdmin />}>
+                    <Route path="/admin/usuarios" element={<AdminUser />} />
+                  </Route>
+                  {/* -------------------------------------------------------------------------------------- */}
+                  {/* Cierra ruta potegida con o sin login */}
                 </Route>
-                {/* -------------------------------------------------------------------------------------- */}
-                {/* Rutas Admin */}
-                <Route element={<RutasAdmin />}>
-                  <Route path="/admin/usuarios" element={<AdminUser />} />
-                </Route>
-                {/* -------------------------------------------------------------------------------------- */}
-                {/* Cierra ruta users */}
-              </Route>
-            </Routes>
-          </main>
-          {<Footer />}
-        </div>
-      )}
+              </Routes>
+            </main>
+            {<Footer />}
+          </>
+        )}
+      </div>
     </>
   );
 }
