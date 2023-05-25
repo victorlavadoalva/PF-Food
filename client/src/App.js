@@ -24,6 +24,7 @@ import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import CuentaCliente from "./Pages/CuentaCliente";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ function App() {
                   </Route>
                   <Route path="menuCliente/:id" element={<MenuCliente />} />
                 </Route>
+                <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
