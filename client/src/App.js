@@ -54,19 +54,22 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
-                      <Route path="detail/:restoId" element={<Detail />} >
-                          <Route path="menuCliente/:id" element={<MenuCliente />} />
+                      {/* Usuaio tipo Cliente */}
+                      <Route element={<RutasCliente />}>
+                        <Route path="perfil" />
+                      </Route>
+                      <Route path="detail/:restoId" element={<Detail />}>
+                        <Route
+                          path="menuCliente/:id"
+                          element={<MenuCliente />}
+                        />
                       </Route>
                     </Route>
                   </Route>
-                  <Route element={<RutasCliente />}></Route>
                   {/* -------------------------------------------------------------------------------------- */}
                   {/* Error 404 */}
                   <Route path="*" element={<Error404 />} />
                   {/* -------------------------------------------------------------------------------------- */}
-
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Usuaio tipo Cliente */}
 
                   {/* -------------------------------------------------------------------------------------- */}
                   {/* Usuario tipo Restaurante */}
