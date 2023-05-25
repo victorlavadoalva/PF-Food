@@ -49,6 +49,7 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
+              <Route path="mapa" element={<Map />}/>
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />} />
