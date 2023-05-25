@@ -10,7 +10,6 @@ const Review = () => {
   const restDataString = localStorage.getItem('RestData');
   const id = JSON.parse(restDataString)?.id;
   console.log(id);
-  const token = JSON.parse(restDataString)
 
 
   const handleValChange = (event, value) => {
@@ -23,22 +22,13 @@ const Review = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.put(
-        `https://pf-backend-production-5a61.up.railway.app/restaurants/${id}`,
-        {
-          valoraciones: {
-            rating: rating,
-            comment: comment,
-            number: number,
-          },
+      const response = await axios.put(`https://pf-backend-production-5a61.up.railway.app/restaurants/${id}`, {
+        valoraciones: {
+          rating: rating,
+          comment: comment,
+          number: number,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
+      });
       console.log(response.data); 
       setRating(0);
       setComment('');

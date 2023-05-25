@@ -7,13 +7,8 @@ export default function FormPlatos() {
   const [formSubmit, setformSubmit] = useState(false);
   const [imageFile,setImageFile] = useState(null)
   const restDataString = localStorage.getItem('RestData');
-  const id = JSON.parse(restDataString)?.restaurant.id;
-  console.log(restDataString)
+  const id = JSON.parse(restDataString)?.id;
   console.log(id);
-  const token = JSON.parse(restDataString)?.restaurant.token;
-  console.log(token)
-  console.log('hola')
-  
 
 
   function handleImage(event) {
@@ -94,23 +89,16 @@ export default function FormPlatos() {
               setformSubmit(true);
               setTimeout(() => setformSubmit(false), 5000);
               const platoId = response.data._id;
-              console.log('Plato id:', platoId)
-
-              axios.put(`https://pf-backend-production-83a4.up.railway.app/restaurants/${id}`, {
-                menu: platoId ,
-              }, {
-                headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${token}`,
-                },
+              const menu = { _id: platoId };
+              axios.put(`https://pf-backend-production-5a61.up.railway.app/restaurants/${id}`, {
+                menu: [menu],
               })
-                .then((response) => {
-                  console.log('Actualización del menú exitosa:', response.data);
-                })
-                .catch((error) => {
-                  console.error('Error al actualizar el menú:', error);
-                });
-              
+              .then((response) => {
+                console.log('Actualización del menú exitosa:', response.data);
+              })
+              .catch((error) => {
+                console.error('Error al actualizar el menú:', error);
+              });
           })
           .catch((error)=>{
             console.log(error);

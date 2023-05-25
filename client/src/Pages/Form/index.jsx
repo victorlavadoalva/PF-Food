@@ -17,7 +17,8 @@ export default function Form() {
     image: null,
     type_customer: "Restaurant",
     tags: [],
-    capacity: ""
+    capacity: "",
+    email: ""
   });
   
 
@@ -30,6 +31,7 @@ export default function Form() {
     phoneNumber:"",
     capacity: '',
     image: '',
+    email:""
 
   });
 
@@ -53,7 +55,7 @@ export default function Form() {
       formData.append("phoneNumber", restorants.phoneNumber);
       formData.append("image", imageFile);
       formData.append("type_customer", "Restaurant");
-      formData.append("email", "gonzasuarez100@gmail.com");
+      formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
 
@@ -73,7 +75,8 @@ export default function Form() {
             image: null,
             type_customer: "Restaurant",
             tags: [],
-            capacity: ""
+            capacity: "",
+            email: ''
           });
           localStorage.setItem('RestData', JSON.stringify(response.data));
         })
@@ -132,6 +135,9 @@ export default function Form() {
       case 'phoneNumber':
         validatePhoneNumber(value);
         break;  
+      case 'email':
+        validateEmail(value);
+        break
       default:
         break;
     }
@@ -193,9 +199,17 @@ export default function Form() {
       setErrors({ ...errors, phoneNumber: '' });
     }
   };
-  
-  
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,3}$/;
+  
+    if (!emailRegex.test(email)) {
+      setErrors({ ...errors, email: 'Correo electrónico inválido' });
+    } else {
+      setErrors({ ...errors, email: '' });
+    }
+  };
+  
   const validateImage = (image) => {
     if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
       setErrors({ ...errors, image: 'Formato inválido' });
@@ -213,7 +227,8 @@ export default function Form() {
       errors.address === '' &&
       errors.phoneNumber === '' &&
       errors.capacity === '' &&
-      errors.image === '' 
+      errors.image === '' &&
+      errors.email === ''
     );
   }
 
@@ -284,6 +299,17 @@ export default function Form() {
                 placeholder="Telefono..."
                 error={errors.phoneNumber !== ""}
                 helperText={errors.phoneNumber !== "" ? errors.phoneNumber : ""}
+              />
+              <TextField
+                label="Email"
+                variant="outlined"
+                name="email"
+                value={restorants.email}
+                onChange={handleChange}
+                autoComplete="off"
+                placeholder="Email..."
+                error={errors.email !== ""}
+                helperText={errors.email !== "" ? errors.email : ""}
               />
               <TextField
                 label="Descripcion"
