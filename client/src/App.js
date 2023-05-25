@@ -56,7 +56,7 @@ function App() {
                     <Route path="home" element={<Home />}>
                       {/* Usuaio tipo Cliente */}
                       <Route element={<RutasCliente />}>
-                            <Route path="perfil" />
+                        <Route path="perfil" />
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
@@ -66,10 +66,6 @@ function App() {
                       </Route>
                     </Route>
                   </Route>
-                  {/* -------------------------------------------------------------------------------------- */}
-
-                  
-                  
                   {/* -------------------------------------------------------------------------------------- */}
                   {/* Error 404 */}
                   <Route path="*" element={<Error404 />} />
