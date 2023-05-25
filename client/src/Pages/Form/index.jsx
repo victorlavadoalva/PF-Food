@@ -53,6 +53,7 @@ export default function Form() {
       formData.append("phoneNumber", restorants.phoneNumber);
       formData.append("image", imageFile);
       formData.append("type_customer", "Restaurant");
+      formData.append("email", "gonzasuarez100@gmail.com");
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
 
@@ -77,6 +78,7 @@ export default function Form() {
           localStorage.setItem('RestData', JSON.stringify(response.data));
         })
         .catch((error) => {
+          console.log(error)
           alert('Error al crear el restaurante');
         });
     } else {
