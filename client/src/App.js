@@ -70,6 +70,7 @@ function App() {
                   </Route>
                   <Route path="menuCliente/:id" element={<MenuCliente />} />
                 </Route>
+                <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
