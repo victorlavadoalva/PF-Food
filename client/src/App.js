@@ -20,6 +20,7 @@ import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
+import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
@@ -55,6 +56,10 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
+                      {/* Usuaio tipo Cliente */}
+                      <Route element={<RutasCliente />}>
+                        <Route path="perfil" />
+                      </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
                           path="menuCliente/:id"
@@ -63,30 +68,33 @@ function App() {
                       </Route>
                     </Route>
                   </Route>
-                  <Route element={<RutasCliente />}>
-                    <Route path="cuentaCliente" element={<CuentaCliente />} />
-                  </Route>
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Error 404 */}
-                  <Route path="*" element={<Error404 />} />
-                  {/* -------------------------------------------------------------------------------------- */}
-
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Usuaio tipo Cliente  */}
-
-                  {/* -------------------------------------------------------------------------------------- */}
-                  {/* Usuario tipo Restaurante */}
-                  <Route element={<RutaRestaurant />}>
-                    {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
-                    <Route exact path="/form" element={<Form />} />
-                    {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
-                    <Route path="/restorant" element={<RestoHome />}>
-                      {/*Pasarle los componentes por element*/}
-                      <Route path="pedidos" element={<Pedidos />} />
-                      <Route path="add_food" element={<FormPlatos />} />
-                      <Route path="menu" />
-                      <Route path="reservas" element={<Reservas />} />
-                    </Route>
+                  <Route path="menuCliente/:id" element={<MenuCliente />} />
+                </Route>
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Error 404 */}
+                <Route path="*" element={<Error404 />} />
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Usuario registrandose */}
+                <Route path="/user-type" element={<UserType />} />
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Usuaio tipo Cliente */}
+                <Route element={<RutasCliente />}>
+                  {/* Franco se encarga de terminar esta rutas*/}
+                  {/* <Route exact path='/home' element={<Home />} /> */}
+                </Route>
+                {/* -------------------------------------------------------------------------------------- */}
+                {/* Usuario tipo Restaurante */}
+                <Route element={<RutaRestaurant />}>
+                  {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
+                  <Route exact path="/form" element={<Form />} />
+                  {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
+                  <Route path="/restorant" element={<RestoHome />}>
+                    {/*Pasarle los componentes por element*/}
+                    <Route path="pedidos" element={<Pedidos />} />
+                    <Route path="add_food" element={<FormPlatos />} />
+                    <Route path="menu" />
+                    <Route path="reservas" element={<Reservas />} />
+                    <Route path="dashboard" element={<Dashboard />} />
                   </Route>
                   {/* -------------------------------------------------------------------------------------- */}
                   {/* Rutas Admin */}
