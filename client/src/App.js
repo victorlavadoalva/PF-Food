@@ -23,6 +23,7 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import { Map } from "./Pages/Map/Map";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
+              <Route path="mapa" element={<Map />}/>
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />} />
