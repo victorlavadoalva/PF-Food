@@ -71,8 +71,6 @@ function App() {
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
                 {/* -------------------------------------------------------------------------------------- */}
-
-                {/* -------------------------------------------------------------------------------------- */}
                 {/* Usuario tipo Restaurante */}
                 <Route element={<RutaRestaurant />}>
                   {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
