@@ -55,12 +55,14 @@ const location = useLocation()
         
       </div>
       <div className={styles.containerImg}>
-        <div className={styles.elementDesing}>
-         <Login_Register/>
+        <div className={styles.elementDesing}></div>
+          <div className={styles.LoginRegister}>
+            <Login_Register />
+          </div>
         <div className={styles.container_carousel}>
           <Carousel/>
         </div>           
-        </div>
+        
       </div>
     </div>
 

@@ -1,38 +1,86 @@
-.divUser {
-  position: relative;
-  top: 25vh;
-  left: 40vh;
+.divUserImage {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
   align-items: center;
-  max-width: 9rem;
-  background-color: #323232;
-  border: none;
-  margin: 2rem;
-  color: white;
-  font-size: 13px;
-  border-radius: 15%;
-  padding-bottom: 2rem;
-  transform: rotate(-10deg);
+  justify-content: center;
+  flex-direction: column;
+  /* background: #323232; */
+  border-radius: 50%;
+  width: 8vh;
+  padding:5px 0 0 0;
 }
 
+.imagePerfil {
+  border-radius: 50%; 
+  max-width: 4.5rem;
+  cursor: pointer;
+  border:5px solid #323232;
+}
+
+
+.perfilDesplegable {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 6%;
+  border: 3px solid black;
+  width: 6.5rem;
+  height: 6rem;
+}
+
+.perfilname {
+  width: 100%;
+  font-size: 16px;
+}
+
+
+
 .buttonAccount {
-  position: relative;
-  top: 30vh;
-  left: 45vh;
-  background-color: #323232;
+  display: flex;
   border: none;
-  color: white;
   height: 5rem;
   width: 20vh;
-  font-size: 17px;
+  align-items: center;
+  justify-content: center;
+} 
+
+.btn{
+ width: 100%;
+ height: 100%;
+ margin: 0.5em;
+ background: #323232;
+ color: white;
+ border: none;
   border-top-left-radius: 30rem;
   border-bottom-left-radius: 60rem;
   border-top-right-radius: 60rem;
   border-bottom-right-radius: 30rem;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-10deg);
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ z-index: 1;
+ overflow: hidden;
 }
+
+.buttonAccount button:hover {
+  color: black;
+ }
+ 
+ .buttonAccount button:after {
+  content: "";
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+ }
+ 
+ .buttonAccount button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+ }

@@ -96,17 +96,19 @@
   width: 49%;
   height: 90vh;
   padding-bottom: 4px;
+ 
 }
 .elementDesing {
   position: relative;
   background-color: #5bc0be;
   border-radius: 10vh;
-  border-bottom-right-radius: 25rem;
-  bottom: 25vh;
-  right: -25vh;
-  width: 100vh;
+  border-bottom-right-radius: 10rem;
+  bottom: 27vh;
+  right: -20vh;
+  width: 220vh;
   height: 120vh;
-  transform: rotate(10deg);
+  transform: rotate(10deg); 
+  overflow:hidden;
 }
 
 @media (max-width: 1500px) {
@@ -127,23 +129,12 @@
   }
 }
 
-.buttonAccount {
-  position: relative;
-  top: 30vh;
-  left: 45vh;
-  background-color: #323232;
-  border: none;
-  color: white;
-  height: 5rem;
-  width: 20vh;
-  font-size: 17px;
-  border-top-left-radius: 30rem;
-  border-bottom-left-radius: 60rem;
-  border-top-right-radius: 60rem;
-  border-bottom-right-radius: 30rem;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-10deg);
+.LoginRegister {
+  position: absolute;
+  top: 5vh;
+  right: 1vh;
+  height: 6rem;
+  width: 25vh;
 }
 
 @media (max-width: 1500px) {
@@ -170,9 +161,8 @@
   position: absolute;
   width: 55rem;
   height: 60vh;
-  top: 50vh;
-  transform: rotate(-10deg);
-  right: 300px;
+  top: 20vh;
+  right:15vh;
 }
 
 @media (max-width: 1500px) {

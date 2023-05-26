@@ -11,6 +11,7 @@ import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
 import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
 import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
+import CuentaCliente from "./Pages/CuentaCliente";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
@@ -23,7 +24,6 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import CuentaCliente from "./Pages/CuentaCliente";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
-              <Route path="mapa" element={<Map />}/>
+              {/* <Route path="mapa" element={<Map />}/> */}
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />} />
