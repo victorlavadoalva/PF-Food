@@ -8,4 +8,6 @@
     padding: 10px;
     background-color: aliceblue;
 
+    flex-basis: calc(45% - 10px); /* El 10px es el espacio entre los elementos */
+    margin: 5px;
 }

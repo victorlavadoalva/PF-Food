@@ -1,21 +1,17 @@
-.container{
-    display: flex;
-    justify-content: center; 
-    flex-wrap: wrap;
-    row-gap: 70px;
-    align-items: center;
-    justify-items: center;
-    width: 90%;
-    height: 90%;
-    margin: 5%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
-.container > * {
-    flex:1;
-    margin: 0 20px;
+.container{
+    font-family: 'Cabin', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 3em;
+
 }
 
 .banerCont{
+    font-family: 'Cabin', sans-serif;
     display: flex;
     align-items: center;
     width: 100%;
