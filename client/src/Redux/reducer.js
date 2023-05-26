@@ -10,7 +10,9 @@ import {
     GET_DISH,
     LOADING,
     LOGIN,
-    POST_USER
+    POST_USER,
+    ADD_TO_CART,
+    DELETE_FROM_CART
 } from "./actionsTypes";
 
 const initialState = {
@@ -25,11 +27,22 @@ const initialState = {
     userFoundByEmail:[],
     error:[],
     plates: [],
-    dishes:[]
+    dishes:[],
+    cart: [],
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
+        case DELETE_FROM_CART:
+            return {
+                ...state,
+                cart: state.cart.filter(product => product !== payload)
+            }
+        case ADD_TO_CART:
+            return {
+                ...state,
+                cart: [...state.cart, payload]
+            }
         case GET_ALL_RESTORANTS:
             return {
                 ...state,
