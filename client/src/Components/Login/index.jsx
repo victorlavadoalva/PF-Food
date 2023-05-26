@@ -8,6 +8,7 @@ export default function Login_Register() {
   const handleLogOut = () => {
  window.localStorage.setItem("redirectPath", window.location.pathname);
 window.localStorage.removeItem("UserToken")
+window.localStorage.removeItem("UserLogVerificate")
     logout()
   }
   const handleLogin = () => {

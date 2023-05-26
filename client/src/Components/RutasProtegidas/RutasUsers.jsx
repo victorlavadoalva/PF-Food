@@ -36,9 +36,7 @@ export default function RutasUsers() {
   }, [dispatch, saveEmail]);
 
 
-  const dataUser = window.localStorage.getItem("UserLogVerificate");
-  const restaurant = JSON.parse(dataUser);
-  const { type_customer } = restaurant;
+
 
   useEffect(() => {
 
@@ -81,8 +79,15 @@ if (tokenLogin.token) {
   }
   },[tokenLogin])
 
-  
+  let type_customer = "";
 
+  const dataUser = window.localStorage.getItem("UserLogVerificate");
+  if(dataUser){
+    const restaurant = JSON.parse(dataUser);
+    type_customer = restaurant.type_customer
+  }
+  
+  
 
   if (type_customer === "Restaurante") {
     return <Navigate to={restaurantRoute} />;
