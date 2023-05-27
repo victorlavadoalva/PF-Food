@@ -18,7 +18,12 @@ const Store = () => {
     const dispatch = useDispatch();
     const localStorage = window.localStorage.getItem('store');
     const store = JSON.parse(localStorage);
-    const { pathname } = useLocation()
+    const location = useLocation()
+    let pathname = false;
+
+    if(location.pathname === '/home/cart') {
+        pathname = true;
+    }
 
     useEffect(() => {
         window.localStorage.setItem('store', JSON.stringify(cartItems))
@@ -74,7 +79,7 @@ const Store = () => {
                     <Typography variant="h6" gutterBottom>
                         Total: ${getTotalPrice()}
                     </Typography>
-                    {cartItems.length > 0 && pathname === "/home/cart" && (
+                    {cartItems.length > 0 && pathname && (
                         <><Link>
                             <Button variant="contained" color="primary" onClick={payment}>
                                 Confirmar
@@ -86,7 +91,7 @@ const Store = () => {
                             }
                             <br></br>
                             {
-                                (link && pathname === "/home/cart" &&
+                                (link && pathname  &&
                                     <Link to={link} target="_blank" rel="noopener noreferrer">
                                         <Button variant="contained" color="primary" onClick={deleteStore} >
                                             Pagar
