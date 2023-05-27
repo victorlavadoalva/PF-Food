@@ -36,7 +36,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         case DELETE_FROM_CART:
             return {
                 ...state,
-                cart: state.cart.filter(product => product !== payload)
+                cart: state.cart.filter(product => product.id !== payload)
             }
         case ADD_TO_CART:
             return {

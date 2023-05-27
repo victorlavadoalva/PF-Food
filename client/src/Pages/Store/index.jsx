@@ -18,13 +18,10 @@ const Store = () => {
     const dispatch = useDispatch();
     const localStorage = window.localStorage.getItem('store');
     const store = JSON.parse(localStorage);
-    console.log('store', store);
     const { pathname } = useLocation()
 
     useEffect(() => {
         window.localStorage.setItem('store', JSON.stringify(cartItems))
-        console.log('cartItems', cartItems);
-        console.log('localStorage', store);
     }, [cartItems, store])
 
     if (!cartItems.length && store) {
