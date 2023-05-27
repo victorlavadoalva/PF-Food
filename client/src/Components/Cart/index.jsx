@@ -17,6 +17,7 @@ const Cart = () => {
   const {dishes} = useSelector(state => state);
   const dispatch = useDispatch();
   const { id } = useParams();
+  
 
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const Cart = () => {
   };
 
   const removeFromCart = (productId) => {
+    console.log('Removing product with _id:', productId);
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
@@ -56,7 +58,8 @@ const Cart = () => {
             {/* Render the cart items */}
             <List>
               {cartItems.map((item) => (
-                <ListItem key={item.id} disableGutters >
+                console.log('CartItem:', item),
+                <ListItem key={item._id} disableGutters >
                   <ListItemText primary={item.name} secondary={`$${item.cost}`} />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete" onClick={() => removeFromCart(item.id)}>
@@ -105,8 +108,8 @@ const Cart = () => {
           ) : (
             dishes.map((food) => (
               <CardDish
-                key={food.id}
-                id={food.id}
+                key={food._id}
+                id={food._id}
                 image={food.image ? food.image[0] : null}
                 name={food.name}
                 tags={food.tags}
