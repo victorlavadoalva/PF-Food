@@ -22,7 +22,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getDish(id));
   }, [dispatch, id]);
-  console.log(dishes);
+  console.log('carta: ', dishes);
   
 
   const addToCart = (product) => {
@@ -107,7 +107,7 @@ const Cart = () => {
               <CardDish
                 key={food.id}
                 id={food.id}
-                image={food.image[0]}
+                image={food.image ? food.image[0] : null}
                 name={food.name}
                 tags={food.tags}
                 cost={food.cost}
