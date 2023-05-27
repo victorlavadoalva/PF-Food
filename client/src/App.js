@@ -24,6 +24,7 @@ import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 import CuentaCliente from "./Pages/CuentaCliente";
+import {Map} from './Pages/Map/Map.jsx'
 
 function App() {
   const dispatch = useDispatch();
