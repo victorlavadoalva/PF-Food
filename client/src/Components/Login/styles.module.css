@@ -5,7 +5,7 @@
   border:3px solid black;
   width: 10rem;
 }
-.divUserImage {
+.perfil {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,20 @@
   border-radius: 6%;
   border: 3px solid black;
   width: 6.5rem;
-  height: 6rem;
+  height: 8rem;
+}
+
+.perfilDesplegable__lista {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 10px;
+  list-style: none;
+  z-index: 1;
 }
 
 .perfilname {

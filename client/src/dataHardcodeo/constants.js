@@ -14,11 +14,12 @@ export const RESTOS = [
       "El restaurante insignia de los chefs Virgilio Martínez y Pía León es un santuario de todo lo peruano. Combinando una hospitalidad impecable, un vasto conocimiento de los productos latinoamericanos y una creatividad sin igual en la cocina, esta oda gastronómica a Perú es el merecido ganador de Mejor Restaurante de Latinoamérica 2022, patrocinado por S.Pellegrino & Acqua Panna, título que ya había obtenido anteriormente desde 2014 hasta 2016.",
     especial:
       "La última versión del menú de Central incluye ingredientes que rara vez se encuentran en otro lugar del mundo. Después de viajar extensamente por todo el país, Martínez y León presentan solo lo mejor de los tesoros culinarios de Perú. El menú de degustación, llamado Mundo Mater, incluye clásicos como Tierra de Maíz y Tallos Extremos, y también introduce nuevos platos, como Rocas Negras (con algas, almejas y calamares), Conexión Amazónica (con cecina, arapaima y yuca) y Océano Azul-Verde (una combinación de vieiras y pepino).",
-    image: [
-      require("./img/ejemplo1.jpg").default,
-      require("./img/ejemplo2.jpg").default,
-      require("./img/ejemplo3.jpg").default,
-    ],
+    // image: [
+    //   require("./img/ejemplo1.jpg").default,
+    //   require("./img/ejemplo2.jpg").default,
+    //   require("./img/ejemplo3.jpg").default,
+    // ],
+    image:require("./img/ejemplo1.jpg").default
   },
   {
     id: 6,

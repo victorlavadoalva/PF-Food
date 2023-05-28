@@ -28,16 +28,7 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const handleAcount = () => {
-    navigate("/home/perfil")
-  }
-  
-  const handleLogOut = () => {
-  window.localStorage.setItem("redirectPath", window.location.pathname);
-  window.localStorage.removeItem("UserToken")
-  window.localStorage.removeItem("UserLogVerificate")
-      logout()
-  }
+
   return (
     <React.Fragment>
       <Box className={styles.container}>
@@ -102,13 +93,13 @@ export default function AccountMenu() {
           <Avatar /> Franco Krismann
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleAcount()}>
+        <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleLogOut()}>
+        <MenuItem >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

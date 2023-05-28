@@ -58,7 +58,6 @@ function App() {
                     <Route path="home" element={<Home />}>
                       {/* Usuaio tipo Cliente */}
                       <Route element={<RutasCliente />}>
-                        <Route path="perfil" />
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
