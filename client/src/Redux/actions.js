@@ -37,12 +37,13 @@ export const getRestorants = ({ page = 1, order, rating, name, country, tags }) 
   };
 };
 
-export const getDish = () => {
+export const getDish = ( id ) => {
   return async function (dispatch) {
     try {
-      const response = await axios(URL_POST);
-      const data = response.data;
-      return dispatch({ type: GET_DISH, payload: data });
+      const response = await axios(URL_RESTAURANT + "/" + id);
+      const { menu } = response.data;
+      console.log('response menu:', JSON.stringify(menu));
+      return dispatch({ type: GET_DISH, payload: menu });
     } catch(error) {
       return dispatch({  type: ERROR, payload: error })
     }

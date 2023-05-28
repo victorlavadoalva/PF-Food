@@ -1,41 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Button, Grid } from '@mui/material';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FOOD } from '../../dataHardcodeo/constants';
 import { CardDish } from '../CardDish';
 import styles from '../../Pages/MenuClientes/styles.module.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-
-// const productList = [
-//   { id: 1, name: 'Product 1', price: 10 },
-//   { id: 2, name: 'Product 2', price: 15 },
-//   { id: 3, name: 'Product 3', price: 20 },
-// ];
-
-// const ProductCard = ({ product, addToCart }) => {
-//   return (
-//     <Grid item key={product.id} xs={12} sm={6} md={4}>
-//       <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-//         <Typography variant="h6" component="div">
-//           {product.name}
-//         </Typography>
-//         <Typography variant="subtitle1" color="text.secondary">
-//           Precio: ${product.price}
-//         </Typography>
-//         <Button onClick={() => addToCart(product)} variant="contained" color="primary">
-//           Agregar
-//         </Button>
-//       </div>
-//     </Grid>
-//   );
-// };
+import { getDish } from '../../Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [link, setLink] = useState();
   const [confirmed, setConfirmed] = useState(false)
+  const {dishes} = useSelector(state => state);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+
+  useEffect(() => {
+    dispatch(getDish(id));
+  }, [dispatch, id]);
+  console.log('carta: ', dishes);
+  
 
   const addToCart = (product) => {
     setCartItems((prevItems) => [...prevItems, product]);
@@ -112,19 +100,23 @@ const Cart = () => {
           Carta:
         </Typography>
         <div className={styles.cardContainer}>
-          {FOOD.map((food) => (
-            <CardDish
-              key={food.id}
-              id={food.id}
-              image={food.image[0]}
-              name={food.name}
-              tags={food.tags}
-              cost={food.cost}
-              description={food.description}
-              className={styles.card}
-              addToCart={addToCart}
-            />
-          ))}
+          {dishes.length === 0 ? (
+            <Typography variant="body1">La carta está vacía.</Typography>
+          ) : (
+            dishes.map((food) => (
+              <CardDish
+                key={food.id}
+                id={food.id}
+                image={food.image ? food.image[0] : null}
+                name={food.name}
+                tags={food.tags}
+                cost={food.cost}
+                description={food.description}
+                className={styles.card}
+                addToCart={addToCart}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>
