@@ -58,6 +58,7 @@ export default function Login_Register() {
     <>
       {isAuthenticated ? (
         <>
+        //No borrar
           {/* <div className={styles.perfil}>
             <img
               className={styles.imagePerfil}
