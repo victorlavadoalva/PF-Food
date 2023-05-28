@@ -1,17 +1,24 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { FOOD } from '../../dataHardcodeo/constants';
 import { CardDish } from '../CardDish';
 import styles from '../../Pages/MenuClientes/styles.module.css'
-import * as actions from '../../Redux/actions'
-import Store from '../../Pages/Store';
-
+import { getDish } from '../../Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import * as actions from '../../Redux/actions';
+import Store from '../../Pages/Store'
 
 const Cart = () => {
-  
+  const {dishes} = useSelector(state => state);
   const dispatch = useDispatch();
-  // const cartItems = useSelector(state => state.cart)
+  const { id } = useParams();
+
+
+  useEffect(() => {
+    dispatch(getDish(id));
+  }, [dispatch, id]);
+  console.log('carta: ', dishes);
+  
 
   const addToCart = (product) => {
     dispatch(actions.addToCart(product))
@@ -25,19 +32,23 @@ const Cart = () => {
           Carta:
         </Typography>
         <div className={styles.cardContainer}>
-          {FOOD.map((food) => (
-            <CardDish
-              key={food.id}
-              id={food.id}
-              image={food.image[0]}
-              name={food.name}
-              tags={food.tags}
-              cost={food.cost}
-              description={food.description}
-              className={styles.card}
-              addToCart={addToCart}
-            />
-          ))}
+          {dishes.length === 0 ? (
+            <Typography variant="body1">La carta está vacía.</Typography>
+          ) : (
+            dishes.map((food) => (
+              <CardDish
+                key={food.id}
+                id={food.id}
+                image={food.image ? food.image[0] : null}
+                name={food.name}
+                tags={food.tags}
+                cost={food.cost}
+                description={food.description}
+                className={styles.card}
+                addToCart={addToCart}
+              />
+            ))
+          )}
         </div>
       </div>
       <div className={styles.store}>
