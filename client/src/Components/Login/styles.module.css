@@ -1,3 +1,10 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:3px solid black;
+  width: 10rem;
+}
 .divUserImage {
   display: flex;
   align-items: center;
