@@ -8,17 +8,15 @@ import { useParams } from 'react-router-dom';
 import * as actions from '../../Redux/actions';
 import Store from '../../Pages/Store'
 
+
 const Cart = () => {
-  const {dishes} = useSelector(state => state);
+  const { dishes } = useSelector(state => state);
   const dispatch = useDispatch();
   const { id } = useParams();
-
 
   useEffect(() => {
     dispatch(getDish(id));
   }, [dispatch, id]);
-  console.log('carta: ', dishes);
-  
 
   const addToCart = (product) => {
     dispatch(actions.addToCart(product))
@@ -37,8 +35,8 @@ const Cart = () => {
           ) : (
             dishes.map((food) => (
               <CardDish
-                key={food.id}
-                id={food.id}
+                key={food._id}
+                id={food._id}
                 image={food.image ? food.image[0] : null}
                 name={food.name}
                 tags={food.tags}
