@@ -12,6 +12,8 @@ import {
   POST_USER,
   UPDATE_USER,
   UPDATE_SUCCESS,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
 } from "./actionsTypes";
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`;
@@ -63,20 +65,15 @@ export const getDish = ( id ) => {
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
-      console.log(saveEmail);
-      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`);
-      const response_restaurant = await axios.get(
-        URL_RESTAURANT + `?email=${saveEmail}`
-      );
-      const dataUser = response_user.data;
-      const dataRestaurant = response_restaurant.data;
+      console.log(saveEmail)
+      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`)
+      const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}`)
+      const dataUser = response_user.data
+      const dataRestaurant = response_restaurant.data
       if (dataUser) {
         return dispatch({ type: GET_USER_EMAIL, payload: [true, dataUser] });
       } else if (dataRestaurant) {
-        return dispatch({
-          type: GET_USER_EMAIL,
-          payload: [true, dataRestaurant],
-        });
+        return dispatch({ type: GET_USER_EMAIL, payload: [true, dataRestaurant] });
       } else {
         return dispatch({ type: GET_USER_EMAIL, payload: [false, null] });
       }
@@ -95,7 +92,7 @@ export const GetTokenLogin = (typeUser, email) => {
       if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email);
         const { data } = await axios.get(URL_USERS + `/login/${email}`);
-        console.log("casa", data);
+        
         localStorage.setItem("access_token", data.token);
 
         return dispatch({ type: GET_TOKEN, payload: data });
@@ -213,3 +210,21 @@ export const updateAccount = (userId, userData) => {
     }
   };
 };
+
+export const addToCart = (cart) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: ADD_TO_CART,
+      payload: cart
+    })
+  }
+}
+
+export const deleteFromCart = (productId) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: DELETE_FROM_CART,
+      payload: productId
+    })
+  }
+}

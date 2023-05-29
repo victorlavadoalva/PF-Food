@@ -11,6 +11,8 @@ import {
   LOADING,
   LOGIN,
   POST_USER,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
   UPDATE_USER,
   UPDATE_SUCCESS,
 } from "./actionsTypes";
@@ -28,12 +30,23 @@ const initialState = {
   error: [],
   plates: [],
   dishes: [],
+  cart: [],
   user: {},
   updateSuccess: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case DELETE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((product) => product.id !== payload),
+      };
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, payload],
+      };
     case GET_ALL_RESTORANTS:
       return {
         ...state,

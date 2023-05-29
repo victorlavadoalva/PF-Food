@@ -1,20 +1,20 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./styles.module.css";
 
-export default function Login_Register() {
-  const { isAuthenticated, user, loginWithRedirect, logout ,isLoading} = useAuth0();
+export default function LoginRegister() {
 
+  const { isAuthenticated, user, loginWithRedirect, logout, isLoading } = useAuth0();
 
   const handleLogOut = () => {
- window.localStorage.setItem("redirectPath", window.location.pathname);
-window.localStorage.removeItem("UserToken")
-window.localStorage.removeItem("UserLogVerificate")
+    window.localStorage.setItem("redirectPath", window.location.pathname);
+    window.localStorage.removeItem("UserToken")
+    window.localStorage.removeItem("UserLogVerificate")
     logout()
   }
+  
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
-  
-      loginWithRedirect();
+    loginWithRedirect();
   };
 
   return (

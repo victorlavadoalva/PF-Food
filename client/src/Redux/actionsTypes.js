@@ -12,6 +12,8 @@ const GET_TOKEN = "GET_TOKEN";
 const GET_DISH = "GET_DISH";
 const UPDATE_USER = "UPDATE_USER";
 const UPDATE_SUCCESS = "UPDATE_SUCCESS";
+const ADD_TO_CART = "ADD_TO_CART";
+const DELETE_FROM_CART = "DELETE_FROM_CART";
 
 module.exports = {
   GET_ALL_RESTORANTS,
@@ -28,4 +30,6 @@ module.exports = {
   GET_DISH,
   UPDATE_USER,
   UPDATE_SUCCESS,
+  ADD_TO_CART,
+  DELETE_FROM_CART
 };
