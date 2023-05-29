@@ -63,6 +63,9 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const { pathname } = useLocation();
+  const menuId = "primary-search-account-menu";
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  let isRestorant = false;
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,10 +79,6 @@ export default function PrimarySearchAppBar() {
     setOpen((prevState) => !prevState);
   };
 
-  const menuId = "primary-search-account-menu";
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-
   useEffect(() => {
     dispatch(getRestorants({ name }));
   }, [name, dispatch]);
@@ -87,8 +86,6 @@ export default function PrimarySearchAppBar() {
   const handleSearchChange = (event) => {
     setName(event.target.value);
   };
-
-  let isRestorant = false;
 
   if (pathname === "/restorant" || pathname === "/restorant/pedidos" || pathname === "/restorant/reservas" || pathname === "/restorant/add_food" || pathname === "/form") {
     isRestorant = true;
@@ -134,11 +131,14 @@ export default function PrimarySearchAppBar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Link to="/home/cart" target="_blank" rel="noopener noreferrer">
-            <IconButton>
-              <ShoppingCartIcon />
-            </IconButton>
-          </Link>
+          {
+            !isRestorant &&
+            <Link to="/home/cart" target="_blank" rel="noopener noreferrer">
+              <IconButton>
+                <ShoppingCartIcon />
+              </IconButton>
+            </Link>
+          }
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"

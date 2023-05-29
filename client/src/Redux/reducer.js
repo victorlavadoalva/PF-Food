@@ -12,32 +12,45 @@ import {
     LOGIN,
     POST_USER,
     ADD_TO_CART,
-    DELETE_FROM_CART
+    DELETE_FROM_CART,
+    ADD_FROM_STORE,
+    DELETE_CART,
 } from "./actionsTypes";
 
 const initialState = {
     restorants: {},
     allRestorants: [],
-    RestaurantID:[],
-    AmountPage:"",
-    Admin:[],
-    loadingApp:false,
-    tokenLogin:[],
-    postuser:[],
-    userFoundByEmail:[],
-    error:[],
+    RestaurantID: [],
+    AmountPage: "",
+    Admin: [],
+    loadingApp: false,
+    tokenLogin: [],
+    postuser: [],
+    userFoundByEmail: [],
+    error: [],
     plates: [],
-    dishes:[],
+    dishes: [],
     cart: [],
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case DELETE_FROM_CART:
-            return {
+        case DELETE_CART:
+            return ({
                 ...state,
-                cart: state.cart.filter(product => product.id !== payload)
-            }
+                cart: []
+            })
+        case ADD_FROM_STORE:
+            return ({
+                ...state,
+                cart: payload
+            })
+        case DELETE_FROM_CART:
+            const filtered = state.cart.filter(product => product.id !== payload);
+            return ({
+                ...state,
+                cart: filtered
+            })
         case ADD_TO_CART:
             return {
                 ...state,
@@ -57,52 +70,52 @@ const rootReducer = (state = initialState, { type, payload }) => {
         case POST_USER:
             return {
                 ...state,
-                postuser:payload
+                postuser: payload
             }
         case GET_USER_EMAIL:
-                return{
+            return {
                 ...state,
-                userFoundByEmail:payload
+                userFoundByEmail: payload
             }
         case LOADING:
-            return{
+            return {
                 ...state,
-                loadingApp:payload
+                loadingApp: payload
             }
         case GET_TOKEN:
             return {
                 ...state,
-                tokenLogin:payload
+                tokenLogin: payload
             }
         case LOGIN:
-            return{
+            return {
                 ...state,
-                login:payload
+                login: payload
             }
         case GET_RESTOURANT_ID:
-            return{
+            return {
                 ...state,
                 RestaurantID: payload
             }
         case GET_DISH:
-            return{
+            return {
                 ...state,
                 dishes: payload
             }
         case GET_AMOUNTPAGES:
             return {
                 ...state,
-                AmountPage:payload
+                AmountPage: payload
             }
         case GET_ADMIN_USER:
             return {
                 ...state,
-                Admin:payload
+                Admin: payload
             }
         case ERROR:
-            return{
+            return {
                 ...state,
-                error:payload
+                error: payload
             }
         default:
             return { ...state };

@@ -12,6 +12,8 @@ import {
   POST_USER,
   ADD_TO_CART,
   DELETE_FROM_CART,
+  ADD_FROM_STORE,
+  DELETE_CART
 } from "./actionsTypes";
 //const token = process.env.GET_TOKEN;
 //const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
@@ -117,7 +119,7 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
-      console.log("RestaurantPost", data)
+      //console.log("RestaurantPost", data)
       return dispatch({ type: POST_USER, payload: data });
     } catch (error) {
       return dispatch({
@@ -171,11 +173,28 @@ export const addToCart = (cart) => {
   }
 }
 
+export const addFromStore = (item) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: ADD_FROM_STORE,
+      payload: item,
+    })
+  }
+}
+
 export const deleteFromCart = (productId) => {
   return async function (dispatch) {
     return dispatch({
       type: DELETE_FROM_CART,
       payload: productId
+    })
+  }
+}
+
+export const deleteCart = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: DELETE_CART,
     })
   }
 }

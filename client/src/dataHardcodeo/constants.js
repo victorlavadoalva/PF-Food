@@ -276,7 +276,7 @@ export const IMAGE_NOT_FOUND =
 
 export const FOOD = [
   {
-    id: 1,
+    _id: 1,
     name: "Milanesa",
     description:
       "La milanesa es un filete, normalmente de carne vacuna, que se cocina frito o al horno. Por extensión, se llama milanesa a cualquier rebanada de un ingrediente rebozado y cocido de manera similar, por lo que existen milanesas de cerdo, de pollo, de pescado, de soja, de berenjena o de mozzarella, entre otros ingredientes",
@@ -288,7 +288,7 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 2,
+    _id: 2,
     name: "Pure",
     description: "Que rico",
     image: [require("./img/milanesa.jpeg").default],
@@ -299,7 +299,7 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 3,
+    _id: 3,
     name: "fideos",
     description: "fideos con manteca",
     image: [require("./img/milanesa.jpeg").default],
@@ -310,7 +310,7 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 4,
+    _id: 4,
     name: "Milanesa",
     description:
       "La milanesa es un filete, normalmente de carne vacuna, que se cocina frito o al horno. Por extensión, se llama milanesa a cualquier rebanada de un ingrediente rebozado y cocido de manera similar, por lo que existen milanesas de cerdo, de pollo, de pescado, de soja, de berenjena o de mozzarella, entre otros ingredientes",
@@ -322,7 +322,7 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 5,
+    _id: 5,
     name: "Pure",
     description: "Que rico",
     image: [require("./img/milanesa.jpeg").default],
@@ -333,7 +333,7 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 6,
+    _id: 6,
     name: "fideos",
     description: "fideos con manteca",
     image: [require("./img/milanesa.jpeg").default],
