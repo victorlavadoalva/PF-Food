@@ -119,7 +119,6 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
-      //console.log("RestaurantPost", data)
       return dispatch({ type: POST_USER, payload: data });
     } catch (error) {
       return dispatch({
