@@ -1,6 +1,8 @@
 import axios from "axios";
 import {
+  ADD_FROM_STORE,
   ADD_TO_CART,
+  DELETE_CART,
   DELETE_FROM_CART,
   ERROR,
   FILTER_LANDING,
@@ -148,8 +150,6 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
-      console.log("RestaurantPost", data);
-      console.log("RestaurantPost", data);
       return dispatch({ type: POST_USER, payload: data });
     } catch (error) {
       return dispatch({
@@ -238,11 +238,27 @@ export const addToCart = (cart) => {
   };
 };
 
+export const addFromStore = (item) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: ADD_FROM_STORE,
+      payload: item,
+    })
+  }
+}
+
 export const deleteFromCart = (productId) => {
   return async function (dispatch) {
     return dispatch({
       type: DELETE_FROM_CART,
       payload: productId
+    })
+  }
+}
+export const deleteCart = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: DELETE_CART
     })
   }
 }
