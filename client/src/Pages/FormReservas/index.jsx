@@ -55,7 +55,7 @@ const ReservasCliente = () => {
               type="text"
               id="nombre"
               name="nombre"
-              className={styles["form-input"]}
+              className={styles.input}
             />
             <ErrorMessage
               name="nombre"
@@ -71,7 +71,7 @@ const ReservasCliente = () => {
               id="dia"
               name="dia"
               min={format(addDays(today, 1), "yyyy-MM-dd")}
-              className={styles["form-input"]}
+              className={styles.input}
             />
             <ErrorMessage
               name="dia"
@@ -86,7 +86,7 @@ const ReservasCliente = () => {
               type="time"
               id="hora"
               name="hora"
-              className={styles["form-input"]}
+              className={styles.input}
             />
             <ErrorMessage
               name="hora"
@@ -102,7 +102,7 @@ const ReservasCliente = () => {
               id="cantidadComensales"
               name="cantidadComensales"
               min={1}
-              className={styles["form-input"]}
+              className={styles.input}
             />
             <ErrorMessage
               name="cantidadComensales"
@@ -117,7 +117,7 @@ const ReservasCliente = () => {
               type="tel"
               id="telefono"
               name="telefono"
-              className={styles["form-input"]}
+              className={styles.input}
             />
             <ErrorMessage
               name="telefono"

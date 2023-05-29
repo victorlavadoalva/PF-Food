@@ -22,11 +22,7 @@ label {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-input[type="number"],
-input[type="tel"] {
+.input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
