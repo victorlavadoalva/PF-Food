@@ -15,8 +15,10 @@ import CuentaCliente from "./Pages/CuentaCliente";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
+import ReservasCliente from "./Pages/FormReservas";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import { Map } from "./Pages/Map/Map.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import Store from './Pages/Store';
@@ -51,7 +53,7 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
-              {/* <Route path="mapa" element={<Map />}/> */}
+                <Route path="mapa" element={<Map />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />} />
@@ -63,17 +65,21 @@ function App() {
                         <Route path="cart" element={<Store />}/>
                       </Route>
                       <Route element={<RutasCliente />}>
+                        <Route
+                          path="cuentaCliente"
+                          element={<CuentaCliente />}
+                        />
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
                           path="menuCliente/:id"
                           element={<MenuCliente />}
                         />
+                        <Route path="reservas/:id" element={<ReservasCliente />}/>
                       </Route>
                     </Route>
                   </Route>
                 </Route>
-                <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />

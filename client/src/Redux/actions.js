@@ -13,13 +13,21 @@ import {
   GET_USER_EMAIL,
   LOADING,
   POST_USER,
+  UPDATE_SUCCESS,
+  UPDATE_USER,
 } from "./actionsTypes";
 //const token = process.env.GET_TOKEN;
 //const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
+
+const token = process.env.GET_TOKEN;
+const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`;
 const URL_RESTAURANT =
   "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
+
+
+const backendUrl = "http://localhost:3001/users";
 
 export const getRestorants = ({
   page = 1,
@@ -67,10 +75,9 @@ export const getDish = (id) => {
       return dispatch({ type: GET_DISH, payload: menu });
     } catch (error) {
       return dispatch({ type: ERROR, payload: error });
-    }
   };
 };
-
+}
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
@@ -120,6 +127,7 @@ export const GetTokenLogin = (typeUser, email) => {
   };
 };
 
+
 export const PostUser = (User) => {
   return async function (dispatch) {
     try {
@@ -140,6 +148,7 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
+      console.log("RestaurantPost", data);
       console.log("RestaurantPost", data);
       return dispatch({ type: POST_USER, payload: data });
     } catch (error) {
@@ -184,6 +193,42 @@ export const LoadingApp = (boolean) => {
   };
 };
 
+export const updateAccount = (userId, userData) => {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: LOADING });
+
+      const token = localStorage.getItem("access_token");
+      //TODO hay que conectarlo y probarlo cuando el deploy este realizado
+      const resp = await axios.put(
+        `${backendUrl}/${userId}`,
+        {
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch({ type: UPDATE_USER, payload: resp.data });
+
+      const updateSuccessful = resp.status === 200;
+
+      dispatch({ type: UPDATE_SUCCESS, payload: updateSuccessful });
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: [{ error }, { errorUpdateAccount: "ErrorUpdateAccount" }],
+      });
+    }
+  };
+};
+
+
 export const addToCart = (cart) => {
   return async function (dispatch) {
     return dispatch({
@@ -197,7 +242,7 @@ export const deleteFromCart = (productId) => {
   return async function (dispatch) {
     return dispatch({
       type: DELETE_FROM_CART,
-      payload: productId,
-    });
-  };
-};
+      payload: productId
+    })
+  }
+}

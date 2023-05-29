@@ -20,7 +20,7 @@ export const NavBarMenu = ({anchorEl, setAnchorEl}) => {
     };
 
     const handleCuentaCliente = () =>{
-        navigate('/cuentaCliente')
+        navigate('/home/cuentaCliente')
     }
 
     const handleLogin = () => {

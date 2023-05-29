@@ -1,37 +1,39 @@
 import {
-    ADD_TO_CART,
-    DELETE_FROM_CART,
-    ERROR,
-    FILTER_LANDING,
-    GET_ADMIN_USER,
-    GET_ALL_RESTORANTS,
-    GET_AMOUNTPAGES,
-    GET_DISH,
-    GET_FILTERED,
-    GET_RESTOURANT_ID,
-    GET_TOKEN,
-    GET_USER_EMAIL,
-    LOADING,
-    LOGIN,
-    POST_USER
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  ERROR,
+  FILTER_LANDING,
+  GET_ADMIN_USER,
+  GET_ALL_RESTORANTS,
+  GET_AMOUNTPAGES,
+  GET_DISH,
+  GET_FILTERED,
+  GET_RESTOURANT_ID,
+  GET_TOKEN,
+  GET_USER_EMAIL,
+  LOADING,
+  LOGIN,
+  POST_USER
 } from "./actionsTypes";
 
 const initialState = {
-    restorants: {},
-    allRestorants: [],
-    RestaurantID:[],
-    AmountPage:"",
-    Admin:[],
-    loadingApp:false,
-    tokenLogin:[],
-    postuser:[],
-    userFoundByEmail:[],
-    error:[],
-    plates: [],
-    dishes:[],
-    cart: [],
-    filter_landing:[]
-}
+  restorants: {},
+  allRestorants: [],
+  RestaurantID: [],
+  AmountPage: "",
+  Admin: [],
+  loadingApp: false,
+  tokenLogin: [],
+  postuser: [],
+  userFoundByEmail: [],
+  error: [],
+  plates: [],
+  dishes: [],
+  cart: [],
+  filter_landing:[],
+  user: {},
+  updateSuccess: false,
+};
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -114,6 +116,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         default:
             return { ...state };
     };
-};
+  }
 
-export default rootReducer;
+  export default rootReducer
