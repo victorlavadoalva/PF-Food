@@ -9,13 +9,25 @@ export const NavBarMenu = ({anchorEl, setAnchorEl}) => {
     const isMenuOpen = Boolean(anchorEl);
     const handleMenuClose = () => {
         setAnchorEl(null);
-      };
-
+    }; 
     const navigate = useNavigate();
     
+    const handleLogOut = () => {
+        window.localStorage.setItem("redirectPath", window.location.pathname);
+        window.localStorage.removeItem("UserToken");
+        window.localStorage.removeItem("UserLogVerificate");
+        logout();
+    };
+
     const handleCuentaCliente = () =>{
         navigate('/cuentaCliente')
     }
+
+    const handleLogin = () => {
+        window.localStorage.setItem("redirectPath", window.location.pathname);
+        
+        loginWithRedirect();
+    };
 
     return (
         <Menu
@@ -36,11 +48,11 @@ export const NavBarMenu = ({anchorEl, setAnchorEl}) => {
             {isAuthenticated?<>
             <MenuItem onClick={handleMenuClose}>{user.name}</MenuItem>
             <MenuItem onClick={handleCuentaCliente}>Mi cuenta</MenuItem>
-            <MenuItem onClick={logout}>Cerrar sesion</MenuItem>
+            <MenuItem onClick={handleLogOut}>Cerrar sesion</MenuItem>
             </>
             :
             <>
-            <MenuItem onClick={loginWithRedirect}>Login</MenuItem>
+            <MenuItem onClick={handleLogin}>Login</MenuItem>
             </>
             }
       </Menu>

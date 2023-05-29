@@ -100,7 +100,7 @@ function App() {
                 {/* Cierra ruta potegida con o sin login */}
               </Routes>
             </main>
-            {<Footer />}
+            {location.pathname !== "/user-type" && <Footer />}
           </>
         )}
       </div>
