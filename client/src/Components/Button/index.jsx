@@ -10,7 +10,7 @@ export default function BasicButtons() {
       <Button
         variant="contained"
         sx={{ background: "#3A506B" }}
-        onClick={() => navigate("reservas")}
+        onClick={() => navigate(`reservas/${restoId}`)}
       >
         Reservas
       </Button>
