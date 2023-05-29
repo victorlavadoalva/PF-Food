@@ -4,6 +4,19 @@
     justify-content: space-between;
 }
 
+.containerStore{
+    margin-left: 3%;
+    margin-top: 3%;
+    max-width: 80vh;
+}
+
+.store {
+    margin-right: -3vw;
+    margin-top: 5vh;
+    width: 20vw;
+    justify-self: center;
+}
+
 .containerCart {
     padding-top: 8vh;
     width: 20vw;

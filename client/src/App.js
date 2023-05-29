@@ -19,6 +19,7 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
+import Store from './Pages/Store';
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
@@ -36,11 +37,12 @@ function App() {
     } else {
       dispatch(LoadingApp(false));
     }
-  }, [isLoading]);
+  }, [dispatch, isLoading]);
   return (
     <>
       <div className={styles.app}>
         {isLoading || loadingApp ? (
+          // eslint-disable-next-line react/jsx-pascal-case
           <Loading_Login />
         ) : (
           <>
@@ -57,6 +59,9 @@ function App() {
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
                       {/* Usuaio tipo Cliente */}
+                      <Route >
+                        <Route path="cart" element={<Store />}/>
+                      </Route>
                       <Route element={<RutasCliente />}>
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
