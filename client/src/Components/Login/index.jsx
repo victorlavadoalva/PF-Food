@@ -40,13 +40,7 @@ export default function Login_Register() {
     navigate("/home/perfil")//Cambiar ruta
   };
 
-  // const handleActivatePerfil = () => {
-  //   if (PerfilActive === true) {
-  //     setPerfilActive(false);
-  //   } else {
-  //     setPerfilActive(true);
-  //   }
-  // };
+
 
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
@@ -58,7 +52,7 @@ export default function Login_Register() {
     <>
       {isAuthenticated ? (
         <>
-        //No borrar
+        {/*No borrar*/}
           {/* <div className={styles.perfil}>
             <img
               className={styles.imagePerfil}

@@ -19,6 +19,7 @@ export const RESTOS = [
     //   require("./img/ejemplo2.jpg").default,
     //   require("./img/ejemplo3.jpg").default,
     // ],
+    //Usar esta data en casos de prueba
     image:require("./img/ejemplo1.jpg").default
   },
   {
