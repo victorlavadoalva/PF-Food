@@ -14,7 +14,7 @@ export const NavBarMenu = ({anchorEl, setAnchorEl}) => {
     const navigate = useNavigate();
     
     const handleCuentaCliente = () =>{
-        navigate('/cuentaCliente')
+        navigate('/home/cuentaCliente')
     }
 
     return (

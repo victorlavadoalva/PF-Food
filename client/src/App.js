@@ -26,6 +26,7 @@ import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 import CuentaCliente from "./Pages/CuentaCliente";
 import { Map } from "./Pages/Map/Map";
+import ReservasCliente from "./Pages/FormReservas";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
-              <Route path="mapa" element={<Map />}/>
+                <Route path="mapa" element={<Map />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />} />
@@ -64,18 +65,21 @@ function App() {
                         <Route path="cart" element={<Store />}/>
                       </Route>
                       <Route element={<RutasCliente />}>
-                        <Route path="perfil" />
+                        <Route
+                          path="cuentaCliente"
+                          element={<CuentaCliente />}
+                        />
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
                           path="menuCliente/:id"
                           element={<MenuCliente />}
                         />
+                        <Route path="reservas/:id" element={<ReservasCliente />}/>
                       </Route>
                     </Route>
                   </Route>
                 </Route>
-                <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
