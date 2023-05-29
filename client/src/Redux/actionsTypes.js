@@ -12,6 +12,7 @@ const GET_TOKEN = "GET_TOKEN"
 const GET_DISH = "GET_DISH"
 const ADD_TO_CART = "ADD_TO_CART"
 const DELETE_FROM_CART = "DELETE_FROM_CART"
+const FILTER_LANDING = "FILTER_LANDING"
 
 module.exports = {
     GET_ALL_RESTORANTS,
@@ -27,5 +28,6 @@ module.exports = {
     GET_TOKEN,
     GET_DISH,
     ADD_TO_CART,
-    DELETE_FROM_CART
+    DELETE_FROM_CART,
+    FILTER_LANDING
 }

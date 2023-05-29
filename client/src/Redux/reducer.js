@@ -1,18 +1,19 @@
 import {
+    ADD_TO_CART,
+    DELETE_FROM_CART,
     ERROR,
+    FILTER_LANDING,
     GET_ADMIN_USER,
     GET_ALL_RESTORANTS,
     GET_AMOUNTPAGES,
+    GET_DISH,
     GET_FILTERED,
     GET_RESTOURANT_ID,
     GET_TOKEN,
     GET_USER_EMAIL,
-    GET_DISH,
     LOADING,
     LOGIN,
-    POST_USER,
-    ADD_TO_CART,
-    DELETE_FROM_CART
+    POST_USER
 } from "./actionsTypes";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
     plates: [],
     dishes:[],
     cart: [],
+    filter_landing:[]
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -48,6 +50,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 allRestorants: payload,
                 restorants: payload
+            }
+        case FILTER_LANDING:
+            return{
+                ...state,
+                filter_landing:payload
             }
         case GET_FILTERED:
             return {

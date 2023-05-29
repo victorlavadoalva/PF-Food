@@ -3,31 +3,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardFilter_Landing from "../../Components/CardFilterLanding";
 import CardLanding from "../../Components/CardLanding";
-import { getRestorants } from "../../Redux/actions";
+import { getRestorants ,getRestorantFilter} from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
 import { Outlet } from "react-router-dom";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
 import Login_Register from "../../Components/Login";
-import {RESTOS} from "../../dataHardcodeo/constants"
+// import {RESTOS} from "../../dataHardcodeo/constants" "No borrar, data de prueba"
 function Landing() {
-  const { restorants } = useSelector((state) => state);
+  const { restorants, filter_landing } = useSelector((state) => state);
   const dispatch = useDispatch();
   const location = useLocation();
   const [filterActivate, setFilterActivate] = useState(false)
-
+  const[valueFilter, setValueFilter] = useState(null)
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
   }, [dispatch, restorants.documents, restorants.length]);
 
-const handleActivateFilter = () => {
-  if(filterActivate === false ){
-    setFilterActivate(true)
-  }else {
-    setFilterActivate(false)
-  }
+//Pasarle ruta del value
+const handleChangeValue = (event) => {
+if(valueFilter === null ){
+  setValueFilter(event)
+  setFilterActivate(true)
+}else if(valueFilter !== event){
+  setValueFilter(event)
+  setFilterActivate(true)
+}else if(valueFilter === event){
+  setValueFilter(null)
+  setFilterActivate(false)
 }
+}
+
+useEffect(() => {
+  dispatch(getRestorantFilter(valueFilter))
+},[valueFilter])
 
   return (
     <>
@@ -51,14 +61,15 @@ const handleActivateFilter = () => {
                     className={styles.CardPopular}
                     image={el.image}
                     name={el.name}
-                    onClick = {handleActivateFilter}
+                    value={valueFilter}
+                    onChange = {handleChangeValue}
                   />
               ))}
             </div>
             {filterActivate && 
             <div className={styles.containerFilter}>
               <div className={styles.containerCardsFilter}>
-              {RESTOS.map((el) => (
+              {filter_landing.map((el) => (
                 <Link
                 key={el.id}
                 to={`/home/detail/${el.id}`}
