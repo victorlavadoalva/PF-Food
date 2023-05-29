@@ -1,6 +1,11 @@
 import axios from "axios";
 import {
+  ADD_FROM_STORE,
+  ADD_TO_CART,
+  DELETE_CART,
+  DELETE_FROM_CART,
   ERROR,
+  FILTER_LANDING,
   GET_ADMIN_USER,
   GET_ALL_RESTORANTS,
   GET_AMOUNTPAGES,
@@ -10,19 +15,19 @@ import {
   GET_USER_EMAIL,
   LOADING,
   POST_USER,
-  UPDATE_USER,
   UPDATE_SUCCESS,
-  ADD_TO_CART,
-  DELETE_FROM_CART,
-  ADD_FROM_STORE,
-  DELETE_CART
+  UPDATE_USER,
 } from "./actionsTypes";
+//const token = process.env.GET_TOKEN;
+//const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
+
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`;
 const URL_RESTAURANT =
   "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
+
 
 const backendUrl = "http://localhost:3001/users";
 
@@ -52,30 +57,46 @@ export const getRestorants = ({
   };
 };
 
-export const getDish = ( id ) => {
+export const getRestorantFilter = (tags) => {
   return async function (dispatch) {
     try {
-      const response = await axios(URL_POST);
-      const data = response.data;
-      return dispatch({ type: GET_DISH, payload: data });
-    } catch (error) {
-      return dispatch({ type: ERROR, payload: error });
-    }
+      const { data } = await axios(URL_RESTAURANT, {
+        params: { tags },
+      });
+      return dispatch({ type: FILTER_LANDING, payload: data });
+    } catch (error) {}
   };
 };
 
+export const getDish = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios(URL_RESTAURANT + "/" + id);
+      const { menu } = response.data;
+      console.log("response menu:", JSON.stringify(menu));
+      return dispatch({ type: GET_DISH, payload: menu });
+    } catch (error) {
+      return dispatch({ type: ERROR, payload: error });
+  };
+};
+}
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
-      console.log(saveEmail)
-      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`)
-      const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}`)
-      const dataUser = response_user.data
-      const dataRestaurant = response_restaurant.data
+      console.log(saveEmail);
+      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`);
+      const response_restaurant = await axios.get(
+        URL_RESTAURANT + `?email=${saveEmail}`
+      );
+      const dataUser = response_user.data;
+      const dataRestaurant = response_restaurant.data;
       if (dataUser) {
         return dispatch({ type: GET_USER_EMAIL, payload: [true, dataUser] });
       } else if (dataRestaurant) {
-        return dispatch({ type: GET_USER_EMAIL, payload: [true, dataRestaurant] });
+        return dispatch({
+          type: GET_USER_EMAIL,
+          payload: [true, dataRestaurant],
+        });
       } else {
         return dispatch({ type: GET_USER_EMAIL, payload: [false, null] });
       }
@@ -94,15 +115,9 @@ export const GetTokenLogin = (typeUser, email) => {
       if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email);
         const { data } = await axios.get(URL_USERS + `/login/${email}`);
-        
-        localStorage.setItem("access_token", data.token);
-
         return dispatch({ type: GET_TOKEN, payload: data });
       } else if (typeUser === "Restaurante") {
         const { data } = await axios.get(URL_RESTAURANT + `/login/${email}`);
-
-        localStorage.setItem("access_token", data);
-
         return dispatch({ type: GET_TOKEN, payload: data });
       }
     } catch (error) {
@@ -113,6 +128,7 @@ export const GetTokenLogin = (typeUser, email) => {
     }
   };
 };
+
 
 export const PostUser = (User) => {
   return async function (dispatch) {
@@ -212,14 +228,15 @@ export const updateAccount = (userId, userData) => {
   };
 };
 
+
 export const addToCart = (cart) => {
   return async function (dispatch) {
     return dispatch({
       type: ADD_TO_CART,
-      payload: cart
-    })
-  }
-}
+      payload: cart,
+    });
+  };
+};
 
 export const addFromStore = (item) => {
   return async function (dispatch) {

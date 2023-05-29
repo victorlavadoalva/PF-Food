@@ -11,22 +11,22 @@ import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
 import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
 import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
+import CuentaCliente from "./Pages/CuentaCliente";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
+import ReservasCliente from "./Pages/FormReservas";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import { Map } from "./Pages/Map/Map.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
-import Store from './Pages/Store'
+import Store from './Pages/Store';
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import CuentaCliente from "./Pages/CuentaCliente";
-import { Map } from "./Pages/Map/Map";
-import ReservasCliente from "./Pages/FormReservas";
 
 function App() {
   const dispatch = useDispatch();
@@ -106,7 +106,7 @@ function App() {
                 {/* Cierra ruta potegida con o sin login */}
               </Routes>
             </main>
-            {<Footer />}
+            {location.pathname !== "/user-type" && <Footer />}
           </>
         )}
       </div>
