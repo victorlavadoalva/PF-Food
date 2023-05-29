@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router";
 import styles from "./styles.module.css"
-import { PostUser ,LoadingApp} from "../../Redux/actions";
+import { PostUser } from "../../Redux/actions";
 
 export default function UserType() {
   const navigate = useNavigate()
@@ -57,7 +57,7 @@ useEffect(() => {
       
     }
   }      
-}, [navigate,dispatch, savedData]);
+}, [navigate, dispatch, savedData, UserNew, isClient, isRestaurant]);
 
 
 
@@ -76,7 +76,7 @@ useEffect(() => {
   }
     Local()
 
-}, [ isClient ]);
+}, [isClient, navigate, postuser]);
 
 
 

@@ -10,6 +10,8 @@ const LOGIN = "LOGIN"
 const LOADING = "LOADING"
 const GET_TOKEN = "GET_TOKEN"
 const GET_DISH = "GET_DISH"
+const ADD_TO_CART = "ADD_TO_CART"
+const DELETE_FROM_CART = "DELETE_FROM_CART"
 
 module.exports = {
     GET_ALL_RESTORANTS,
@@ -23,6 +25,7 @@ module.exports = {
     LOGIN,
     LOADING,
     GET_TOKEN,
-    GET_DISH
-
+    GET_DISH,
+    ADD_TO_CART,
+    DELETE_FROM_CART
 }

@@ -10,9 +10,11 @@ import {
   GET_USER_EMAIL,
   LOADING,
   POST_USER,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
 } from "./actionsTypes";
-const token = process.env.GET_TOKEN;
-const GET_URL_TOKEN =`https://pf-backend-production-83a4.up.railway.app/${token}`
+//const token = process.env.GET_TOKEN;
+//const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
 const URL_RESTAURANT = "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
@@ -53,16 +55,16 @@ export const getDish = ( id ) => {
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
-        console.log(saveEmail)
-        const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`)
-        const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}` )
-        const dataUser = response_user.data
-        const dataRestaurant = response_restaurant.data
+      console.log(saveEmail)
+      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`)
+      const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}`)
+      const dataUser = response_user.data
+      const dataRestaurant = response_restaurant.data
       if (dataUser) {
         return dispatch({ type: GET_USER_EMAIL, payload: [true, dataUser] });
-      }else if(dataRestaurant){
+      } else if (dataRestaurant) {
         return dispatch({ type: GET_USER_EMAIL, payload: [true, dataRestaurant] });
-      }else {
+      } else {
         return dispatch({ type: GET_USER_EMAIL, payload: [false, null] });
       }
     } catch (error) {
@@ -75,16 +77,16 @@ export const GetUserEmail = ({ saveEmail }) => {
 };
 
 
-export const GetTokenLogin = (typeUser, email) =>{
-  return async function (dispatch){
+export const GetTokenLogin = (typeUser, email) => {
+  return async function (dispatch) {
     try {
-      if(typeUser === "Cliente"){
+      if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email)
-        const {data} = await axios.get(URL_USERS + `/login/${email}`)
-        return dispatch({type:GET_TOKEN,payload:data})
-      }else if(typeUser ==="Restaurante"){
-        const {data} = await axios.get(URL_RESTAURANT + `/login/${email}`)
-        return dispatch({type:GET_TOKEN,payload:data})
+        const { data } = await axios.get(URL_USERS + `/login/${email}`)
+        return dispatch({ type: GET_TOKEN, payload: data })
+      } else if (typeUser === "Restaurante") {
+        const { data } = await axios.get(URL_RESTAURANT + `/login/${email}`)
+        return dispatch({ type: GET_TOKEN, payload: data })
       }
     } catch (error) {
       return dispatch({
@@ -152,11 +154,28 @@ export const getRestorantsID = (id) => {
 };
 
 export const LoadingApp = (boolean) => {
-return async function(dispatch){
-return dispatch({
-  type:LOADING,
-  payload:boolean
-})
-}
+  return async function (dispatch) {
+    return dispatch({
+      type: LOADING,
+      payload: boolean
+    })
+  }
 }
 
+export const addToCart = (cart) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: ADD_TO_CART,
+      payload: cart
+    })
+  }
+}
+
+export const deleteFromCart = (productId) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: DELETE_FROM_CART,
+      payload: productId
+    })
+  }
+}
