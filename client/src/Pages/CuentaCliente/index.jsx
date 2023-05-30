@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
-// import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { updateAccount } from "../../Redux/actions";
 
@@ -19,18 +18,14 @@ export default function CuentaCliente({ userId, userData }) {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [passwordError, setPasswordError] = useState(false);
-  // const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const { error, updateSuccess } = useSelector((state) => state);
 
   const userLog = localStorage.getItem("UserLogVerificate");
-  const { id, name: storedName, email: storedEmail } = JSON.parse(userLog);
+  const { id, name: storedName, email: storedEmail, phone: storedPhone, address: storedAddress } = JSON.parse(userLog);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -55,16 +50,6 @@ export default function CuentaCliente({ userId, userData }) {
     setName(e.target.value);
   };
 
-  // const handleChangePassword = (e) => {
-  //   const value = e.target.value;
-  //   setPassword(value);
-  //   setPasswordError(
-  //     !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/.test(
-  //       value
-  //     )
-  //   );
-  // };
-
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -77,15 +62,9 @@ export default function CuentaCliente({ userId, userData }) {
     setAddress(e.target.value);
   };
 
-  // const togglePasswordVisibility = () => {
-  //   setShowPassword(!showPassword);
-  // };
-
   const handleUpdateAccount = () => {
-    // console.log("Updating account");
     const userData = {
       name,
-      // password,
       email,
       phone,
       address,
@@ -127,41 +106,13 @@ export default function CuentaCliente({ userId, userData }) {
               margin="normal"
               disabled
             />
-            {/* <TextField
-              label="Contraseña"
-              value={password}
-              onChange={handleChangePassword}
-              fullWidth
-              margin="normal"
-              type={showPassword ? "text" : "password"}
-              error={passwordError}
-              helperText={
-                passwordError &&
-                "La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un número y un carácter especial (!@#$%^&*)."
-              }
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Button
-                      onClick={togglePasswordVisibility}
-                      disableRipple
-                      sx={{
-                        minWidth: "auto",
-                        color: "#3A506B",
-                      }}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </Button>
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
             <TextField
               label="Email"
               value={email}
               onChange={handleChangeEmail}
               fullWidth
               margin="normal"
+              disabled
             />
             <TextField
               label="Teléfono"

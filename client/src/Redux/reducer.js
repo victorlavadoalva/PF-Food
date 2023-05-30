@@ -17,7 +17,7 @@ import {
   LOGIN,
   POST_USER,
   UPDATE_SUCCESS,
-  UPDATE_USER,
+  UPDATE_USER
 } from "./actionsTypes";
 
 const initialState = {
@@ -123,23 +123,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         Admin: payload,
       };
-    case ERROR:
-      return {
-        ...state,
-        error: payload,
-      };
     case UPDATE_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          data: payload,
-        },
+        loading: false,
+        user: payload,
       };
     case UPDATE_SUCCESS:
       return {
         ...state,
-        updateSuccess: payload,
+        updateSuccessful: payload,
+      };
+    case ERROR:
+      return {
+        ...state,
+        error: payload,
       };
     default:
       return { ...state };
