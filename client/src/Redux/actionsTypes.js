@@ -31,7 +31,7 @@ module.exports = {
     GET_DISH,
     ADD_TO_CART,
     DELETE_FROM_CART,
-  FILTER_LANDING,
+    FILTER_LANDING,
     ADD_FROM_STORE,
     DELETE_CART,
 }

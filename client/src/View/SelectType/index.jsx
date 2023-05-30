@@ -49,6 +49,7 @@ useEffect(() => {
     console.log(UserNew);
     if (isClient) {
       dispatch(PostUser(UserNew));
+      
     } else if (isRestaurant) {
       window.localStorage.setItem("UserLogVerificate", JSON.stringify(UserNew));
       window.localStorage.removeItem("redirectPath")
@@ -61,23 +62,17 @@ useEffect(() => {
 
 
 
+
 useEffect(() => {
-  console.log("useEffect",isClient)
-  function Local (){
-    if(isClient){
-    const redirectPath = localStorage.getItem('redirectPath');
-    console.log(redirectPath)
-
-    window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
-    navigate(redirectPath)
-    
-    }
-    
-  }
-    Local()
-
-}, [isClient, navigate, postuser]);
-
+if(postuser){
+  const redirectPath = localStorage.getItem('redirectPath');
+      console.log("Obj USER", postuser)
+      window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
+      console.log(redirectPath)
+      window.localStorage.setItem("IsLogin", true);
+      navigate(redirectPath)
+}
+},[postuser.length])
 
 
 

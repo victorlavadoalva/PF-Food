@@ -57,7 +57,6 @@ export default function RutasUsers() {
           window.localStorage.removeItem("redirectPath");
           dispatch(LoadingApp(false));
         } else if (userFoundByEmail[0] === false) {
-          window.localStorage.removeItem("redirectPath");
           navigate(redirection);
           dispatch(LoadingApp(false));
         }
