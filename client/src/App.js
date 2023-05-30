@@ -27,6 +27,7 @@ import AdminUser from "./View/AdminUsers";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import FormUser from "./Pages/FormUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +57,10 @@ function App() {
                 <Route path="mapa" element={<Map />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
-                  <Route path="/user-type" element={<UserType />} />
+                  <Route path="/user-type" element={<UserType />}>
+                    <Route exact path="form" element={<Form />} />
+                    <Route exact path="formUser" element={<FormUser />} />
+                  </Route>
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
