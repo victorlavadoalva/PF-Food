@@ -34,7 +34,8 @@ export const CardDish = ({
   id,
   description,
   addToCart,
-  removeFromMenu
+  removeFromMenu,
+  isActive,
 }) => {
 
   const [expanded, setExpanded] = useState(false);
@@ -65,7 +66,7 @@ export const CardDish = ({
   const isRestorant = pathname === "/restorant";
 
   return (
-    <Card sx={{ width: 450}} key={id}>
+    <Card className={`${isActive ? "" : styles.false}`} sx={{ width: 450}} key={id}>
       <div className={styles.headerContainer}>
         <CardMedia
           component="img"
