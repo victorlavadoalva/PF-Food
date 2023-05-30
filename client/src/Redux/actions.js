@@ -75,9 +75,9 @@ export const getDish = (id) => {
       return dispatch({ type: GET_DISH, payload: menu });
     } catch (error) {
       return dispatch({ type: ERROR, payload: error });
+    }
   };
 };
-}
 export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
@@ -113,7 +113,7 @@ export const GetTokenLogin = (typeUser, email) => {
       if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email);
         const { data } = await axios.get(URL_USERS + `/login/${email}`);
-        localStorage.setItem("access_token",data.token);
+        localStorage.setItem("access_token", data.token);
 
         return dispatch({ type: GET_TOKEN, payload: data });
       } else if (typeUser === "Restaurante") {
@@ -130,7 +130,6 @@ export const GetTokenLogin = (typeUser, email) => {
     }
   };
 };
-
 
 export const PostUser = (User) => {
   return async function (dispatch) {
@@ -229,7 +228,6 @@ export const updateAccount = (userId, userData) => {
   };
 };
 
-
 export const addToCart = (cart) => {
   return async function (dispatch) {
     return dispatch({
@@ -244,22 +242,22 @@ export const addFromStore = (item) => {
     return dispatch({
       type: ADD_FROM_STORE,
       payload: item,
-    })
-  }
-}
+    });
+  };
+};
 
 export const deleteFromCart = (productId) => {
   return async function (dispatch) {
     return dispatch({
       type: DELETE_FROM_CART,
-      payload: productId
-    })
-  }
-}
+      payload: productId,
+    });
+  };
+};
 export const deleteCart = () => {
   return async function (dispatch) {
     return dispatch({
-      type: DELETE_CART
-    })
-  }
-}
+      type: DELETE_CART,
+    });
+  };
+};
