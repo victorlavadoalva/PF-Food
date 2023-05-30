@@ -40,9 +40,9 @@ export default function Login_Register() {
     dispatch(LoadingApp(true))
     logout();
   };
-  const handleAcount = () => {
-    navigate("/home/perfil")//Cambiar ruta
-  };
+  const handleCuentaCliente = () =>{
+    navigate('/home/cuentaCliente')
+}
   const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
   const userLocal = JSON.parse(getlocalstorage)
 
@@ -149,7 +149,7 @@ console.log(user)
           <Avatar /> {user.name || userLocal.name}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleAcount}>
+        <MenuItem onClick={handleCuentaCliente}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
