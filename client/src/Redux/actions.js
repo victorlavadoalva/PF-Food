@@ -49,7 +49,7 @@ export const getRestorants = ({
     } catch (error) {
       return dispatch({
         type: ERROR,
-        payload: [{ error }, { errorGetRestorant: "ErrorGetRestorant" }],
+        payload: [{ error }, "ErrorGetRestorant" ]
       });
     }
   };
@@ -83,9 +83,8 @@ export const GetUserEmail = ({ saveEmail }) => {
     try {
       console.log(saveEmail);
       const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`);
-      const response_restaurant = await axios.get(
-        URL_RESTAURANT + `?email=${saveEmail}`
-      );
+      console.log(response_user);
+      const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}`);
       const dataUser = response_user.data;
       const dataRestaurant = response_restaurant.data;
       if (dataUser) {
@@ -101,7 +100,7 @@ export const GetUserEmail = ({ saveEmail }) => {
     } catch (error) {
       return dispatch({
         type: ERROR,
-        payload: [{ error }, { errorPost: "ErrorPostUser" }],
+        payload: [{ error },  "ErrorPostUser" ]
       });
     }
   };
@@ -114,18 +113,19 @@ export const GetTokenLogin = (typeUser, email) => {
         console.log("!!!!!!!ActionsToken", email);
         const { data } = await axios.get(URL_USERS + `/login/${email}`);
         localStorage.setItem("access_token", data.token);
-
-        return dispatch({ type: GET_TOKEN, payload: data });
-      } else if (typeUser === "Restaurante") {
+        console.log(data);
+        return dispatch({ type: GET_TOKEN, payload: [true ,data] });
+      } else if (typeUser === "Restaurant") {
+        console.log("!!!!!!!!ActionsToken ,Restaurant", email)
         const { data } = await axios.get(URL_RESTAURANT + `/login/${email}`);
         localStorage.setItem("access_token", data.token);
 
-        return dispatch({ type: GET_TOKEN, payload: data });
+        return dispatch({ type: GET_TOKEN, payload: [true ,data]  });
       }
     } catch (error) {
       return dispatch({
         type: ERROR,
-        payload: [{ error }, { errorToken: "ErrorToken" }],
+        payload: [{ error },  "ErrorToken" ],
       });
     }
   };
@@ -136,11 +136,11 @@ export const PostUser = (User) => {
     try {
       console.log(User);
       const { data } = await axios.post(URL_USERS, User);
-      return dispatch({ type: POST_USER, payload: data });
+      return dispatch({ type: POST_USER, payload: [true, data] });
     } catch (error) {
       return dispatch({
         type: ERROR,
-        payload: [{ error }, { errorPost: "ErrorPostUser" }],
+        payload: [{ error },  "ErrorPostUser" ],
       });
     }
   };
@@ -151,11 +151,11 @@ export const PostRestaurant = (Restaurant) => {
     try {
       console.log(Restaurant);
       const { data } = await axios.post(URL_RESTAURANT, Restaurant);
-      return dispatch({ type: POST_USER, payload: data });
+      return dispatch({ type: POST_USER, payload: [true, data ]});
     } catch (error) {
       return dispatch({
         type: ERROR,
-        payload: [{ error }, { errorPost: "ErrorPostUser" }],
+        payload: [{ error },   "ErrorPostUser" ],
       });
     }
   };
@@ -222,7 +222,7 @@ export const updateAccount = (userId, userData) => {
     } catch (error) {
       dispatch({
         type: ERROR,
-        payload: [{ error }, { errorUpdateAccount: "ErrorUpdateAccount" }],
+        payload: [{ error },  "ErrorUpdateAccount" ],
       });
     }
   };

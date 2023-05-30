@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from "@mui/material";
-
+import { useDispatch ,useSelector} from "react-redux";
+import { PostRestaurant } from "../../Redux/actions";
 
 export default function Form() {
+  
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {postuser} = useSelector((state) => state)
   const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
@@ -55,12 +60,22 @@ export default function Form() {
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
+      // axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
+      //   .then((response) => {
+      //     console.log('Datos enviados:', formData);
+      //     console.log('Respuesta del servidor:', response.data);
+      
+        dispatch(PostRestaurant(formData))
+      
+    } else {
+      alert('Información incompleta!');
+    }
+  };
 
-      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
-        .then((response) => {
-          console.log('Datos enviados:', formData);
-          console.log('Respuesta del servidor:', response.data);
-          alert('Restaurante creado');
+  useEffect(() => {
+
+    if(postuser[0] === true){
+      alert('Restaurante creado');
           setErrors({});
           setRestorants({
             name: "",
@@ -69,24 +84,16 @@ export default function Form() {
             country: "",
             address: "",
             phoneNumber: "",
-            image: null,
+            images: null,
             type_customer: "Restaurant",
             tags: [],
-            capacity: "",
             email: ''
           });
-          localStorage.setItem("UserLogVerificate", JSON.stringify(response.data));
-          window.localStorage.setItem("IsLogin", true);
-        })
-        .catch((error) => {
-          console.log(error)
-          alert('Error al crear el restaurante');
-        });
-    } else {
-      alert('Información incompleta!');
+          navigate("/restorant")
     }
-    console.log(restorants)
-  };
+    
+         
+  },[navigate, postuser])
 
   const [tagValue, setTagValue] = useState("");
   function handleTags(event) {
@@ -108,7 +115,6 @@ export default function Form() {
         [name]: value
       })
     };
-    console.log(restorants)
 
 
     switch (name) {

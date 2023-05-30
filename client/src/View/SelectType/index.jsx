@@ -28,14 +28,14 @@ console.log(postuser)
 
 const handleTypeClient = (event) => {
   event.preventDefault()
-  const updatedUser = { ...UserNew, type_customer: "Cliente" };
+  const updatedUser = { ...UserNew, type_customer: "User" };
   setUserNew(updatedUser);
   setSaveData(true)
   setIsClient(true)
 }
 const handleTypeRestaurant= (event) => {
   event.preventDefault()
-  const updatedUser = { ...UserNew, type_customer: "Restaurante" };
+  const updatedUser = { ...UserNew, type_customer: "Restaurant" };
   setUserNew(updatedUser);
   setSaveData(true)
   setIsRestaurant(true)
@@ -47,6 +47,7 @@ useEffect(() => {
   if (savedData) {
     
     console.log(UserNew);
+    console.log("Usuario cliente", isClient)
     if (isClient) {
       dispatch(PostUser(UserNew));
       
@@ -58,21 +59,23 @@ useEffect(() => {
       
     }
   }      
-}, [navigate, dispatch, savedData, UserNew, isClient, isRestaurant]);
+}, [navigate, dispatch, savedData, isClient, isRestaurant]);
 
 
 
 
 useEffect(() => {
-if(postuser){
+  console.log("!!!!!!!!USeEffect navigate client")
+  console.log("PostUser length",postuser)
+if(postuser[0] === true ){
   const redirectPath = localStorage.getItem('redirectPath');
       console.log("Obj USER", postuser)
-      window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
+      window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser[1]));
       console.log(redirectPath)
       window.localStorage.setItem("IsLogin", true);
       navigate(redirectPath)
 }
-},[postuser.length])
+},[navigate,postuser])
 
 
 

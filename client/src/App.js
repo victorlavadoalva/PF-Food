@@ -56,7 +56,10 @@ function App() {
                 <Route path="mapa" element={<Map />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
-                  <Route path="/user-type" element={<UserType />} />
+                  <Route path="/user-type" element={<UserType />} >
+                        <Route path="form_Restaurant" element={<Form/>} />
+                        <Route path="form_User"  />
+                  </Route>
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
@@ -87,7 +90,7 @@ function App() {
                 {/* Usuario tipo Restaurante */}
                 <Route element={<RutaRestaurant />}>
                   {/* Cambiar nombre de la ruta form por ¿"create_restaurant"? */}
-                  <Route exact path="/form" element={<Form />} />
+                  
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
