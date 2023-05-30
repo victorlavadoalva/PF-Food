@@ -8,7 +8,7 @@ import { getRestorants } from "../../Redux/actions";
 import { LOCATION, ORDER, RATING, TAGS } from '../../dataHardcodeo/constants'; // Cuando tengamos la info del backend esto hay que sacarlo
 import styles from "./styles.module.css";
 import React from 'react';
-import { Typography, List, ListItem, Button } from '@material-ui/core';
+import { Typography, List, ListItem, Button } from '@mui/material';
 
 
 export default function Home() {
