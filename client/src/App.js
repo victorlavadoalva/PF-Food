@@ -16,6 +16,7 @@ import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
 import ReservasCliente from "./Pages/FormReservas";
+import FormUser from "./Pages/FormUser";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 import { Map } from "./Pages/Map/Map.jsx";
@@ -56,9 +57,9 @@ function App() {
                 <Route path="mapa" element={<Map />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
-                  <Route path="/user-type" element={<UserType />} >
-                        <Route path="form_Restaurant" element={<Form/>} />
-                        <Route path="form_User"  />
+                  <Route path="/user-type" element={<UserType />}>
+                    <Route exact path="form-restaurant" element={<Form />} />
+                    <Route exact path="form-user" element={<FormUser />} />
                   </Route>
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
