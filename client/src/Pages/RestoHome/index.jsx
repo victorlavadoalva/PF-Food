@@ -1,26 +1,34 @@
+//! TODO descomentar cuando este conectado al back
+//import { useSelector } from 'react-redux';
 import { CardDish } from '../../Components/CardDish';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import styles from "./styles.module.css";
 import { FOOD } from '../../dataHardcodeo/constants'
 import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
-
 export default function Home() {
 
-  // const { plates } = useSelector(state => state);
-  const plates = FOOD;
+  let plates = FOOD;
+  //! TODO descomentar cuando este conectado al back
+  // const { dishes } = useSelector(state => state);
+  const [isActive, setIsActive] = useState();
   const location = useLocation();
-  const menus = useSelector(state => state.plates);
   const pathname = location.pathname;
-  let isRestorant = false
-  
-  pathname === "/restorant" ? isRestorant = true : isRestorant = false
-  
+
+  let isRestorant = false;
+  pathname === "/restorant" ? isRestorant = true : isRestorant = false;
+
+  useEffect(() => {
+  }, [isActive])
+
   const removeFromMenu = (id) => {
-    const menu = menus.find(menu => menu.id === id);
-    menu.isActive= false;
-  }
+    const dish = plates.find(dish => dish._id === id);
+    //! TODO descomentar una vez conectado al back
+    //const dish = dishes.find(dish => dish._id === id);
+    dish.isActive ? dish.isActive = false : dish.isActive = true;
+    setIsActive(isActive ? false : true);
+  };
 
   return (
     <>
@@ -29,10 +37,11 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.cards}>
             {
-              // plates?.documents?.length ?
-              //   plates?.documents?.map(plate => {
               plates.length ?
                 plates.map(plate => {
+              //! TODO descomentar cuando este conectado al back
+              // dishes?.documents?.length ?
+              //   dishes?.documents?.map(plate => {
                   return (
                     <CardDish
                       key={plate.id}
@@ -40,13 +49,13 @@ export default function Home() {
                       title={plate.name}
                       tags={plate.tags}
                       cost={plate.cost || 0}
-                      id={plate.id}
+                      id={plate._id}
                       isActive={plate.isActive}
                       removeFromMenu={removeFromMenu}
                     />
                   )
                 })
-                : <p>Loading...</p>
+                : <p>No hay platos que mostrar...</p>
             }
           </div>
         </div>

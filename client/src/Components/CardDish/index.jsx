@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
@@ -34,7 +36,8 @@ export const CardDish = ({
   id,
   description,
   addToCart,
-  removeFromMenu
+  removeFromMenu,
+  isActive,
 }) => {
 
   const [expanded, setExpanded] = useState(false);
@@ -43,11 +46,11 @@ export const CardDish = ({
 
   //const [anchorEl, setAnchorEl] = useState(null);
   //const open = Boolean(anchorEl);
-  
+
   // const handleClick = (event) => {
   //   setAnchorEl(event.currentTarget);
   // };
-  
+
   // const handleClose = () => {
   //   //TODO hay que hacer el put y delete
   //   setAnchorEl(null);
@@ -65,7 +68,7 @@ export const CardDish = ({
   const isRestorant = pathname === "/restorant";
 
   return (
-    <Card sx={{ width: 450}} key={id}>
+    <Card className={`${isActive ? "" : styles.false}`} sx={{ width: 450 }} key={id}>
       <div className={styles.headerContainer}>
         <CardMedia
           component="img"
@@ -116,11 +119,16 @@ export const CardDish = ({
           </ExpandMore>
         </CardActions>
       )}
-      {isRestorant && (
+      {isRestorant && (isActive ? (
         <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
-          <DeleteIcon />
+          <RemoveIcon />
         </IconButton>
-      )}
+      ) : (
+        <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
+          <AddIcon />
+        </IconButton>
+      ))
+      }
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{description}</Typography>
