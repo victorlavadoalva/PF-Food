@@ -42,6 +42,7 @@ export const getRestorants = ({
       const { data } = await axios(URL_RESTAURANT, {
         params: { page, order, rating, name, country, tags },
       });
+      console.log('Server Response:', data);
       return (
         dispatch({ type: GET_ALL_RESTORANTS, payload: data[0] }),
         dispatch({ type: GET_AMOUNTPAGES, payload: data[0].totalPages })
