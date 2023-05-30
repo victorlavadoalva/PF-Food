@@ -84,7 +84,7 @@ export default function Form() {
             country: "",
             address: "",
             phoneNumber: "",
-            images: null,
+            image: null,
             type_customer: "Restaurant",
             tags: [],
             email: ''

@@ -24,6 +24,7 @@ export default function RutasUsers() {
   const [saveEmail, setSaveEmail] = useState("");
   const [saveName, setSaveName] = useState("")
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [TokenSave, setTokenSave] = useState(false)
   console.log("Verificado", isAuthenticated);
   console.log("isLoading", isLoading);
 
@@ -55,10 +56,7 @@ export default function RutasUsers() {
 console.log(saveEmail)
   useEffect(() => {
     if (saveEmail) {
-      
       dispatch(GetUserEmail({ saveEmail }));
-    }else if(saveName){
-
     }
   }, [dispatch, saveEmail, saveName]);
 
@@ -98,14 +96,18 @@ console.log(saveEmail)
     if (tokenLogin[0] === true) {
       const objUser = JSON.stringify(tokenLogin[1]);
       window.localStorage.setItem("UserLogVerificate", objUser);
-      window.localStorage.setItem("IsLogin", true);    }
-  }, [tokenLogin])
-
-  useEffect(() => {
-    if (userRol === "Restaurant") {
-      setShouldRedirect(true);
+      window.localStorage.setItem("IsLogin", true);  
+        if(tokenLogin[1].type_customer === "Restaurant") {
+          setShouldRedirect(true);
+        } 
     }
-  }, [dataUser]);
+  }, [tokenLogin])
+console.log("DATA SUBIDA", restaurant)
+  // useEffect(() => {
+  //   if (userRol === "Restaurant") {
+  //     setShouldRedirect(true);
+  //   }
+  // }, []);
 
   if (shouldRedirect) {
     navigate(restaurantRoute);

@@ -15,7 +15,6 @@ export default function RutaRestaurant() {
     if (dataUser) {
       const restaurant = JSON.parse(dataUser);
       type_customer = restaurant.type_customer;
-console.log(type_customer)
       if (type_customer !== "Restaurant" || !type_customer) {
         setShouldRedirect(true);
       }
@@ -25,12 +24,6 @@ console.log(type_customer)
     
   }, []);
 
-  // useEffect(() => {
-  //   console.log("ErrorActions",error)
-  //     if(error.length){
-  //       // alert(error[1])
-  //     }
-  // },[error.length])
 
   if (shouldRedirect) {
     navigate(redirection);
