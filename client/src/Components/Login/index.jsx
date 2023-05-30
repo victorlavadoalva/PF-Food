@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -13,15 +13,16 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import * as React from "react";
-
+import { useDispatch } from "react-redux";
+import { LoadingApp } from "../../Redux/actions";
 
 export default function Login_Register() {
   const navigate = useNavigate();
-  const [PerfilActive, setPerfilActive] = useState(false);
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const { isAuthenticated, user, loginWithRedirect, logout ,isLoading} = useAuth0();
-
+  const { isAuthenticated,user, loginWithRedirect, logout ,isLoading} = useAuth0();
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -31,26 +32,36 @@ export default function Login_Register() {
 
 
   const handleLogOut = () => {
-    window.localStorage.setItem("redirectPath", window.location.pathname);
+    window.localStorage.removeItem("redirectPath");
     window.localStorage.removeItem("UserToken");
     window.localStorage.removeItem("UserLogVerificate");
+    window.localStorage.removeItem("access_token");
+    window.localStorage.setItem("IsLogin", false);
+    dispatch(LoadingApp(true))
     logout();
   };
   const handleAcount = () => {
     navigate("/home/perfil")//Cambiar ruta
   };
-
-
+  const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
+  const userLocal = JSON.parse(getlocalstorage)
 
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
-
+    // dispatch(LoadingApp(true))
     loginWithRedirect();
   };
 
+  // useEffect(() => {
+  //   if(user){
+  //     dispatch(LoadingApp(false))
+  //   }
+  // },[user])
+
+console.log(user)
   return (
     <>
-      {isAuthenticated ? (
+      {user ? (
         <>
         {/*No borrar*/}
           {/* <div className={styles.perfil}>
@@ -87,7 +98,7 @@ export default function Login_Register() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 52, height: 52 }}>M</Avatar>
+            <Avatar sx={{ width: 52, height: 52 }}>{user.name[0] || userLocal.name[0]  }</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -135,7 +146,7 @@ export default function Login_Register() {
             pointerEvents: "none",
           }}
         >
-          <Avatar /> Franco Krismann
+          <Avatar /> {user.name || userLocal.name}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleAcount}>

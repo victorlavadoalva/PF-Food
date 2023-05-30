@@ -27,8 +27,6 @@ const URL_RESTAURANT =
   "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
-
-
 const backendUrl = "http://localhost:3001/users";
 
 export const getRestorants = ({
@@ -115,9 +113,13 @@ export const GetTokenLogin = (typeUser, email) => {
       if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email);
         const { data } = await axios.get(URL_USERS + `/login/${email}`);
+        localStorage.setItem("access_token",data.token);
+
         return dispatch({ type: GET_TOKEN, payload: data });
       } else if (typeUser === "Restaurante") {
         const { data } = await axios.get(URL_RESTAURANT + `/login/${email}`);
+        localStorage.setItem("access_token", data.token);
+
         return dispatch({ type: GET_TOKEN, payload: data });
       }
     } catch (error) {
@@ -197,11 +199,10 @@ export const updateAccount = (userId, userData) => {
   return async function (dispatch) {
     try {
       dispatch({ type: LOADING });
-
       const token = localStorage.getItem("access_token");
       //TODO hay que conectarlo y probarlo cuando el deploy este realizado
       const resp = await axios.put(
-        `${backendUrl}/${userId}`,
+        `${URL_USERS}/${userId}`,
         {
           name: userData.name,
           email: userData.email,

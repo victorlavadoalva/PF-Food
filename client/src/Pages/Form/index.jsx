@@ -75,7 +75,8 @@ export default function Form() {
             capacity: "",
             email: ''
           });
-          localStorage.setItem('RestData', JSON.stringify(response.data));
+          localStorage.setItem("UserLogVerificate", JSON.stringify(response.data));
+          window.localStorage.setItem("IsLogin", true);
         })
         .catch((error) => {
           console.log(error)
