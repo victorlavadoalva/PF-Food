@@ -199,9 +199,8 @@ export const updateAccount = (userId, userData) => {
     try {
       dispatch({ type: LOADING });
       const token = localStorage.getItem("access_token");
-      //TODO hay que conectarlo y probarlo cuando el deploy este realizado
       const resp = await axios.put(
-        `${URL_USERS}/${userId}`,
+        `${backendUrl}/${userId}`,
         {
           name: userData.name,
           email: userData.email,
