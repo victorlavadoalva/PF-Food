@@ -37,5 +37,5 @@ module.exports = {
     ADD_FROM_STORE,
     DELETE_CART,
     UPDATE_SUCCESS,
-    UPDATE_USER
+    UPDATE_USER,
 }

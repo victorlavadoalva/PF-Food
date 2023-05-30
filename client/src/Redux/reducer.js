@@ -36,7 +36,7 @@ const initialState = {
   cart: [],
   filter_landing: [],
   user: {},
-  updateSuccessful: false,
+  updateSuccess: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {

@@ -43,7 +43,7 @@ export default function CuentaCliente({ userId, userData }) {
     setName(storedName || "");
     setEmail(storedEmail || "");
     setPhone(storedPhone || "");
-    setAddress(storedAddress || "")
+    setAddress(storedAddress || "");
   }, [storedName, storedEmail, storedPhone, storedAddress]);
 
   const handleChangeName = (e) => {
