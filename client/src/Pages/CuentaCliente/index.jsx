@@ -47,7 +47,9 @@ export default function CuentaCliente({ userId, userData }) {
   useEffect(() => {
     setName(storedName || "");
     setEmail(storedEmail || "");
-  }, [storedName, storedEmail]);
+    setPhone(storedPhone || "");
+    setAddress(storedAddress || "");
+  }, [storedName, storedEmail, storedPhone, storedAddress]);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
