@@ -42,9 +42,12 @@ export default function CuentaCliente({ userId, userData }) {
   useEffect(() => {
     setName(storedName || "");
     setEmail(storedEmail || "");
-    setPhone(storedPhone || "");
-    setAddress(storedAddress || "");
-  }, [storedName, storedEmail, storedPhone, storedAddress]);
+    //! TODO descomentar cuando haya info del back
+    // setPhone(storedPhone || "");
+    // setAddress(storedAddress || "");
+  }, [storedName, storedEmail, 
+    // storedPhone, storedAddress
+  ]);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -73,9 +76,11 @@ export default function CuentaCliente({ userId, userData }) {
 
     const hasChanges =
       name !== storedName ||
-      email !== storedEmail ||
-      phone !== storedPhone ||
-      address !== storedAddress;
+      email !== storedEmail
+      //! TODO descomentar cuando haya info del back 
+      // ||
+      // phone !== storedPhone ||
+      // address !== storedAddress;
 
     if (hasChanges) {
       dispatch(updateAccount(id, userData));
