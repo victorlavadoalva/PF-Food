@@ -4,9 +4,26 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useLocation } from "react-router-dom";
 import styles from "./styles.module.css";
+import { useNavigate } from "react-router";
 
 export default function Footer() {
+  const handleFacebookClick = () => {
+    window.open("https://es-la.facebook.com/", "_blank");
+  };
+  const handleInstagramClick = () => {
+    window.open("https://www.instagram.com/?hl=es", "_blank");
+  };
+  const handleTwitterClick = () => {
+    window.open("https://twitter.com/i/flow/login", "_blank");
+  };
+  const handleLinkedInClick = () => {
+    window.open("https://www.linkedin.com/home", "_blank");
+  };
+
   const location = useLocation();
+  const navigate = useNavigate();
+
+
   return (
     <footer
       className={
@@ -19,10 +36,10 @@ export default function Footer() {
             <h4>FoodBook</h4>
             <ul>
               <li>
-                <a href="#">Acerca de nosotros</a>
+                <a href="#" onClick={() => navigate(`home/aboutUs`)}>Acerca de nosotros</a>
               </li>
               <li>
-                <a href="#">Nuestros Desarrolladores</a>
+                <a href="#" onClick={() => navigate(`home/developers`)}>Nuestros Desarrolladores</a>
               </li>
             </ul>
           </div>
@@ -54,16 +71,16 @@ export default function Footer() {
           <div className={styles.footer_col}>
             <h4>follow us</h4>
             <div className={styles.social_links}>
-              <a href="#">
+              <a href="#" onClick={handleFacebookClick}>
                 <FacebookIcon />
               </a>
-              <a href="#">
+              <a href="#" onClick={handleTwitterClick}>
                 <TwitterIcon />
               </a>
-              <a href="#">
+              <a href="#" onClick={handleInstagramClick}>
                 <InstagramIcon />
               </a>
-              <a href="#">
+              <a href="#" onClick={handleLinkedInClick}>
                 <LinkedInIcon />
               </a>
             </div>
