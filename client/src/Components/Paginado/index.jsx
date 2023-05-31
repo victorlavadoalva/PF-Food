@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-
 import Pagination from '@mui/material/Pagination';
-
 import { getRestorants } from "../../Redux/actions";
 
 export default function PaginationRounded({ filters}) {
@@ -15,7 +13,8 @@ const handleChange = (e,page) => {
     page, 
     country: filters.location, 
     order: filters.order, 
-    rating: filters.rating
+    rating: filters.rating,
+    tags: filters.tags
   }))
 }
 
