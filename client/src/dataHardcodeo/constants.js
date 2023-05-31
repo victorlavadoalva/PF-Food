@@ -14,11 +14,13 @@ export const RESTOS = [
       "El restaurante insignia de los chefs Virgilio Martínez y Pía León es un santuario de todo lo peruano. Combinando una hospitalidad impecable, un vasto conocimiento de los productos latinoamericanos y una creatividad sin igual en la cocina, esta oda gastronómica a Perú es el merecido ganador de Mejor Restaurante de Latinoamérica 2022, patrocinado por S.Pellegrino & Acqua Panna, título que ya había obtenido anteriormente desde 2014 hasta 2016.",
     especial:
       "La última versión del menú de Central incluye ingredientes que rara vez se encuentran en otro lugar del mundo. Después de viajar extensamente por todo el país, Martínez y León presentan solo lo mejor de los tesoros culinarios de Perú. El menú de degustación, llamado Mundo Mater, incluye clásicos como Tierra de Maíz y Tallos Extremos, y también introduce nuevos platos, como Rocas Negras (con algas, almejas y calamares), Conexión Amazónica (con cecina, arapaima y yuca) y Océano Azul-Verde (una combinación de vieiras y pepino).",
-    image: [
-      require("./img/ejemplo1.jpg").default,
-      require("./img/ejemplo2.jpg").default,
-      require("./img/ejemplo3.jpg").default,
-    ],
+    // image: [
+    //   require("./img/ejemplo1.jpg").default,
+    //   require("./img/ejemplo2.jpg").default,
+    //   require("./img/ejemplo3.jpg").default,
+    // ],
+    //Usar esta data en casos de prueba
+    image:require("./img/ejemplo1.jpg").default
   },
   {
     id: 6,
@@ -276,7 +278,7 @@ export const IMAGE_NOT_FOUND =
 
 export const FOOD = [
   {
-    id: 1,
+    _id: 1,
     name: "Milanesa",
     description:
       "La milanesa es un filete, normalmente de carne vacuna, que se cocina frito o al horno. Por extensión, se llama milanesa a cualquier rebanada de un ingrediente rebozado y cocido de manera similar, por lo que existen milanesas de cerdo, de pollo, de pescado, de soja, de berenjena o de mozzarella, entre otros ingredientes",
@@ -286,9 +288,10 @@ export const FOOD = [
     original: true,
     cost: 127,
     rating: [2, 3],
+    isActive: true,
   },
   {
-    id: 2,
+    _id: 2,
     name: "Pure",
     description: "Que rico",
     image: [require("./img/milanesa.jpeg").default],
@@ -296,22 +299,25 @@ export const FOOD = [
     ingredients: "Ingredientes secretos",
     original: true,
     cost: 100,
+    isActive: true,
     rating: [2, 3],
   },
   {
-    id: 3,
+    _id: 3,
     name: "fideos",
     description: "fideos con manteca",
     image: [require("./img/milanesa.jpeg").default],
     tags: ["Vegetariana", "Apto celiacos"],
     ingredients: "Ingredientes secretos",
     original: true,
+    isActive: true,
     cost: 127,
     rating: [2, 3],
   },
   {
-    id: 4,
+    _id: 4,
     name: "Milanesa",
+    isActive: true,
     description:
       "La milanesa es un filete, normalmente de carne vacuna, que se cocina frito o al horno. Por extensión, se llama milanesa a cualquier rebanada de un ingrediente rebozado y cocido de manera similar, por lo que existen milanesas de cerdo, de pollo, de pescado, de soja, de berenjena o de mozzarella, entre otros ingredientes",
     image: [require("./img/milanesa.jpeg").default],
@@ -322,8 +328,9 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 5,
+    _id: 5,
     name: "Pure",
+    isActive: true,
     description: "Que rico",
     image: [require("./img/milanesa.jpeg").default],
     tags: ["Vegetariana", "Apto celiacos"],
@@ -333,7 +340,8 @@ export const FOOD = [
     rating: [2, 3],
   },
   {
-    id: 6,
+    _id: 6,
+    isActive: true,
     name: "fideos",
     description: "fideos con manteca",
     image: [require("./img/milanesa.jpeg").default],

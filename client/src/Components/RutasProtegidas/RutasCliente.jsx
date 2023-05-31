@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function RutasCliente() {
+  
   const navigate = useNavigate();
   const redirection = "/home";
   const dataUser = window.localStorage.getItem("UserLogVerificate");
@@ -21,6 +22,5 @@ export default function RutasCliente() {
     navigate(redirection);
     return null; // Evitar que se muestre la ruta antes de redirigir
   }
-
   return <Outlet />;
 }

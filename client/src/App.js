@@ -15,11 +15,13 @@ import CuentaCliente from "./Pages/CuentaCliente";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
+import ReservasCliente from "./Pages/FormReservas";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
-import Map from './Pages/Map/Map';
+import { Map } from "./Pages/Map/Map.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
+import Store from './Pages/Store';
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
 import AdminView from "./View/AdminUsers/index";
@@ -27,6 +29,7 @@ import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import FormUser from "./Pages/FormUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,11 +42,12 @@ function App() {
     } else {
       dispatch(LoadingApp(false));
     }
-  }, [isLoading]);
+  }, [dispatch, isLoading]);
   return (
     <>
       <div className={styles.app}>
         {isLoading || loadingApp ? (
+          // eslint-disable-next-line react/jsx-pascal-case
           <Loading_Login />
         ) : (
           <>
@@ -55,26 +59,36 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="adminView" element={<AdminView />} />
               <Route path="mapa" element={<Map />}/>
+
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
-                  <Route path="/user-type" element={<UserType />} />
+                  <Route path="/user-type" element={<UserType />}>
+                    <Route exact path="form" element={<Form />} />
+                    <Route exact path="formUser" element={<FormUser />} />
+                  </Route>
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
                       {/* Usuaio tipo Cliente */}
+                      <Route >
+                        <Route path="cart" element={<Store />}/>
+                      </Route>
                       <Route element={<RutasCliente />}>
-                        <Route path="perfil" />
+                        <Route
+                          path="cuentaCliente"
+                          element={<CuentaCliente />}
+                        />
                       </Route>
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
                           path="menuCliente/:id"
                           element={<MenuCliente />}
                         />
+                        <Route path="reservas/:id" element={<ReservasCliente />}/>
                       </Route>
                     </Route>
                   </Route>
                 </Route>
-                <Route path="cuentaCliente" element={<CuentaCliente />}/>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
@@ -102,7 +116,7 @@ function App() {
                 {/* Cierra ruta potegida con o sin login */}
               </Routes>
             </main>
-            {<Footer />}
+            {location.pathname !== "/user-type" && <Footer />}
           </>
         )}
       </div>

@@ -6,16 +6,23 @@
     margin-left: 0px;
 }
 
+.false {
+    opacity: 50%;
+}
+
 .cardContainer {
-  display: grid;
-  grid-template-columns: 1fr auto; /* Primera columna para la imagen (1fr) y segunda columna para el resto de la card (auto) */
-  grid-template-areas: "image content"; /* Define las áreas de la grid */
-  grid-gap: 20px; /* Espacio entre las tarjetas */
+    display: grid;
+    grid-template-columns: 1fr auto;
+    /* Primera columna para la imagen (1fr) y segunda columna para el resto de la card (auto) */
+    grid-template-areas: "image content";
+    /* Define las áreas de la grid */
+    grid-gap: 20px;
+    /* Espacio entre las tarjetas */
 }
 
 .header {
     flex: 1 1 0%;
-    overflow: hidden;  
+    overflow: hidden;
 }
 
 .headerContainer {

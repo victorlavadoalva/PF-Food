@@ -1,11 +1,11 @@
 .footerLanding {
-  position: absolute;
+  
   top: 87vh;
   background-color: #3a506b;
   /* height: 127px; */
   display: block;
   width: 100%;
-  border-top-left-radius: 5vh;
+  
 }
 
 .footerHome {

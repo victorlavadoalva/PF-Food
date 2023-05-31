@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Link } from 'react-router-dom';
@@ -6,40 +6,40 @@ import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from 
 
 
 export default function Form() {
-  const [imageFile,setImageFile] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
     description: "",
     city: "",
-    address:"",
-    country:"",
-    phoneNumber:"",
+    address: "",
+    country: "",
+    phoneNumber: "",
     image: null,
     type_customer: "Restaurant",
     tags: [],
     capacity: "",
     email: ""
   });
-  
+
 
   const [errors, setErrors] = useState({
     name: 'Campo Requerido',
     description: '',
     city: "",
-    country:"",
-    address:"",
-    phoneNumber:"",
+    country: "",
+    address: "",
+    phoneNumber: "",
     capacity: '',
     image: '',
-    email:""
+    email: ""
 
   });
 
   function handleImage(event) {
     const file = event[0];
     setImageFile(file)
-    }
-  
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     if (restorants.name && restorants.city && restorants.country && restorants.address && restorants.description && restorants.capacity) {
@@ -66,16 +66,17 @@ export default function Form() {
             name: "",
             description: "",
             city: "",
-            country:"",
-            address:"",
-            phoneNumber:"",
+            country: "",
+            address: "",
+            phoneNumber: "",
             image: null,
             type_customer: "Restaurant",
             tags: [],
             capacity: "",
             email: ''
           });
-          localStorage.setItem('RestData', JSON.stringify(response.data));
+          localStorage.setItem("UserLogVerificate", JSON.stringify(response.data));
+          window.localStorage.setItem("IsLogin", true);
         })
         .catch((error) => {
           console.log(error)
@@ -131,7 +132,7 @@ export default function Form() {
         break;
       case 'phoneNumber':
         validatePhoneNumber(value);
-        break;  
+        break;
       case 'email':
         validateEmail(value);
         break
@@ -148,7 +149,7 @@ export default function Form() {
       setErrors({ ...errors, name: '' });
     }
   };
-  
+
   const validateDescription = (description) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(description) || description.length < 20) {
       setErrors({ ...errors, description: 'Descripción inválida' });
@@ -156,7 +157,7 @@ export default function Form() {
       setErrors({ ...errors, description: '' });
     }
   };
-  
+
   const validateCapacity = (capacity) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(capacity)) {
       setErrors({ ...errors, capacity: 'Se requiere capacidad' });
@@ -172,7 +173,7 @@ export default function Form() {
       setErrors({ ...errors, city: '' });
     }
   };
-  
+
   const validateAddress = (address) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(address)) {
       setErrors({ ...errors, address: 'Dirección inválida' });
@@ -180,7 +181,7 @@ export default function Form() {
       setErrors({ ...errors, address: '' });
     }
   };
-  
+
   const validateCountry = (country) => {
     if (!/^[\p{L}\s.,;()']+$/u.test(country)) {
       setErrors({ ...errors, country: 'País inválido' });
@@ -188,7 +189,7 @@ export default function Form() {
       setErrors({ ...errors, country: '' });
     }
   };
-  
+
   const validatePhoneNumber = (phoneNumber) => {
     if (!/^[\d\-()\s]+$/.test(phoneNumber)) {
       setErrors({ ...errors, phoneNumber: 'Número de teléfono inválido' });
@@ -199,21 +200,21 @@ export default function Form() {
 
   const validateEmail = (email) => {
     const emailRegex = /^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,3}$/;
-  
+
     if (!emailRegex.test(email)) {
       setErrors({ ...errors, email: 'Correo electrónico inválido' });
     } else {
       setErrors({ ...errors, email: '' });
     }
   };
-  
-  const validateImage = (image) => {
-    if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
-      setErrors({ ...errors, image: 'Formato inválido' });
-    } else {
-      setErrors({ ...errors, image: '' });
-    }
-  };
+
+  // const validateImage = (image) => {
+  //   if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
+  //     setErrors({ ...errors, image: 'Formato inválido' });
+  //   } else {
+  //     setErrors({ ...errors, image: '' });
+  //   }
+  // };
 
   function isFormValid() {
     return (
@@ -279,7 +280,7 @@ export default function Form() {
                 label="Direccion"
                 variant="outlined"
                 name="address"
-                value={restorants.address}  
+                value={restorants.address}
                 onChange={handleChange}
                 autoComplete="off"
                 placeholder="Direccion..."
@@ -347,7 +348,7 @@ export default function Form() {
                 <MenuItem value="Parrilla">Parrilla</MenuItem>
                 <MenuItem value="Tematicas">Tematicas</MenuItem>
                 <MenuItem value="Otros">Otros</MenuItem>
-                     
+
               </Select>
               <Button
                 variant="contained"
@@ -357,9 +358,9 @@ export default function Form() {
                 Agregar
               </Button>
               <input
-                 type="file"
-                 name="image"
-                 onChange={(e) => handleImage(e.target.files)}
+                type="file"
+                name="image"
+                onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>
                 <Button

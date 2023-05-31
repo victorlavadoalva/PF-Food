@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router";
 import styles from "./styles.module.css"
-import { PostUser ,LoadingApp} from "../../Redux/actions";
+import { PostUser } from "../../Redux/actions";
 
 export default function UserType() {
   const navigate = useNavigate()
@@ -49,6 +49,7 @@ useEffect(() => {
     console.log(UserNew);
     if (isClient) {
       dispatch(PostUser(UserNew));
+      
     } else if (isRestaurant) {
       window.localStorage.setItem("UserLogVerificate", JSON.stringify(UserNew));
       window.localStorage.removeItem("redirectPath")
@@ -57,27 +58,21 @@ useEffect(() => {
       
     }
   }      
-}, [navigate,dispatch, savedData]);
+}, [navigate, dispatch, savedData, UserNew, isClient, isRestaurant]);
+
 
 
 
 useEffect(() => {
-  console.log("useEffect",isClient)
-  function Local (){
-    if(isClient){
-    const redirectPath = localStorage.getItem('redirectPath');
-    console.log(redirectPath)
-
-    window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
-    navigate(redirectPath)
-    
-    }
-    
-  }
-    Local()
-
-}, [ isClient ]);
-
+if(postuser){
+  const redirectPath = localStorage.getItem('redirectPath');
+      console.log("Obj USER", postuser)
+      window.localStorage.setItem("UserLogVerificate", JSON.stringify(postuser));
+      console.log(redirectPath)
+      window.localStorage.setItem("IsLogin", true);
+      navigate(redirectPath)
+}
+},[postuser.length])
 
 
 

@@ -24,12 +24,6 @@ export default function Footer() {
               <li>
                 <a href="#">Nuestros Desarrolladores</a>
               </li>
-              <li>
-                <a href="#">Politica de Privacidad</a>
-              </li>
-              <li>
-                <a href="#">Programa de afiliados</a>
-              </li>
             </ul>
           </div>
           <div className={styles.footer_col}>
@@ -39,13 +33,7 @@ export default function Footer() {
                 <a href="#">FAQ</a>
               </li>
               <li>
-                <a href="#">Comprando</a>
-              </li>
-              <li>
-                <a href="#">Estado de orden</a>
-              </li>
-              <li>
-                <a href="#">Opciones de pago</a>
+                <a href="http://localhost:3000/home/cart">Carrito</a>
               </li>
             </ul>
           </div>
@@ -53,13 +41,12 @@ export default function Footer() {
             <h4>Compra en linea</h4>
             <ul>
               <li>
-                <a href="#">Restaurantes</a>
+                <a href="http://localhost:3000/home">Restaurantes</a>
               </li>
               <li>
-                <a href="#">Tipos de comida</a>
-              </li>
-              <li>
-                <a href="#">Ubicaciones de Restaurantes</a>
+                <a href="http://localhost:3000/mapa">
+                  Ubicaciones de Restaurantes
+                </a>
               </li>
             </ul>
           </div>
@@ -75,7 +62,7 @@ export default function Footer() {
               </a>
               <a href="#">
                 <InstagramIcon />
-              </a>{" "}
+              </a>
               <a href="#">
                 <LinkedInIcon />
               </a>

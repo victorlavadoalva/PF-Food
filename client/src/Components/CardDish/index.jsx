@@ -6,14 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { useLocation } from "react-router-dom";
@@ -37,21 +36,26 @@ export const CardDish = ({
   id,
   description,
   addToCart,
+  removeFromMenu,
+  isActive,
+  editMenu,
 }) => {
+
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-
   const { pathname } = useLocation();
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    //TODO hay que hacer el put y delete
-    setAnchorEl(null);
-  };
+  //const [anchorEl, setAnchorEl] = useState(null);
+  //const open = Boolean(anchorEl);
+
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   //TODO hay que hacer el put y delete
+  //   setAnchorEl(null);
+  // };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -64,9 +68,8 @@ export const CardDish = ({
 
   const isRestorant = pathname === "/restorant";
 
-
   return (
-    <Card sx={{ width: 450 }} key={id}>
+    <Card className={`${isActive ? "" : styles.false}`} sx={{ width: 450 }} key={id}>
       <div className={styles.headerContainer}>
         <CardMedia
           component="img"
@@ -77,32 +80,6 @@ export const CardDish = ({
         />
         <div className={styles.infoContainer}>
           <CardHeader
-            // Despues ver si la action para editar y eliminar se implementa en la cards o no
-            // action={
-            //   <>
-            //     <IconButton aria-label="settings" onClick={handleClick}>
-            //       <MoreVertIcon />
-            //     </IconButton>
-            //     <Menu
-            //       id="menu-appbar"
-            //       anchorEl={anchorEl}
-            //       anchorOrigin={{
-            //         vertical: "top",
-            //         horizontal: "right",
-            //       }}
-            //       keepMounted
-            //       transformOrigin={{
-            //         vertical: "top",
-            //         horizontal: "right",
-            //       }}
-            //       open={Boolean(anchorEl)}
-            //       onClose={handleClose}
-            //     >
-            //       <MenuItem onClick={handleClose}>Editar</MenuItem>
-            //       <MenuItem onClick={handleClose}>Eliminar</MenuItem>
-            //     </Menu>
-            //   </>
-            // }
             title={name}
             className={styles.header}
             sx={{ padding: 0 }}
@@ -143,6 +120,23 @@ export const CardDish = ({
           </ExpandMore>
         </CardActions>
       )}
+      {
+        isRestorant &&
+        <IconButton edge="end" aria-label="delete" onClick={() => editMenu(id)}>
+          <EditIcon />
+        </IconButton>
+      }
+      {
+        isRestorant && (isActive ? (
+          <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
+            <RemoveIcon />
+          </IconButton>
+        ) : (
+          <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
+            <AddIcon />
+          </IconButton>
+        ))
+      }
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{description}</Typography>

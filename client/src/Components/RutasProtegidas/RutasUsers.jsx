@@ -1,33 +1,34 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Outlet, Navigate} from "react-router-dom";
+import { useNavigate, Outlet, Navigate } from "react-router-dom";
 import { GetUserEmail, LoadingApp, GetTokenLogin } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function RutasUsers() {
+  
   const { userFoundByEmail, tokenLogin } = useSelector((state) => state);
   const { isAuthenticated, user, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
   const redirection = "/user-type";
   const restaurantRoute = "/restorant";
-
-  console.log("Verificado", isAuthenticated);
-  console.log("isLoading", isLoading);
+  const dataUser = window.localStorage.getItem("UserLogVerificate");
+  let type_customer = "";
   const [saveEmail, setSaveEmail] = useState("");
 
+  //console.log("Verificado", isAuthenticated);
+  //console.log("isLoading", isLoading);
 
   useEffect(() => {
     if (isAuthenticated) {
       setSaveEmail(user.email);
       const objUser = JSON.stringify(user);
       window.localStorage.setItem("UserVerificated", objUser);
-    }else{
+    } else {
       window.localStorage.setItem("IsLogin", JSON.stringify(false));
 
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
     if (saveEmail) {
@@ -35,15 +36,11 @@ export default function RutasUsers() {
     }
   }, [dispatch, saveEmail]);
 
-
-
-
   useEffect(() => {
-
-
     const checkIfNewUser = async () => {
       const isLoginString = window.localStorage.getItem("IsLogin");
       const isLogin = JSON.parse(isLoginString);
+
       if (!isLogin) {
         if (userFoundByEmail[0] === true) {
           dispatch(GetTokenLogin("Cliente", userFoundByEmail[1].email));
@@ -60,39 +57,30 @@ export default function RutasUsers() {
           window.localStorage.removeItem("redirectPath");
           dispatch(LoadingApp(false));
         } else if (userFoundByEmail[0] === false) {
-          window.localStorage.removeItem("redirectPath");
           navigate(redirection);
           dispatch(LoadingApp(false));
         }
       }
-      
     };
-
     checkIfNewUser();
-  }, [dispatch,userFoundByEmail, navigate]);
+  }, [dispatch, userFoundByEmail, navigate]);
 
   useEffect(() => {
-if (tokenLogin.token) {
-    const objUser = JSON.stringify(tokenLogin);
-    window.localStorage.setItem("UserLogVerificate", objUser);
-    window.localStorage.setItem("IsLogin", true);
-  }
-  },[tokenLogin])
+    if (tokenLogin.token) {
+      const objUser = JSON.stringify(tokenLogin);
+      window.localStorage.setItem("UserLogVerificate", objUser);
+      window.localStorage.setItem("IsLogin", true);
+    }
+  }, [tokenLogin])
 
-  let type_customer = "";
-
-  const dataUser = window.localStorage.getItem("UserLogVerificate");
-  if(dataUser){
+  if (dataUser) {
     const restaurant = JSON.parse(dataUser);
     type_customer = restaurant.type_customer
   }
-  
-  
 
   if (type_customer === "Restaurante") {
     return <Navigate to={restaurantRoute} />;
   } else {
     return <Outlet />;
   }
-
 }
