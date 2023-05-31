@@ -27,8 +27,9 @@ const URL_RESTAURANT =
   "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
-const backendUrl = "http://localhost:3001/users";
-
+const backendUrl = "http://localhost:3001/";
+const userLocal = backendUrl + "users"
+const restaurantLocal = backendUrl + "restaurants"
 export const getRestorants = ({
   page = 1,
   order,
@@ -83,9 +84,9 @@ export const GetUserEmail = ({ saveEmail }) => {
   return async function (dispatch) {
     try {
       console.log(saveEmail);
-      const response_user = await axios.get(URL_USERS + `?email=${saveEmail}`);
+      const response_user = await axios.get(userLocal + `?email=${saveEmail}`);
       console.log(response_user);
-      const response_restaurant = await axios.get(URL_RESTAURANT + `?email=${saveEmail}`);
+      const response_restaurant = await axios.get(restaurantLocal + `?email=${saveEmail}`);
       const dataUser = response_user.data;
       const dataRestaurant = response_restaurant.data;
       if (dataUser) {
@@ -112,13 +113,13 @@ export const GetTokenLogin = (typeUser, email) => {
     try {
       if (typeUser === "Cliente") {
         console.log("!!!!!!!ActionsToken", email);
-        const { data } = await axios.get(URL_USERS + `/login/${email}`);
+        const { data } = await axios.get(userLocal + `/login/${email}`);
         localStorage.setItem("access_token", data.token);
         console.log(data);
         return dispatch({ type: GET_TOKEN, payload: [true ,data] });
       } else if (typeUser === "Restaurant") {
         console.log("!!!!!!!!ActionsToken ,Restaurant", email)
-        const { data } = await axios.get(URL_RESTAURANT + `/login/${email}`);
+        const { data } = await axios.get(restaurantLocal + `/login/${email}`);
         localStorage.setItem("access_token", data.token);
 
         return dispatch({ type: GET_TOKEN, payload: [true ,data]  });
@@ -151,7 +152,7 @@ export const PostRestaurant = (Restaurant) => {
   return async function (dispatch) {
     try {
       console.log(Restaurant);
-      const { data } = await axios.post(URL_RESTAURANT, Restaurant);
+      const { data } = await axios.post(backendUrl + "restaurants", Restaurant);
       return dispatch({ type: POST_USER, payload: [true, data ]});
     } catch (error) {
       return dispatch({

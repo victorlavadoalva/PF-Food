@@ -32,11 +32,11 @@ export default function UserType() {
 //   setIsClient(true)
 const handleTypeClient = (event) => {
   event.preventDefault()
-  navigate("/user-type/")
+  navigate("/user-type/form-user")
 }
 const handleTypeRestaurant= (event) => {
   event.preventDefault()
-  navigate("/user-type/")
+  navigate("/user-type/form-restaurant")
 }
 
 
@@ -78,8 +78,10 @@ const handleTypeRestaurant= (event) => {
 
   return (
     <>
-    {location.pathname === "/user-type" &&
     <div className={styles.container}>
+
+    {location.pathname === "/user-type" &&
+
                 <ul>
                     <li>
                         <button onClick={handleTypeClient} >Cliente</button>
@@ -88,9 +90,10 @@ const handleTypeRestaurant= (event) => {
                         <button onClick={handleTypeRestaurant} >Restaurante</button>
                     </li>
                 </ul>
-    </div>
     }
     <Outlet/>
+    </div>
+    
     </>
   );
 }

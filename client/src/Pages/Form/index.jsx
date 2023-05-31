@@ -10,20 +10,22 @@ export default function Form() {
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"));
+
   const {postuser} = useSelector((state) => state)
   const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
-    name: "",
+    name: objUser.nickname,
     description: "",
     city: "",
     address: "",
     country: "",
     phoneNumber: "",
-    image: null,
+    images: null,
     type_customer: "Restaurant",
     tags: [],
     capacity: "",
-    email: ""
+    email:objUser.email
   });
 
 
@@ -35,7 +37,7 @@ export default function Form() {
     address: "",
     phoneNumber: "",
     capacity: '',
-    image: '',
+    images: '',
     email: ""
 
   });
@@ -55,45 +57,48 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("image", imageFile);
+      formData.append("images", imageFile);
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity", restorants.capacity);
-      // axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
-      //   .then((response) => {
-      //     console.log('Datos enviados:', formData);
-      //     console.log('Respuesta del servidor:', response.data);
-      
-        dispatch(PostRestaurant(formData))
+      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
+        .then((response) => {
+          console.log('Datos enviados:', formData);
+          console.log('Respuesta del servidor:',  response.data);
+          const{restaurant} = response.data
+          console.log(restaurant)
+          alert("Usuario creado");
+          
+          setErrors({});
+          setRestorants({
+            description: "",
+            city: "",
+            address: "",
+            country: "",
+            phoneNumber: "",
+            images: null,
+            type_customer: "Restaurant",
+            tags: [],
+            capacity: "",
+          });
+          localStorage.setItem(
+            "UserLogVerificate",
+            JSON.stringify(restaurant)
+          );
+          window.localStorage.setItem("IsLogin", true);
+          navigate("/restorant")
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Error al crear el usuario");
+        });
       
     } else {
       alert('Información incompleta!');
     }
   };
 
-  useEffect(() => {
-
-    if(postuser[0] === true){
-      alert('Restaurante creado');
-          setErrors({});
-          setRestorants({
-            name: "",
-            description: "",
-            city: "",
-            country: "",
-            address: "",
-            phoneNumber: "",
-            image: null,
-            type_customer: "Restaurant",
-            tags: [],
-            email: ''
-          });
-          navigate("/restorant")
-    }
-    
-         
-  },[navigate, postuser])
 
   const [tagValue, setTagValue] = useState("");
   function handleTags(event) {
@@ -231,7 +236,7 @@ export default function Form() {
       errors.address === '' &&
       errors.phoneNumber === '' &&
       errors.capacity === '' &&
-      errors.image === '' &&
+      errors.images === '' &&
       errors.email === ''
     );
   }
@@ -304,16 +309,20 @@ export default function Form() {
                 error={errors.phoneNumber !== ""}
                 helperText={errors.phoneNumber !== "" ? errors.phoneNumber : ""}
               />
-              <TextField
-                label="Email"
+               <TextField
+                label="Correo"
                 variant="outlined"
                 name="email"
                 value={restorants.email}
                 onChange={handleChange}
                 autoComplete="off"
-                placeholder="Email..."
-                error={errors.email !== ""}
-                helperText={errors.email !== "" ? errors.email : ""}
+                placeholder="Correo..."
+                disabled={true} 
+                nputProps={{
+                  readOnly: true,
+                }}
+                // error={errors.city !== ""}
+                // helperText={errors.city !== "" ? errors.city : ""}
               />
               <TextField
                 label="Descripcion"
@@ -365,7 +374,7 @@ export default function Form() {
               </Button>
               <input
                 type="file"
-                name="image"
+                name="images"
                 onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>

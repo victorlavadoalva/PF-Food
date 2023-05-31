@@ -51,7 +51,9 @@ function App() {
           <>
             {location.pathname !== "/" &&
               location.pathname !== "/landing" &&
-              location.pathname !== "/user-type" && <Header />}
+              location.pathname !== "/user-type" &&
+              location.pathname !== "/user-type/form-user" &&
+              location.pathname !== "/user-type/form-restaurant" &&   <Header />}
             <main className={styles.main}>
               <Routes>
                 <Route path="mapa" element={<Map />} />

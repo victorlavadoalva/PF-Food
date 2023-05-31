@@ -65,7 +65,7 @@ console.log(saveEmail)
       const isLoginString = window.localStorage.getItem("IsLogin");
       const isLogin = JSON.parse(isLoginString);
       if (!isLogin) {
-        if (userFoundByEmail[0] === true && userFoundByEmail[1].type_customer === "Cliente") {
+        if (userFoundByEmail[0] === true && userFoundByEmail[1].type_customer === "User") {
           dispatch(GetTokenLogin("Cliente", userFoundByEmail[1].email));
           const storedPath = localStorage.getItem("redirectPath");
           navigate(storedPath);
@@ -81,7 +81,7 @@ console.log(saveEmail)
           // navigate(restaurantRoute);
           window.localStorage.removeItem("redirectPath");
           dispatch(LoadingApp(false));
-        } else if (userFoundByEmail[0] === false ) {
+        } else if (userFoundByEmail[0] === false && location.pathname !== "/user-type/form-user" && location.pathname !== "/user-type/form-restaurant") {
           console.log("!!!!!!!!!!No esta registrado")
           navigate(redirection);
           dispatch(LoadingApp(false));
@@ -103,16 +103,18 @@ console.log(saveEmail)
     }
   }, [tokenLogin])
 console.log("DATA SUBIDA", restaurant)
-  // useEffect(() => {
-  //   if (userRol === "Restaurant") {
-  //     setShouldRedirect(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userRol === "Restaurant") {
+      setShouldRedirect(true);
+    }
+  }, []);
 
   if (shouldRedirect) {
     navigate(restaurantRoute);
     return null; // Evitar que se muestre la ruta antes de redirigir
+  }else{
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  
 }
