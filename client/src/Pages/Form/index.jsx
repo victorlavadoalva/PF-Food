@@ -12,7 +12,7 @@ export default function Form() {
   const navigate = useNavigate()
   const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"));
 
-  const [imageFile, setImageFile] = useState(null)
+  const [imagesFile, setImagesFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: objUser.nickname,
     description: "",
@@ -45,7 +45,7 @@ export default function Form() {
     const files = Array.from(event.target.files).slice(0, 3);
     const fileObjects = files.map((file) => URL.createObjectURL(file));
     
-    setImages(fileObjects);
+    setImagesFile(fileObjects);
   }
   
 
@@ -59,7 +59,7 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("images", imageFile);
+      formData.append("images", imagesFile);
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
