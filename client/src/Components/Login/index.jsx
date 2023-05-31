@@ -35,6 +35,8 @@ export default function Login_Register() {
     window.localStorage.removeItem("redirectPath");
     window.localStorage.removeItem("UserToken");
     window.localStorage.removeItem("UserLogVerificate");
+    window.localStorage.removeItem("isAuthenticated");
+
     window.localStorage.removeItem("access_token");
     window.localStorage.setItem("IsLogin", false);
     dispatch(LoadingApp(true))
@@ -58,7 +60,6 @@ export default function Login_Register() {
   //   }
   // },[user])
 
-console.log(user)
   return (
     <>
       {user ? (

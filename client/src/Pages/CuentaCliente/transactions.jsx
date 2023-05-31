@@ -12,7 +12,7 @@ export const Transactions = ({ restId }) => {
   useEffect(() => {
     const fetchPedidosCliente = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/transactions/${restId}`);
+            const { data } = await axios.get(`http://localhost:3001/users/transactions/${restId}`);
             setPedidoRows(data);
         } catch (error) {
             console.error("Error al obtener los pedidos:", error);

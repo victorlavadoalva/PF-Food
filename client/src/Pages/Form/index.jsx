@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from "@mui/material";
-
+import { useDispatch ,useSelector} from "react-redux";
+import { PostRestaurant } from "../../Redux/actions";
 
 export default function Form() {
-  const [images, setImages] = useState([]);
-  const [imageFile, setImageFile] = useState(null)
+  
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"));
+
+  const [imagesFile, setImagesFile] = useState(null)
   const [restorants, setRestorants] = useState({
-    name: "",
+    name: objUser.nickname,
     description: "",
     city: "",
     address: "",
     country: "",
     phoneNumber: "",
-    image: null,
+    images:[],
     type_customer: "Restaurant",
     tags: [],
-    capacity: "",
-    email: ""
+    capacity: 0,
+    email:objUser.email,
   });
 
 
@@ -31,16 +36,16 @@ export default function Form() {
     address: "",
     phoneNumber: "",
     capacity: '',
-    image: '',
-    email: ""
-
+    images: '',
+    email: "",
+    images:""
   });
 
   function handleImage(event) {
     const files = Array.from(event.target.files).slice(0, 3);
     const fileObjects = files.map((file) => URL.createObjectURL(file));
     
-    setImages(fileObjects);
+    setImagesFile(fileObjects);
   }
   
 
@@ -54,43 +59,48 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("images", JSON.stringify(images));
+      formData.append("images", imagesFile);
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
-      formData.append("capacity", restorants.capacity);
-
-      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
+      formData.append("capacity",Number(restorants.capacity) );
+      axios.post("http://localhost:3001/restaurants", formData)
         .then((response) => {
           console.log('Datos enviados:', formData);
-          console.log('Respuesta del servidor:', response.data);
-          alert('Restaurante creado');
+          console.log('Respuesta del servidor:',  response.data);
+          const{restaurant} = response.data
+          console.log(restaurant)
+          alert("Usuario creado");
+          
           setErrors({});
           setRestorants({
-            name: "",
             description: "",
             city: "",
-            country: "",
             address: "",
+            country: "",
             phoneNumber: "",
-            image: null,
+            images: null,
             type_customer: "Restaurant",
             tags: [],
             capacity: "",
-            email: ''
           });
-          localStorage.setItem("UserLogVerificate", JSON.stringify(response.data));
+          localStorage.setItem(
+            "UserLogVerificate",
+            JSON.stringify(restaurant)
+          );
           window.localStorage.setItem("IsLogin", true);
+          navigate("/restorant")
         })
         .catch((error) => {
-          console.log(error)
-          alert('Error al crear el restaurante');
+          console.log(error);
+          alert("Error al crear el usuario");
         });
+      
     } else {
       alert('Información incompleta!');
     }
-    console.log(restorants)
   };
+
 
   const [tagValue, setTagValue] = useState("");
   function handleTags(event) {
@@ -112,7 +122,6 @@ export default function Form() {
         [name]: value
       })
     };
-    console.log(restorants)
 
 
     switch (name) {
@@ -229,7 +238,7 @@ export default function Form() {
       errors.address === '' &&
       errors.phoneNumber === '' &&
       errors.capacity === '' &&
-      errors.image === '' &&
+      errors.images === '' &&
       errors.email === ''
     );
   }
@@ -302,16 +311,20 @@ export default function Form() {
                 error={errors.phoneNumber !== ""}
                 helperText={errors.phoneNumber !== "" ? errors.phoneNumber : ""}
               />
-              <TextField
-                label="Email"
+               <TextField
+                label="Correo"
                 variant="outlined"
                 name="email"
                 value={restorants.email}
                 onChange={handleChange}
                 autoComplete="off"
-                placeholder="Email..."
-                error={errors.email !== ""}
-                helperText={errors.email !== "" ? errors.email : ""}
+                placeholder="Correo..."
+                disabled={true} 
+                nputProps={{
+                  readOnly: true,
+                }}
+                // error={errors.city !== ""}
+                // helperText={errors.city !== "" ? errors.city : ""}
               />
               <TextField
                 label="Descripcion"
@@ -362,9 +375,8 @@ export default function Form() {
               </Button>
               <input
                 type="file"
-                name="image"
-                onChange={(e) => handleImage(e.target)}
-                multiple
+                name="images"
+                onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>
                 <Button
