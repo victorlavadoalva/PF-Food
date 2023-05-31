@@ -153,7 +153,7 @@ const ReservasCliente = () => {
                 }
 
                 return (
-                  <select {...field}>
+                  <select {...field} className={styles.select}>
                     {options.map((option) => (
                       <option key={option} value={option}>
                         {option}

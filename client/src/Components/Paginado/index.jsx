@@ -11,10 +11,10 @@ const handleChange = (e,page) => {
   // TODO cambiar country x location o al reves
   dispatch(getRestorants({
     page, 
-    country: filters.location, 
+    city: filters.city, 
     order: filters.order, 
     rating: filters.rating,
-    tags: filters.tags
+    tag: filters.tag
   }))
 }
 
