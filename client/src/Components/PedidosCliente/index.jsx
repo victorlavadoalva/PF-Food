@@ -4,12 +4,12 @@ import { DataGrid } from "@mui/x-data-grid";
 export default function PedidosCliente({ rows }) {
 
   const columns = [
-    {
-      field: "day",
-      headerName: "Fecha",
-      type: "string",
-      width: 100,
-    },
+    // {
+    //   field: "day",
+    //   headerName: "Fecha",
+    //   type: "string",
+    //   width: 100,
+    // },
     { field: "id", headerName: "Pedido N°", width: 90 },
     {
       field: "name",
