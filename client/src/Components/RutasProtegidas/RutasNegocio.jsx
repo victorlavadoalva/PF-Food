@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-export default function RutaRestaurant(){
-const navigate = useNavigate()
-const redirection = "/"
-let type_customer = "";
-const [shouldRedirect, setShouldRedirect] = useState(false);
 
 export default function RutaRestaurant() {
-
-  const navigate = useNavigate()
-  const redirection = "/"
+  const navigate = useNavigate();
+  const redirection = "/";
   const [shouldRedirect, setShouldRedirect] = useState(false);
   let type_customer = "";
 
@@ -33,5 +27,4 @@ export default function RutaRestaurant() {
   } else {
     return <Outlet />;
   }
-
 }

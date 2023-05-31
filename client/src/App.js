@@ -18,7 +18,7 @@ import FormPlatos from "./Pages/FormPlatos";
 import ReservasCliente from "./Pages/FormReservas";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
-import { Map } from "./Pages/Map/Map.jsx";
+// import { Map } from "./Pages/Map/Map.jsx";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import Store from './Pages/Store';
@@ -32,6 +32,7 @@ import styles from "./styles.module.css";
 import FormUser from "./Pages/FormUser";
 import AboutUs from "./Pages/AboutUs";
 import Developers from "./Pages/Developers";
+import Map from "./Pages/Map/Map"
 
 function App() {
   const dispatch = useDispatch();
