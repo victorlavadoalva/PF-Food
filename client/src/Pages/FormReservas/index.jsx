@@ -37,12 +37,14 @@ const ReservasCliente = () => {
     const storedData = localStorage.getItem("UserLogVerificate");
 
     console.log(values);
-    const token = process.env.REACT_APP_TOKEN;
-    console.log(token);
+
     const token2 =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTQ5MjYwNywiZXhwIjo0ODQxMjUyNjA3fQ.1bJibYNPFAX8-rmxXwlxVsgKsTzJZIyZsD4JeCER9Yk";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTU2ODg3MCwiZXhwIjo0ODQxMzI4ODcwfQ.IqsmLGaKpz5nme2r_UN5s8oItD69CuKvkiyMZoPGZbQ";
     // Verificar si se encontraron datos en el Local Storage
     if (storedData) {
+      const token = process.env.REACT_APP_TOKEN;
+      console.log(token);
+
       //obtener ID del restaurante
       const direction = window.location.href;
       const segments = direction.split("/");
@@ -51,8 +53,8 @@ const ReservasCliente = () => {
       // Si se encontraron datos, convertirlos a objeto o utilizarlos según sea necesario
       const parsedData = JSON.parse(storedData);
       const idUser = parsedData.id;
-      const url = "https://pf-backend-production-83a4.up.railway.app/";
-      const url2 = "http://localhost:3001/";
+      const url = "https://pf-backend-production-83a4.up.railway.app";
+      const url2 = "http://localhost:3001";
 
       const reservation = {
         ...values,
@@ -62,12 +64,12 @@ const ReservasCliente = () => {
       // por params id de restaurante y por name ID de usuario
       axios
         .put(
-          url2 + "restaurants/" + `${idRestauran2}`,
+          url2 + "/restaurants/" + `${idRestaurant}`,
           { reservation: reservation },
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token2}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         )
