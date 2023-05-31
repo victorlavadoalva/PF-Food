@@ -21,9 +21,9 @@ const Cart = () => {
 
 
   useEffect(() => {
-    // if (dishes.length === 0) {
-    //   setIsActive(FOOD);
-    // }
+    if (dishes.length === 0) {
+      setIsActive(FOOD);
+    }
     //!TODO descomentar una vez conectado al back
     const activeDish = dishes.map(dish => dish.isActive === true);
     setIsActive(activeDish);
