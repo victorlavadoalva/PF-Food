@@ -3,19 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { MarkersRest } from './MarkerRest';
 import axios from 'axios'
 
-//*******************************DATA PRUEBA******************************************** */
-let userLocation = {address:"Mariquita Sanchez de Thompson 856",city:"Rio Cuarto", country:"Argentina"}
-//********************************************************************************* */
-
 
 export default function Map() {
+    const userData = localStorage.getItem('UserLogVerificate');
+    const userObject = JSON.parse(userData);
     const [allRestaurants, setAllRestaurants] = useState([])
     const [coordenadas, setCoordenadas] = useState({lat:null,lng:null})
-    const [addressSearch, setAddressSearch] = useState({city:userLocation.city, country:userLocation.country})
-
+    const [addressSearch, setAddressSearch] = useState({city:userObject.city, country:userObject.country})
     useEffect(()=>{
       axios.get("http://localhost:3001/restaurants?all=true")
-        .then(data=>setAllRestaurants(data.data))
+        .then(data=>{setAllRestaurants(data.data);console.log(userObject)})
     },[])
     useEffect(() => {
         async function buscarDireccion() {
@@ -47,10 +44,21 @@ export default function Map() {
         buscarDireccion();
       }, [addressSearch]);
 
-    const containerStyle = {
-      width: '100%',
-      height: '40rem'
-    };
+      const containerStyle = {
+        width: '100%',
+        height: '40rem',
+        position: 'relative',
+      };
+    
+      const selectContainerStyle = {
+        position: 'absolute',
+        top: '1rem',
+        right: '1rem',
+        zIndex: 1,
+        backgroundColor: '#fff',
+        padding: '1rem',
+      };
+    
   
     let center = coordenadas;
 
@@ -71,10 +79,11 @@ export default function Map() {
   
     return (
       <LoadScript googleMapsApiKey="AIzaSyAR96I2GcOFCVlWMer5l_WtCRrSnAJK8DM">
-        <div>
+        <div style={containerStyle}>
+        <div style={selectContainerStyle}>
             <label>City</label>
          <select value={addressSearch.city} name="city" onChange={handleSelectChange}>
-         <option value={userLocation.city}>My City</option>
+         <option value={userObject.city}>My City</option>
          <option value={""}>City</option>
            {
              allRestaurants&&allRestaurants.length>0&&allRestaurants.map((rest)=>{
@@ -89,7 +98,7 @@ export default function Map() {
 
         <label>Country</label>
         <select value={addressSearch.country} name="country" onChange={handleSelectChange}>
-        <option value={userLocation.country}>My Ccountry</option>
+        <option value={userObject.country}>My Ccountry</option>
          <option value={""}>Country</option>
            {
              allRestaurants&&allRestaurants.length>0&&allRestaurants.map((rest)=>{
@@ -109,6 +118,7 @@ export default function Map() {
         >
           <MarkersRest restaurants={allRestaurants?allRestaurants:[]} />
         </GoogleMap>
+        </div>
       </LoadScript>
     );
   }

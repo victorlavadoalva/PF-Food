@@ -12,7 +12,7 @@ export default function Form() {
   const navigate = useNavigate()
   const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"));
 
-  const [imagesFile, setImagesFile] = useState(null)
+  const [imagesFile, setImagesFile] = useState([])
   const [restorants, setRestorants] = useState({
     name: objUser.nickname,
     description: "",
@@ -41,11 +41,10 @@ export default function Form() {
     images:""
   });
 
-  function handleImage(event) {
-    const files = Array.from(event.target.files).slice(0, 3);
-    const fileObjects = files.map((file) => URL.createObjectURL(file));
+  function handleImage(files) {
+    const selectFiles = Array.from(files).slice(0, 3);
     
-    setImagesFile(fileObjects);
+    setImagesFile(selectFiles);
   }
   
 
@@ -59,11 +58,15 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("images", imagesFile);
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
-      formData.append("tags", JSON.stringify(restorants.tags));
       formData.append("capacity",Number(restorants.capacity) );
+      restorants.tags.forEach((tag) => {
+        formData.append("tags", tag);
+      });
+      imagesFile.forEach((file) => {
+        formData.append("images", file);
+      });
       axios.post("http://localhost:3001/restaurants", formData)
         .then((response) => {
           console.log('Datos enviados:', formData);
@@ -103,14 +106,15 @@ export default function Form() {
 
 
   const [tagValue, setTagValue] = useState("");
+  useEffect(()=>{console.log(restorants.tags)},[restorants])
   function handleTags(event) {
     event.preventDefault();
-    if (tagValue.trim() !== "") {
+    if (tagValue!== "") {
       setRestorants({
         ...restorants,
         tags: [...restorants.tags, tagValue]
       });
-      setTagValue("");
+      setTagValue("")
     }
   }
 
@@ -376,6 +380,7 @@ export default function Form() {
               <input
                 type="file"
                 name="images"
+                multiple
                 onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>
