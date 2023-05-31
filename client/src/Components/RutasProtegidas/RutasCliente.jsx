@@ -12,7 +12,7 @@ export default function RutasCliente() {
   const { type_customer } = restaurant;
 
   useEffect(() => {
-    if (type_customer !== "Cliente") {
+    if (type_customer !== "User") {
       setShouldRedirect(true);
     }
   }, [dataUser]);

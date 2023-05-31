@@ -10,6 +10,8 @@ import {
   GET_AMOUNTPAGES,
   GET_DISH,
   GET_FILTERED,
+  GET_ORDERS,
+  GET_RESERVS,
   GET_RESTOURANT_ID,
   GET_TOKEN,
   GET_USER_EMAIL,
@@ -18,8 +20,7 @@ import {
   POST_USER,
   UPDATE_SUCCESS,
   UPDATE_USER,
-  GET_RESERVS,
-  GET_ORDERS,
+  USER_REGISTER,
 } from "./actionsTypes";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   tokenLogin: [],
   postuser: [],
   userFoundByEmail: [],
+  user_register:[],
   error: [],
   plates: [],
   dishes: [],
@@ -71,6 +73,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         cart: filtered,
       };
+    case USER_REGISTER:
+      return {
+        ...state,
+        user_register:payload
+      }
     case ADD_TO_CART:
       return {
         ...state,

@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 export default function RutaRestaurant() {
-  const navigate = useNavigate();
-  const redirection = "/";
+  
+  const { error } = useSelector((state) => state);
+  const navigate = useNavigate()
+  const redirection = "/"
   const [shouldRedirect, setShouldRedirect] = useState(false);
   let type_customer = "";
 
@@ -12,14 +15,15 @@ export default function RutaRestaurant() {
     if (dataUser) {
       const restaurant = JSON.parse(dataUser);
       type_customer = restaurant.type_customer;
-
-      if (type_customer !== "Restaurante" || !type_customer) {
+      if (type_customer !== "Restaurant" || !type_customer) {
         setShouldRedirect(true);
       }
     } else {
       setShouldRedirect(true);
     }
+    
   }, []);
+
 
   if (shouldRedirect) {
     navigate(redirection);
