@@ -42,13 +42,8 @@ export const getRestorants = ({
 }) => {
   return async function (dispatch) {
     try {
-<<<<<<< Updated upstream
       const { data } = await axios(restaurantLocal, {
-        params: { page, order, rating, name, country, tags },
-=======
-      const { data } = await axios(URL_RESTAURANT, {
-        params: { page, order, rating, name, city, tag },
->>>>>>> Stashed changes
+        params: { page, order, rating, name, country, tag },
       });
       console.log('Server Response:', data);
       return (
