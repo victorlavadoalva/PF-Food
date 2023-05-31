@@ -14,7 +14,12 @@ const TableAdmin = () => {
     const [status, setStatus] = useState('');
     const [galleta, setGalleta] = useState(false);
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU0MTc3NjAsImV4cCI6NDg0MTE3Nzc2MH0.afWU7ObBcuGkzTp4NelPghU-KG52h5IgOzBYTOCO0us"
+    const dataStorage = localStorage.getItem("UserLogVerificate");
+    const dataParsed = JSON.parse(dataStorage);
+    
+    // const token = dataParsed.token;
+    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NDc1MzUsImV4cCI6NDg0MTMwNzUzNX0.7fDrfKD497Nfcsjcn7hE0Qkd8Mp-lbAq6uCBL4exIxc"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NDkxMzAsImV4cCI6NDg0MTMwOTEzMH0.Ub6SDo8aJnCm7NcE1FPoTZxUlcRdySBzSOPG-HsXiUE"
     
     const columns = [
         {
@@ -48,7 +53,13 @@ const TableAdmin = () => {
             name: 'Actions', cell:(row) => (
             bandera && bandera.email === row.email 
             ? row.status == "active" 
-            ? <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
+            ? row.rol.toLowerCase() == "user"
+            ?
+            // <div className={style.contBanadmin}>
+                <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
+                // {/* <button id={row.id} name={row.rol} className={style.buttonAdmin} onClick={handlerSetAdmin}>Set Admin</button> */}
+            // {/* </div> */}
+            : <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
             : <button id={row.email} className={style.buttonUndo} onClick={handlerUnban}>Unban</button>
             : null)
         }
@@ -56,6 +67,7 @@ const TableAdmin = () => {
 
     let datas;
     useEffect(async () => {
+        // datas = await axios.get(`http://pf-backend-production-83a4.up.railway.app/admin`, {
         datas = await axios.get(`http://localhost:3001/admin`, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -127,8 +139,10 @@ const TableAdmin = () => {
     }
 
     const handlerBan = (event) => {
+        // axios.get(event.target.name == "Restaurant" ? `http://pf-backend-production-83a4.up.railway.app/restaurants/${event.target.id}` : `http://pf-backend-production-83a4.up.railway.app/users/${event.target.id}`)
         axios.get(event.target.name == "Restaurant" ? `http://localhost:3001/restaurants/${event.target.id}` : `http://localhost:3001/users/${event.target.id}`)
         .then((data) => {
+            // axios.post(`http://pf-backend-production-83a4.up.railway.app/banned`,{
             axios.post(`http://localhost:3001/banned`,{
                 user_banned:data.data
             },{
@@ -142,8 +156,26 @@ const TableAdmin = () => {
         ).catch((error) => console.log(error))
     }
 
+    const handlerSetAdmin = (event) => {
+        // axios.get(event.target.name == "Restaurant" ? `http://pf-backend-production-83a4.up.railway.app/restaurants/${event.target.id}` : `http://pf-backend-production-83a4.up.railway.app/users/${event.target.id}`)
+        axios.get(event.target.name == "Restaurant" ? `http://localhost:3001/restaurants/${event.target.id}` : `http://localhost:3001/users/${event.target.id}`)
+        .then((data) => {
+            console.log(data.data);
+            // axios.delete(`http://pf-backend-production-83a4.up.railway.app/admin/${data.data._id}`,{
+            axios.put(`http://localhost:3001/admin/${data.data.id}`,{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            setGalleta(!galleta);
+        }
+        ).catch((error) => console.log(error))
+    }
+
     const handlerUnban = (event) => {
         console.log(token);
+        // axios.get(`http://pf-backend-production-83a4.up.railway.app/banned?email=${event.target.id}`,{
         axios.get(`http://localhost:3001/banned?email=${event.target.id}`,{
             headers: {
                 Authorization: `Bearer ${token}`
@@ -151,6 +183,7 @@ const TableAdmin = () => {
             }
         })
         .then((data) => {
+            // axios.delete(`http://pf-backend-production-83a4.up.railway.app/banned/${data.data._id}`,{
             axios.delete(`http://localhost:3001/banned/${data.data._id}`,{
                 headers: {
                     Authorization: `Bearer ${token}`

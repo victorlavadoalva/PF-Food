@@ -6,8 +6,8 @@
     border-radius: 2em;
     width: 40%;
     height: 70%;
-    margin-left: -1.5em;
 }
+
 .button:hover{
     background-color: #aa1920;
     border: 2px solid #80001c;
@@ -52,4 +52,27 @@
     padding: 5px;
     font-weight: 500;
     border-radius: 0.8em;
+}
+
+.buttonAdmin{
+    margin-left: 1em;
+    align-items: center;
+    border: 2px solid #446A61;
+    color: white;
+    background-color: #598F54;
+    border-radius: 2em;
+    width: 40%;
+    height: 70%;
+}
+.buttonAdmin:hover{
+    background-color: #356b3d;
+    border: 2px solid #345331;
+    cursor: pointer;
+}
+
+.contBanadmin{
+    height: 100%;
+    width: 100%;
+    margin-left: -2.5em;
+    padding-top: 0.5em;
 }
