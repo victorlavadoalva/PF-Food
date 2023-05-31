@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import PedidosCliente from "../../Components/PedidosCliente";
-import { pedidosClienteRows } from "../../dataHardcodeo/constants";
+// import { pedidosClienteRows } from "../../dataHardcodeo/constants";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ export const Transactions = ({ restId }) => {
   useEffect(() => {
     const fetchPedidosCliente = async () => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/transactions/${restId}`);
+            const { data } = await axios.get(`http://localhost:3001/users/transactions/${restId}`);
             setPedidoRows(data);
         } catch (error) {
             console.error("Error al obtener los pedidos:", error);
@@ -20,7 +20,7 @@ export const Transactions = ({ restId }) => {
     };
 
     fetchPedidosCliente();
-  }, []);
+  }, [restId]);
     
   return (
     <Box >
@@ -37,7 +37,7 @@ export const Transactions = ({ restId }) => {
           <Typography variant="h5" align="left">
             Mis Pedidos
           </Typography>
-          <PedidosCliente rows={pedidosClienteRows} />
+          <PedidosCliente rows={pedidoRows} />
         </Paper>
       </Box> 
     </Box>

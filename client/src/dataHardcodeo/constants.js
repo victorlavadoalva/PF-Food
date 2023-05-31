@@ -201,32 +201,24 @@ export const RATING = [
 
 export const TAGS = [
   {
-    id: "internacional",
-    name: "Internacional",
+    id: "Pizza",
+    name: "Pizza",
   },
   {
-    id: "veggie",
-    name: "Veggie",
+    id: "Burger",
+    name: "Burger",
   },
   {
-    id: "vegan",
-    name: "Vegan",
+    id: "Sandwich",
+    name: "Sandwich",
   },
   {
-    id: "celiaco",
-    name: "Celiaco",
+    id: "Chicken",
+    name: "Chicken",
   },
   {
-    id: "parrilla",
-    name: "Parrilla",
-  },
-  {
-    id: "tematicas",
-    name: "Temáticas",
-  },
-  {
-    id: "otros",
-    name: "Otros",
+    id: "Pasta",
+    name: "Pasta",
   },
 ];
 
