@@ -9,10 +9,7 @@ import { updateAccount } from "../../Redux/actions";
 
 import styles from "./styles.module.css";
 import { Transactions } from "./transactions";
-import { Reservations } from "./reservations";
-
-// import PedidosCliente from "../../Components/PedidosCliente";
-// import ReservasCliente from "../../Components/ReservasCliente";
+// import { Reservations } from "./reservations";
 
 export default function CuentaCliente({ userId, userData }) {
   const { isAuthenticated } = useAuth0();
@@ -23,11 +20,21 @@ export default function CuentaCliente({ userId, userData }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
 
   const { error, updateSuccess } = useSelector((state) => state);
 
   const userLog = localStorage.getItem("UserLogVerificate");
-  const { id, name: storedName, email: storedEmail, phone: storedPhone, address: storedAddress } = JSON.parse(userLog);
+  const {
+    id,
+    name: storedName,
+    email: storedEmail,
+    phone: storedPhone,
+    address: storedAddress,
+    city: storedCity,
+    country: storedCountry,
+  } = JSON.parse(userLog);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -44,11 +51,17 @@ export default function CuentaCliente({ userId, userData }) {
   useEffect(() => {
     setName(storedName || "");
     setEmail(storedEmail || "");
-    //! TODO descomentar cuando haya info del back
-    // setPhone(storedPhone || "");
-    // setAddress(storedAddress || "");
-  }, [storedName, storedEmail, 
-    // storedPhone, storedAddress
+    setPhone(storedPhone || "");
+    setAddress(storedAddress || "");
+    setCity(storedCity || "");
+    setCountry(storedCountry || "");
+  }, [
+    storedName,
+    storedEmail,
+    storedPhone,
+    storedAddress,
+    storedCity,
+    storedCountry,
   ]);
 
   const handleChangeName = (e) => {
@@ -67,26 +80,48 @@ export default function CuentaCliente({ userId, userData }) {
     setAddress(e.target.value);
   };
 
+  const handleChangeCity = (e) => {
+    setCity(e.target.value);
+  };
+
+  const handleChangeCountry = (e) => {
+    setCountry(e.target.value);
+  };
+
   const handleUpdateAccount = () => {
     const userData = {
       name,
       email,
       phone,
       address,
+      city,
+      country,
       type_customer: "Cliente",
     };
 
     const hasChanges =
       name !== storedName ||
-      email !== storedEmail
-      //! TODO descomentar cuando haya info del back 
-      // ||
-      // phone !== storedPhone ||
-      // address !== storedAddress;
+      email !== storedEmail ||
+      phone !== storedPhone ||
+      address !== storedAddress ||
+      city !== storedCity ||
+      country !== storedCountry;
 
     if (hasChanges) {
-      dispatch(updateAccount(id, userData));
-    }
+      dispatch(updateAccount(id, userData))
+        .then(() => {
+          const updateUserLog = {
+            ...JSON.parse(userLog),
+            name: userData.name,
+            email: userData.email,
+            phone: userData.phone,
+            address: userData.address,
+            city: userData.city,
+            country: userData.country,
+          };
+          localStorage.setItem("UserLogVerificate", JSON.stringify(updateUserLog));
+        });
+    };
   };
 
   return (
@@ -97,7 +132,7 @@ export default function CuentaCliente({ userId, userData }) {
             "& > :not(style)": {
               m: 1,
               width: 500,
-              height: 500,
+              height: 600,
             },
           }}
         >
@@ -135,6 +170,20 @@ export default function CuentaCliente({ userId, userData }) {
               fullWidth
               margin="normal"
             />
+            <TextField
+              label="Ciudad"
+              value={city}
+              onChange={handleChangeCity}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="País"
+              value={country}
+              onChange={handleChangeCountry}
+              fullWidth
+              margin="normal"
+            />
 
             <Button
               variant="contained"
@@ -152,7 +201,7 @@ export default function CuentaCliente({ userId, userData }) {
         </Box>
         <Transactions />
         {/* ver si se le va a dar funcionalidad a las Reservations */}
-        <Reservations />
+        {/* <Reservations /> */}
       </Box>
     </div>
   );

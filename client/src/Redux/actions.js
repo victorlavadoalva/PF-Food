@@ -205,11 +205,14 @@ export const updateAccount = (userId, userData) => {
       dispatch({ type: LOADING });
       const token = localStorage.getItem("access_token");
       const resp = await axios.put(
-        `${backendUrl}/${userId}`,
+        `${userLocal}/${userId}`,
         {
           name: userData.name,
           email: userData.email,
           phone: userData.phone,
+          address: userData.address,
+          city: userData.city,
+          country: userData.country
         },
         {
           headers: {
