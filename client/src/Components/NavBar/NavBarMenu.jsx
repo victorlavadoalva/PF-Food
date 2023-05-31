@@ -1,6 +1,6 @@
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import { useAuth0 } from "@auth0/auth0-react";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { LoadingApp } from "../../Redux/actions";

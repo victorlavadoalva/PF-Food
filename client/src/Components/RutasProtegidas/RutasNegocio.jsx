@@ -31,5 +31,4 @@ export default function RutaRestaurant() {
   } else {
     return <Outlet />;
   }
-
 }

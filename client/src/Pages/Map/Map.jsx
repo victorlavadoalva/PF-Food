@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useEffect, useState } from 'react';
 import { MarkersRest } from './MarkerRest';
 
 //*******************************DATA PRUEBA******************************************** */
@@ -8,7 +8,7 @@ let userLocation = {address:"Mariquita Sanchez de Thompson 856",city:"Rio Cuarto
 //********************************************************************************* */
 
 
-export function Map() {
+export default function Map() {
     const [coordenadas, setCoordenadas] = useState({lat:null,lng:null})
     const [addressSearch, setAddressSearch] = useState({city:userLocation.city, country:userLocation.country})
     useEffect(() => {

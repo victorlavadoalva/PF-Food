@@ -19,12 +19,17 @@ import ReservasCliente from "./Pages/FormReservas";
 import FormUser from "./Pages/FormUser";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
-import { Map } from "./Pages/Map/Map.jsx";
+// import { Map } from "./Pages/Map/Map.jsx";
+import AboutUs from "./Pages/AboutUs";
+import Developers from "./Pages/Developers";
+import Map from "./Pages/Map/Map";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import Store from './Pages/Store';
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
+import AdminView from "./View/AdminUsers/index";
+import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
@@ -56,7 +61,10 @@ function App() {
               location.pathname !== "/user-type/form-restaurant" &&   <Header />}
             <main className={styles.main}>
               <Routes>
-                <Route path="mapa" element={<Map />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="adminView" element={<AdminView />} />
+              <Route path="mapa" element={<Map />}/>
+
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />}>
@@ -66,6 +74,8 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
+                      <Route path="aboutUs" element={<AboutUs />} />
+                      <Route path="developers" element={<Developers />} />
                       {/* Usuaio tipo Cliente */}
                       <Route >
                         <Route path="cart" element={<Store />}/>
@@ -101,6 +111,7 @@ function App() {
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
                     <Route path="reservas" element={<Reservas />} />
+                    
                   </Route>
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}

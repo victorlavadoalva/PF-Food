@@ -10,6 +10,8 @@ import {
   GET_ALL_RESTORANTS,
   GET_AMOUNTPAGES,
   GET_DISH,
+  GET_ORDERS,
+  GET_RESERVS,
   GET_RESTOURANT_ID,
   GET_TOKEN,
   GET_USER_EMAIL,
@@ -17,16 +19,15 @@ import {
   POST_USER,
   UPDATE_SUCCESS,
   UPDATE_USER,
-  USER_REGISTER
+  USER_REGISTER,
 } from "./actionsTypes";
 //const token = process.env.GET_TOKEN;
 //const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
 
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`;
-const URL_RESTAURANT =
-  "https://pf-backend-production-83a4.up.railway.app/restaurants";
-const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
+const URL_RESTAURANT = "http://localhost:3001/restaurants";
+const URL_USERS = "http://localhost:3001/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
 const backendUrl = "http://localhost:3001";
 const userLocal = backendUrl + "/users"
@@ -65,7 +66,7 @@ export const getRestorantFilter = (tags) => {
         params: { tags },
       });
       return dispatch({ type: FILTER_LANDING, payload: data });
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -275,3 +276,32 @@ export const Register = (user) => {
     });
   };
 };
+export const getReservs = (restoId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`https://pf-backend-production-83a4.up.railway.app/restorant/${restoId}`);
+      const data = response.data;
+      return dispatch({
+        type: GET_RESERVS,
+        payload: data
+      })
+    } catch (error) {
+      return dispatch({ type: ERROR, payload: error });
+    }
+  };
+};export const getOrders = (restoId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`https://pf-backend-production-83a4.up.railway.app/restorant/${restoId}`);
+      const data = response.data;
+      return dispatch({
+        type: GET_ORDERS,
+        payload: data
+      })
+    } catch (error) {
+      return dispatch({ type: ERROR, payload: error });
+    }
+  };
+};
+
+

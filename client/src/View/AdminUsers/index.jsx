@@ -1,8 +1,12 @@
+import TableAdmin from "./Table";
+import style from './index.module.css';
 
-export default function AdminUser () {
-return (
-    <div>
-        <h1>Admin Users</h1>
-    </div>
-)
-}
+const AdminView = () => {
+    return(
+        <div className={style.container}>
+            <TableAdmin/>
+        </div>
+    );
+};
+
+export default AdminView;

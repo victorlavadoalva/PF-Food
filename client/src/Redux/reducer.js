@@ -10,6 +10,8 @@ import {
   GET_AMOUNTPAGES,
   GET_DISH,
   GET_FILTERED,
+  GET_ORDERS,
+  GET_RESERVS,
   GET_RESTOURANT_ID,
   GET_TOKEN,
   GET_USER_EMAIL,
@@ -18,7 +20,7 @@ import {
   POST_USER,
   UPDATE_SUCCESS,
   UPDATE_USER,
-  USER_REGISTER
+  USER_REGISTER,
 } from "./actionsTypes";
 
 const initialState = {
@@ -39,10 +41,22 @@ const initialState = {
   filter_landing: [],
   user: {},
   updateSuccess: false,
+  reservs:{},
+  orders:{},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_ORDERS: 
+      return {
+        ...state,
+        orders: payload
+      }
+    case GET_RESERVS:
+      return {
+        ...state,
+        reservs: payload
+      } 
     case DELETE_CART:
       return {
         ...state,

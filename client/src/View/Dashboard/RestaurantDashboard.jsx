@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Loading_Login from '../Loading';
 import style from './RestaurantDashboard.module.css';
 import ValorationsMonth from './dashComponents/ValorationsMonth';
 import TopUsers from './dashUsers/topUsers';
@@ -7,6 +8,7 @@ import Deliverys from './raiting/Deliverys';
 
 const Dashboards = () => {
     const [dataDhas, setDataDhas] = useState(null);
+    const isMounted = useRef(true);
     
 
     useEffect(() => {
@@ -14,8 +16,9 @@ const Dashboards = () => {
             // const response = await axios.get(`http://localhost:3001/restaurants/dashboard/${id}`);
             axios.get(`http://localhost:3001/restaurants/dashboard/646e81029abe7c82fd16942b`)
                 .then((response) => {
-                    console.log(response.data);
-                    setDataDhas(response.data)
+                    if(isMounted.current){
+                        setDataDhas(response.data)
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -23,6 +26,9 @@ const Dashboards = () => {
         };
 
         fetchData();
+        return () => {
+            isMounted.current = false
+        }
     }, []);
     console.log(dataDhas)
 
@@ -45,7 +51,7 @@ const Dashboards = () => {
                     ? dataDhas.topFiveUsers.map((user) => {
                         return <TopUsers data={user} />
                     })
-                    : <h2>Loading...</h2>
+                    : <Loading_Login />
                 }
             </div>
         </>

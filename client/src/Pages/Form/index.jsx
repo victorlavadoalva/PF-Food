@@ -42,9 +42,12 @@ export default function Form() {
   });
 
   function handleImage(event) {
-    const file = event[0];
-    setImageFile(file)
+    const files = Array.from(event.target.files).slice(0, 3);
+    const fileObjects = files.map((file) => URL.createObjectURL(file));
+    
+    setImages(fileObjects);
   }
+  
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -355,12 +358,11 @@ export default function Form() {
                 onChange={(e) => setTagValue(e.target.value)}
               >
                 <MenuItem value="">Seleccionar</MenuItem>
-                <MenuItem value="Internacional">Internacional</MenuItem>
-                <MenuItem value="Veggie">Veggie</MenuItem>
-                <MenuItem value="Vegan">Vegan</MenuItem>
-                <MenuItem value="Celiaco">Celiaco</MenuItem>
-                <MenuItem value="Parrilla">Parrilla</MenuItem>
-                <MenuItem value="Tematicas">Tematicas</MenuItem>
+                <MenuItem value="Pizza">Pizza</MenuItem>
+                <MenuItem value="Burger">Burger</MenuItem>
+                <MenuItem value="Sandwich">Sandwich</MenuItem>
+                <MenuItem value="Chicken">Chicken</MenuItem>
+                <MenuItem value="Pasta">Pasta</MenuItem>
                 <MenuItem value="Otros">Otros</MenuItem>
 
               </Select>
