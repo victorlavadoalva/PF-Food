@@ -25,8 +25,8 @@ import {
 
 const token = process.env.GET_TOKEN;
 const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`;
-const URL_RESTAURANT = "https://pf-backend-production-83a4.up.railway.app/restaurants";
-const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
+const URL_RESTAURANT = "http://localhost:3001/restaurants";
+const URL_USERS = "http://localhost:3001/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
 const backendUrl = "http://localhost:3001/users";
 
