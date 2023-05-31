@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Table, { Direction } from 'react-data-table-component';
 import SelectSmall from '../../Components/Select';
 import imgDefault from '../../Img/ImgCardLanding/default.png';
+import Loading_Login from '../Loading';
 import style from './Table.module.css';
 
 
@@ -213,7 +214,7 @@ const TableAdmin = () => {
                 pagination={true}
                 paginationPerPage={10}
             />
-            : <h1>Loading...</h1>
+            : <Loading_Login />
         }
         
         </>
