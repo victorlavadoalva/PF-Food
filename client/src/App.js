@@ -11,19 +11,22 @@ import RutasCliente from "./Components/RutasProtegidas/RutasCliente";
 import RutaRestaurant from "./Components/RutasProtegidas/RutasNegocio";
 import RutasUsers from "./Components/RutasProtegidas/RutasUsers";
 import Error404 from "./Pages/404";
+import CuentaCliente from "./Pages/CuentaCliente";
 import Detail from "./Pages/Detail/index";
 import Form from "./Pages/Form";
 import FormPlatos from "./Pages/FormPlatos";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
+import Map from './Pages/Map/Map';
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
 import { LoadingApp } from "./Redux/actions";
 import AdminUser from "./View/AdminUsers";
+import AdminView from "./View/AdminUsers/index";
+import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import CuentaCliente from "./Pages/CuentaCliente";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +52,8 @@ function App() {
               location.pathname !== "/user-type" && <Header />}
             <main className={styles.main}>
               <Routes>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="adminView" element={<AdminView />} />
               <Route path="mapa" element={<Map />}/>
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
@@ -85,6 +90,7 @@ function App() {
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
                     <Route path="reservas" element={<Reservas />} />
+                    
                   </Route>
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
