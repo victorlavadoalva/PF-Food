@@ -21,6 +21,8 @@ export default function Home() {
 
   useEffect(() => {
   }, [isActive])
+  const editMenu = () => {
+  }
 
   const removeFromMenu = (id) => {
     const dish = plates.find(dish => dish._id === id);
@@ -39,9 +41,9 @@ export default function Home() {
             {
               plates.length ?
                 plates.map(plate => {
-              //! TODO descomentar cuando este conectado al back
-              // dishes?.documents?.length ?
-              //   dishes?.documents?.map(plate => {
+                  //! TODO descomentar cuando este conectado al back
+                  // dishes?.documents?.length ?
+                  //   dishes?.documents?.map(plate => {
                   return (
                     <CardDish
                       key={plate.id}
@@ -52,6 +54,7 @@ export default function Home() {
                       id={plate._id}
                       isActive={plate.isActive}
                       removeFromMenu={removeFromMenu}
+                      editMenu={editMenu}
                     />
                   )
                 })

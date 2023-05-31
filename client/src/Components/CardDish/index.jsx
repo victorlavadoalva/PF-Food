@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -38,6 +38,7 @@ export const CardDish = ({
   addToCart,
   removeFromMenu,
   isActive,
+  editMenu,
 }) => {
 
   const [expanded, setExpanded] = useState(false);
@@ -119,15 +120,22 @@ export const CardDish = ({
           </ExpandMore>
         </CardActions>
       )}
-      {isRestorant && (isActive ? (
-        <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
-          <RemoveIcon />
+      {
+        isRestorant &&
+        <IconButton edge="end" aria-label="delete" onClick={() => editMenu(id)}>
+          <EditIcon />
         </IconButton>
-      ) : (
-        <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
-          <AddIcon />
-        </IconButton>
-      ))
+      }
+      {
+        isRestorant && (isActive ? (
+          <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
+            <RemoveIcon />
+          </IconButton>
+        ) : (
+          <IconButton edge="end" aria-label="delete" onClick={() => removeFromMenu(id)}>
+            <AddIcon />
+          </IconButton>
+        ))
       }
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
