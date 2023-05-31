@@ -2,70 +2,101 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
 import { Link } from 'react-router-dom';
-import { TextField, Box, Button, Container } from "@mui/material";
-import { useRef } from "react";
+import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from "@mui/material";
+
 
 export default function Form() {
+  const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
     description: "",
     city: "",
-    adress:"",
-    country:"",
-    phoneNumber:"",
-    image: [],
+    address: "",
+    country: "",
+    phoneNumber: "",
+    image: null,
     type_customer: "Restaurant",
     tags: [],
-    capacity: ""
+    capacity: "",
+    email: ""
   });
+
 
   const [errors, setErrors] = useState({
     name: 'Campo Requerido',
     description: '',
     city: "",
-    country:"",
-    adress:"",
-    phoneNumber:"",
+    country: "",
+    address: "",
+    phoneNumber: "",
     capacity: '',
     image: '',
+    email: ""
 
   });
 
+  function handleImage(event) {
+    const file = event[0];
+    setImageFile(file)
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    if (restorants.name && restorants.city && restorants.country && restorants.adress && restorants.description && restorants.capacity) {
-      axios.post("https://pf-backend-production-5a61.up.railway.app/restaurants", restorants)
-      setErrors({});
-      setRestorants({
-        name: "",
-        description: "",
-        city: "",
-        country:"",
-        adress:"",
-        phoneNumber:"",
-        image: "",
-        type_customer: "Restaurant",
-        tags: [],
-        capacity: ""
-      });
-      alert('Restaurante creado')
+    if (restorants.name && restorants.city && restorants.country && restorants.address && restorants.description && restorants.capacity) {
+      const formData = new FormData();
+      formData.append("name", restorants.name);
+      formData.append("description", restorants.description);
+      formData.append("city", restorants.city);
+      formData.append("address", restorants.address);
+      formData.append("country", restorants.country);
+      formData.append("phoneNumber", restorants.phoneNumber);
+      formData.append("image", imageFile);
+      formData.append("type_customer", "Restaurant");
+      formData.append("email", restorants.email);
+      formData.append("tags", JSON.stringify(restorants.tags));
+      formData.append("capacity", restorants.capacity);
+
+      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
+        .then((response) => {
+          console.log('Datos enviados:', formData);
+          console.log('Respuesta del servidor:', response.data);
+          alert('Restaurante creado');
+          setErrors({});
+          setRestorants({
+            name: "",
+            description: "",
+            city: "",
+            country: "",
+            address: "",
+            phoneNumber: "",
+            image: null,
+            type_customer: "Restaurant",
+            tags: [],
+            capacity: "",
+            email: ''
+          });
+          localStorage.setItem("UserLogVerificate", JSON.stringify(response.data));
+          window.localStorage.setItem("IsLogin", true);
+        })
+        .catch((error) => {
+          console.log(error)
+          alert('Error al crear el restaurante');
+        });
     } else {
-      alert('Información incompleta');
+      alert('Información incompleta!');
     }
     console.log(restorants)
   };
 
-  const tagsInputRef = useRef(null);
-
+  const [tagValue, setTagValue] = useState("");
   function handleTags(event) {
-    
     event.preventDefault();
-    const tagValue = tagsInputRef.current.value;
     if (tagValue.trim() !== "") {
       setRestorants({
         ...restorants,
         tags: [...restorants.tags, tagValue]
       });
+      setTagValue("");
     }
   }
 
@@ -77,6 +108,7 @@ export default function Form() {
         [name]: value
       })
     };
+    console.log(restorants)
 
 
     switch (name) {
@@ -100,9 +132,9 @@ export default function Form() {
         break;
       case 'phoneNumber':
         validatePhoneNumber(value);
-        break;  
-      case 'image':
-        validateImage(value);
+        break;
+      case 'email':
+        validateEmail(value);
         break
       default:
         break;
@@ -117,7 +149,7 @@ export default function Form() {
       setErrors({ ...errors, name: '' });
     }
   };
-  
+
   const validateDescription = (description) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(description) || description.length < 20) {
       setErrors({ ...errors, description: 'Descripción inválida' });
@@ -125,7 +157,7 @@ export default function Form() {
       setErrors({ ...errors, description: '' });
     }
   };
-  
+
   const validateCapacity = (capacity) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(capacity)) {
       setErrors({ ...errors, capacity: 'Se requiere capacidad' });
@@ -141,7 +173,7 @@ export default function Form() {
       setErrors({ ...errors, city: '' });
     }
   };
-  
+
   const validateAddress = (address) => {
     if (!/^[\p{L}\d\s.,;()']+$/u.test(address)) {
       setErrors({ ...errors, address: 'Dirección inválida' });
@@ -149,7 +181,7 @@ export default function Form() {
       setErrors({ ...errors, address: '' });
     }
   };
-  
+
   const validateCountry = (country) => {
     if (!/^[\p{L}\s.,;()']+$/u.test(country)) {
       setErrors({ ...errors, country: 'País inválido' });
@@ -157,7 +189,7 @@ export default function Form() {
       setErrors({ ...errors, country: '' });
     }
   };
-  
+
   const validatePhoneNumber = (phoneNumber) => {
     if (!/^[\d\-()\s]+$/.test(phoneNumber)) {
       setErrors({ ...errors, phoneNumber: 'Número de teléfono inválido' });
@@ -165,16 +197,24 @@ export default function Form() {
       setErrors({ ...errors, phoneNumber: '' });
     }
   };
-  
-  
 
-  const validateImage = (image) => {
-    if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.gif|.GIF|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
-      setErrors({ ...errors, image: 'Formato inválido' });
+  const validateEmail = (email) => {
+    const emailRegex = /^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,3}$/;
+
+    if (!emailRegex.test(email)) {
+      setErrors({ ...errors, email: 'Correo electrónico inválido' });
     } else {
-      setErrors({ ...errors, image: '' });
+      setErrors({ ...errors, email: '' });
     }
   };
+
+  // const validateImage = (image) => {
+  //   if (!/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.png|.PNG|.jpeg|.JPEG)$/.test(image)) {
+  //     setErrors({ ...errors, image: 'Formato inválido' });
+  //   } else {
+  //     setErrors({ ...errors, image: '' });
+  //   }
+  // };
 
   function isFormValid() {
     return (
@@ -182,10 +222,11 @@ export default function Form() {
       errors.description === '' &&
       errors.city === '' &&
       errors.country === '' &&
-      errors.adress === '' &&
+      errors.address === '' &&
       errors.phoneNumber === '' &&
       errors.capacity === '' &&
-      errors.image === '' 
+      errors.image === '' &&
+      errors.email === ''
     );
   }
 
@@ -238,13 +279,13 @@ export default function Form() {
               <TextField
                 label="Direccion"
                 variant="outlined"
-                name="adress"
-                value={restorants.adress}
+                name="address"
+                value={restorants.address}
                 onChange={handleChange}
                 autoComplete="off"
                 placeholder="Direccion..."
-                error={errors.adress !== ""}
-                helperText={errors.adress !== "" ? errors.adress : ""}
+                error={errors.address !== ""}
+                helperText={errors.address !== "" ? errors.address : ""}
               />
               <TextField
                 label="Numero de Telefono"
@@ -256,6 +297,17 @@ export default function Form() {
                 placeholder="Telefono..."
                 error={errors.phoneNumber !== ""}
                 helperText={errors.phoneNumber !== "" ? errors.phoneNumber : ""}
+              />
+              <TextField
+                label="Email"
+                variant="outlined"
+                name="email"
+                value={restorants.email}
+                onChange={handleChange}
+                autoComplete="off"
+                placeholder="Email..."
+                error={errors.email !== ""}
+                helperText={errors.email !== "" ? errors.email : ""}
               />
               <TextField
                 label="Descripcion"
@@ -281,21 +333,23 @@ export default function Form() {
                 error={errors.capacity !== ""}
                 helperText={errors.capacity !== "" ? errors.capacity : ""}
               />
-              <TextField
-                label="Tags"
-                variant="outlined"
-                name="tags"
-                placeholder="Tags..."
-                autoComplete="off"
-                inputRef={tagsInputRef}
-                onChange={handleChange}
-                type="text"
-              />
-              <div>
-                {
-                  restorants.tags.map((tag, index) => (<span key={index}>{tag + ', '}</span>))
-                }
-              </div>
+              <InputLabel id="tags-label">Tags</InputLabel>
+              <Select
+                labelId="tags-label"
+                id="tags"
+                value={tagValue}
+                onChange={(e) => setTagValue(e.target.value)}
+              >
+                <MenuItem value="">Seleccionar</MenuItem>
+                <MenuItem value="Internacional">Internacional</MenuItem>
+                <MenuItem value="Veggie">Veggie</MenuItem>
+                <MenuItem value="Vegan">Vegan</MenuItem>
+                <MenuItem value="Celiaco">Celiaco</MenuItem>
+                <MenuItem value="Parrilla">Parrilla</MenuItem>
+                <MenuItem value="Tematicas">Tematicas</MenuItem>
+                <MenuItem value="Otros">Otros</MenuItem>
+
+              </Select>
               <Button
                 variant="contained"
                 onClick={handleTags}
@@ -303,17 +357,10 @@ export default function Form() {
               >
                 Agregar
               </Button>
-              <TextField
-                label="Image"
-                variant="outlined"
-                name="image"
-                value={restorants.image}
-                onChange={handleChange}
-                autoComplete="off"
-                placeholder="Image..."
+              <input
                 type="file"
-                error={errors.image !== ""}
-                helperText={errors.image !== "" ? errors.image : ""}
+                name="image"
+                onChange={(e) => handleImage(e.target.files)}
               />
               <Box mr={2} mt={2} mb={2}>
                 <Button

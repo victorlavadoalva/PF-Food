@@ -1,8 +1,12 @@
-import styles from "./index.module.css";
+import styles from "./styles.module.css";
 
-export default function CardLanding({id ,image, name}) {
+export default function CardLanding({id ,image, name, onChange}) {
+
+  const handleClick = () => {
+    onChange(name); 
+  };
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardContainer} onClick={handleClick}>
         <div className={styles.imgContainer}>
           <img src={image} alt = {name} />
         </div>

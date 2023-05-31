@@ -1,15 +1,15 @@
+import { CardActionArea } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 export const SimpleCard = ({ image, title, city, address, id }) => {
   return (
-    <Link to={`/detail/${id}`} style={{textDecoration: 'none'}}>
+    <Link to={`detail/${id}`} style={{textDecoration: 'none'}}>
       <Card sx={{ width: 345, height: 270 }}>
         <CardActionArea>
           <CardMedia
