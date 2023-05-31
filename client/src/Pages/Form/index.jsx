@@ -12,7 +12,6 @@ export default function Form() {
   const navigate = useNavigate()
   const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"));
 
-  const {postuser} = useSelector((state) => state)
   const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: objUser.nickname,
@@ -21,11 +20,11 @@ export default function Form() {
     address: "",
     country: "",
     phoneNumber: "",
-    images: null,
+    images:[],
     type_customer: "Restaurant",
     tags: [],
-    capacity: "",
-    email:objUser.email
+    capacity: 0,
+    email:objUser.email,
   });
 
 
@@ -38,8 +37,8 @@ export default function Form() {
     phoneNumber: "",
     capacity: '',
     images: '',
-    email: ""
-
+    email: "",
+    images:""
   });
 
   function handleImage(event) {
@@ -61,8 +60,8 @@ export default function Form() {
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
-      formData.append("capacity", restorants.capacity);
-      axios.post("https://pf-backend-production-83a4.up.railway.app/restaurants", formData)
+      formData.append("capacity",Number(restorants.capacity) );
+      axios.post("http://localhost:3001/restaurants", formData)
         .then((response) => {
           console.log('Datos enviados:', formData);
           console.log('Respuesta del servidor:',  response.data);

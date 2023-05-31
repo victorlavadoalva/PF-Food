@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet, Navigate ,useLocation} from "react-router-dom";
-import { GetUserEmail, LoadingApp, GetTokenLogin } from "../../Redux/actions";
+import { GetUserEmail, LoadingApp, GetTokenLogin,Register } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function RutasUsers() {
@@ -83,6 +83,7 @@ console.log(saveEmail)
           dispatch(LoadingApp(false));
         } else if (userFoundByEmail[0] === false && location.pathname !== "/user-type/form-user" && location.pathname !== "/user-type/form-restaurant") {
           console.log("!!!!!!!!!!No esta registrado")
+          dispatch(Register(user))
           navigate(redirection);
           dispatch(LoadingApp(false));
         }

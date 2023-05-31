@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate ,useLocation, Outlet} from "react-router";
 import styles from "./styles.module.css"
 import { PostUser } from "../../Redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function UserType() {
   const navigate = useNavigate()
   // const dispatch = useDispatch();
   const location = useLocation()
+  const {user_register} = useSelector((state) => state)
   // const {postuser} = useSelector(state => state);
-  const objUser = JSON.parse(window.localStorage.getItem("UserVerificated"))
-  
 
 //   const [UserNew, setUserNew] = useState({
 //     id:null,
@@ -32,10 +32,12 @@ export default function UserType() {
 //   setIsClient(true)
 const handleTypeClient = (event) => {
   event.preventDefault()
+  window.localStorage.setItem("UserVerificated", JSON.stringify(user_register))
   navigate("/user-type/form-user")
 }
 const handleTypeRestaurant= (event) => {
   event.preventDefault()
+  window.localStorage.setItem("UserVerificated", JSON.stringify(user_register))
   navigate("/user-type/form-restaurant")
 }
 

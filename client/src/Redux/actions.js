@@ -17,6 +17,7 @@ import {
   POST_USER,
   UPDATE_SUCCESS,
   UPDATE_USER,
+  USER_REGISTER
 } from "./actionsTypes";
 //const token = process.env.GET_TOKEN;
 //const GET_URL_TOKEN = `https://pf-backend-production-83a4.up.railway.app/${token}`
@@ -27,9 +28,9 @@ const URL_RESTAURANT =
   "https://pf-backend-production-83a4.up.railway.app/restaurants";
 const URL_USERS = "https://pf-backend-production-83a4.up.railway.app/users";
 const URL_POST = "​https://pf-backend-production-83a4.up.railway.app/posts";
-const backendUrl = "http://localhost:3001/";
-const userLocal = backendUrl + "users"
-const restaurantLocal = backendUrl + "restaurants"
+const backendUrl = "http://localhost:3001";
+const userLocal = backendUrl + "/users"
+const restaurantLocal = backendUrl + "/restaurants"
 export const getRestorants = ({
   page = 1,
   order,
@@ -40,7 +41,7 @@ export const getRestorants = ({
 }) => {
   return async function (dispatch) {
     try {
-      const { data } = await axios(URL_RESTAURANT, {
+      const { data } = await axios(restaurantLocal, {
         params: { page, order, rating, name, country, tags },
       });
       console.log('Server Response:', data);
@@ -67,6 +68,7 @@ export const getRestorantFilter = (tags) => {
     } catch (error) {}
   };
 };
+
 
 export const getDish = (id) => {
   return async function (dispatch) {
@@ -259,6 +261,17 @@ export const deleteCart = () => {
   return async function (dispatch) {
     return dispatch({
       type: DELETE_CART,
+    });
+  };
+};
+
+
+
+export const Register = (user) => {
+  return async function (dispatch) {
+    return dispatch({
+      type: USER_REGISTER,
+      payload:user
     });
   };
 };

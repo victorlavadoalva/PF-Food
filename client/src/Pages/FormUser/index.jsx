@@ -13,7 +13,8 @@ export default function FormUser() {
     city: "",
     address: "",
     country: "",
-    // phone:"",
+    phone:"",
+    images:[objUser.picture],
     type_customer: "User",
     description:null,
   });
@@ -24,26 +25,22 @@ export default function FormUser() {
     city: "Campo requerido",
     address: "Campo requerido",
     country: "Campo requerido",
-    // phone:"Campo requerido",
+    phone:"",
     type_customer: "User",
     description:null,
   });
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (user.city && user.country && user.address && user.name) {
-      const formData = new FormData();
-      if(!user.name) {
-        formData.append("name", objUser.nickname);
-      }else{
-        formData.append("name", user.name);
-      }
-      
+    if (user.city && user.country && user.address && user.name && user.phone) {
+      const formData = new FormData();      
+      formData.append("name", user.name);
       formData.append("email", user.email);
       formData.append("city", user.city);
       formData.append("address", user.address);
       formData.append("country", user.country);
-      // formData.append("phone", user.phone);
+      formData.append("phone", user.phone);
+      formData.append("images", user.images);
       formData.append("type_customer", user.type_customer);
       axios
         .post(
@@ -98,9 +95,9 @@ export default function FormUser() {
       case "country":
         validateCountry(value);
         break;
-      // case "phone":
-      //   validatePhoneNumber(value);
-      //   break;
+      case "phone":
+        validatePhoneNumber(value);
+        break;
       case "name":
         validateName(value)
       default:
@@ -116,13 +113,13 @@ export default function FormUser() {
     }
   };
 
-  // const validatePhoneNumber = (phoneNumber) => {
-  //   if (!/^\d+$/.test(phoneNumber)) {
-  //     setErrors({ ...errors, phoneNumber: "Número de teléfono inválido" });
-  //   } else {
-  //     setErrors({ ...errors, phoneNumber: "" });
-  //   }
-  // };
+  const validatePhoneNumber = (phone) => {
+    if (!/^[0-9]+$/.test(phone)) {
+      setErrors({ ...errors, phone: "Número de teléfono inválido" });
+    } else {
+      setErrors({ ...errors, phone: "" });
+    }
+  };
 
   const validateCity = (city) => {
     if (!/^[\p{L}\s.,;()']+$/u.test(city)) {
@@ -191,7 +188,7 @@ export default function FormUser() {
                 // error={errors.city !== ""}
                 // helperText={errors.city !== "" ? errors.city : ""}
               />
-              {/* <TextField
+              <TextField
                 label="Telefono"
                 variant="outlined"
                 name="phone"
@@ -201,7 +198,7 @@ export default function FormUser() {
                 placeholder="Telefono..."
                 error={errors.phone !== ""}
                 helperText={errors.phone !== "" ? errors.phone : ""}
-              /> */}
+              />
               <TextField
                 label="Ciudad"
                 variant="outlined"
