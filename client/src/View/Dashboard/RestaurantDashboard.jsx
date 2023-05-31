@@ -9,12 +9,20 @@ import Deliverys from './raiting/Deliverys';
 const Dashboards = () => {
     const [dataDhas, setDataDhas] = useState(null);
     const isMounted = useRef(true);
+    const dataStorage = localStorage.getItem("UserLogVerificate");
+    const dataParsed = JSON.parse(dataStorage);
+    const token = dataParsed.token
+    console.log(token);
     
 
     useEffect(() => {
         const fetchData = () => {
-            // const response = await axios.get(`http://localhost:3001/restaurants/dashboard/${id}`);
-            axios.get(`http://localhost:3001/restaurants/dashboard/646e81029abe7c82fd16942b`)
+            axios.get(`http://localhost:3001/restaurants/dashboard/${dataParsed.id}`,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                    // 'Content-Type': 'application/json'
+                }
+            })
                 .then((response) => {
                     if(isMounted.current){
                         setDataDhas(response.data)
@@ -35,7 +43,7 @@ const Dashboards = () => {
     return (
         <>
             <div className={style.banerCont}>
-                <h1>Pepito's Restaurant</h1>
+                <h1>{dataParsed.name}</h1>
             </div>
             <div className={style.container}>
                 <ValorationsMonth data={dataDhas ? dataDhas : []} />

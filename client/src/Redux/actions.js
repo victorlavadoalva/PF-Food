@@ -38,12 +38,12 @@ export const getRestorants = ({
   rating,
   name,
   country,
-  tags,
+  tag,
 }) => {
   return async function (dispatch) {
     try {
       const { data } = await axios(restaurantLocal, {
-        params: { page, order, rating, name, country, tags },
+        params: { page, order, rating, name, country, tag },
       });
       console.log('Server Response:', data);
       return (
@@ -205,11 +205,14 @@ export const updateAccount = (userId, userData) => {
       dispatch({ type: LOADING });
       const token = localStorage.getItem("access_token");
       const resp = await axios.put(
-        `${backendUrl}/${userId}`,
+        `${userLocal}/${userId}`,
         {
           name: userData.name,
           email: userData.email,
           phone: userData.phone,
+          address: userData.address,
+          city: userData.city,
+          country: userData.country
         },
         {
           headers: {
