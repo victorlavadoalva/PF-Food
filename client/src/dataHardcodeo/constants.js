@@ -609,36 +609,36 @@ export const pedidosClienteColumns = [
   },
 ];
 
-// export const pedidosClienteRows = [
-//   {
-//     id: 1,
-//     day: "25/03/2023",
-//     name: "ItItaly",
-//     plate: ["Ñoquis con salsa boloñesa"],
-//     status: true,
-//   },
-//   {
-//     id: 2,
-//     day: "05/04/2023",
-//     name: "SushiClub",
-//     plate: ["Combinado 30p"],
-//     status: true,
-//   },
-//   {
-//     id: 3,
-//     day: "15/05/2023",
-//     name: "El Club de la Milanesa",
-//     plate: ["Milanesas con papas"],
-//     status: true,
-//   },
-//   {
-//     id: 4,
-//     day: "25/05/2023",
-//     name: "ItItaly",
-//     plate: ["Lasaña"],
-//     status: false,
-//   },
-// ];
+export const pedidosClienteRows = [
+  {
+    id: 1,
+    day: "25/03/2023",
+    name: "ItItaly",
+    plate: ["Ñoquis con salsa boloñesa"],
+    status: true,
+  },
+  {
+    id: 2,
+    day: "05/04/2023",
+    name: "SushiClub",
+    plate: ["Combinado 30p"],
+    status: true,
+  },
+  {
+    id: 3,
+    day: "15/05/2023",
+    name: "El Club de la Milanesa",
+    plate: ["Milanesas con papas"],
+    status: true,
+  },
+  {
+    id: 4,
+    day: "25/05/2023",
+    name: "ItItaly",
+    plate: ["Lasaña"],
+    status: false,
+  },
+];
 
 export const reservasClienteColumns = [
   { field: "id", headerName: "Reserva N°", width: 90 },
