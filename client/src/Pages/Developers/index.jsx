@@ -10,62 +10,63 @@ export default function Developers() {
 
   const backendTeam = [
     {
-      name: 'Integrante 1',
+      name: 'Santiago Leyria',
       photo: '/path/to/photo1.jpg',
-      linkedin: 'https://www.linkedin.com/profile1',
+      linkedin: 'https://www.linkedin.com/in/santiago-leyria-lino-182497219',
     },
     {
-      name: 'Integrante 2',
+      name: 'Victor Lavado',
       photo: '/path/to/photo2.jpg',
-      linkedin: 'https://www.linkedin.com/profile2',
+      linkedin: 'https://www.linkedin.com/in/victor-lavado/',
     },
     {
-      name: 'Integrante 3',
+      name: 'Miguel Sierra',
       photo: '/path/to/photo3.jpg',
-      linkedin: 'https://www.linkedin.com/profile3',
+      linkedin: 'https://www.linkedin.com/in/miguel-sierra-bola%C3%B1os-a995b5263',
     },
     {
       name: 'Integrante 4',
       photo: '/path/to/photo4.jpg',
-      linkedin: 'https://www.linkedin.com/profile4',
+      linkedin: 'https://www.linkedin.com/profile3',
     },
 
   ];
 
   const frontendTeam = [
     {
-      name: 'Integrante 5',
+      name: 'Gonzalo Medina',
       photo: '/path/to/photo5.jpg',
-      linkedin: 'https://www.linkedin.com/profile5',
+      linkedin: 'https://www.linkedin.com/in/gonzalo-medina-borsotto-7565b9263/',
     },
     {
-      name: 'Integrante 6',
+      name: 'Gonzalo Suarez',
       photo: '/path/to/photo6.jpg',
-      linkedin: 'https://www.linkedin.com/profile6',
+      linkedin: 'https://www.linkedin.com/in/gonzalo-suarez-7bab9a206/',
     },
     {
-      name: 'Integrante 7',
+      name: 'Aldana Alonso',
       photo: '/path/to/photo7.jpg',
-      linkedin: 'https://www.linkedin.com/profile7',
+      linkedin: 'https://www.linkedin.com/in/aldana-soledad-alonso/',
     },
     {
-      name: 'Integrante 8',
+      name: 'Franco Krismann',
       photo: '/path/to/photo8.jpg',
-      linkedin: 'https://www.linkedin.com/profile8',
+      linkedin: 'https://www.linkedin.com/in/franco-gabriel-krismann-',
     },
   ];
 
   return (
-    <div className={styles.developers}>
-      <div className={styles.team}>
-        <div>
+    <div className={styles.container}>
+      
+      <div className={styles.column}>
+        <div className={styles.title}>
         <Typography variant="h3" component="h3">
           Equipo Backend
         </Typography>
         </div>
-        <div>
-        {backendTeam.map((member, index) => (
-          <div key={index} className={styles.member}>
+        <div className={styles.team}>
+        {backendTeam.map((member) => (
+          <div className={styles.integrante}>
             <img src={member.photo} alt={member.name} />
             <Typography variant="h4" component="h4">
               {member.name}
@@ -77,16 +78,16 @@ export default function Developers() {
         ))}
         </div>
       </div>
-  
-      <div className={styles.team}>
-        <div>
+      
+      <div className={styles.column}>
+      <div className={styles.title}>
         <Typography variant="h3" component="h3">
           Equipo Frontend
         </Typography>
-        </div>
-        <div>
-        {frontendTeam.map((member, index) => (
-          <div key={index} className={styles.member}>
+      </div>
+        <div className={styles.team}>
+        {frontendTeam.map((member) => (
+          <div className={styles.integrante}>
             <img src={member.photo} alt={member.name} />
             <Typography variant="h4" component="h4">
               {member.name}
