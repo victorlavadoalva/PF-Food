@@ -106,8 +106,8 @@ function App() {
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Rutas Admin */}
                 <Route element={<RutasAdmin />}>
-                  <Route path="/admin/usuarios" element={<AdminUser />} />
                 </Route>
+                  <Route path="/admin/usuarios" element={<AdminUser />} />
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Cierra ruta potegida con o sin login */}
               </Routes>
