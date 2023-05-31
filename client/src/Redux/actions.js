@@ -37,7 +37,7 @@ export const getRestorants = ({
   order,
   rating,
   name,
-  city,
+  country,
   tag,
 }) => {
   return async function (dispatch) {
