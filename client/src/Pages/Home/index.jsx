@@ -16,30 +16,30 @@ export default function Home() {
   const { restorants } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  const [location, setLocation] = useState('');
+  const [city, setCity] = useState('');
   const [order, setOrder] = useState('');
   const [rating, setRating] = useState('');
   const [searchName] = useState("")
-  const [tags, setTags] = useState([]);
+  const [tag, setTag] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
 
 
   useEffect(() => {
-    if (order || rating || location || tags) {
-      dispatch(getRestorants({ order, rating, searchName, location, tags }));
+    if (order || rating || city || tag) {
+      dispatch(getRestorants({ order, rating, searchName, city, tag }));
     }
-  }, [dispatch, order, rating, location, tags, searchName]);
+  }, [dispatch, order, rating, city, tag, searchName]);
 
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
   }, [dispatch, restorants.documents, restorants.length]);
 
   const handleChangeLocation = (loc) => {
-    if (location === loc) {
-      setLocation('');
+    if (city === loc) {
+      setCity('');
       setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Ubicación')));
     } else {
-      setLocation(loc);
+      setCity(loc);
       setSelectedFilters((prevFilters) => {
         const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Ubicación'));
         return [...updatedFilters, `Ubicación: ${loc}`];
@@ -50,38 +50,38 @@ export default function Home() {
   const handleChangeOrder = (ord) => {
     if (order === ord) {
       setOrder('');
-      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Ordenar')));
+      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Alfabet')));
     } else {
       setOrder(ord);
       setSelectedFilters((prevFilters) => {
-        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Ordenar'));
-        return [...updatedFilters, `Ordenar: ${ord}`];
+        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Alfabet'));
+        return [...updatedFilters, `Alfabet: ${ord}`];
       });
     }
   };
 
   const handleChangeTags = (tg) => {
-    if (tags.includes(tg)) {
-      setTags((prevTags) => prevTags.filter((tag) => tag !== tg));
-      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Tags')));
+    if (tag.includes(tg)) {
+      setTag((prevTags) => prevTags.filter((tag) => tag !== tg));
+      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Tag')));
     } else {
-      setTags((prevTags) => [...prevTags, tg]);
+      setTag((prevTags) => [...prevTags, tg]);
       setSelectedFilters((prevFilters) => {
-        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Tags'));
-        return [...updatedFilters, `Tags: ${tg}`];
+        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Tag'));
+        return [...updatedFilters, `Tag: ${tg}`];
       });
     }
   };
 
   const handleChangeRating = (rtg) => {
     if (rating === rtg) {
-      setRating('');
-      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Valoración')));
+      setRating('')
+      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Valoracion')));
     } else {
-      setRating(rtg);
+      setOrder(rtg);
       setSelectedFilters((prevFilters) => {
-        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Valoración'));
-        return [...updatedFilters, `Valoración: ${rtg}`];
+        const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Valoracion'));
+        return [...updatedFilters, `Valoracion: ${rtg}`];
       });
     }
   };
@@ -90,17 +90,17 @@ export default function Home() {
     setSelectedFilters((prevFilters) => prevFilters.filter((f) => f !== filter));
   
     if (filter.startsWith('Ubicación')) {
-      setLocation('');
-    } else if (filter.startsWith('Ordenar')) {
+      setCity('');
+    } else if (filter.startsWith('Alfabet')) {
       setOrder('');
     } else if (filter.startsWith('Tags')) {
-      setTags((prevTags) => prevTags.filter((tag) => `Tags: ${tag}` !== filter));
-    } else if (filter.startsWith('Valoración')) {
+      setTag((prevTags) => prevTags.filter((tag) => `Tag: ${tag}` !== filter));
+    } else if (filter.startsWith('Valoracion')) {
       setRating('');
     }
   };
   
-  console.log('Filters:', { location, rating, order, tags });
+  console.log('Filters:', { city, rating, order, tag });
 
   return (
     <>
@@ -109,7 +109,7 @@ export default function Home() {
         <div>
           <div className={styles.paginate}>
             <div className={styles.paginationContainer}> {/* Nuevo contenedor */}
-              <PaginationRounded filters={{ location, rating, order, tags }} />
+              <PaginationRounded filters={{ city, rating, order, tag }} />
             </div>
           </div>
         <div className={styles.homeContainer}>
@@ -134,7 +134,7 @@ export default function Home() {
               ))}
             </List>
       
-            <Typography variant="h6">Ordenar</Typography>
+            <Typography variant="h6">Ordenar alfabeticamente</Typography>
             <List>
               {ORDER.map((option) => (
                 <ListItem key={option.id} button onClick={() => handleChangeOrder(option.id)}>
@@ -143,7 +143,7 @@ export default function Home() {
               ))}
             </List>
       
-            <Typography variant="h6">Tags</Typography>
+            <Typography variant="h6">Tag</Typography>
             <List>
               {TAGS.map((option) => (
                 <ListItem key={option.id} button onClick={() => handleChangeTags(option.id)}>
@@ -152,7 +152,7 @@ export default function Home() {
               ))}
             </List>
       
-            <Typography variant="h6">Valoración</Typography>
+            <Typography variant="h6">Ordenar por valoracion</Typography>
             <List>
               {RATING.map((option) => (
                 <ListItem key={option.id} button onClick={() => handleChangeRating(option.id)}>
