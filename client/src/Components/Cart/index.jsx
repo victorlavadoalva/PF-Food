@@ -12,19 +12,23 @@ import { FOOD } from '../../dataHardcodeo/constants'
 
 const Cart = () => {
   //!TODO descomentar una vez conectado al back
-  // const { dishes } = useSelector(state => state);
-  // const [isActive, setIsActive] = useState(dishes);
+  const { dishes } = useSelector(state => state);
+  const [isActive, setIsActive] = useState(dishes);
   const dispatch = useDispatch();
   const { id } = useParams();
   const localStorage = window.localStorage.getItem('store');
   const store = JSON.parse(localStorage);
 
+
   useEffect(() => {
+    if (dishes.length === 0) {
+      setIsActive(FOOD);
+    }
     //!TODO descomentar una vez conectado al back
-    // const activeDish = dishes.map(dish => dish.isActive === true);
-    // setIsActive(activeDish);
+    const activeDish = dishes.map(dish => dish.isActive === true);
+    setIsActive(activeDish);
     dispatch(getDish(id));
-  }, [dispatch, id]);
+  }, [dishes, dispatch, id]);
 
   const addToCart = (product) => {
     dispatch(actions.addToCart(product));
@@ -39,12 +43,12 @@ const Cart = () => {
           Carta:
         </Typography>
         <div className={styles.cardContainer}>
-          {FOOD.length === 0 ? (
+          {dishes.length === 0 ? (
             <Typography variant="body1">La carta está vacía.</Typography>
           ) : (
-            FOOD.map((food) => {
-              //!TODO descomentar una vez conectado al back
-              //isActive.map(food => {
+            // FOOD.map((food) => {
+            //!TODO descomentar una vez conectado al back
+            isActive.map(food => {
               return (
                 <CardDish
                   key={food._id}

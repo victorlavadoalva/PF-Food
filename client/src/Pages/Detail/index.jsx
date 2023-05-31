@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 import BasicButtons from "../../Components/Button";
 import { useLocation, Outlet } from "react-router-dom";
 import Review from '../../Components/Review';
+import MapDetail from "../../Components/MapDetail/MapDetail";
 
 function Detail() {
   const location = useLocation();
@@ -83,6 +84,9 @@ function Detail() {
           Calificación
         </Typography>
         <Rating name="read-only" defaultValue={restaurant.rating} readOnly />
+      </div>
+      <div>
+      <MapDetail restaurant={restaurant}/>
       </div>
       <div>
         <ListItemButton onClick={() => navigate("/home")}>

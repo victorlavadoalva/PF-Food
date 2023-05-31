@@ -14,6 +14,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import MapIcon from "@mui/icons-material/Map";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavBarMenu } from "./NavBarMenu";
 import { TemporaryDrawer } from "./Drawer";
@@ -139,6 +140,13 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </Link>
           }
+          <div>
+            <Link to="/mapa">
+            <IconButton>
+            <MapIcon />
+            </IconButton>
+            </Link>
+          </div>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
