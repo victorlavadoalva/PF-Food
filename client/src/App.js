@@ -28,6 +28,7 @@ import RestoHome from "./Pages/RestoHome";
 import Store from "./Pages/Store";
 import { LoadingApp } from "./Redux/actions";
 import AdminView from "./View/AdminUsers/index";
+import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
@@ -106,6 +107,7 @@ function App() {
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
+                    <Route path="dashboard" element={<Dashboard/>} />
                     <Route path="pedidos" element={<Pedidos />} />
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
