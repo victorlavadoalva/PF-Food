@@ -1,16 +1,19 @@
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
 import { MarkersRest } from './MarkerRest';
-
-//*******************************DATA PRUEBA******************************************** */
-let restaurantsArr = [{address:"misiones 856",city:"Rio Cuarto", country:"Argentina",name:"Algún nombre de restaurante"},{address:"Mariquita Sanchez de Thompson 764",city:"Rio Cuarto", country:"Argentina",name:"Restaurante Piola"},{address:"Francisco Muñiz 864",city:"Rio Cuarto", country:"Argentina",name:"Restaurante mas copado"},{address:"Presidente Peron 690",city:"Villa Mercedes", country:"Argentina",name:"Algún nombre de restaurante"},{address:"Presidente Peron 895",city:"Villa Mercedes", country:"Argentina",name:"Restaurante Piola"},{address:"Presidente Peron 943",city:"Villa Mercedes", country:"Argentina",name:"Restaurante mas copado"}]
-let userLocation = {address:"Mariquita Sanchez de Thompson 856",city:"Rio Cuarto", country:"Argentina"}
-//********************************************************************************* */
+import axios from 'axios'
 
 
 export default function Map() {
+    const userData = localStorage.getItem('UserLogVerificate');
+    const userObject = JSON.parse(userData);
+    const [allRestaurants, setAllRestaurants] = useState([])
     const [coordenadas, setCoordenadas] = useState({lat:null,lng:null})
-    const [addressSearch, setAddressSearch] = useState({city:userLocation.city, country:userLocation.country})
+    const [addressSearch, setAddressSearch] = useState({city:userObject.city, country:userObject.country})
+    useEffect(()=>{
+      axios.get("http://localhost:3001/restaurants?all=true")
+        .then(data=>{setAllRestaurants(data.data);console.log(userObject)})
+    },[])
     useEffect(() => {
         async function buscarDireccion() {
           try {
@@ -41,10 +44,21 @@ export default function Map() {
         buscarDireccion();
       }, [addressSearch]);
 
-    const containerStyle = {
-      width: '100%',
-      height: '40rem'
-    };
+      const containerStyle = {
+        width: '100%',
+        height: '40rem',
+        position: 'relative',
+      };
+    
+      const selectContainerStyle = {
+        position: 'absolute',
+        top: '1rem',
+        right: '1rem',
+        zIndex: 1,
+        backgroundColor: '#fff',
+        padding: '1rem',
+      };
+    
   
     let center = coordenadas;
 
@@ -65,29 +79,34 @@ export default function Map() {
   
     return (
       <LoadScript googleMapsApiKey="AIzaSyAR96I2GcOFCVlWMer5l_WtCRrSnAJK8DM">
-        <div>
+        <div style={containerStyle}>
+        <div style={selectContainerStyle}>
             <label>City</label>
          <select value={addressSearch.city} name="city" onChange={handleSelectChange}>
+         <option value={userObject.city}>My City</option>
          <option value={""}>City</option>
            {
-             restaurantsArr.map((rest)=>{
-                if(arrControllerCity.includes(rest.city))return;
+             allRestaurants&&allRestaurants.length>0&&allRestaurants.map((rest)=>{
+              const cityRes = rest.city ? rest.city.toLowerCase() : null;
+                if(arrControllerCity.includes(cityRes))return;
                 else{
-                    arrControllerCity.push(rest.city)
-                return(<option value={rest.city}>{rest.city}</option>)}
+                    arrControllerCity.push(cityRes)
+                return(<option value={cityRes}>{cityRes}</option>)}
              })
            }
         </select>
 
         <label>Country</label>
         <select value={addressSearch.country} name="country" onChange={handleSelectChange}>
+        <option value={userObject.country}>My Ccountry</option>
          <option value={""}>Country</option>
            {
-             restaurantsArr.map((rest)=>{
-                if(arrControllerCountry.includes(rest.country))return;
+             allRestaurants&&allRestaurants.length>0&&allRestaurants.map((rest)=>{
+              const countryRes = rest.country ? rest.country.toLowerCase() : null;
+                if(arrControllerCountry.includes(countryRes))return;
                 else{
-                    arrControllerCountry.push(rest.country)
-                return(<option value={rest.country}>{rest.country}</option>)}
+                    arrControllerCountry.push(countryRes)
+                return(<option value={countryRes}>{countryRes}</option>)}
              })
            }
         </select>
@@ -97,8 +116,9 @@ export default function Map() {
           center={center}
           zoom={zoom}
         >
-          <MarkersRest restaurants={restaurantsArr} />
+          <MarkersRest restaurants={allRestaurants?allRestaurants:[]} />
         </GoogleMap>
+        </div>
       </LoadScript>
     );
   }
