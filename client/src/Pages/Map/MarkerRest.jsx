@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Marker,InfoWindow } from '@react-google-maps/api';
+import { Link } from "react-router-dom";
 
 export const MarkersRest = ({ restaurants }) => {
   const [markers, setMarkers] = useState([]);
@@ -64,7 +65,9 @@ export const MarkersRest = ({ restaurants }) => {
           onCloseClick={handleCloseInfoWindow}
         >
           <div>
+            <Link to={`/home/detail/${selectedMarker.info._id}`}>
             <h4>{selectedMarker.info.name}</h4>
+            </Link>
             <p>{selectedMarker.info.address}</p>
             </div>
         </InfoWindow>
