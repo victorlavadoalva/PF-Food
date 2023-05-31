@@ -36,6 +36,7 @@ const ReservasCliente = () => {
     // Obtener datos del Local Storage
     const storedData = localStorage.getItem("UserLogVerificate");
 
+    console.log(values);
     const token = process.env.REACT_APP_TOKEN;
     console.log(token);
     const token2 =
@@ -129,7 +130,39 @@ const ReservasCliente = () => {
 
           <div className={styles["form-group"]}>
             <label htmlFor="hora">Hora:</label>
-            <Field type="time" id="hora" name="hora" className={styles.input} />
+            <Field
+              type="time"
+              id="hora"
+              name="hora"
+              className={styles.input}
+              step="7200"
+              min="08:00"
+              max="18:00"
+              pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+              required
+            >
+              {(props) => {
+                const { field } = props;
+                const options = [];
+
+                // Generar opciones con intervalo de dos horas
+                let hour = 8;
+                while (hour <= 18) {
+                  options.push(`${hour.toString().padStart(2, "0")}:00`);
+                  hour += 2;
+                }
+
+                return (
+                  <select {...field}>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                );
+              }}
+            </Field>
             <ErrorMessage
               name="hora"
               component="div"

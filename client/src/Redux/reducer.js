@@ -17,7 +17,9 @@ import {
   LOGIN,
   POST_USER,
   UPDATE_SUCCESS,
-  UPDATE_USER
+  UPDATE_USER,
+  GET_RESERVS,
+  GET_ORDERS,
 } from "./actionsTypes";
 
 const initialState = {
@@ -37,10 +39,22 @@ const initialState = {
   filter_landing: [],
   user: {},
   updateSuccess: false,
+  reservs:{},
+  orders:{},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_ORDERS: 
+      return {
+        ...state,
+        orders: payload
+      }
+    case GET_RESERVS:
+      return {
+        ...state,
+        reservs: payload
+      } 
     case DELETE_CART:
       return {
         ...state,
