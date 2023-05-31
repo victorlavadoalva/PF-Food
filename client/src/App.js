@@ -28,6 +28,8 @@ import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
 import FormUser from "./Pages/FormUser";
+import AboutUs from "./Pages/AboutUs";
+import Developers from "./Pages/Developers";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +66,8 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
+                      <Route path="aboutUs" element={<AboutUs />} />
+                      <Route path="developers" element={<Developers />} />
                       {/* Usuaio tipo Cliente */}
                       <Route >
                         <Route path="cart" element={<Store />}/>

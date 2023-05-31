@@ -6,6 +6,7 @@ import { TextField, Box, Button, Container, Select, MenuItem, InputLabel } from 
 
 
 export default function Form() {
+  const [images, setImages] = useState([]);
   const [imageFile, setImageFile] = useState(null)
   const [restorants, setRestorants] = useState({
     name: "",
@@ -36,9 +37,12 @@ export default function Form() {
   });
 
   function handleImage(event) {
-    const file = event[0];
-    setImageFile(file)
+    const files = Array.from(event.target.files).slice(0, 3);
+    const fileObjects = files.map((file) => URL.createObjectURL(file));
+    
+    setImages(fileObjects);
   }
+  
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -50,7 +54,7 @@ export default function Form() {
       formData.append("address", restorants.address);
       formData.append("country", restorants.country);
       formData.append("phoneNumber", restorants.phoneNumber);
-      formData.append("image", imageFile);
+      formData.append("images", JSON.stringify(images));
       formData.append("type_customer", "Restaurant");
       formData.append("email", restorants.email);
       formData.append("tags", JSON.stringify(restorants.tags));
@@ -341,12 +345,11 @@ export default function Form() {
                 onChange={(e) => setTagValue(e.target.value)}
               >
                 <MenuItem value="">Seleccionar</MenuItem>
-                <MenuItem value="Internacional">Internacional</MenuItem>
-                <MenuItem value="Veggie">Veggie</MenuItem>
-                <MenuItem value="Vegan">Vegan</MenuItem>
-                <MenuItem value="Celiaco">Celiaco</MenuItem>
-                <MenuItem value="Parrilla">Parrilla</MenuItem>
-                <MenuItem value="Tematicas">Tematicas</MenuItem>
+                <MenuItem value="Pizza">Pizza</MenuItem>
+                <MenuItem value="Burger">Burger</MenuItem>
+                <MenuItem value="Sandwich">Sandwich</MenuItem>
+                <MenuItem value="Chicken">Chicken</MenuItem>
+                <MenuItem value="Pasta">Pasta</MenuItem>
                 <MenuItem value="Otros">Otros</MenuItem>
 
               </Select>
@@ -360,7 +363,8 @@ export default function Form() {
               <input
                 type="file"
                 name="image"
-                onChange={(e) => handleImage(e.target.files)}
+                onChange={(e) => handleImage(e.target)}
+                multiple
               />
               <Box mr={2} mt={2} mb={2}>
                 <Button
