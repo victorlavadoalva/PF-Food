@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { updateAccount } from "../../Redux/actions";
 
 import styles from "./styles.module.css";
+import { Transactions } from "./transactions";
+import { Reservations } from "./reservations";
 
-import PedidosCliente from "../../Components/PedidosCliente";
-import ReservasCliente from "../../Components/ReservasCliente";
+// import PedidosCliente from "../../Components/PedidosCliente";
+// import ReservasCliente from "../../Components/ReservasCliente";
 
 export default function CuentaCliente({ userId, userData }) {
   const { isAuthenticated } = useAuth0();
@@ -143,39 +145,9 @@ export default function CuentaCliente({ userId, userData }) {
             )}
           </Paper>
         </Box>
-
-        <Box
-          sx={{
-            "& > :not(style)": {
-              m: 1,
-              width: 500,
-              height: 500,
-            },
-          }}
-        >
-          <Paper elevation={3} style={{ padding: "20px" }}>
-            <Typography variant="h5" align="left">
-              Mis Pedidos
-            </Typography>
-            <PedidosCliente />
-          </Paper>
-        </Box>
-        <Box
-          sx={{
-            "& > :not(style)": {
-              m: 1,
-              width: 500,
-              height: 500,
-            },
-          }}
-        >
-          <Paper elevation={3} style={{ padding: "20px" }}>
-            <Typography variant="h5" align="left">
-              Mis Reservas
-            </Typography>
-            <ReservasCliente />
-          </Paper>
-        </Box>
+        <Transactions />
+        {/* ver si se le va a dar funcionalidad a las Reservations */}
+        <Reservations />
       </Box>
     </div>
   );
