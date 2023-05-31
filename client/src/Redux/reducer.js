@@ -137,23 +137,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         Admin: payload,
       };
-    case ERROR:
-      return {
-        ...state,
-        error: payload,
-      };
     case UPDATE_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          data: payload,
-        },
+        loading: false,
+        user: payload,
       };
     case UPDATE_SUCCESS:
       return {
         ...state,
-        updateSuccess: payload,
+        updateSuccessful: payload,
+      };
+    case ERROR:
+      return {
+        ...state,
+        error: payload,
       };
     default:
       return { ...state };

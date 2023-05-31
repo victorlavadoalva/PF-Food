@@ -43,6 +43,7 @@ export const getRestorants = ({
       const { data } = await axios(URL_RESTAURANT, {
         params: { page, order, rating, name, country, tags },
       });
+      console.log('Server Response:', data);
       return (
         dispatch({ type: GET_ALL_RESTORANTS, payload: data[0] }),
         dispatch({ type: GET_AMOUNTPAGES, payload: data[0].totalPages })
@@ -200,9 +201,8 @@ export const updateAccount = (userId, userData) => {
     try {
       dispatch({ type: LOADING });
       const token = localStorage.getItem("access_token");
-      //TODO hay que conectarlo y probarlo cuando el deploy este realizado
       const resp = await axios.put(
-        `${URL_USERS}/${userId}`,
+        `${backendUrl}/${userId}`,
         {
           name: userData.name,
           email: userData.email,
