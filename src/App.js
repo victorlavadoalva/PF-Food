@@ -21,7 +21,7 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 // import { Map } from "./Pages/Map/Map.jsx";
 import AboutUs from "./Pages/AboutUs";
-// import { Aprobe } from "./Pages/Aprobe/Aprobe";
+import { Aprobe } from "./Pages/Aprobe/Aprobe";
 import Developers from "./Pages/Developers";
 import { Failure } from "./Pages/Failure/Failure";
 import Map from "./Pages/Map/Map";
@@ -71,11 +71,10 @@ function App() {
                     <Route exact path="form-restaurant" element={<Form />} />
                     <Route exact path="form-user" element={<FormUser />} />
                   </Route>
+
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
-                      {/* <Route path="aprobe" element={<Aprobe />} /> */}
-                      <Route path="failure" element={<Failure />} />
                       <Route path="aboutUs" element={<AboutUs />} />
                       <Route path="developers" element={<Developers />} />
                       {/* Usuaio tipo Cliente */}
@@ -102,6 +101,9 @@ function App() {
                     </Route>
                   </Route>
                 </Route>
+
+                <Route path="failure" element={<Failure />} />
+                <Route path="aprobe" element={<Aprobe />} />
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
