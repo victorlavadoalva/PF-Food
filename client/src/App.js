@@ -32,6 +32,7 @@ import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
+import { Failure } from "./Pages/Failure/Failure";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function App() {
             <main className={styles.main}>
               <Routes>
                 <Route path="mapa" element={<Map />} />
-
+                <Route path="failure" element={<Failure/>} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />}>
