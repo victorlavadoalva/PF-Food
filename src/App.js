@@ -74,8 +74,8 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
-                      <Route path="/aprobe" element={<Aprobe />} />
-                      <Route path="/failure" element={<Failure />} />
+                      <Route path="aprobe" element={<Aprobe />} />
+                      <Route path="failure" element={<Failure />} />
                       <Route path="aboutUs" element={<AboutUs />} />
                       <Route path="developers" element={<Developers />} />
                       {/* Usuaio tipo Cliente */}
