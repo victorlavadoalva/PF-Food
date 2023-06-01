@@ -16,6 +16,10 @@ export default function Home() {
   const { restorants } = useSelector(state => state);
   const dispatch = useDispatch();
 
+  const currentPath = locationRouter.pathname;
+  const shouldRenderPagination = !currentPath.includes('/menuCliente');
+
+
   const [city, setCity] = useState('');
   const [order, setOrder] = useState('');
   const [rating, setRating] = useState('');
@@ -171,7 +175,7 @@ export default function Home() {
                   return (
                     <SimpleCard
                       key={resto._id}
-                      image={resto.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                      image={resto.images[0] || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                       title={resto.name}
                       city={resto.city || "Ciudad"}
                       address={resto.adress || "Direccion"}

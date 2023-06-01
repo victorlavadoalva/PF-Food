@@ -80,6 +80,7 @@ export const getDish = (id) => {
     try {
       const response = await axios(URL_RESTAURANT + "/" + id);
       const { menu } = response.data;
+      console.log(menu)
       console.log("response menu:", JSON.stringify(menu));
       return dispatch({ type: GET_DISH, payload: menu });
     } catch (error) {
