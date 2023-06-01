@@ -12,9 +12,10 @@ export default function DataGridDemo() {
   const [isActive, setIsActive] = React.useState();
   const orders = useSelector(state => state.orders);
   const dispatch = useDispatch();
-  const restDataStorage = window.localStorage.getItem('RestData');
+  const restDataStorage = window.localStorage.getItem('UserLogVerificate');
   const restData = JSON.parse(restDataStorage);
-  const restoId = restData.restaurant.id;
+  const restoId = restData.id;
+  console.log("resto id", restoId);
 
   const handleDelete = (id) => {
     const activeOrders = orders.filter(order => order.id !== id);

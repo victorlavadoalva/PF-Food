@@ -1,33 +1,39 @@
-//! TODO descomentar cuando este conectado al back
-//import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CardDish } from '../../Components/CardDish';
 import { useState, useEffect } from 'react';
 import styles from "./styles.module.css";
-import { FOOD } from '../../dataHardcodeo/constants'
+import * as actions from '../../Redux/actions';
 import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+// import { FOOD } from '../../dataHardcodeo/constants'
 
 export default function Home() {
 
-  let plates = FOOD;
-  //! TODO descomentar cuando este conectado al back
-  // const { dishes } = useSelector(state => state);
+  // let plates = FOOD;
+  const { dishes } = useSelector(state => state);
+  console.log("dishes", dishes[0]);
   const [isActive, setIsActive] = useState();
   const location = useLocation();
   const pathname = location.pathname;
+  const dispatch = useDispatch();
+  const restDataStorage = window.localStorage.getItem("UserLogVerificate");
+  const restData = JSON.parse(restDataStorage);
+  const restId = restData.id;
+  console.log("Rest id", restId);
 
   let isRestorant = false;
   pathname === "/restorant" ? isRestorant = true : isRestorant = false;
 
   useEffect(() => {
-  }, [isActive])
+    dispatch(actions.getDish(restId))
+  }, [dispatch, isActive, restId])
   const editMenu = () => {
   }
 
   const removeFromMenu = (id) => {
-    const dish = plates.find(dish => dish._id === id);
-    //! TODO descomentar una vez conectado al back
-    //const dish = dishes.find(dish => dish._id === id);
+    // const dish = plates.find(dish => dish._id === id);
+
+    const dish = dishes.find(dish => dish._id === id);
     dish.isActive ? dish.isActive = false : dish.isActive = true;
     setIsActive(isActive ? false : true);
   };
@@ -39,11 +45,11 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.cards}>
             {
-              plates.length ?
-                plates.map(plate => {
-                  //! TODO descomentar cuando este conectado al back
-                  // dishes?.documents?.length ?
-                  //   dishes?.documents?.map(plate => {
+              // plates.length ?
+              //   plates.map(plate => {
+
+              dishes.length ?
+                dishes.map(plate => {
                   return (
                     <CardDish
                       key={plate.id}

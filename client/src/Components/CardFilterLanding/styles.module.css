@@ -10,6 +10,7 @@
   border-top-right-radius: 35px;
   background-color: #3a506b;
   margin: 10px 0 0 0;
+  border: 2px solid black;
 }
 
 .imgContainer {
@@ -28,7 +29,7 @@
 }
 
 .containerTitle {
-  /* border:3px solid black; */
+  /* border:1px solid black; */
   display: flex;
   justify-content: flex-start;
   order: 2;

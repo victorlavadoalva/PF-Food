@@ -5,21 +5,20 @@ import axios from "axios";
 
 export default function FormPlatos() {
   const [formSubmit, setformSubmit] = useState(false);
-  const [imageFile,setImageFile] = useState(null)
-  const restDataString = localStorage.getItem('RestData');
-  const id = JSON.parse(restDataString)?.restaurant.id;
-  console.log(restDataString)
-  console.log(id);
-  const token = JSON.parse(restDataString)?.restaurant.token;
-  console.log(token)
-  console.log('hola')
-  
+  const [imageFile, setImageFile] = useState(null)
+  const restDataString = localStorage.getItem('UserLogVerificate');
+  const id = JSON.parse(restDataString)?.id;
+  const token = JSON.parse(restDataString)?.token;
 
+  console.log("id", id);
+  console.log("token", token)
+  // console.log(restDataString)
+  // console.log('hola')
 
   function handleImage(event) {
     const file = event[0];
     setImageFile(file)
-    }
+  }
 
   return (
     <>
@@ -82,11 +81,11 @@ export default function FormPlatos() {
           formData.append('tags', valores.tags);
           formData.append('cost', valores.cost);
           formData.append('type', valores.type);
-          formData.append('image', imageFile);
+          //formData.append('image', imageFile);
           formData.append('authorRest', id);
           console.log('Formulario enviado:', valores);
-          axios.post("https://pf-backend-production-83a4.up.railway.app/posts", formData)
-          .then((response) =>{
+          axios.post("http://localhost:3001/posts", formData)
+            .then((response) => {
               console.log('Datos enviados:', formData);
               console.log('Respuesta del servidor:', response.data);
               resetForm();
@@ -96,11 +95,10 @@ export default function FormPlatos() {
               const platoId = response.data._id;
               console.log('Plato id:', platoId)
 
-              axios.put(`https://pf-backend-production-83a4.up.railway.app/restaurants/${id}`, {
-                menu: platoId ,
+              axios.put(`http://localhost:3001/restaurants/${id}`, {
+                menu: platoId,
               }, {
                 headers: {
-                  "Content-Type": "application/json",
                   "Authorization": `Bearer ${token}`,
                 },
               })
@@ -110,11 +108,11 @@ export default function FormPlatos() {
                 .catch((error) => {
                   console.error('Error al actualizar el menú:', error);
                 });
-              
-          })
-          .catch((error)=>{
-            console.log(error);
-          })
+
+            })
+            .catch((error) => {
+              console.log(error);
+            })
         }}
       >
         {({ values, errors, touched, handleSubmit, handleChange, handleBlur }) => (
