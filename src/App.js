@@ -74,6 +74,8 @@ function App() {
 
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
+                    <Route path="failure" element={<Failure />} />
+                    <Route path="aprobe" element={<Aprobe />} />
                     <Route path="home" element={<Home />}>
                       <Route path="aboutUs" element={<AboutUs />} />
                       <Route path="developers" element={<Developers />} />
@@ -102,8 +104,6 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route path="failure" element={<Failure />} />
-                <Route path="aprobe" element={<Aprobe />} />
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Error 404 */}
                 <Route path="*" element={<Error404 />} />
