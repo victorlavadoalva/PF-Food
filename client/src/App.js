@@ -21,6 +21,7 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing/index.jsx";
 // import { Map } from "./Pages/Map/Map.jsx";
 import AboutUs from "./Pages/AboutUs";
+import { Aprobe } from "./Pages/Aprobe/Aprobe";
 import Developers from "./Pages/Developers";
 import { Failure } from "./Pages/Failure/Failure";
 import Map from "./Pages/Map/Map";
@@ -62,7 +63,8 @@ function App() {
             <main className={styles.main}>
               <Routes>
                 <Route path="mapa" element={<Map />} />
-                <Route path="failure" element={<Failure/>} />
+                <Route path="aprobe" element={<Aprobe />} />
+                <Route path="failure" element={<Failure />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />}>
@@ -108,7 +110,7 @@ function App() {
                   {/* Al componente de la ruta restorant agregarle el Outlet, Ej:El landing tiene para ver*/}
                   <Route path="/restorant" element={<RestoHome />}>
                     {/*Pasarle los componentes por element*/}
-                    <Route path="dashboard" element={<Dashboard/>} />
+                    <Route path="dashboard" element={<Dashboard />} />
                     <Route path="pedidos" element={<Pedidos />} />
                     <Route path="add_food" element={<FormPlatos />} />
                     <Route path="menu" />
