@@ -39,7 +39,7 @@ const ReservasCliente = () => {
     console.log(values);
 
     const token2 =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU2MzA4MTksImV4cCI6NDg0MTM5MDgxOX0.oTz390vmjqpfXdULMY7m0fkcWdBBoLNRQ5pTWz6DYQk";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTYxNzY3NywiZXhwIjo0ODQxMzc3Njc3fQ.Km8OWeI_l6zQOuSN8jE3GGN-Yuju2NEzTUN2tWVgIgw";
     // Verificar si se encontraron datos en el Local Storage
     if (storedData) {
       const token = process.env.REACT_APP_TOKEN;

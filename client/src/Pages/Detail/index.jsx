@@ -14,6 +14,8 @@ import { useLocation, Outlet } from "react-router-dom";
 import Review from '../../Components/Review';
 import MapDetail from "../../Components/MapDetail/MapDetail";
 import Loading_Login from "../../View/Loading";
+import zIndex from "@mui/material/styles/zIndex";
+
 
 function Detail() {
   const location = useLocation();
@@ -101,6 +103,16 @@ Object.keys(restaurant).length > 0 ? (
       </div>
       <div>
         <BasicButtons/>
+      </div>
+      <div className={styles.divInfo}>
+        {restaurant.valoraciones.map((valoration)=>{return(
+        <div >
+          
+          <Rating name="read-only" defaultValue={valoration.rating} readOnly />
+          <h4>{valoration.comment}</h4>
+          <hr/>
+          </div>)
+        })}
       </div>
       <Review restoId={restoId}></Review>
     </div>
