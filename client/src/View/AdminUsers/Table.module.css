@@ -70,6 +70,23 @@
     cursor: pointer;
 }
 
+.buttonAdminChau{
+    margin-left: 1em;
+    margin-top: -1em;
+    align-items: center;
+    border: 2px solid #B20027;
+    color: white;
+    background-color: #b93d43;
+    border-radius: 2em;
+    width: 40%;
+    height: 70%;
+}
+.buttonAdminChau:hover{
+    background-color: #aa1920;
+    border: 2px solid #80001c;
+    cursor: pointer;
+}
+
 .contBanadmin{
     height: 100%;
     width: 100%;
