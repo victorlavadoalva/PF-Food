@@ -375,8 +375,8 @@ export const reservasColumns = [
     editable: true,
   },
   {
-    field: "phone",
-    headerName: "Telefono",
+    field: "email",
+    headerName: "Email",
     type: "string",
     width: 150,
     editable: true,

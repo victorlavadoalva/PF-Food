@@ -42,7 +42,7 @@ const initialState = {
   filter_landing: [],
   user: {},
   updateSuccess: false,
-  reservs:{},
+  reservs:[],
   orders:{},
 };
 
