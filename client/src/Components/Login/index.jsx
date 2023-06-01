@@ -31,6 +31,7 @@ export default function Login_Register() {
   };
 
 
+
   const handleLogOut = () => {
     window.localStorage.removeItem("redirectPath");
     window.localStorage.removeItem("UserToken");
@@ -47,13 +48,20 @@ export default function Login_Register() {
 }
   const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
   const userLocal = JSON.parse(getlocalstorage)
-
+let isAdmin = false
+  useEffect(() =>{
+ if(userLocal.isAdmin){
+  isAdmin = true
+ }
+  },[userLocal])
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
     // dispatch(LoadingApp(true))
     loginWithRedirect();
   };
-
+ const handleAdmin = () => {
+  navigate("/adminView")
+ }
   // useEffect(() => {
   //   if(user){
   //     dispatch(LoadingApp(false))
@@ -64,31 +72,6 @@ export default function Login_Register() {
     <>
       {user ? (
         <>
-        {/*No borrar*/}
-          {/* <div className={styles.perfil}>
-            <img
-              className={styles.imagePerfil}
-              src={user.picture}
-              alt={user.name}
-              onClick={() => handleActivatePerfil()}
-            />
-            {PerfilActive && (
-              <div className={styles.perfilDesplegable}>
-                <div>
-                  <img />
-                  <p>Franco Krismann</p>
-                </div>
-                <ul className={styles.perfilDesplegable__lista}>
-                  <li>
-                    <p>Configuracion</p>
-                  </li>
-                  <li>
-                    <p>Log Out</p>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div> */}
           <Box className={styles.container}>
         <Tooltip title="Account settings">
           <IconButton
@@ -156,6 +139,13 @@ export default function Login_Register() {
           </ListItemIcon>
           Settings
         </MenuItem>
+        {
+          isAdmin && 
+           <MenuItem onClick={handleAdmin}>
+          Admin
+        </MenuItem>
+        }
+       
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
