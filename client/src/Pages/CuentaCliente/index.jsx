@@ -120,6 +120,7 @@ export default function CuentaCliente({ userId, userData }) {
             country: userData.country,
           };
           localStorage.setItem("UserLogVerificate", JSON.stringify(updateUserLog));
+          alert("Cuenta actualizada con éxito");
         });
     };
   };
@@ -192,11 +193,11 @@ export default function CuentaCliente({ userId, userData }) {
             >
               Actualizar
             </Button>
-            {updateSuccess && (
+            {/* {updateSuccess && (
               <Typography variant="body1" color="success" padding="2%">
                 ¡La cuenta se ha actualizado con éxito!
               </Typography>
-            )}
+            )} */}
           </Paper>
         </Box>
         <Transactions />
