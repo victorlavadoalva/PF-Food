@@ -20,8 +20,9 @@ const TableAdmin = () => {
     
     // const token = dataParsed.token;
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NDc1MzUsImV4cCI6NDg0MTMwNzUzNX0.7fDrfKD497Nfcsjcn7hE0Qkd8Mp-lbAq6uCBL4exIxc"
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NDkxMzAsImV4cCI6NDg0MTMwOTEzMH0.Ub6SDo8aJnCm7NcE1FPoTZxUlcRdySBzSOPG-HsXiUE"
-    
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NzQwNzgsImV4cCI6NDg0MTMzNDA3OH0.zTrnWN0pbSaiKeI0A8U4DM8xTH_tWlkQG1cUxwiWR8E"
+    const password = "uhsjkew-2-3.wkjdss--s.d";
+
     const columns = [
         {
             name: 'Name',
@@ -56,10 +57,16 @@ const TableAdmin = () => {
             ? row.status == "active" 
             ? row.rol.toLowerCase() == "user"
             ?
-            // <div className={style.contBanadmin}>
+            <div className={style.contBanadmin}>
                 <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
-                // {/* <button id={row.id} name={row.rol} className={style.buttonAdmin} onClick={handlerSetAdmin}>Set Admin</button> */}
-            // {/* </div> */}
+                <button id={row.id} name={row.rol} className={style.buttonAdmin} onClick={handlerSetAdmin}>Set Admin</button>
+            </div> 
+            : row.rol.toLowerCase() == "admin"
+            ? 
+            <div className={style.contBanadmin}>
+                <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
+                <button id={row.id} name={row.rol} className={style.buttonAdminChau} onClick={handlerRemoveAdmin}>Rem. Admin</button>
+            </div>
             : <button id={row.id} name={row.rol} className={style.button} onClick={handlerBan}>Ban</button>
             : <button id={row.email} className={style.buttonUndo} onClick={handlerUnban}>Unban</button>
             : null)
@@ -159,16 +166,48 @@ const TableAdmin = () => {
 
     const handlerSetAdmin = (event) => {
         // axios.get(event.target.name == "Restaurant" ? `http://pf-backend-production-83a4.up.railway.app/restaurants/${event.target.id}` : `http://pf-backend-production-83a4.up.railway.app/users/${event.target.id}`)
-        axios.get(event.target.name == "Restaurant" ? `http://localhost:3001/restaurants/${event.target.id}` : `http://localhost:3001/users/${event.target.id}`)
+        axios.put(`http://localhost:3001/users/${event.target.id}?password=${password}`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then((data) => {
-            console.log(data.data);
-            // axios.delete(`http://pf-backend-production-83a4.up.railway.app/admin/${data.data._id}`,{
-            axios.put(`http://localhost:3001/admin/${data.data.id}`,{
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            })
+
+            const existingData = localStorage.getItem('UserLogVerificate');
+            const userData = JSON.parse(existingData);
+
+            userData.isAdmin = data.data.isAdmin;
+            userData.token = data.data.token;
+
+            const updatedData = JSON.stringify(userData);
+
+            localStorage.setItem('UserLogVerificate', updatedData);
+            let datoas = localStorage.getItem('UserLogVerificate')
+            console.log(JSON.parse(datoas));
+            setGalleta(!galleta);
+        }
+        ).catch((error) => console.log(error))
+    }
+    const handlerRemoveAdmin = (event) => {
+        // axios.get(event.target.name == "Restaurant" ? `http://pf-backend-production-83a4.up.railway.app/restaurants/${event.target.id}` : `http://pf-backend-production-83a4.up.railway.app/users/${event.target.id}`)
+        axios.put(`http://localhost:3001/users/${event.target.id}?password=removeAdmin`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((data) => {
+            const existingData = localStorage.getItem('UserLogVerificate');
+            const userData = JSON.parse(existingData);
+
+            userData.isAdmin = data.data.isAdmin;
+            userData.token = data.data.token;
+
+            const updatedData = JSON.stringify(userData);
+
+            localStorage.setItem('UserLogVerificate', updatedData);
+
+            let datoas = localStorage.getItem('UserLogVerificate')
+            console.log(JSON.parse(datoas));
             setGalleta(!galleta);
         }
         ).catch((error) => console.log(error))
