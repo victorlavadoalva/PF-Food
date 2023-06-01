@@ -87,6 +87,8 @@ function App() {
                           element={<CuentaCliente />}
                         />
                       </Route>
+                      <Route path="/aprobe" element={<Aprobe />} />
+
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route
                           path="menuCliente/:id"
