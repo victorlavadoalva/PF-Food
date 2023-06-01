@@ -10,7 +10,6 @@ import axios from 'axios';
 export default function Home() {
 
   const { dishes } = useSelector(state => state);
-  console.log("dishes", dishes[0]);
   const [isActive, setIsActive] = useState();
   const location = useLocation();
   const pathname = location.pathname;
@@ -18,7 +17,6 @@ export default function Home() {
   const restDataStorage = window.localStorage.getItem("UserLogVerificate");
   const restData = JSON.parse(restDataStorage);
   const restId = restData.id;
-  console.log("Rest id", restId);
 
   let isRestorant = false;
   pathname === "/restorant" ? isRestorant = true : isRestorant = false;
@@ -47,7 +45,6 @@ export default function Home() {
             {
               dishes.length ?
                 dishes.map(plate => {
-                  console.log(plate.name)
                   return (
                     <CardDish
                       key={plate.id}
