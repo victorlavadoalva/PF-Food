@@ -9,6 +9,7 @@ import { LOCATION, ORDER, RATING, TAGS } from '../../dataHardcodeo/constants'; /
 import styles from "./styles.module.css";
 import React from 'react';
 import { Typography, List, ListItem, Button } from '@mui/material';
+import Loading_Login from '../../View/Loading';
 
 
 export default function Home() {
@@ -186,7 +187,7 @@ export default function Home() {
                     />
                   )
                 })
-                : <p>Loading...</p>
+                : <Loading_Login/>
             }
           </div>
         </div>
