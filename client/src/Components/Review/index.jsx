@@ -30,7 +30,7 @@ const Review = ({ restoId }) => {
         number: number,
       };
       console.log('valoracion:',valoraciones)
-
+      if(comment!==""){
       const response = await axios.put(
         `http://localhost:3001/restaurants/${restoId}`,
         {
@@ -45,10 +45,13 @@ const Review = ({ restoId }) => {
       );
       
       console.log('response:',response); 
+      alert('Valoracion envida, gracias por tu tiempo')
       setRating(0);
       setComment('');
-      setNumber((prevNumber) => prevNumber + 1);
+      setNumber((prevNumber) => prevNumber + 1);}
+      else{throw new Error('Agregue un comentario')}
     } catch (error) {
+      alert(`Error, ${error.message} o Recargue la pagina`)
       console.error(error);
     }
   };
