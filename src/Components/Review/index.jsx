@@ -7,10 +7,10 @@ const Review = ({ restoId }) => {
   const [comment, setComment] = useState("");
   const [number, setNumber] = useState(1);
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTYxNzY3NywiZXhwIjo0ODQxMzc3Njc3fQ.Km8OWeI_l6zQOuSN8jE3GGN-Yuju2NEzTUN2tWVgIgw";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTY0OTU5NiwiZXhwIjo0ODQxNDA5NTk2fQ.a5N5xugj0GFHSAvKVUpuC3dmVmA2U3w5t1sY5jhAzeQ";
 
   console.log("restoId:", restoId);
-  console.log("token:", token);
+  console.log("token DE REVIEW ES:", token);
   console.log(process.env);
 
   const handleValChange = (event, value) => {

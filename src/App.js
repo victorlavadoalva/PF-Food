@@ -64,8 +64,7 @@ function App() {
               <Routes>
                 <Route path="/adminView" element={<AdminView />} />
                 <Route path="mapa" element={<Map />} />
-                <Route path="/aprobe" element={<Aprobe />} />
-                <Route path="/failure" element={<Failure />} />
+
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />}>
@@ -75,6 +74,8 @@ function App() {
                   {/* Con o sin iniciar sesion */}
                   <Route path="/" element={<Landing />}>
                     <Route path="home" element={<Home />}>
+                      <Route path="/aprobe" element={<Aprobe />} />
+                      <Route path="/failure" element={<Failure />} />
                       <Route path="aboutUs" element={<AboutUs />} />
                       <Route path="developers" element={<Developers />} />
                       {/* Usuaio tipo Cliente */}
@@ -87,7 +88,6 @@ function App() {
                           element={<CuentaCliente />}
                         />
                       </Route>
-                      <Route path="/aprobe" element={<Aprobe />} />
 
                       <Route path="detail/:restoId" element={<Detail />}>
                         <Route

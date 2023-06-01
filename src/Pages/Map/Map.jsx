@@ -9,8 +9,8 @@ export default function Map() {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [coordenadas, setCoordenadas] = useState({ lat: null, lng: null });
   const [addressSearch, setAddressSearch] = useState({
-    city: userObject.city,
-    country: userObject.country,
+    city: userObject.city ? userObject.city : "",
+    country: userObject.country ? userObject.country : "",
   });
   useEffect(() => {
     axios
