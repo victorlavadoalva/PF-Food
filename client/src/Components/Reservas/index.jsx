@@ -12,9 +12,9 @@ export default function DataGridDemo() {
     const [isActive, setIsActive] = React.useState();
     const reservs = useSelector(state => state.reservs);
     const dispatch = useDispatch();
-    const restDataStorage = window.localStorage.getItem('RestData');
+    const restDataStorage = window.localStorage.getItem('UserLogVerificate');
     const restData = JSON.parse(restDataStorage);
-    const restoId = restData.restaurant.id;
+    const restoId = restData.id;
 
     const handleDelete = (id) => {
         const activeReservs = reservs.filter(reserv => reserv.id !== id);
