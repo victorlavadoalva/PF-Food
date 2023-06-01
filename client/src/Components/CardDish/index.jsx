@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
 
 export const CardDish = ({
   image,
-  name,
+  title,
   tags,
   cost,
   id,
@@ -74,13 +74,13 @@ export const CardDish = ({
         <CardMedia
           component="img"
           image={image}
-          alt={name}
+          alt={title}
           className={styles.image}
           sx={{ width: "100px" }}
         />
         <div className={styles.infoContainer}>
           <CardHeader
-            title={name}
+            title={title}
             className={styles.header}
             sx={{ padding: 0 }}
           />
@@ -108,7 +108,7 @@ export const CardDish = ({
             <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
           </IconButton>
           <IconButton aria-label="shopping">
-            <ShoppingCartIcon onClick={() => addToCart({ id, name, cost, description: "", image: "" })} />
+            <ShoppingCartIcon onClick={() => addToCart({ id, title, cost, description: "", image: "" })} />
           </IconButton>
           <ExpandMore
             expand={expanded}

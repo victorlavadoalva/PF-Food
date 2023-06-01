@@ -42,9 +42,9 @@ function Detail() {
         <Typography component="h2" variant="h2" style={{ marginBottom: "8px" }}>
           {restaurant.name}
         </Typography>
-        {Array.isArray(restaurant.image) ? (
+        {Array.isArray(restaurant.images) ? (
           <Carousel>
-            {restaurant.image.map((image, index) => (
+            {restaurant.images.map((image, index) => (
               <img
                 key={index}
                 src={image}
@@ -53,9 +53,9 @@ function Detail() {
               />
             ))}
           </Carousel>
-        ) : restaurant.image ? (
+        ) : restaurant.images ? (
           <img
-            src={restaurant.image}
+            src={restaurant.images}
             alt="Restaurant"
             className={styles.image}
             style={{ maxWidth: "100%", height: "auto" }}
