@@ -7,7 +7,7 @@ const Review = ({ restoId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [number, setNumber] = useState(1);
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTU2OTI2MiwiZXhwIjo0ODQxMzI5MjYyfQ.tVbNrtX_dV5mmSiMVpi2Ylb0N01M3pZCpr4G5Y8MzuI';
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTYxNzY3NywiZXhwIjo0ODQxMzc3Njc3fQ.Km8OWeI_l6zQOuSN8jE3GGN-Yuju2NEzTUN2tWVgIgw";
 
   console.log('restoId:', restoId);
   console.log('token:',token)
@@ -32,14 +32,14 @@ const Review = ({ restoId }) => {
       console.log('valoracion:',valoraciones)
 
       const response = await axios.put(
-        `https://pf-backend-production-83a4.up.railway.app/restaurants/${restoId}`,
+        `http://localhost:3001/restaurants/${restoId}`,
         {
           valoraciones,
         },
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTYxNzY3NywiZXhwIjo0ODQxMzc3Njc3fQ.Km8OWeI_l6zQOuSN8jE3GGN-Yuju2NEzTUN2tWVgIgw`,
           },
         }
       );
