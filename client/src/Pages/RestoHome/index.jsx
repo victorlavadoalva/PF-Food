@@ -11,6 +11,7 @@ export default function Home() {
 
   const { dishes } = useSelector(state => state);
   const [isActive, setIsActive] = useState();
+  const [status, setStatus] = useState("");
   const location = useLocation();
   const pathname = location.pathname;
   const dispatch = useDispatch();
@@ -23,9 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(actions.getDish(restId))
-  }, [dispatch, isActive, restId])
-  const editMenu = () => {
-  }
+  }, [dispatch, isActive, restId, status])
 
   const removeFromMenu = (id) => {
     const dish = dishes.find(dish => dish._id === id);
@@ -34,6 +33,15 @@ export default function Home() {
     axios.put('http://localhost:3001/posts/' + dish._id, {
       isActive: isActive,
     })
+      .then(response => {
+        console.log("respuesta axios", response.status);
+        setStatus(response.status)
+        // Aquí puedes realizar cualquier acción adicional con la respuesta exitosa
+      })
+      .catch(error => {
+        console.error("error axios", error);
+        // Aquí puedes manejar el error de la petición
+      });
   };
 
   return (
@@ -55,7 +63,6 @@ export default function Home() {
                       id={plate._id}
                       isActive={plate.isActive}
                       removeFromMenu={removeFromMenu}
-                      editMenu={editMenu}
                     />
                   )
                 })
