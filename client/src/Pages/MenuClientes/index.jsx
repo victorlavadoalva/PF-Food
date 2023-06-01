@@ -25,7 +25,7 @@ export default function MenuCliente() {
     <div className={styles.menu}>
       {/* Hay que chequear que muestre la cantidad de paginas dependiendo la cantidad de menu */}
       <div className={styles.paginate}>
-        <PaginationRounded/>
+        
       </div>
       {/* Es una prueba para renderizar las cards de los platos */}
       <Cart />

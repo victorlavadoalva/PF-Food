@@ -7,10 +7,11 @@ const Review = ({ restoId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [number, setNumber] = useState(1);
-  const token = process.env.TOKEN_ADMIN;
+  const token = process.env.REACT_APP_TOKEN_ADMIN;
 
   console.log('restoId:', restoId);
   console.log('token:',token)
+  console.log(process.env)
 
 
   const handleValChange = (event, value) => {

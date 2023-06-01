@@ -19,16 +19,17 @@ const Cart = () => {
   const localStorage = window.localStorage.getItem('store');
   const store = JSON.parse(localStorage);
 
-
-  useEffect(() => {
-    if (dishes.length === 0) {
-      setIsActive(FOOD);
-    }
-    //!TODO descomentar una vez conectado al back
-    const activeDish = dishes.map(dish => dish.isActive === true);
-    setIsActive(activeDish);
+  useEffect(()=>{
     dispatch(getDish(id));
-  }, [dishes, dispatch, id]);
+  },[])
+  useEffect(() => {
+    // if (dishes.length === 0) {
+    //   setIsActive(FOOD);
+    // }
+    //!TODO descomentar una vez conectado al back
+    // const activeDish =dishes.length>0 && dishes.map(dish => dish.isActive === true);
+    setIsActive(dishes);
+  }, [dishes,id]);
 
   const addToCart = (product) => {
     dispatch(actions.addToCart(product));
@@ -48,13 +49,13 @@ const Cart = () => {
           ) : (
             // FOOD.map((food) => {
             //!TODO descomentar una vez conectado al back
-            isActive.map(food => {
+            isActive && isActive.length && isActive.map(food => {
               return (
                 <CardDish
                   key={food._id}
                   id={food._id}
-                  image={food.image ? food.image[0] : null}
-                  name={food.name}
+                  image={food.images ? food.images[0] : null}
+                  title={food.name}
                   tags={food.tags}
                   cost={food.cost}
                   description={food.description}

@@ -50,10 +50,11 @@ export default function Home() {
 
               dishes.length ?
                 dishes.map(plate => {
+                  console.log(plate.name)
                   return (
                     <CardDish
                       key={plate.id}
-                      image={plate.image || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
+                      image={plate.images || "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"}
                       title={plate.name}
                       tags={plate.tags}
                       cost={plate.cost || 0}

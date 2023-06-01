@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function FormPlatos() {
   const [formSubmit, setformSubmit] = useState(false);
-  const [imageFile, setImageFile] = useState(null)
+  const [imageFile, setImageFile] = useState([])
   const restDataString = localStorage.getItem('UserLogVerificate');
   const id = JSON.parse(restDataString)?.id;
   const token = JSON.parse(restDataString)?.token;
@@ -15,9 +15,9 @@ export default function FormPlatos() {
   // console.log(restDataString)
   // console.log('hola')
 
-  function handleImage(event) {
-    const file = event[0];
-    setImageFile(file)
+  function handleImage(files) {
+    const selectFiles = Array.from(files).slice(0,1);
+    setImageFile(selectFiles)
   }
 
   return (
@@ -81,7 +81,9 @@ export default function FormPlatos() {
           formData.append('tags', valores.tags);
           formData.append('cost', valores.cost);
           formData.append('type', valores.type);
-          //formData.append('image', imageFile);
+          imageFile.forEach((file) => {
+            formData.append("images", file);
+          });
           formData.append('authorRest', id);
           console.log('Formulario enviado:', valores);
           axios.post("http://localhost:3001/posts", formData)
@@ -209,6 +211,7 @@ export default function FormPlatos() {
                 type="file"
                 id="image"
                 name="image"
+                multiple
                 onChange={(e) => handleImage(e.target.files)}
               />
               {touched.image && errors.image && <div className={styles.error}>{errors.image}</div>}
