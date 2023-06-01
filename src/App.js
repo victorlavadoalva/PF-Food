@@ -64,8 +64,8 @@ function App() {
               <Routes>
                 <Route path="/adminView" element={<AdminView />} />
                 <Route path="mapa" element={<Map />} />
-                <Route path="aprobe" element={<Aprobe />} />
-                <Route path="failure" element={<Failure />} />
+                <Route path="/aprobe" element={<Aprobe />} />
+                <Route path="/failure" element={<Failure />} />
                 <Route element={<RutasUsers />}>
                   {/* Usuario registrandose */}
                   <Route path="/user-type" element={<UserType />}>
