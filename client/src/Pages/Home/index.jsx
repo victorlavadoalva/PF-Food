@@ -50,14 +50,14 @@ export default function Home() {
   };
 
   const handleChangeOrder = (ord) => {
-    if (order === ord) {
+    if (order === ord.id) {
       setOrder('');
       setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Alfabet')));
     } else {
-      setOrder(ord);
+      setOrder(ord.id);
       setSelectedFilters((prevFilters) => {
         const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Alfabet'));
-        return [...updatedFilters, `Alfabet: ${ord}`];
+        return [...updatedFilters, `Alfabet: ${ord.name}`];
       });
     }
   };
@@ -76,14 +76,14 @@ export default function Home() {
   };
 
   const handleChangeRating = (rtg) => {
-    if (rating === rtg) {
+    if (rating === rtg.id) {
       setRating('')
       setSelectedFilters((prevFilters) => prevFilters.filter((filter) => !filter.startsWith('Valoracion')));
     } else {
-      setOrder(rtg);
+      setOrder(rtg.id);
       setSelectedFilters((prevFilters) => {
         const updatedFilters = prevFilters.filter((filter) => !filter.startsWith('Valoracion'));
-        return [...updatedFilters, `Valoracion: ${rtg}`];
+        return [...updatedFilters, `Valoracion: ${rtg.name}`];
       });
     }
   };
@@ -103,6 +103,7 @@ export default function Home() {
   };
   
   console.log('Filters:', { city, rating, order, tag });
+  var index = -1;
 
   return (
     <>
@@ -139,7 +140,7 @@ export default function Home() {
             <Typography variant="h6">Ordenar alfabeticamente</Typography>
             <List>
               {ORDER.map((option) => (
-                <ListItem key={option.id} button onClick={() => handleChangeOrder(option.id)}>
+                <ListItem key={option.id} button onClick={() => handleChangeOrder(option)}>
                   <Typography>{option.name}</Typography>
                 </ListItem>
               ))}
@@ -157,7 +158,7 @@ export default function Home() {
             <Typography variant="h6">Ordenar por valoracion</Typography>
             <List>
               {RATING.map((option) => (
-                <ListItem key={option.id} button onClick={() => handleChangeRating(option.id)}>
+                <ListItem key={option.id} button onClick={() => handleChangeRating(option)}>
                   <Typography>{option.name}</Typography>
                 </ListItem>
               ))}
@@ -168,6 +169,7 @@ export default function Home() {
             {
               restorants?.documents?.length ?
                 restorants?.documents?.map(resto => {
+                  const currentIndex = index++;
                   return (
                     <SimpleCard
                       key={resto._id}
@@ -176,6 +178,7 @@ export default function Home() {
                       city={resto.city || "Ciudad"}
                       address={resto.adress || "Direccion"}
                       id={resto._id}
+                      index={currentIndex + 1}
                     />
                   )
                 })
