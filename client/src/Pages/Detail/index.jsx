@@ -31,6 +31,7 @@ function Detail() {
   }, [dispatch, restoId]);
 
   const restaurant = useSelector((state) => state.RestaurantID);
+  console.log('restaurant:',restaurant)
   
 
   // Convertir restoId a número
@@ -88,10 +89,7 @@ Object.keys(restaurant).length > 0 ? (
           Descripción: {restaurant.description}
         </Typography>
         {/* <Typography component="p" style={{ marginBottom: '8px' }}>Tags: {restaurant.tags}</Typography> */}
-        <Typography component="p" style={{ marginBottom: "8px" }}>
-          Calificación
-        </Typography>
-        <Rating name="read-only" defaultValue={restaurant.rating} readOnly />
+        
       </div>
       <div>
       <MapDetail restaurant={restaurant}/>

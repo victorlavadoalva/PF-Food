@@ -40,14 +40,14 @@ export const getRestorants = ({
   order,
   rating,
   name,
-  country,
+  city,
   stringTag,
 }) => {
   return async function (dispatch) {
     try {
-      
+      console.log('city:',city)
       const { data } = await axios(restaurantLocal, {
-        params: { page, order, rating, name, country, tag : stringTag  },
+        params: { page, order, rating, name, city, tag : stringTag  },
       });
       console.log('Server Response:', data);
       return (
