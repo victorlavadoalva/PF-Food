@@ -26,7 +26,9 @@ export default function Home() {
 
   useEffect(() => {
     if (order || rating || city || tag) {
-      dispatch(getRestorants({ order, rating, searchName, city, tag }));
+      let stringTag = tag.length > 0 ? tag.join('~') : tag
+      console.log("stringTag",stringTag)
+      dispatch(getRestorants({ order, rating, searchName, city, stringTag }));
     }
   }, [dispatch, order, rating, city, tag, searchName]);
 
@@ -143,7 +145,7 @@ export default function Home() {
               ))}
             </List>
       
-            <Typography variant="h6">Tag</Typography>
+            <Typography variant="h6">Categoria</Typography>
             <List>
               {TAGS.map((option) => (
                 <ListItem key={option.id} button onClick={() => handleChangeTags(option.id)}>
