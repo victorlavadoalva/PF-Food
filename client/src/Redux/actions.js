@@ -38,12 +38,13 @@ export const getRestorants = ({
   rating,
   name,
   country,
-  tag,
+  stringTag,
 }) => {
   return async function (dispatch) {
     try {
+      
       const { data } = await axios(restaurantLocal, {
-        params: { page, order, rating, name, country, tag },
+        params: { page, order, rating, name, country, tag : stringTag  },
       });
       console.log('Server Response:', data);
       return (
@@ -59,13 +60,14 @@ export const getRestorants = ({
   };
 };
 
-export const getRestorantFilter = (tags) => {
+export const getRestorantFilter = (tag) => {
   return async function (dispatch) {
+    console.log(tag);
     try {
-      const { data } = await axios(URL_RESTAURANT, {
-        params: { tags },
+      const { data } = await axios(restaurantLocal, {
+        params: { tag },
       });
-      return dispatch({ type: FILTER_LANDING, payload: data });
+      return dispatch({ type: FILTER_LANDING, payload: data[0].documents  });
     } catch (error) { }
   };
 };
