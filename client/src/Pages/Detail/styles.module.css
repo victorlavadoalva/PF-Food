@@ -1,0 +1,18 @@
+.image {
+    max-width: fit-content;    
+}
+
+.detail {
+    padding: 30px 15rem;
+}
+
+.container {
+   margin-bottom: 8px;
+}
+
+.divInfo{
+    padding-top: 2rem;
+    z-index: 1;
+    max-width: 30%;
+}
+
