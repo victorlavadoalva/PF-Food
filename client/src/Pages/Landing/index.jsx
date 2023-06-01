@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardFilter_Landing from "../../Components/CardFilterLanding";
 import CardLanding from "../../Components/CardLanding";
-import { getRestorants ,getRestorantFilter} from "../../Redux/actions";
+import { getRestorants, getRestorantFilter } from "../../Redux/actions";
 import { props } from "../../dataHardcodeo/constants";
 import Carousel from "./Carrusel";
 import { Outlet } from "react-router-dom";
@@ -15,30 +15,37 @@ function Landing() {
   const { restorants, filter_landing } = useSelector((state) => state);
   const dispatch = useDispatch();
   const location = useLocation();
-  const [filterActivate, setFilterActivate] = useState(false)
-  const[valueFilter, setValueFilter] = useState(null)
+  const [filterActivate, setFilterActivate] = useState(false);
+  const [valueFilter, setValueFilter] = useState(null);
+
+
+
   useEffect(() => {
     if (!restorants.documents) dispatch(getRestorants({}));
   }, [dispatch, restorants.documents, restorants.length]);
 
-//Pasarle ruta del value
-const handleChangeValue = (event) => {
-if(valueFilter === null ){
-  setValueFilter(event)
-  setFilterActivate(true)
-}else if(valueFilter !== event){
-  setValueFilter(event)
-  setFilterActivate(true)
-}else if(valueFilter === event){
-  setValueFilter(null)
-  setFilterActivate(false)
-}
-}
+  const dataFilter = filter_landing.slice(0, 5)
 
-useEffect(() => {
-  dispatch(getRestorantFilter(valueFilter))
-},[valueFilter])
+  const handleChangeValue = (event) => {
+    if (valueFilter === null) {
+      setValueFilter(event);
+      setFilterActivate(true);
+    } else if (valueFilter !== event) {
+      setValueFilter(event);
+      setFilterActivate(true);
+    } else if (valueFilter === event) {
+      setValueFilter(null);
+      setFilterActivate(false);
+    }
+  };
 
+  useEffect(() => {
+    if(valueFilter){
+      dispatch(getRestorantFilter(valueFilter));
+
+    }
+  }, [valueFilter]);
+console.log(filter_landing);
   return (
     <>
       {location.pathname === "/" && (
@@ -57,35 +64,48 @@ useEffect(() => {
             </div>
             <div className={styles.containerCards}>
               {props.map((el) => (
-                  <CardLanding key={el.id}
-                    className={styles.CardPopular}
-                    image={el.image}
-                    name={el.name}
-                    value={valueFilter}
-                    onChange = {handleChangeValue}
-                  />
-              ))}
-            </div>
-            {filterActivate && 
-            <div className={styles.containerFilter}>
-              <div className={styles.containerCardsFilter}>
-              {filter_landing.map((el) => (
-                <Link
-                key={el.id}
-                to={`/home/detail/${el.id}`}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <CardFilter_Landing
-                  // className={styles.CardPopular}
+                <CardLanding
+                  key={el.id}
+                  className={styles.CardPopular}
                   image={el.image}
                   name={el.name}
+                  value={valueFilter}
+                  onChange={handleChangeValue}
                 />
-              </Link>
               ))}
-              </div>
             </div>
-          
-            }
+            {filterActivate && (
+              <div className={styles.containerFilter}>
+                <div className={styles.containerCardsFilter}>
+                  {dataFilter ? (
+                    dataFilter.map((el) => (
+                      
+                        <CardFilter_Landing
+                          // className={styles.CardPopular}
+                          key={el._id}
+                          image={el.images}
+                          name={el.name}
+                          id={el._id}
+                        />
+                      
+                    ))
+                  ) : (
+                    <div className={styles.container_londing}>
+                      <div className={styles.dot_spinner}>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                        <div className={styles.dot_spinner__dot}></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           <div className={styles.containerImg}>
             <div className={styles.elementDesing}></div>

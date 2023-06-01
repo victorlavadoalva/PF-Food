@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 export default function RutaRestaurant() {
   
-  const { error } = useSelector((state) => state);
   const navigate = useNavigate()
   const redirection = "/home"
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -31,6 +30,7 @@ export default function RutaRestaurant() {
   } else {
     return <Outlet />;
   }
+
 }
 
 
