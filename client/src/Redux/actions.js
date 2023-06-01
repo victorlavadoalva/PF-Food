@@ -17,9 +17,10 @@ import {
   GET_USER_EMAIL,
   LOADING,
   POST_USER,
+  RESET_DETAIL,
   UPDATE_SUCCESS,
   UPDATE_USER,
-  USER_REGISTER,
+  USER_REGISTER
 } from "./actionsTypes";
 
 //const token = process.env.GET_TOKEN;
@@ -39,14 +40,14 @@ export const getRestorants = ({
   order,
   rating,
   name,
-  country,
+  city,
   stringTag,
 }) => {
   return async function (dispatch) {
     try {
-      
+      console.log('city:',city)
       const { data } = await axios(restaurantLocal, {
-        params: { page, order, rating, name, country, tag : stringTag  },
+        params: { page, order, rating, name, city, tag : stringTag  },
       });
       console.log('Server Response:', data);
       return (
@@ -316,3 +317,11 @@ export const getOrders = (restoId) => {
 };
 
 
+export const resetDetail = () => {
+  return async function (dispatch) {
+    return dispatch({
+      type: RESET_DETAIL,
+      payload: []
+    });
+  };
+};

@@ -11,6 +11,7 @@ const Review = ({ restoId }) => {
 
   console.log('restoId:', restoId);
   console.log('token:',token)
+  console.log(process.env)
 
 
   const handleValChange = (event, value) => {
@@ -23,14 +24,17 @@ const Review = ({ restoId }) => {
 
   const handleSubmit = async () => {
     try {
+      const valoraciones = {
+        rating: rating,
+        comment: comment,
+        number: number,
+      };
+      console.log('valoracion:',valoraciones)
+
       const response = await axios.put(
         `http://localhost:3001/restaurants/${restoId}`,
         {
-          valoraciones: {
-            rating: rating,
-            comment: comment,
-            number: number,
-          },
+          valoraciones,
         },
         {
           headers: {
@@ -39,7 +43,8 @@ const Review = ({ restoId }) => {
           },
         }
       );
-      console.log(response.data); 
+      
+      console.log('response:',response); 
       setRating(0);
       setComment('');
       setNumber((prevNumber) => prevNumber + 1);

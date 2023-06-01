@@ -160,12 +160,12 @@ export const RESTOS = [
 ];
 export const LOCATION = [
   {
-    id: 1,
-    name: "Bs As",
+    id: "Bogota",
+    name: "Bogota",
   },
   {
-    id: 2,
-    name: "Córdoba",
+    id: 'Cosquin',
+    name: "Cosquin",
   },
   {
     id: 3,
