@@ -62,7 +62,7 @@ function App() {
               location.pathname !== "/user-type/form-restaurant" && <Header />}
             <main className={styles.main}>
               <Routes>
-              <Route path="/adminView" element={<AdminView />} />
+                <Route path="/adminView" element={<AdminView />} />
                 <Route path="mapa" element={<Map />} />
                 <Route path="aprobe" element={<Aprobe />} />
                 <Route path="failure" element={<Failure />} />
@@ -120,8 +120,7 @@ function App() {
                 </Route>
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Rutas Admin */}
-                <Route element={<RutasAdmin />}>
-                </Route>
+                <Route element={<RutasAdmin />}></Route>
 
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Cierra ruta potegida con o sin login */}

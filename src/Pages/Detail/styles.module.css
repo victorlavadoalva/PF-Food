@@ -10,3 +10,9 @@
    margin-bottom: 8px;
 }
 
+.divInfo{
+    padding-top: 2rem;
+    z-index: 1;
+    max-width: 30%;
+}
+
