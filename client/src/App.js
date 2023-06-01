@@ -22,6 +22,7 @@ import Landing from "./Pages/Landing/index.jsx";
 // import { Map } from "./Pages/Map/Map.jsx";
 import AboutUs from "./Pages/AboutUs";
 import Developers from "./Pages/Developers";
+import { Failure } from "./Pages/Failure/Failure";
 import Map from "./Pages/Map/Map";
 import MenuCliente from "./Pages/MenuClientes";
 import RestoHome from "./Pages/RestoHome";
@@ -32,7 +33,6 @@ import Dashboard from "./View/Dashboard/RestaurantDashboard";
 import Loading_Login from "./View/Loading";
 import UserType from "./View/SelectType";
 import styles from "./styles.module.css";
-import { Failure } from "./Pages/Failure/Failure";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +61,7 @@ function App() {
               location.pathname !== "/user-type/form-restaurant" && <Header />}
             <main className={styles.main}>
               <Routes>
+              <Route path="/adminView" element={<AdminView />} />
                 <Route path="mapa" element={<Map />} />
                 <Route path="failure" element={<Failure/>} />
                 <Route element={<RutasUsers />}>
@@ -118,7 +119,6 @@ function App() {
                 {/* -------------------------------------------------------------------------------------- */}
                 {/* Rutas Admin */}
                 <Route element={<RutasAdmin />}>
-                  <Route path="/adminView" element={<AdminView />} />
                 </Route>
 
                 {/* -------------------------------------------------------------------------------------- */}
