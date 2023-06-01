@@ -7,6 +7,8 @@ export default function PaginationRounded({ filters}) {
   const amountPages = useSelector((state) => state.AmountPage)
   const dispatch = useDispatch()
 
+
+
 const handleChange = (e,page) => {
   // TODO cambiar country x location o al reves
   dispatch(getRestorants({
