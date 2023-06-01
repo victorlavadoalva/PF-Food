@@ -20,6 +20,7 @@ export default function Login_Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isAdmin, setIsAdmin] = React.useState(false)
   const open = Boolean(anchorEl);
   const { isAuthenticated,user, loginWithRedirect, logout ,isLoading} = useAuth0();
   
@@ -29,6 +30,7 @@ export default function Login_Register() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
 
   const handleLogOut = () => {
@@ -45,15 +47,28 @@ export default function Login_Register() {
   const handleCuentaCliente = () =>{
     navigate('/home/cuentaCliente')
 }
-  const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
-  const userLocal = JSON.parse(getlocalstorage)
-
+const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
+const userLocal = JSON.parse(getlocalstorage)
+useEffect(()=>{
+  userLocal && setIsAdmin(userLocal.isAdmin)
+},[])
+// let userLocal
+// let isAdmin = false
+//   useEffect(() =>{
+//     const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
+//     getlocalstorage?userLocal = JSON.parse(getlocalstorage):userLocal={isAdmin:false}
+//  if(userLocal.isAdmin){
+//   isAdmin = true
+//  }
+//   },[userLocal])
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
     // dispatch(LoadingApp(true))
     loginWithRedirect();
   };
-
+ const handleAdmin = () => {
+  navigate("/adminView")
+ }
   // useEffect(() => {
   //   if(user){
   //     dispatch(LoadingApp(false))
@@ -64,31 +79,6 @@ export default function Login_Register() {
     <>
       {user ? (
         <>
-        {/*No borrar*/}
-          {/* <div className={styles.perfil}>
-            <img
-              className={styles.imagePerfil}
-              src={user.picture}
-              alt={user.name}
-              onClick={() => handleActivatePerfil()}
-            />
-            {PerfilActive && (
-              <div className={styles.perfilDesplegable}>
-                <div>
-                  <img />
-                  <p>Franco Krismann</p>
-                </div>
-                <ul className={styles.perfilDesplegable__lista}>
-                  <li>
-                    <p>Configuracion</p>
-                  </li>
-                  <li>
-                    <p>Log Out</p>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div> */}
           <Box className={styles.container}>
         <Tooltip title="Account settings">
           <IconButton
@@ -156,6 +146,13 @@ export default function Login_Register() {
           </ListItemIcon>
           Settings
         </MenuItem>
+        {
+          isAdmin && 
+           <MenuItem onClick={handleAdmin}>
+          Admin
+        </MenuItem>
+        }
+       
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
