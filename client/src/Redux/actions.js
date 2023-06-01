@@ -289,8 +289,8 @@ export const Register = (user) => {
 export const getReservs = (restoId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`https://pf-backend-production-83a4.up.railway.app/restorant/${restoId}`);
-      const data = response.data;
+      const response = await axios.get(`http://localhost:3001/restaurants/${restoId}`);
+      const data = response.data.reservations;
       return dispatch({
         type: GET_RESERVS,
         payload: data
