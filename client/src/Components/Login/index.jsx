@@ -20,6 +20,7 @@ export default function Login_Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isAdmin, setIsAdmin] = React.useState(false)
   const open = Boolean(anchorEl);
   const { isAuthenticated, user, loginWithRedirect, logout, isLoading } = useAuth0();
 
@@ -45,15 +46,21 @@ export default function Login_Register() {
   };
   const handleCuentaCliente = () => {
     navigate('/home/cuentaCliente')
-  }
-  const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
-  const userLocal = JSON.parse(getlocalstorage)
-  // let isAdmin = false
-  //   useEffect(() =>{
-  //  if(userLocal.isAdmin){
-  //   isAdmin = true;
-  //  }
-  // },[userLocal])
+}
+const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
+const userLocal = JSON.parse(getlocalstorage)
+useEffect(()=>{
+  userLocal && setIsAdmin(userLocal.isAdmin)
+},[])
+// let userLocal
+// let isAdmin = false
+//   useEffect(() =>{
+//     const getlocalstorage = window.localStorage.getItem("UserLogVerificate")
+//     getlocalstorage?userLocal = JSON.parse(getlocalstorage):userLocal={isAdmin:false}
+//  if(userLocal.isAdmin){
+//   isAdmin = true
+//  }
+//   },[userLocal])
   const handleLogin = () => {
     window.localStorage.setItem("redirectPath", window.location.pathname);
     // dispatch(LoadingApp(true))

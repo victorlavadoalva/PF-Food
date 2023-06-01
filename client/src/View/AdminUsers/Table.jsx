@@ -20,7 +20,7 @@ const TableAdmin = () => {
     
     // const token = dataParsed.token;
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NDc1MzUsImV4cCI6NDg0MTMwNzUzNX0.7fDrfKD497Nfcsjcn7hE0Qkd8Mp-lbAq6uCBL4exIxc"
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU1NzQwNzgsImV4cCI6NDg0MTMzNDA3OH0.zTrnWN0pbSaiKeI0A8U4DM8xTH_tWlkQG1cUxwiWR8E"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTYxNzY3NywiZXhwIjo0ODQxMzc3Njc3fQ.Km8OWeI_l6zQOuSN8jE3GGN-Yuju2NEzTUN2tWVgIgw"
     const password = "uhsjkew-2-3.wkjdss--s.d";
 
     const columns = [
