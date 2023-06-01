@@ -5,11 +5,10 @@ import styles from "./styles.module.css";
 import * as actions from '../../Redux/actions';
 import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-// import { FOOD } from '../../dataHardcodeo/constants'
+import axios from 'axios';
 
 export default function Home() {
 
-  // let plates = FOOD;
   const { dishes } = useSelector(state => state);
   console.log("dishes", dishes[0]);
   const [isActive, setIsActive] = useState();
@@ -31,11 +30,12 @@ export default function Home() {
   }
 
   const removeFromMenu = (id) => {
-    // const dish = plates.find(dish => dish._id === id);
-
     const dish = dishes.find(dish => dish._id === id);
-    dish.isActive ? dish.isActive = false : dish.isActive = true;
-    setIsActive(isActive ? false : true);
+    dish.isActive = !dish.isActive;
+    setIsActive(!isActive);
+    axios.put('http://localhost:3001/posts/' + dish._id, {
+      isActive: isActive,
+    })
   };
 
   return (
@@ -45,9 +45,6 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.cards}>
             {
-              // plates.length ?
-              //   plates.map(plate => {
-
               dishes.length ?
                 dishes.map(plate => {
                   console.log(plate.name)
