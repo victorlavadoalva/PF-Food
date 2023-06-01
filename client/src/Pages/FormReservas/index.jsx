@@ -39,7 +39,7 @@ const ReservasCliente = () => {
     console.log(values);
 
     const token2 =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjoidHJ1ZSIsImlhdCI6MTY4NTU2ODg3MCwiZXhwIjo0ODQxMzI4ODcwfQ.IqsmLGaKpz5nme2r_UN5s8oItD69CuKvkiyMZoPGZbQ";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODU2MzA4MTksImV4cCI6NDg0MTM5MDgxOX0.oTz390vmjqpfXdULMY7m0fkcWdBBoLNRQ5pTWz6DYQk";
     // Verificar si se encontraron datos en el Local Storage
     if (storedData) {
       const token = process.env.REACT_APP_TOKEN;
@@ -69,7 +69,7 @@ const ReservasCliente = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token2}`,
             },
           }
         )
