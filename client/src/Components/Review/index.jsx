@@ -3,14 +3,14 @@ import { Rating, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
 
 
-const Review = () => {
+const Review = ({ restoId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [number, setNumber] = useState(1);
-  const restDataString = localStorage.getItem('RestData');
-  const id = JSON.parse(restDataString)?.id;
-  console.log(id);
-  const token = JSON.parse(restDataString)
+  const token = process.env.TOKEN_ADMIN;
+
+  console.log('restoId:', restoId);
+  console.log('token:',token)
 
 
   const handleValChange = (event, value) => {
@@ -24,7 +24,7 @@ const Review = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.put(
-        `https://pf-backend-production-5a61.up.railway.app/restaurants/${id}`,
+        `https://pf-backend-production-83a4.up.railway.app/restaurants/${restoId}`,
         {
           valoraciones: {
             rating: rating,
